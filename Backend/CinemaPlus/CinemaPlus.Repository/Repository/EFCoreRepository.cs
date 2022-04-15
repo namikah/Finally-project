@@ -24,6 +24,12 @@ namespace CinemaPlus.Repository.Repository
             return await DbContext.Set<T>().ToListAsync();
         }
 
+        public DbSet<T> GetAllForInclude()
+        {
+            return DbContext.Set<T>();
+        }
+
+
         public async Task<T> GetAsync(int id)
         {
             return await DbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);

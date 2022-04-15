@@ -1,4 +1,5 @@
 ﻿using CinemaPlus.Models.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace CinemaPlus.Repository.Repository.Contracts
     public interface IRepository<T> where T : class, IEntity
     {
         Task<IList<T>> GetAllAsync();
+        DbSet<T> GetAllForInclude();
         Task<T> GetAsync(int id);
         Task AddAsync(T entity);
         Task AddAsync(IEnumerable<T> entity);

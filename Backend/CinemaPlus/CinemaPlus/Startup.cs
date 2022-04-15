@@ -1,6 +1,8 @@
 using CinemaPlus.Data;
 using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.DataContext;
+using CinemaPlus.Repository.Repository;
+using CinemaPlus.Repository.Repository.Contracts;
 using CinemaPlus.Services.Mapping;
 using CinemaPlus.Services.Services;
 using CinemaPlus.Services.Services.Contracts;
@@ -42,6 +44,9 @@ namespace CinemaPlus
             });
             services.AddAutoMapper(typeof(MapperProfile));
 
+            services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
+            services.AddScoped<IMovieService, MovieService>();
+
             services.AddScoped(typeof(IUserService), typeof(UserService));
 
             services.AddControllers();
@@ -65,6 +70,8 @@ namespace CinemaPlus
                 options.Password.RequireUppercase = true;
 
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            services.AddControllersWithViews().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             Constants.SeedDataPath = Path.Combine(_environment.ContentRootPath, "Data", "SeedData");
         }
