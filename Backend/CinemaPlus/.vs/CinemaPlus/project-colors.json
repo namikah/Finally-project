@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "5443846c-3d6f-4dd2-8e7f-e82b5ed2ec60": {
+      "ProjectGuid": "5443846c-3d6f-4dd2-8e7f-e82b5ed2ec60",
+      "DisplayName": "CinemaPlus",
+      "ColorIndex": 0
+    },
+    "0b771580-20c3-4c49-bcbf-75d412e3ac9b": {
+      "ProjectGuid": "0b771580-20c3-4c49-bcbf-75d412e3ac9b",
+      "DisplayName": "CinemaPlus.Repository",
+      "ColorIndex": 1
+    },
+    "12b45b1f-b24a-492b-994a-4e0e7e2ad5bc": {
+      "ProjectGuid": "12b45b1f-b24a-492b-994a-4e0e7e2ad5bc",
+      "DisplayName": "CinemaPlus.Models",
+      "ColorIndex": 2
+    },
+    "6505c202-0677-441c-bb9e-ee3e96a4973c": {
+      "ProjectGuid": "6505c202-0677-441c-bb9e-ee3e96a4973c",
+      "DisplayName": "CinemaPlus.Data",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "b8ef41cc-2b6f-4eb5-a634-05ffbfc708d7": {
+      "ProjectGuid": "b8ef41cc-2b6f-4eb5-a634-05ffbfc708d7",
+      "DisplayName": "CinemaPlus.Services",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}
