@@ -1,8 +1,10 @@
-﻿using CinemaPlus.Models.Entities;
+﻿using CinemaPlus.Models.DTOs;
+using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.DataContext;
 using CinemaPlus.Repository.Repository;
 using CinemaPlus.Services.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,9 +17,11 @@ namespace CinemaPlus.Services.Services
         {
         }
 
-        public async Task<IList<Movie>> GetAllMoviesAsync(int page, int perPage)
+        public async Task<MovieDto> GetAllMoviesAsync(int page, int perPage)
         {
-            var movies = await GetAllForInclude()
+            var totalMoviesCount = (await GetAllAsync()).Count;
+
+            var movies = await GetAllRelations()
                .AsNoTracking()
                .AsQueryable()
                .Include(x => x.Detail)
@@ -34,12 +38,18 @@ namespace CinemaPlus.Services.Services
                .Take(perPage)
                .ToListAsync();
 
-            return movies;
+           return new MovieDto(){
+                Page = page,
+                PerPage = perPage,
+                Total = totalMoviesCount,
+                TotalPage = Math.Ceiling((decimal)totalMoviesCount / perPage),
+                Data = movies
+            };
         }
 
         public async Task<Movie> GetMovieByIdAsync(int? id)
         {
-            var movie = await GetAllForInclude()
+            var movie = await GetAllRelations()
                  .AsNoTracking()
                  .AsQueryable()
                  .Include(x => x.Detail)

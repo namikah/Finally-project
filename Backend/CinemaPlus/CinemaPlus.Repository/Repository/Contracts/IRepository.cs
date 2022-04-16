@@ -11,7 +11,7 @@ namespace CinemaPlus.Repository.Repository.Contracts
     public interface IRepository<T> where T : class, IEntity
     {
         Task<IList<T>> GetAllAsync();
-        DbSet<T> GetAllForInclude();
+        DbSet<T> GetAllRelations();
         Task<T> GetAsync(int id);
         Task AddAsync(T entity);
         Task AddAsync(IEnumerable<T> entity);
