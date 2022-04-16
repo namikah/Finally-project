@@ -11,6 +11,8 @@ namespace CinemaPlus.Services.Services.Contracts
 {
     public interface IMovieService : IRepository<Movie>
     {
-        Task<IList<Movie>> GetAllMoviesAsync();
+        Task<IList<Movie>> GetAllMoviesAsync(int page, int perPage);
+
+        Task<Movie> GetMovieByIdAsync(int? id);
     }
 }

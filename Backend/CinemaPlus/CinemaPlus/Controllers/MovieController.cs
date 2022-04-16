@@ -1,5 +1,6 @@
 ﻿using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.Repository.Contracts;
+using CinemaPlus.Services.Services;
 using CinemaPlus.Services.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace CinemaPlus.Controllers
     {
         private readonly IRepository<Movie> _movieRepository;
         private readonly IMovieService _movieService;
+        //private readonly MovieService _movieService;
 
         public MovieController(IRepository<Movie> movieRepository, IMovieService movieService)
         {
@@ -24,24 +26,9 @@ namespace CinemaPlus.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int page = 1, int perpage = 4)
         {
-            var movies = await _movieService.GetAllForInclude()
-                .AsNoTracking()
-                .AsQueryable()
-                .Include(x => x.Detail)
-                .Include(x => x.MovieActors)
-                .ThenInclude(x => x.Actor)
-                .Include(x => x.MovieDirectors)
-                .ThenInclude(x => x.Director)
-                .Include(x => x.MovieFormats)
-                .ThenInclude(x => x.Format)
-                .Include(x => x.MovieGenres)
-                .ThenInclude(x => x.Genre)
-                .ToListAsync();
-
-            //return Ok(await _movieService.GetAllMoviesAsync());
-            return Ok(movies);
+            return Ok(await _movieService.GetAllMoviesAsync(page, perpage));
         }
 
         [HttpGet("{id?}")]
@@ -50,19 +37,7 @@ namespace CinemaPlus.Controllers
             if (id == null)
                 throw new Exception("Not found");
 
-            var movie = await _movieService.GetAllForInclude()
-                .AsNoTracking()
-                .AsQueryable()
-                .Include(x => x.Detail)
-                .Include(x => x.MovieActors)
-                .ThenInclude(x => x.Actor)
-                .Include(x => x.MovieDirectors)
-                .ThenInclude(x => x.Director)
-                .Include(x => x.MovieFormats)
-                .ThenInclude(x => x.Format)
-                .Include(x => x.MovieGenres)
-                .ThenInclude(x => x.Genre)
-                .FirstOrDefaultAsync(x=>x.Id == (int)id);
+            var movie = await _movieService.GetMovieByIdAsync(id);
             if (movie == null)
                 throw new Exception("Not found");
 
