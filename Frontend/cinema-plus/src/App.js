@@ -1,13 +1,19 @@
-import './App.css';
-import Index from './components/movie/Index';
+import "./App.css";
+import { Switch } from "react-router-dom";
+import Home from "./pages/home/Home";
+import { Route } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import Header from "./components/layouts/header/Header";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      <Index/>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Switch>
+        <Route path={"/"} exact component={Home} />
+        <Redirect to={"/error"} />
+      </Switch>
+    </>
   );
 }
 
