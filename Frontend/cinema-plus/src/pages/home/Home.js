@@ -1,8 +1,11 @@
 import React from 'react'
+import TabHeader from '../../components/tabHeader/TabHeader'
 
 function Home() {
   return (
-    <div>Home</div>
+   <>
+   <TabHeader/>
+   </>
   )
 }
 

@@ -1,0 +1,24 @@
+#tab-header {
+  margin-top: 80px;
+  > div {
+    ul {
+        margin: 0;
+        .react-tabs__tab{
+         cursor: pointer;
+         list-style: none;
+        border-radius: 5px 5px 0 0;
+        text-decoration: none;
+        color: black;
+        padding: 15px 20px;
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: 500;
+        &.react-tabs__tab--selected{
+              background: #334e9e;
+              color: white;
+
+          }
+     }
+    }
+  }
+}

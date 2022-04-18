@@ -1,0 +1,48 @@
+.header-filter {
+  width: 100%;
+  background: #334e9e;
+  height: 100px;
+  select {
+    border-radius: 20px;
+    width: 220px;
+    height: 45px;
+    padding: 5px;
+    border: 1px solid gray;
+  font-weight: 500;
+  }
+  .in-english {
+    position: relative;
+    a {
+        text-decoration: none;
+        color: black;
+        font-weight: 500;
+      width: 220px;
+      height: 45px;
+      border-radius: 20px;
+      margin: 0;
+      padding: 5px;
+      border: 1px solid gray;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+.card-group {
+  .card {
+    border: 0;
+    img {
+      width: 262px;
+      height: 370px;
+    }
+    .card-body {
+      .card-title {
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+}

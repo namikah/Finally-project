@@ -1,8 +1,15 @@
-import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import "./header.scss";
 
 function Header() {
+  const [state, setState] = useState(false);
+
+  const toggleClick = useCallback(() => {
+    setState(!state);
+  }, [state]);
+
   return (
     <header>
       <div id="header-default">
@@ -13,13 +20,13 @@ function Header() {
               <li className="main-menu">
                 <Link to={""}>Platinum</Link>
               </li>
-              <li  className="main-menu">
+              <li className="main-menu">
                 <Link to={""}>Dolby Atmos</Link>
               </li>
-              <li  className="main-menu">
+              <li className="main-menu">
                 <Link to={""}>Xidmətlər</Link>
               </li>
-              <li  className="main-menu">
+              <li className="main-menu">
                 <Link to={""}>Haqqımızda</Link>
               </li>
               <li className="lang">
@@ -66,7 +73,7 @@ function Header() {
                   </Link>
                 </li>
                 <li className="call-center">
-                  <div class="callcenter">
+                  <div className="callcenter">
                     <span>
                       <img src="" alt=""></img>
                       +99412 499 89 88
@@ -89,7 +96,7 @@ function Header() {
         <div className="header-top d-flex justify-content-between align-items-center">
           <div className="container">
             <div className="d-flex justify-content-between align-items-center">
-              <div class="callcenter">
+              <div className="callcenter">
                 <span>
                   <img src="" alt=""></img>
                   +99412 499 89 88
@@ -129,10 +136,44 @@ function Header() {
                   alt="logo"
                 ></img>
               </div>
-              <div className="button-side">
-                <Link>
+              <div className="button-side"  onClick={() => toggleClick()}>
+                <Link to={""}>
                   <span></span>
                 </Link>
+              </div>
+            </div>
+          </div>
+          <div
+            className="toggle-menu"
+            style={state ? { height: "100vh", overflow: "auto" } : {}}
+          >
+            <div className="container">
+              <ul>
+                <li className="main-menu">
+                  <Link to={""}>Platinum</Link>
+                </li>
+                <li className="main-menu">
+                  <Link to={""}>Aksiyalar</Link>
+                </li>
+                <li className="main-menu">
+                  <Link to={""}>Tariflər</Link>
+                </li>
+                <li className="main-menu">
+                  <Link to={""}>Haqqımızda</Link>
+                </li>
+                <li className="cine-bonus main-menu">
+                  <Link to={""}>Əlaqə</Link>
+                </li>
+              </ul>
+              <div className="d-flex justify-content-center align-items-center">
+                <div className="app-icon">
+                  <Link
+                    to={"https://apps.apple.com/us/app/cinemaplus/id1072140418"}
+                  >
+                    <FontAwesomeIcon icon="fa-brands fa-app-store" />
+                  </Link>
+                </div>
+                <div className="social-icon"></div>
               </div>
             </div>
           </div>

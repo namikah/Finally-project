@@ -1,12 +1,16 @@
 header {
+  height: 115px;
+  z-index: 99999999999999;
   #header-default {
     position: fixed;
-    left: 0;
-    right: 0;
+    width: 100%;
+    background-color: white;
     top: 0;
-    height: 115px;
+    box-shadow: 0 0 10px 8px rgb(202, 202, 202);
+    z-index: 99999999999999;
     .container {
       .header-top {
+        background-color: white;
         height: 58px;
         ul {
           margin: 0;
@@ -40,12 +44,6 @@ header {
                 color: black;
                 &:hover {
                   color: #6a6a6a;
-                }
-              }
-              .icon-app {
-                &:hover {
-                  img {
-                  }
                 }
               }
             }
@@ -116,16 +114,16 @@ header {
     }
   }
   #header-responsive {
+    position: fixed;
+    width: 100%;
+    top: 0;
     display: none;
+    z-index: 999999999999;
+    box-shadow: 0 0 10px 10px rgb(120, 120, 120);
     .header-top {
+      background-color: white;
       height: 58px;
       .container {
-        .callcenter {
-          span {
-            img {
-            }
-          }
-        }
         .lang {
           display: flex;
           gap: 8px;
@@ -146,12 +144,14 @@ header {
     .header-bottom {
       background-color: #334e9e;
       height: 57px;
+      z-index: 999999999;
       .logo-side {
         img {
           width: 130px;
         }
       }
       .button-side {
+        cursor: pointer;
         a {
           span {
             background: #fff;
@@ -174,6 +174,35 @@ header {
               width: 45px;
               height: 2px;
               top: -10px;
+            }
+          }
+        }
+      }
+      .toggle-menu {
+        transition: 0.5s ease-out;
+        background-color: #334e9e;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        overflow: hidden;
+        height: 0;
+        overflow: hidden;
+        > div {
+          padding: 40px 15px;
+        }
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          li {
+            padding: 10px 0;
+            border-bottom: 1px solid white;
+            a {
+              color: #00acec;
+              font-size: 18px;
+              font-weight: 500;
+              letter-spacing: 1px;
+              text-decoration: none;
             }
           }
         }
