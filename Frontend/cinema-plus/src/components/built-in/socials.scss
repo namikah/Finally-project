@@ -1,0 +1,19 @@
+#socials-icons {
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+  a {
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 7px 12px;
+    &:hover{
+        border-color: rgba(0, 0, 0, 0.286);
+        img{
+            transform: scale(1.2);
+        }
+    }
+    img {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
