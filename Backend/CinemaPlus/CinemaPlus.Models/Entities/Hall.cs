@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Models.Entities
 {
-    public class Actor : IEntity, IPerson
+    public class Hall : IEntity
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public string Surname { get; set; }
+        public int CinemaId { get; set; }
 
-        public string Gender { get; set; }
-
-        public ICollection<MovieActors> MovieActors { get; set; }
-
-        public bool IsDeleted { get; set; }
+        public Cinema Cinema { get; set; }
     }
 }

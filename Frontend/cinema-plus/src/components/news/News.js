@@ -10,7 +10,7 @@ function News() {
       <div className="d-flex justify-content-center align-itmes-center gap-1">
         <Tabs className="w-100">
           <TabList className="d-flex justify-content-center align-items-center gap-1">
-            <Tab>CINEMAPLUS NEWS</Tab>
+            <Tab>CINEMAPLUS XƏBƏRLƏRİ</Tab>
           </TabList>
         </Tabs>
       </div>
@@ -18,9 +18,9 @@ function News() {
         <div className="container">
           <div
             ref={change}
-            className="d-flex justify-content-start align-items-center gap-3"
+            className="d-flex justify-content-start align-items-top gap-3"
           >
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -28,12 +28,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -41,12 +48,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -54,12 +68,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -67,12 +88,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -80,12 +108,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -93,12 +128,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -106,12 +148,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -119,12 +168,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -132,12 +188,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -145,12 +208,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -158,12 +228,19 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Roma şahzadəsi” cizgi filmi Azərbaycan dilində
+                  nümayişə başlayır - VİDEO
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 33-cü Fajr Beynəlxalq Film Festivalında
+                  nümayiş etdirilib
+                </p>
               </div>
             </div>
-            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-item-center">
+            <div className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
               <div className="card-image d-flex justify-content-start align-item-left">
                 <img
                   src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
@@ -171,9 +248,14 @@ function News() {
                   alt="news"
                 />
               </div>
-              <div className="card-body d-flex flex-column justify-content-between align-item-center text-left">
-                  <h2>title</h2>
-                <p>lorem lorem lorem loremlorem lorem lorem lorem lorem</p>
+              <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                <h6>15.04.2022</h6>
+                <h2>
+                  CinemaPlus-da “Ro
+                </h2>
+                <p>
+                  Cizgi filmi ilk dəfə 3
+                </p>
               </div>
             </div>
           </div>
@@ -190,14 +272,14 @@ function News() {
                 change.current.classList.remove("next-two");
               }}
             ></span>
-             <span
+            <span
               onClick={() => {
                 change.current.classList.add("next-two");
               }}
             ></span>
           </div>
           <div className="all-news d-flex justify-content-center align-items-center">
-              <Link>ALL NEWS</Link>
+            <Link>BÜTÜN XƏBƏRLƏR</Link>
           </div>
         </div>
       </div>

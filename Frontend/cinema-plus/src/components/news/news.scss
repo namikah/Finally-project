@@ -38,11 +38,21 @@
             }
           }
           .card-body {
+            h6{
+              color: rgba(255, 255, 255, 0.752);
+              font-size: 16px;
+              font-weight: 500;
+            }
             h2 {
               color: white;
+              font-size: 16px;
+              font-weight: 500;
+              padding: 5px 0;
             }
             p {
-              color: white;
+              color: rgba(255, 255, 255, 0.752);
+              font-size: 14px;
+              font-weight: 500;
             }
           }
         }

@@ -34,5 +34,13 @@ namespace CinemaPlus.Repository.DataContext
         public DbSet<MovieFormats> MovieFormats { get; }
 
         public DbSet<MovieGenres> MovieGenres { get; }
+
+        public DbSet<Cinema> Cinemas { get; }
+
+        public DbSet<Customer> Customers { get; }
+
+        public DbSet<Hall> Halls { get; }
+
+        public DbSet<Session> Sessions { get; }
     }
 }

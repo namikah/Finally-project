@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 function Movie() {
   const [moviesData, setMoviesData] = useState();
   const [curPage, setCurPage] = useState(1);
-  const [option, setOption] = useState(false);
+  const [optionOne, setOptionOne] = useState(false);
+  const [optionTwo, setOptionTwo] = useState(false);
   const { push } = useHistory();
 
   const getData = useCallback((page) => {
@@ -58,22 +59,14 @@ function Movie() {
     [push, maxPageCount]
   );
 
-  const handleOpenOption = useCallback(() => {
-    setOption(true);
-  }, []);
-
-  const handleCloseOption = useCallback(() => {
-    setOption(false);
-  }, []);
-
   return (
     <>
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-5">
         <select
-          onMouseDown={() => handleOpenOption()}
-          onMouseLeave={() => handleCloseOption()}
+          onMouseDown={() => setOptionOne(true)}
+          onMouseLeave={() => setOptionOne(false)}
           style={
-            option
+            optionOne
               ? { borderRadius: "20px 20px 0 0" }
               : { borderRadius: "20px" }
           }
@@ -87,10 +80,10 @@ function Movie() {
           <option value="2">Azerbaijan Cinema</option>
         </select>
         <select
-          onMouseDown={() => handleOpenOption()}
-          onMouseLeave={() => handleCloseOption()}
+          onMouseDown={() => setOptionTwo(true)}
+          onMouseLeave={() => setOptionTwo(false)}
           style={
-            option
+            optionTwo
               ? { borderRadius: "20px 20px 0 0" }
               : { borderRadius: "20px" }
           }

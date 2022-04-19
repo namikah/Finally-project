@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Models.Entities
 {
-    public class Actor : IEntity, IPerson
+    public class Customer : IPerson
     {
         public int Id { get; set; }
 
@@ -16,9 +16,5 @@ namespace CinemaPlus.Models.Entities
         public string Surname { get; set; }
 
         public string Gender { get; set; }
-
-        public ICollection<MovieActors> MovieActors { get; set; }
-
-        public bool IsDeleted { get; set; }
     }
 }

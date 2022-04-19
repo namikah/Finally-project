@@ -12,8 +12,6 @@ namespace CinemaPlus.Models.Base
 
         public string Surname { get; set; }
 
-        public string Age { get; set; }
-
         public string Gender { get; set; }
     }
 }
