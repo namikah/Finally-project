@@ -1,0 +1,77 @@
+#cinemaplus-news {
+  margin-top: 80px;
+  > div {
+    ul {
+      margin: 0;
+      padding: 0;
+      .react-tabs__tab {
+        cursor: pointer;
+        list-style: none;
+        border-radius: 5px 5px 0 0;
+        text-decoration: none;
+        color: black;
+        padding: 15px 20px;
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: 500;
+        background: #334e9e;
+        color: white;
+      }
+    }
+  }
+  .news-body {
+    padding-top: 40px;
+    height: 500px;
+    background: #334e9e;
+    .container {
+      overflow: hidden;
+      > div {
+        transition: 0.8s ease-out;
+        .card {
+          border: 0;
+          background-color: transparent;
+          .card-image {
+            img {
+              width: 100%;
+              margin: 0 40px;
+              height: 150px;
+            }
+          }
+          .card-body {
+            h2 {
+              color: white;
+            }
+            p {
+              color: white;
+            }
+          }
+        }
+      }
+      .pagination {
+        padding-top: 30px;
+        span {
+          cursor: pointer;
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 100%;
+          background-color: #869791;
+        }
+      }
+      .all-news{
+          padding-top: 30px;
+          a{
+              color: white;
+              letter-spacing: 2px;
+              font-weight: 600;
+          }
+      }
+    }
+  }
+}
+.next-one {
+  transform: translate(-104%);
+}
+.next-two {
+  transform: translate(-209%);
+}

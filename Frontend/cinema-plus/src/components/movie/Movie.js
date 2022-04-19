@@ -1,16 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardGroup,
-  CardImg,
-  CardSubtitle,
-  CardTitle,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-} from "reactstrap";
+import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { movieService } from "../../API/services/movieService";
 import { range } from "range";
 import "./movie.scss";
@@ -78,7 +68,7 @@ function Movie() {
 
   return (
     <>
-      <div className="header-filter d-flex justify-content-center align-items-center gap-5">
+      <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-5">
         <select
           onMouseDown={() => handleOpenOption()}
           onMouseLeave={() => handleCloseOption()}
@@ -111,36 +101,48 @@ function Movie() {
           <option value="1797">In English</option>
           <option value="1799">Türkçe</option>
         </select>
-        <div className="in-english d-flex justify-content-center align-items-center"><Link>Movies in English</Link></div>
+        <div className="in-english d-flex justify-content-center align-items-center">
+          <Link>Movies in English</Link>
+        </div>
       </div>
       <div className="container mt-3 mb-5">
-        <CardGroup className="row justify-content-center">
-          {moviesData?.data.map((item) => (
-            <Card key={item.id} className="p-3 d-flex justify-content-center align-items-center col-md-3">
-              <CardImg
-                alt="Card image cap"
-                src="https://picsum.photos/318/180"
-                top
-                width="100%"
-              />
-              <CardBody>
-                <CardTitle tag="h5" className="d-flex justify-content-center align-items-center">
-                  <img src="" alt=""></img>
-                  <img src="" alt=""></img>
-                  <img src="" alt=""></img>
-                  </CardTitle>
-                <CardSubtitle className="d-flex justify-content-center align-items-center">
-                <div>
-                  <Link>seanslar</Link>
+        <section id="movies">
+          <div className="cards row">
+            {moviesData?.data.map((item) => (
+              <div
+                key={item.id}
+                className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
+              >
+                <div className="card-image">
+                  <img
+                    src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
+                    className="card-img-top"
+                    alt="film"
+                  />
                 </div>
-                <div>
-                  <span>6+</span>
+                <div className="card-body d-flex justify-content-center align-item-center">
+                  <div className="card-title">
+                    <ul className="d-flex flex-wrap justify-content-center align-item-center">
+                      {item.movieFormats.map((format) => (
+                        <li className="format.id">
+                          <img src={format.format.icon} alt="film-format"></img>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                </CardSubtitle>
-              </CardBody>
-            </Card>
-          ))}
-        </CardGroup>
+                <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
+                  <Link to={""} className="btn btn-primary add-cart-button">
+                    Add basket
+                  </Link>
+                  <Link to={""} className="age-limit">
+                    <span>{item.ageLimit}+</span>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
         <div className="d-flex justify-content-center mt-5">
           <Pagination>
             <PaginationItem>

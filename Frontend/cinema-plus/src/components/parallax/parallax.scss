@@ -1,0 +1,14 @@
+#parallax {
+  background-color: transparent !important;
+  height: 500px !important;
+  background-image: url("https://cinemaplus.az/site/templates/images/home_slider_new_bg.jpg");
+  background-size: contain;
+  background-position: left center;
+  img {
+    display: block !important;
+    background-position: center !important;
+    height: 90% !important;
+    width: 100% !important;
+    background-size: contain;
+  }
+}

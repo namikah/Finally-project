@@ -1,13 +1,36 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@media screen and (max-width: 992px) {
+  #header-default {
+    display: none !important;
+  }
+  #header-responsive {
+    display: block !important;
+  }
+  #cinemaplus-news{
+    display: none;
+      }
+}
+
+@media screen and (max-width: 768px) {
+  #tab-header > div ul .react-tabs__tab {
+    font-size: 14px !important;
+    padding: 15px 10px;
+  }
+  #parallax {
+    display: none !important;
+  }
+ 
 }
