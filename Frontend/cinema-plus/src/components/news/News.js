@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { Tab, TabList, Tabs } from "react-tabs";
 import "./news.scss";
 
 function News() {
@@ -8,11 +7,11 @@ function News() {
   return (
     <section id="cinemaplus-news">
       <div className="d-flex justify-content-center align-itmes-center gap-1">
-        <Tabs className="w-100">
-          <TabList className="d-flex justify-content-center align-items-center gap-1">
-            <Tab>CINEMAPLUS XƏBƏRLƏRİ</Tab>
-          </TabList>
-        </Tabs>
+        <div className="w-100">
+          <div className="d-flex justify-content-center align-items-center gap-1">
+            <div className="tab-cinemaplus">CINEMAPLUS XƏBƏRLƏRİ</div>
+          </div>
+        </div>
       </div>
       <div className="news-body">
         <div className="container">
@@ -279,7 +278,7 @@ function News() {
             ></span>
           </div>
           <div className="all-news d-flex justify-content-center align-items-center">
-            <Link>BÜTÜN XƏBƏRLƏR</Link>
+            <Link to={""}>BÜTÜN XƏBƏRLƏR</Link>
           </div>
         </div>
       </div>

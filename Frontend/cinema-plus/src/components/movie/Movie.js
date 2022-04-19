@@ -95,7 +95,7 @@ function Movie() {
           <option value="1799">Türkçe</option>
         </select>
         <div className="in-english d-flex justify-content-center align-items-center">
-          <Link>Movies in English</Link>
+          <Link to={""}>Movies in English</Link>
         </div>
       </div>
       <div className="container mt-3 mb-5">
@@ -117,8 +117,8 @@ function Movie() {
                   <div className="card-title">
                     <ul className="d-flex flex-wrap justify-content-center align-item-center">
                       {item.movieFormats.map((format) => (
-                        <li key={format.format.id}>
-                          <img src={format.format.icon} alt="film-format"></img>
+                        <li>
+                          <img key={format.format.id} src={format.format.icon} alt="film-format"></img>
                         </li>
                       ))}
                     </ul>

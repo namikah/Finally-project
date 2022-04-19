@@ -1,6 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
+import MobileApp from "../../built-in/MobileApp";
 import "./header.scss";
 
 function Header() {
@@ -27,7 +27,7 @@ function Header() {
                 <Link to={""}>Xidmətlər</Link>
               </li>
               <li className="main-menu">
-                <Link to={""}>Haqqımızda</Link>
+                <Link to={"/about"}>Haqqımızda</Link>
               </li>
               <li className="lang">
                 <Link to={""}>AZ</Link>
@@ -36,19 +36,19 @@ function Header() {
 
                 <Link to={""}>EN</Link>
 
-                <Link className="icon-app" to={""}>
+                <a className="icon-app" target="_blank" rel="noreferrer" href="https://apps.apple.com/us/app/cinemaplus/id1072140418">
                   <img
                     src="https://cinemaplus.az/site/templates/images/ios.svg"
                     alt="ios"
                   ></img>
-                </Link>
+                </a>
 
-                <Link className="icon-app" to={""}>
+                <a className="icon-app"  target="_blank" rel="noreferrer" href="https://play.google.com/store/apps/details?id=com.promote.cinemaplus">
                   <img
                     src="https://cinemaplus.az/site/templates/images/android.svg"
                     alt="android"
                   ></img>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -59,7 +59,7 @@ function Header() {
               <div className="left-side col-md-5"></div>
               <ul className="right-side col-md-7 d-flex justify-content-between align-items-center">
                 <li className="main-menu">
-                  <Link to={""}>Baş səhifə</Link>
+                  <Link to={"/"}>Baş səhifə</Link>
                 </li>
                 <li className="main-menu">
                   <Link to={""}>Aksiyalar</Link>
@@ -68,7 +68,7 @@ function Header() {
                   <Link to={""}>Tariflər</Link>
                 </li>
                 <li className="cine-bonus main-menu">
-                  <Link to={""}>
+                  <Link to={"/cinebonus"}>
                     CineBonus<span>Loyalty program</span>
                   </Link>
                 </li>
@@ -167,11 +167,7 @@ function Header() {
               </ul>
               <div className="d-flex justify-content-center align-items-center">
                 <div className="app-icon">
-                  <Link
-                    to={"https://apps.apple.com/us/app/cinemaplus/id1072140418"}
-                  >
-                    <FontAwesomeIcon icon="fa-brands fa-app-store" />
-                  </Link>
+                <MobileApp/>
                 </div>
                 <div className="social-icon"></div>
               </div>

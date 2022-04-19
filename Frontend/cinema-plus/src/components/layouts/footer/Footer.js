@@ -12,24 +12,24 @@ function Footer() {
           <div className="left-side col-md-4 d-flex justify-content-center align-items-center">
             <ul>
               <li>
-                <Link>Haqqımızda</Link>
+                <Link to={""}>Haqqımızda</Link>
               </li>
               <li>
-                <Link>Xidmətlər</Link>
+                <Link  to={""}>Xidmətlər</Link>
               </li>
               <li>
-                <Link>Haqqımızda</Link>
+                <Link to={""}>Haqqımızda</Link>
               </li>
             </ul>
             <ul>
               <li>
-                <Link>FAQ</Link>
+                <Link to={""}>FAQ</Link>
               </li>
               <li>
-                <Link>Vakansiyalar</Link>
+                <Link to={""}>Vakansiyalar</Link>
               </li>
               <li>
-                <Link>Əlaqə</Link>
+                <Link to={""}>Əlaqə</Link>
               </li>
             </ul>
           </div>
@@ -42,7 +42,7 @@ function Footer() {
             <Link to={""}>Saytın tam versiyası</Link>
           </div>
           <div className="right-side">
-            <Link>
+            <Link to={""}>
               <img
                 src="https://www.cinemaplus.az/site/templates/images/vipclubcinema2.png"
                 alt="vip-club"

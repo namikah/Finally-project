@@ -1,0 +1,36 @@
+#about {
+  background: url("https://www.cinemaplus.az/site/templates/images/about.jpg") no-repeat center;;
+  background-size: cover;
+  height: 1000px;
+  position: relative;
+  &::after{
+      content: "";
+      background: rgba(23,31,38,0.9);
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: 0;
+  }
+  .container {
+      .row {
+          h2 {
+              z-index: 1;
+          color: white;
+      }
+      ul {
+              z-index: 1;
+              list-style: none;
+          li{
+              p{
+                  font-size: 16px;
+                  line-height: 19px;
+                  color:white;
+              }
+          }
+      }
+    }
+  }
+}

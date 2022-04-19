@@ -1,27 +1,25 @@
 #cinemaplus-news {
   margin-top: 80px;
   > div {
-    ul {
-      margin: 0;
-      padding: 0;
-      .react-tabs__tab {
-        cursor: pointer;
-        list-style: none;
-        border-radius: 5px 5px 0 0;
-        text-decoration: none;
-        color: black;
-        padding: 15px 20px;
-        font-size: 18px;
-        line-height: 20px;
-        font-weight: 500;
-        background: #334e9e;
-        color: white;
-      }
+    margin: 0;
+    padding: 0;
+    .tab-cinemaplus {
+      cursor: pointer;
+      list-style: none;
+      border-radius: 5px 5px 0 0;
+      text-decoration: none;
+      color: black;
+      padding: 15px 20px;
+      font-size: 18px;
+      line-height: 20px;
+      font-weight: 500;
+      background: #334e9e;
+      color: white;
     }
   }
   .news-body {
     padding-top: 40px;
-    height: 500px;
+    padding-bottom: 50px;
     background: #334e9e;
     .container {
       overflow: hidden;
@@ -38,7 +36,7 @@
             }
           }
           .card-body {
-            h6{
+            h6 {
               color: rgba(255, 255, 255, 0.752);
               font-size: 16px;
               font-weight: 500;
@@ -68,18 +66,18 @@
           background-color: #869791;
         }
       }
-      .all-news{
-          padding-top: 30px;
-          a{
-            transition: .5s all;
-              color: white;
-              letter-spacing: 2px;
-              font-weight: 600;
-              &:hover{
-                transform: scale(1.05);
-                color: rgba(255, 255, 255, 0.527);
-              }
+      .all-news {
+        padding-top: 30px;
+        a {
+          transition: 0.5s all;
+          color: white;
+          letter-spacing: 2px;
+          font-weight: 600;
+          &:hover {
+            transform: scale(1.05);
+            color: rgba(255, 255, 255, 0.527);
           }
+        }
       }
     }
   }
