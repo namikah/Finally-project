@@ -22,7 +22,7 @@ namespace CinemaPlus.Services.Services
             var cinemas = await GetAllRelations()
                .AsNoTracking()
                .AsQueryable()
-               .OrderByDescending(x => x.Id)
+               //.OrderByDescending(x => x.Id)
                .ToListAsync();
 
             return cinemas;
