@@ -33,7 +33,7 @@
           .card-image {
             img {
               width: 100%;
-              margin: 0 40px;
+              padding: 0 10px;
               height: 150px;
             }
           }
@@ -61,9 +61,14 @@
       .all-news{
           padding-top: 30px;
           a{
+            transition: .5s all;
               color: white;
               letter-spacing: 2px;
               font-weight: 600;
+              &:hover{
+                transform: scale(1.05);
+                color: rgba(255, 255, 255, 0.527);
+              }
           }
       }
     }

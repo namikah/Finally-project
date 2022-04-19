@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 import { Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Header from "./components/layouts/header/Header";
+import Footer from "./components/layouts/footer/Footer";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path={"/"} exact component={Home} />
         <Redirect to={"/error"} />
       </Switch>
+      <Footer/>
     </>
   );
 }

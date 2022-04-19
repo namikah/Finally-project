@@ -124,7 +124,7 @@ function Movie() {
                   <div className="card-title">
                     <ul className="d-flex flex-wrap justify-content-center align-item-center">
                       {item.movieFormats.map((format) => (
-                        <li className="format.id">
+                        <li key={format.format.id}>
                           <img src={format.format.icon} alt="film-format"></img>
                         </li>
                       ))}
