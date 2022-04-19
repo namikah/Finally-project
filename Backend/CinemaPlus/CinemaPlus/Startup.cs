@@ -47,6 +47,7 @@ namespace CinemaPlus
             services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<ICinemaService, CinemaService>();
 
             services.AddScoped(typeof(IUserService), typeof(UserService));
 

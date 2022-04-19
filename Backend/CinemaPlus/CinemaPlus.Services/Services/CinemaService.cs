@@ -11,37 +11,33 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Services.Services
 {
-    public class SessionService : EFCoreRepository<Session>, ISessionService
+    public class CinemaService : EFCoreRepository<Cinema>, ICinemaService
     {
-        public SessionService(AppDbContext dbContext) : base(dbContext)
+        public CinemaService(AppDbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<List<Session>> GetAllSessionAsync()
+        public async Task<List<Cinema>> GetAllCinemaAsync()
         {
-            var sessions = await GetAllRelations()
+            var cinemas = await GetAllRelations()
                .AsNoTracking()
                .AsQueryable()
-               .Include(x => x.Movie)
-               .Include(x => x.Hall)
                .OrderByDescending(x => x.Id)
                .ToListAsync();
 
-            return sessions;
+            return cinemas;
         }
 
-        public async Task<Session> GetSessionByIdAsync(int? id)
+        public async Task<Cinema> GetCinemaByIdAsync(int? id)
         {
-            if (id == null) return new Session();
+            if (id == null) return new Cinema();
 
-            var session = await GetAllRelations()
+            var cinema = await GetAllRelations()
                .AsNoTracking()
                .AsQueryable()
-               .Include(x => x.Movie)
-               .Include(x => x.Hall)
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 
-            return session;
+            return cinema;
         }
     }
 }
