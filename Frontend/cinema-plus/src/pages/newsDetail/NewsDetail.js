@@ -29,7 +29,6 @@ function NewsDetail() {
     getAllNews(1, 3);
   }, [getData, getAllNews, newsId]);
 
-  console.log(allNews);
   return (
     <section id="news-detail">
       <div className="container">
@@ -47,23 +46,33 @@ function NewsDetail() {
               allowFullScreen
               frameBorder={0}
               width={"100%"}
-              height={600}
+              height={400}
               src={news.trailer}
             ></iframe>
           </div>
-          <div className="right-side col-md-4 d-flex flex-column justify-content-start align-items-start">
-             <div className="d-flex flex-column justify-content-start align-items-start">
-             {allNews?.map((item) => (
-              <div key={item.id} className="card d-flex flex-column justify-content-start align-items-top p-3">
-                <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
-                  <Link to={`/newsdetail?id=${item.id}`}>{item.title}</Link>
+          <div className="right-side col-md-4 d-flex flex-column justify-content-start align-items-center">
+            <div className="d-flex flex-column justify-content-start align-items-start">
+              {allNews?.map((item) => (
+                <div
+                  key={item.id}
+                  className="card d-flex flex-column justify-content-start align-items-top p-3"
+                >
+                  <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                    <Link to={`/newsdetail?id=${item.id}`}>{item.title}</Link>
+                  </div>
+                  <div className="card-image d-flex justify-content-start align-item-left">
+                    <Link to={`/newsdetail?id=${item.id}`}>
+                      <img
+                        src={item.image}
+                        className="card-img-top"
+                        alt="news"
+                      />
+                    </Link>
+                  </div>
                 </div>
-                <div className="card-image d-flex justify-content-start align-item-left">
-                 <Link to={`/newsdetail?id=${item.id}`}><img src={item.image} className="card-img-top" alt="news" /></Link>
-                </div>
-              </div>
-            ))}
-             </div>
+              ))}
+            </div>
+              <Link className="button-all" to={"/allnews"}>Hamısını göstər</Link>
           </div>
         </div>
       </div>

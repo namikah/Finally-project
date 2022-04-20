@@ -108,7 +108,7 @@ function Movie() {
               >
                 <div className="card-image">
                   <img
-                    src="https://www.cinemaplus.az/site/assets/files/0/20/31/574/1_1.350x0.png"
+                    src={item.image}
                     className="card-img-top"
                     alt="film"
                   />
@@ -126,7 +126,7 @@ function Movie() {
                 </div>
                 <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
                   <Link to={""} className="btn btn-primary add-cart-button">
-                    Add basket
+                    SEANSLAR
                   </Link>
                   <Link to={""} className="age-limit">
                     <span>{item.ageLimit}+</span>

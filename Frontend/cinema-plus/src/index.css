@@ -28,6 +28,9 @@ code {
   iframe {
     height: 400px;
   }
+  #news-detail .button-all {
+    padding: 10px  20px !important;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -40,5 +43,20 @@ code {
   }
   iframe {
     height: 180px;
+  }
+  #news-detail .right-side{
+    margin-bottom: 20px;
+  }
+  #news-detail .button-all {
+  padding: 10px  0 !important;
+  }
+ 
+  #all-news .left-side .card{
+    padding-bottom: 20px;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  #all-news .left-side .card .card-body{
+    text-align: center;
   }
 }

@@ -11,6 +11,7 @@ import Services from "./pages/services/Services";
 import Platinum from "./pages/platinum/Platinum";
 import DolbyAtmos from "./pages/dolbyAtmos/DolbyAtmos";
 import NewsDetail from "./pages/newsDetail/NewsDetail";
+import AllNews from "./pages/news/AllNews";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path={"/services"} exact component={Services} />
         <Route path={"/cinebonus"} exact component={CineBonus} />
         <Route path={"/newsdetail"} exact component={NewsDetail} />
+        <Route path={"/allnews"} exact component={AllNews} />
         <Redirect to={"/error"} />
       </Switch>
       <Footer/>

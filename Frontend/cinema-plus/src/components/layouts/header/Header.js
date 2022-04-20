@@ -85,7 +85,7 @@ function Header() {
             </div>
           </div>
         </div>
-        <Link className="header-left-side d-flex justify-content-center">
+        <Link to={"/"} className="header-left-side d-flex justify-content-center">
           <img
             src="https://cinemaplus.az/site/templates/images/cpluslogo.svg"
             alt="logo"
