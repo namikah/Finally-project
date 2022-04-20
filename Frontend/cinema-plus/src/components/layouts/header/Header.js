@@ -18,23 +18,23 @@ function Header() {
             <div className="left-side col-md-5"></div>
             <ul className="right-side col-md-7 d-flex justify-content-between align-items-center">
               <li className="main-menu">
-                <Link to={""}>Platinum</Link>
+                <Link to={"/platinum"}>Platinum</Link>
               </li>
               <li className="main-menu">
-                <Link to={""}>Dolby Atmos</Link>
+                <Link to={"/dolbyatmos"}>Dolby Atmos</Link>
               </li>
               <li className="main-menu">
-                <Link to={""}>Xidmətlər</Link>
+                <Link to={"/services"}>Xidmətlər</Link>
               </li>
               <li className="main-menu">
                 <Link to={"/about"}>Haqqımızda</Link>
               </li>
               <li className="lang">
-                <Link to={""}>AZ</Link>
+                <Link to={"/az"}>AZ</Link>
 
-                <Link to={""}>RU</Link>
+                <Link to={"/ru"}>RU</Link>
 
-                <Link to={""}>EN</Link>
+                <Link to={"/en"}>EN</Link>
 
                 <a className="icon-app" target="_blank" rel="noreferrer" href="https://apps.apple.com/us/app/cinemaplus/id1072140418">
                   <img
@@ -62,10 +62,10 @@ function Header() {
                   <Link to={"/"}>Baş səhifə</Link>
                 </li>
                 <li className="main-menu">
-                  <Link to={""}>Aksiyalar</Link>
+                  <Link to={"/sessions"}>Aksiyalar</Link>
                 </li>
                 <li className="main-menu">
-                  <Link to={""}>Tariflər</Link>
+                  <Link to={"/tariffs"}>Tariflər</Link>
                 </li>
                 <li className="cine-bonus main-menu">
                   <Link to={"/cinebonus"}>

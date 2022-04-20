@@ -4,6 +4,9 @@ import "./news.scss";
 
 function News() {
   const change = useRef();
+  const active = useRef();
+  const active2 = useRef();
+  const active3 = useRef();
   return (
     <section id="cinemaplus-news">
       <div className="d-flex justify-content-center align-itmes-center gap-1">
@@ -249,31 +252,38 @@ function News() {
               </div>
               <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
                 <h6>15.04.2022</h6>
-                <h2>
-                  CinemaPlus-da “Ro
-                </h2>
-                <p>
-                  Cizgi filmi ilk dəfə 3
-                </p>
+                <h2>CinemaPlus-da “Ro</h2>
+                <p>Cizgi filmi ilk dəfə 3</p>
               </div>
             </div>
           </div>
           <div className="pagination d-flex justify-content-center align-items-center gap-3">
-            <span
-              onClick={() => {
-                change.current.classList.remove("next-one");
-                change.current.classList.remove("next-two");
+            <span className="active"
+              ref={active}
+              onClick={(e) => {
+                change.current.classList.remove("next-one", "next-two");
+                active2.current.classList.remove("active");
+                active3.current.classList.remove("active");
+                e.target.classList.add("active");
               }}
             ></span>
             <span
-              onClick={() => {
+              ref={active2}
+              onClick={(e) => {
+                change.current.classList.remove("next-two");
                 change.current.classList.add("next-one");
-                change.current.classList.remove("next-two");
+                active.current.classList.remove("active");
+                active3.current.classList.remove("active");
+                e.target.classList.add("active");
               }}
             ></span>
             <span
-              onClick={() => {
+              ref={active3}
+              onClick={(e) => {
                 change.current.classList.add("next-two");
+                active.current.classList.remove("active");
+                active2.current.classList.remove("active");
+                e.target.classList.add("active");
               }}
             ></span>
           </div>

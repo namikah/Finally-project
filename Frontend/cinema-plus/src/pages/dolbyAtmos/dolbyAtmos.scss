@@ -1,0 +1,34 @@
+#dolby-atmos {
+  padding: 50px 0;
+  background: url("https://www.cinemaplus.az/site/templates/images/guide_bg.jpg") no-repeat center;
+  background-size: cover;
+  .container {
+    .row {
+      .dolby-logo {
+          padding-bottom: 50px;
+        img {
+          height: 65px;
+          width: 250px;
+        }
+      }
+      .dolby-description {
+          padding-bottom: 10px;
+        h2 {
+          color: white;
+          font-size: 18px;
+          font-weight: 700;
+        }
+        p {
+          color: white;
+          line-height: 20px;
+          font-weight: 500;
+          margin: 0;
+        }
+      }
+      .dolby-trailer{
+          iframe{
+          }
+      }
+    }
+  }
+}

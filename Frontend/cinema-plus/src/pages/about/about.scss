@@ -2,7 +2,6 @@
   background: url("https://www.cinemaplus.az/site/templates/images/about.jpg")
     no-repeat center;
   background-size: cover;
-  height: 1000px;
   position: relative;
   &::after {
     content: "";
@@ -29,6 +28,7 @@
             font-size: 16px;
             line-height: 19px;
             color: white;
+            font-weight: 500;
           }
         }
       }
@@ -39,11 +39,11 @@
         li {
           padding: 15px 5px;
           display: inline-block;
-          &:hover{
-              a{
-                  background-color: white;
-                  color: #00ACEC;
-              }
+          &:hover {
+            a {
+              background-color: white;
+              color: #00acec;
+            }
           }
           a {
             border: 1px solid white;
@@ -54,6 +54,23 @@
             border-radius: 20px;
             padding: 10px 15px;
             font-weight: 600;
+          }
+        }
+      }
+      .services-us{
+        padding-top: 80px;
+        z-index: 1;
+        div{
+          padding-bottom: 30px;
+          img{
+            padding-bottom: 20px;
+            height: 85px;
+          }
+          p{
+            font-size: 16px;
+            line-height: 22px;
+            color: white;
+            font-weight: 500;
           }
         }
       }
