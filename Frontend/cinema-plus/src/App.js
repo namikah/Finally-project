@@ -10,6 +10,7 @@ import CineBonus from "./pages/cineBonus/CineBonus";
 import Services from "./pages/services/Services";
 import Platinum from "./pages/platinum/Platinum";
 import DolbyAtmos from "./pages/dolbyAtmos/DolbyAtmos";
+import NewsDetail from "./pages/newsDetail/NewsDetail";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path={"/about"} exact component={About} />
         <Route path={"/services"} exact component={Services} />
         <Route path={"/cinebonus"} exact component={CineBonus} />
+        <Route path={"/newsdetail"} exact component={NewsDetail} />
         <Redirect to={"/error"} />
       </Switch>
       <Footer/>

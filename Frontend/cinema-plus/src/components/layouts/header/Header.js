@@ -85,12 +85,12 @@ function Header() {
             </div>
           </div>
         </div>
-        <div className="header-left-side d-flex justify-content-center">
+        <Link className="header-left-side d-flex justify-content-center">
           <img
             src="https://cinemaplus.az/site/templates/images/cpluslogo.svg"
             alt="logo"
           ></img>
-        </div>
+        </Link>
       </div>
       <div id="header-responsive">
         <div className="header-top d-flex justify-content-between align-items-center">
