@@ -17,7 +17,7 @@ namespace CinemaPlus.Services.Services
         {
         }
 
-        public async Task<MovieDto> GetAllMoviesAsync(int page, int perPage)
+        public async Task<PaginationDto<Movie>> GetAllMoviesAsync(int page, int perPage)
         {
             var totalMoviesCount = (await GetAllAsync()).Count;
 
@@ -38,7 +38,7 @@ namespace CinemaPlus.Services.Services
                .Take(perPage)
                .ToListAsync();
 
-            return new MovieDto()
+            return new PaginationDto<Movie>()
             {
                 Page = page,
                 PerPage = perPage,

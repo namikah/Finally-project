@@ -8,7 +8,7 @@ function Home() {
    <>
    <TabHeader/>
    <Parallax/>
-   <News/>
+   <News page={1} perPage={12}/>
    </>
   )
 }
