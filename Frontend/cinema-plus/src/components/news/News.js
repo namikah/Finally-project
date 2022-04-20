@@ -81,7 +81,7 @@ function News({ page, perPage }) {
             ></span>
           </div>
           <div className="all-news d-flex justify-content-center align-items-center">
-            <Link to={""}>BÜTÜN XƏBƏRLƏR</Link>
+            <Link to={"/allnews"}>BÜTÜN XƏBƏRLƏR</Link>
           </div>
         </div>
       </div>

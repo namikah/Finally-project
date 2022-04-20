@@ -1,13 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { movieService } from "../../API/services/movieService";
 import { newsService } from "../../API/services/newsService";
 import dateFormat from "dateformat";
 import "./allNews.scss";
+import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { range } from "range";
 
 function AllNews() {
   const [moviesData, setMoviesData] = useState();
   const [newsData, setNewsData] = useState();
+  const [curPage, setCurPage] = useState(1);
+  const { push } = useHistory();
 
   const getData = useCallback(() => {
     movieService.getMovies(`?page=1&per_page=4`).then((res) => {
@@ -15,8 +20,8 @@ function AllNews() {
     });
   }, []);
 
-  const getNewsData = useCallback(() => {
-    newsService.getNews(`?page=1&per_page=4`).then((res) => {
+  const getNewsData = useCallback((page) => {
+    newsService.getNews(`?page=${page}&perPage=8`).then((res) => {
       setNewsData(res.data);
     });
   }, []);
@@ -26,8 +31,44 @@ function AllNews() {
   }, [getData]);
 
   useEffect(() => {
-    getNewsData();
-  }, [getNewsData]);
+    getNewsData(curPage);
+  }, [getNewsData,curPage]);
+
+  const handlePageChange = useCallback(
+    (ev) => {
+      const val = ev.target.value;
+      push(`?page=${val}`);
+      setCurPage(val);
+    },
+    [push]
+  );
+
+  const handlePagePrev = useCallback(
+    (curPage) => {
+      const prevPage = curPage - 1;
+      if (prevPage >= 1) {
+        push(`?page=${prevPage}`);
+        setCurPage(prevPage);
+      }
+    },
+    [push]
+  );
+
+  const maxPageCount = useMemo(
+    () => !!newsData && newsData.totalPage,
+    [newsData]
+  );
+
+  const handlePageNext = useCallback(
+    (curPage) => {
+      const nextPage = Math.round(curPage) + 1;
+      if (nextPage <= maxPageCount) {
+        push(`?page=${nextPage}`);
+        setCurPage(nextPage);
+      }
+    },
+    [push, maxPageCount]
+  );
 
   return (
     <section id="all-news">
@@ -55,6 +96,27 @@ function AllNews() {
                 </div>
               </div>
             ))}
+               <div className="d-flex justify-content-center mt-5">
+          <Pagination>
+            <PaginationItem>
+              <PaginationLink
+                onClick={() => handlePagePrev(curPage)}
+                previous
+              />
+            </PaginationItem>
+            {!!maxPageCount &&
+              range(1, maxPageCount + 1).map((i) => (
+                <PaginationItem key={i}>
+                  <PaginationLink value={i} onClick={handlePageChange}>
+                    {i}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+            <PaginationItem>
+              <PaginationLink onClick={() => handlePageNext(curPage)} next />
+            </PaginationItem>
+          </Pagination>
+        </div>
           </div>
           <div className="right-side col-md-4 col-sm-12 d-flex flex-column justify-content-start align-items-center">
             <div className="d-flex flex-column justify-content-start align-items-start">
@@ -78,8 +140,8 @@ function AllNews() {
                 </div>
               ))}
             </div>
-            <Link className="button-all" to={"/news"}>
-              Hamısını göstər
+            <Link className="button-all" to={"/"}>
+              Bütün filmlər
             </Link>
           </div>
         </div>
