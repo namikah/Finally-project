@@ -17,7 +17,6 @@ namespace CinemaPlus.Controllers
     {
         private readonly IRepository<Movie> _movieRepository;
         private readonly IMovieService _movieService;
-        //private readonly MovieService _movieService;
 
         public MovieController(IRepository<Movie> movieRepository, IMovieService movieService)
         {

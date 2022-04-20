@@ -19,9 +19,15 @@ code {
   #header-responsive {
     display: block !important;
   }
-  #cinemaplus-news{
+  #cinemaplus-news {
     display: none;
-      }
+  }
+  #socials-icons {
+    border: 0 !important;
+  }
+  iframe {
+    height: 400px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -32,5 +38,7 @@ code {
   #parallax {
     display: none !important;
   }
- 
+  iframe {
+    height: 180px;
+  }
 }

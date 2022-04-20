@@ -9,7 +9,7 @@ function Footer() {
     <footer>
       <div className="container">
         <div className="top-footer row">
-          <div className="left-side col-md-4 d-flex justify-content-center align-items-center">
+          <div className="left-side col-lg-4 col-md-12 d-flex justify-content-center align-items-center pb-3">
             <ul>
               <li>
                 <Link to={""}>Haqqımızda</Link>
