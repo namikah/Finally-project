@@ -73,7 +73,7 @@ function AllNews() {
   return (
     <section id="all-news">
       <div className="container">
-        <div className="row justify-content-between">
+        <div className="row justify-content-between align-items-start">
           <div className="left-side col-md-7 col-sm-12 row justify-content-start align-items-start">
             <div className="tab-header-news">
               <Link to={"/allnews"}>CinemaPlus Xəbərləri</Link>
@@ -119,7 +119,6 @@ function AllNews() {
         </div>
           </div>
           <div className="right-side col-md-4 col-sm-12 d-flex flex-column justify-content-start align-items-center">
-            <div className="d-flex flex-column justify-content-start align-items-start">
               {moviesData?.data.map((item) => (
                 <div
                   key={item.id}
@@ -139,7 +138,6 @@ function AllNews() {
                   </div>
                 </div>
               ))}
-            </div>
             <Link className="button-all" to={"/"}>
               Bütün filmlər
             </Link>

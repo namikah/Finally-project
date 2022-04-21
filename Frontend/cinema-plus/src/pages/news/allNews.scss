@@ -27,6 +27,11 @@
           .card-image {
               width: 250px;
               min-width: 250px;
+                overflow: hidden;
+                transition: .2s all;
+                &:hover{
+                  box-shadow: 2px 2px 15px 5px rgb(193, 193, 193);
+                  }
           }
           .card-body {
             padding: 0 5px 0 15px;
@@ -38,6 +43,10 @@
                 color: #314ca0;
                 font-size: 16px;
                 font-weight: 500;
+                transition: .2s all;
+                &:hover{
+                  color: #00aff0;
+                }
               }
             }
             h6 {
@@ -87,6 +96,7 @@
             }
           }
           .card-image{
+          
           }
         }
         .button-all {

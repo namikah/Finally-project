@@ -70,7 +70,7 @@ namespace CinemaPlus.Controllers
 
             await _newsRepository.UpdateAsync(news);
 
-            return Ok();
+            return Ok(news);
         }
 
         [HttpDelete("{id?}")]

@@ -30,7 +30,12 @@
       "ProjectGuid": "b8ef41cc-2b6f-4eb5-a634-05ffbfc708d7",
       "DisplayName": "CinemaPlus.Services",
       "ColorIndex": 4
+    },
+    "2638ce5c-a8bc-431d-af1b-f834c3313d68": {
+      "ProjectGuid": "2638ce5c-a8bc-431d-af1b-f834c3313d68",
+      "DisplayName": "CinemaPlus.infrastructure",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 6
 }

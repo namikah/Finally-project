@@ -39,6 +39,19 @@
             a {
               text-decoration: none;
               color: #00aff0;
+              transition: .5s;
+              &:hover{
+                color: white;
+              }
+            }
+          }
+          .card-image {
+            a {
+              overflow: hidden;
+              transition: .3s;
+              &:hover{
+                box-shadow: 2px 2px 15px 5px white;
+                }
             }
           }
         }
@@ -52,9 +65,9 @@
           text-align: center;
           padding: 15px 70px;
           font-weight: 500;
-          transition: .5s all;
-          &:hover{
-              background-color:#00aff0;
+          transition: 0.5s all;
+          &:hover {
+            background-color: #00aff0;
           }
         }
       }
