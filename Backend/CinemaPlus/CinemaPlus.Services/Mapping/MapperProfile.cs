@@ -9,6 +9,8 @@ namespace CinemaPlus.Services.Mapping
         public MapperProfile()
         {
             CreateMap<User, UserDto>().ReverseMap();
+
+            CreateMap<News, NewsDto>().ReverseMap();
         }
     }
 }

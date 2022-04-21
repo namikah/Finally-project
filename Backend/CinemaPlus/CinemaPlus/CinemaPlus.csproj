@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CinemaPlus.infrastructure\CinemaPlus.infrastructure.csproj" />
     <ProjectReference Include="..\CinemaPlus.Services\CinemaPlus.Services.csproj" />
     <ProjectReference Include="..\Data\CinemaPlus.Data.csproj" />
   </ItemGroup>

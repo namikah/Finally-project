@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Models.DTOs
 {
-    public class MovieDto
+    public class PaginationDto<T>
     {
         public int Page { get; set; }
 
@@ -17,6 +17,6 @@ namespace CinemaPlus.Models.DTOs
 
         public decimal TotalPage { get; set; }
 
-        public ICollection<Movie> Data { get; set; }
+        public ICollection<T> Data { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using CinemaPlus.Data;
+using CinemaPlus.infrastructure.Middlewares;
 using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.DataContext;
 using CinemaPlus.Repository.Repository;
@@ -88,6 +89,7 @@ namespace CinemaPlus
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CinemaPlus v1"));
             }
 
+            app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();

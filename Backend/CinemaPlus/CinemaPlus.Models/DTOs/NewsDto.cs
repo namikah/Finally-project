@@ -1,22 +1,28 @@
-﻿using CinemaPlus.Models.Entities;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CinemaPlus.Models.DTOs
 {
-    public class PaginationDto<T>
+    public class NewsDto
     {
-        public int Page { get; set; }
+        public string Title { get; set; }
 
-        public int PerPage { get; set; }
+        public DateTime Date { get; set; }
 
-        public int Total { get; set; }
+        public string Image { get; set; }
 
-        public decimal TotalPage { get; set; }
+        [NotMapped]
+        public IFormFile Photo { get; set; }
 
-        public ICollection<T> Data { get; set; }
+        public string Snippet { get; set; }
+
+        public string Description { get; set; }
+
+        public string Trailer { get; set; }
     }
 }

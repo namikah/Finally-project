@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 
 function Movie() {
   const [moviesData, setMoviesData] = useState();
-  const [curPage, setCurPage] = useState(1);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
+  const [curPage, setCurPage] = useState(1);
   const { push } = useHistory();
 
   const getData = useCallback((page) => {
@@ -107,18 +107,18 @@ function Movie() {
                 className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
               >
                 <div className="card-image">
-                  <img
-                    src={item.image}
-                    className="card-img-top"
-                    alt="film"
-                  />
+                  <img src={item.image} className="card-img-top" alt="film" />
                 </div>
                 <div className="card-body d-flex justify-content-center align-item-center">
                   <div className="card-title">
                     <ul className="d-flex flex-wrap justify-content-center align-item-center">
                       {item.movieFormats.map((format) => (
                         <li>
-                          <img key={format.format.id} src={format.format.icon} alt="film-format"></img>
+                          <img
+                            key={format.format.id}
+                            src={format.format.icon}
+                            alt="film-format"
+                          ></img>
                         </li>
                       ))}
                     </ul>

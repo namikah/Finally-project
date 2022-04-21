@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 function Socials() {
   return (
-    <div id='socials-icons' className='col-lg-4 col-md-12 d-flex justify-content-center align-items-center gap-3 pb-2 b-md-0'>
+    <div id='socials-icons' className='col-lg-4 col-md-12 d-flex justify-content-center align-items-center gap-3 pb-2'>
         <Link to={""}>
          <img src="https://www.cinemaplus.az/site/templates/images/fb.png" alt="social-icon"></img>
          </Link>

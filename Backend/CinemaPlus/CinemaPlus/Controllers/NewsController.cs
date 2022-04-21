@@ -1,4 +1,6 @@
-﻿using CinemaPlus.Models.Entities;
+﻿using AutoMapper;
+using CinemaPlus.Models.DTOs;
+using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.Repository.Contracts;
 using CinemaPlus.Services.Services;
 using CinemaPlus.Services.Services.Contracts;
@@ -17,11 +19,13 @@ namespace CinemaPlus.Controllers
     {
         private readonly IRepository<News> _newsRepository;
         private readonly INewsService _newsService;
+        private readonly IMapper _mapper;
 
-        public NewsController(IRepository<News> newsRepository, INewsService newsService)
+        public NewsController(IRepository<News> newsRepository, INewsService newsService, IMapper mapper)
         {
             _newsRepository = newsRepository;
             _newsService = newsService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -44,11 +48,11 @@ namespace CinemaPlus.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] News news)
+        public async Task<IActionResult> Post([FromForm] NewsDto newsDto)
         {
-            await _newsService.AddAsync(news);
+            await _newsService.AddAsync(_mapper.Map<News>(newsDto));
 
-            return Ok(news);
+            return Ok(newsDto);
         }
 
         [HttpPut("{id?}")]

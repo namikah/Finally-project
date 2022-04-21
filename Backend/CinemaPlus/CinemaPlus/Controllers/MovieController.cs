@@ -1,4 +1,5 @@
-﻿using CinemaPlus.Models.Entities;
+﻿using AutoMapper;
+using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.Repository.Contracts;
 using CinemaPlus.Services.Services;
 using CinemaPlus.Services.Services.Contracts;
@@ -17,11 +18,13 @@ namespace CinemaPlus.Controllers
     {
         private readonly IRepository<Movie> _movieRepository;
         private readonly IMovieService _movieService;
+        private readonly IMapper _mapper;
 
-        public MovieController(IRepository<Movie> movieRepository, IMovieService movieService)
+        public MovieController(IRepository<Movie> movieRepository, IMovieService movieService, IMapper mapper)
         {
             _movieRepository = movieRepository;
             _movieService = movieService;
+            _mapper = mapper;
         }
 
         [HttpGet]
