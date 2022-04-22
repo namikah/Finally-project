@@ -12,6 +12,7 @@ import Platinum from "./pages/platinum/Platinum";
 import DolbyAtmos from "./pages/dolbyAtmos/DolbyAtmos";
 import NewsDetail from "./pages/newsDetail/NewsDetail";
 import AllNews from "./pages/news/AllNews";
+import MovieDetail from "./pages/movieDetail/MovieDetail";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Header />
       <Switch>
         <Route path={"/"} exact component={Home} />
+        <Route path={"/moviedetail"} exact component={MovieDetail} />
         <Route path={"/platinum"} exact component={Platinum} />
         <Route path={"/dolbyatmos"} exact component={DolbyAtmos} />
         <Route path={"/about"} exact component={About} />

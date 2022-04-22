@@ -1,0 +1,49 @@
+#movie-about {
+  .row {
+    margin: 0;
+    .left-side {
+      padding: 20px;
+      background: #1d2730;
+      .image {
+        img {
+          width: 280px;
+          height: 400px;
+        }
+      }
+      .description {
+        p {
+          color: #bbbec1;
+        }
+      }
+    }
+    .right-side {
+      padding: 20px 30px;
+      background: #f0f0f0;
+      .movie-details {
+        li {
+          margin: 0;
+          &.border-bottom-details {
+            border-bottom: 1px solid #c6c6c6;
+          }
+          h6 {
+            padding: 10px 0;
+            color: #0075bc;
+            font-weight: 600;
+          }
+          p {
+            margin: 0;
+            padding: 10px;
+          }
+          img {
+            width: 50px;
+            margin: 0 10px 0 0;
+          }
+          div{
+            margin: 0;
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
+}

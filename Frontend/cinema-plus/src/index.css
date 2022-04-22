@@ -29,14 +29,20 @@ code {
     height: 400px;
   }
   #news-detail .button-all {
-    padding: 10px  20px !important;
-    }
+    padding: 10px 20px !important;
+  }
+  #tab-header{
+    margin-top: 30px !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  #tab-header > div ul .react-tabs__tab {
+  #tab-header{
+    margin-top: 10px !important;
+  }
+  #tab-header div ul .react-tabs__tab {
     font-size: 14px !important;
-    padding: 15px 10px;
+    padding: 10px 5px !important;
   }
   #parallax {
     display: none !important;
@@ -44,19 +50,29 @@ code {
   iframe {
     height: 180px;
   }
-  #news-detail .right-side{
+  #news-detail .right-side {
     margin-bottom: 20px;
   }
   #news-detail .button-all {
-  padding: 10px  0 !important;
+    padding: 10px 0 !important;
   }
- 
-  #all-news .left-side .card{
+
+  #all-news .left-side .card {
     padding-bottom: 20px;
     justify-content: center !important;
     align-items: center !important;
   }
-  #all-news .left-side .card .card-body{
+  #all-news .left-side .card .card-body {
     text-align: center;
+  }
+  #movie-about .row .left-side {
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center !important;
+  }
+
+  #movie-about .row .left-side .image img {
+    width: 200px !important;
+    height: 300px !important;
   }
 }

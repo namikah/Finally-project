@@ -4,11 +4,13 @@
     ul {
       margin: 0;
       padding: 0;
+      &.bottom-bordered {
+        border-bottom: 10px solid #334e9e;
+      }
       .react-tabs__tab {
         cursor: pointer;
         list-style: none;
         border-radius: 5px 5px 0 0;
-        text-decoration: none;
         color: black;
         padding: 15px 20px;
         font-size: 18px;
@@ -17,7 +19,11 @@
         &.react-tabs__tab--selected {
           background: #334e9e;
           color: white;
+        
         }
+      }
+      .no-pagination{
+        display: none;
       }
     }
   }

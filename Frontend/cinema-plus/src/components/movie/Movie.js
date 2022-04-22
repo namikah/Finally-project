@@ -107,7 +107,7 @@ function Movie() {
                 className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
               >
                 <div className="card-image">
-                  <img src={item.image} className="card-img-top" alt="film" />
+                 <Link to={`/moviedetail?id=${item.id}`}><img src={item.image} className="card-img-top" alt="film" /></Link>
                 </div>
                 <div className="card-body d-flex justify-content-center align-item-center">
                   <div className="card-title">
@@ -125,10 +125,10 @@ function Movie() {
                   </div>
                 </div>
                 <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
-                  <Link to={""} className="btn btn-primary add-cart-button">
+                  <Link to={`/moviedetail?id=${item.id}`} className="btn btn-primary add-cart-button">
                     SEANSLAR
                   </Link>
-                  <Link to={""} className="age-limit">
+                  <Link to={`/moviedetail?id=${item.id}`} className="age-limit">
                     <span>{item.ageLimit}+</span>
                   </Link>
                 </div>
@@ -136,7 +136,7 @@ function Movie() {
             ))}
           </div>
         </section>
-        <div className="d-flex justify-content-center mt-5">
+        <div className="pagination-component d-flex justify-content-center mt-5">
           <Pagination>
             <PaginationItem>
               <PaginationLink

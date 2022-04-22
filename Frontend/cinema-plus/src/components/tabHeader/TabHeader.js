@@ -8,7 +8,7 @@ function TabHeader() {
     <section id="tab-header">
       <div className="d-flex justify-content-center align-itmes-center gap-1">
         <Tabs className="w-100">
-          <TabList className="d-flex justify-content-center align-items-center gap-1">
+          <TabList className="bottom-bordered d-flex justify-content-center align-items-center gap-1">
             <Tab>BU GÜN</Tab>
             <Tab>CƏDVƏL</Tab>
             <Tab>TEZLİKLƏ</Tab>
