@@ -13,10 +13,12 @@ import DolbyAtmos from "./pages/dolbyAtmos/DolbyAtmos";
 import NewsDetail from "./pages/newsDetail/NewsDetail";
 import AllNews from "./pages/news/AllNews";
 import MovieDetail from "./pages/movieDetail/MovieDetail";
+import { LoadingProvider } from "./context/loading";
 
 function App() {
   return (
     <>
+      <LoadingProvider>
       <Header />
       <Switch>
         <Route path={"/"} exact component={Home} />
@@ -31,6 +33,7 @@ function App() {
         <Redirect to={"/error"} />
       </Switch>
       <Footer/>
+      </LoadingProvider>
     </>
   );
 }

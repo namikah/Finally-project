@@ -11,7 +11,7 @@ function MovieDetail() {
     const { search } = useLocation();
     const params = new URLSearchParams(search);
     const [movies, setMovies] = useState({});
-    const [allMovies, setAllMovies] = useState([]);
+    const [setAllMovies] = useState([]);
     const movieId = params.get("id");
   
     const getData = useCallback((id) => {
@@ -24,7 +24,7 @@ function MovieDetail() {
       movieService.getMovies(`?page=${p}&perPage=${pPage}`).then((res) => {
         setAllMovies(res.data.data);
       });
-    }, []);
+    }, [setAllMovies]);
   
     useEffect(() => {
       getData(movieId);

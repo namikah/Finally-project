@@ -1,10 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import {
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap";
 import { movieService } from "../../API/services/movieService";
 import { range } from "range";
 import "./movie.scss";
 import { Link } from "react-router-dom";
+import { useLoadingContext } from "../../context/loading";
 
 function Movie() {
   const [moviesData, setMoviesData] = useState();
@@ -12,12 +17,18 @@ function Movie() {
   const [optionTwo, setOptionTwo] = useState(false);
   const [curPage, setCurPage] = useState(1);
   const { push } = useHistory();
+  const [{ loading, setLoading }] = useLoadingContext([]);
 
-  const getData = useCallback((page) => {
-    movieService.getMovies(`?page=${page}&per_page=8`).then((res) => {
-      setMoviesData(res.data);
-    });
-  }, []);
+  const getData = useCallback(
+    (page) => {
+      setLoading(true);
+      movieService.getMovies(`?page=${page}&per_page=8`).then((res) => {
+        setMoviesData(res.data);
+        setLoading(false);
+      });
+    },
+    [setLoading]
+  );
 
   useEffect(() => {
     getData(curPage);
@@ -100,40 +111,56 @@ function Movie() {
       </div>
       <div className="container mt-3 mb-5">
         <section id="movies">
-          <div className="cards row">
-            {moviesData?.data.map((item) => (
-              <div
-                key={item.id}
-                className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
-              >
-                <div className="card-image">
-                 <Link to={`/moviedetail?id=${item.id}`}><img src={item.image} className="card-img-top" alt="film" /></Link>
-                </div>
-                <div className="card-body d-flex justify-content-center align-item-center">
-                  <div className="card-title">
-                    <ul className="d-flex flex-wrap justify-content-center align-item-center">
-                      {item.movieFormats.map((format) => (
-                        <li>
-                          <img
-                            key={format.format.id}
-                            src={format.format.icon}
-                            alt="film-format"
-                          ></img>
-                        </li>
-                      ))}
-                    </ul>
+          <div className="cards row justify-content-center">
+            {loading ? (
+              <div className="loading text-center">Seanslar yüklənir. . .</div>
+            ) : (
+              moviesData?.data.map((item) => (
+                <div
+                  key={item.id}
+                  className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
+                >
+                  <div className="card-image">
+                    <Link to={`/moviedetail?id=${item.id}`}>
+                      <img
+                        src={item.image}
+                        className="card-img-top"
+                        alt="film"
+                      />
+                    </Link>
+                  </div>
+                  <div className="card-body d-flex justify-content-center align-item-center">
+                    <div className="card-title">
+                      <ul className="d-flex flex-wrap justify-content-center align-item-center">
+                        {item.movieFormats.map((format) => (
+                          <li>
+                            <img
+                              key={format.format.id}
+                              src={format.format.icon}
+                              alt="film-format"
+                            ></img>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
+                    <Link
+                      to={`/moviedetail?id=${item.id}`}
+                      className="btn btn-primary add-cart-button"
+                    >
+                      SEANSLAR
+                    </Link>
+                    <Link
+                      to={`/moviedetail?id=${item.id}`}
+                      className="age-limit"
+                    >
+                      <span>{item.ageLimit}+</span>
+                    </Link>
                   </div>
                 </div>
-                <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
-                  <Link to={`/moviedetail?id=${item.id}`} className="btn btn-primary add-cart-button">
-                    SEANSLAR
-                  </Link>
-                  <Link to={`/moviedetail?id=${item.id}`} className="age-limit">
-                    <span>{item.ageLimit}+</span>
-                  </Link>
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </section>
         <div className="pagination-component d-flex justify-content-center mt-5">
