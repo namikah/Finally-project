@@ -1,17 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-} from "reactstrap";
+import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { movieService } from "../../API/services/movieService";
 import { range } from "range";
 import "./movie.scss";
 import { Link } from "react-router-dom";
 import { useLoadingContext } from "../../context/loading";
 
-function Movie() {
+function Movie({ defaultPerPage }) {
   const [moviesData, setMoviesData] = useState();
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
@@ -20,9 +16,9 @@ function Movie() {
   const [{ loading, setLoading }] = useLoadingContext([]);
 
   const getData = useCallback(
-    (page) => {
+    (page, PerPage) => {
       setLoading(true);
-      movieService.getMovies(`?page=${page}&per_page=8`).then((res) => {
+      movieService.getMovies(`?page=${page}&perPage=${PerPage}`).then((res) => {
         setMoviesData(res.data);
         setLoading(false);
       });
@@ -31,8 +27,8 @@ function Movie() {
   );
 
   useEffect(() => {
-    getData(curPage);
-  }, [getData, curPage]);
+    getData(curPage, defaultPerPage);
+  }, [getData, curPage, defaultPerPage]);
 
   const handlePageChange = useCallback(
     (ev) => {
@@ -43,36 +39,30 @@ function Movie() {
     [push]
   );
 
-  const handlePagePrev = useCallback(
-    (curPage) => {
-      const prevPage = curPage - 1;
-      if (prevPage >= 1) {
-        push(`?page=${prevPage}`);
-        setCurPage(prevPage);
-      }
-    },
-    [push]
-  );
+  const handlePagePrev = useCallback(() => {
+    const prevPage = curPage - 1;
+    if (prevPage >= 1) {
+      push(`?page=${prevPage}`);
+      setCurPage(prevPage);
+    }
+  }, [push, curPage]);
 
   const maxPageCount = useMemo(
     () => !!moviesData && moviesData.totalPage,
     [moviesData]
   );
 
-  const handlePageNext = useCallback(
-    (curPage) => {
-      const nextPage = Math.round(curPage) + 1;
-      if (nextPage <= maxPageCount) {
-        push(`?page=${nextPage}`);
-        setCurPage(nextPage);
-      }
-    },
-    [push, maxPageCount]
-  );
+  const handlePageNext = useCallback(() => {
+    const nextPage = Math.round(curPage) + 1;
+    if (nextPage <= maxPageCount) {
+      push(`?page=${nextPage}`);
+      setCurPage(nextPage);
+    }
+  }, [push, maxPageCount, curPage]);
 
   return (
     <>
-      <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-5">
+      <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
         <select
           onMouseDown={() => setOptionOne(true)}
           onMouseLeave={() => setOptionOne(false)}
@@ -111,13 +101,13 @@ function Movie() {
       </div>
       <div className="container mt-3 mb-5">
         <section id="movies">
-          <div className="cards row justify-content-center">
+          <div className="cards row justify-content-start">
             {loading ? (
               <div className="loading text-center">Seanslar yüklənir. . .</div>
             ) : (
               moviesData?.data.map((item) => (
                 <div
-                  key={item.id}
+                  key={"card" + item.id}
                   className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
                 >
                   <div className="card-image">
@@ -132,13 +122,9 @@ function Movie() {
                   <div className="card-body d-flex justify-content-center align-item-center">
                     <div className="card-title">
                       <ul className="d-flex flex-wrap justify-content-center align-item-center">
-                        {item.movieFormats.map((format) => (
-                          <li>
-                            <img
-                              key={format.format.id}
-                              src={format.format.icon}
-                              alt="film-format"
-                            ></img>
+                        {item.movieFormats?.map(({ format }) => (
+                          <li key={"format" + format.id}>
+                            <img src={format.icon} alt="film-format"></img>
                           </li>
                         ))}
                       </ul>
@@ -167,20 +153,53 @@ function Movie() {
           <Pagination>
             <PaginationItem>
               <PaginationLink
-                onClick={() => handlePagePrev(curPage)}
+                style={
+                  curPage.toString() === "1"
+                    ? {
+                        pointerEvents: "none",
+                        color: "black",
+                        fontWeight: "700",
+                      }
+                    : {}
+                }
+                onClick={handlePagePrev}
                 previous
               />
             </PaginationItem>
             {!!maxPageCount &&
               range(1, maxPageCount + 1).map((i) => (
-                <PaginationItem key={i}>
-                  <PaginationLink value={i} onClick={handlePageChange}>
+                <PaginationItem key={"page" + i}>
+                  <PaginationLink
+                    style={
+                      curPage.toString() === i.toString()
+                        ? {
+                            pointerEvents: "none",
+                            color: "black",
+                            fontWeight: "700",
+                          }
+                        : {}
+                    }
+                    value={i}
+                    onClick={handlePageChange}
+                  >
                     {i}
                   </PaginationLink>
                 </PaginationItem>
               ))}
             <PaginationItem>
-              <PaginationLink onClick={() => handlePageNext(curPage)} next />
+              <PaginationLink
+                style={
+                  curPage.toString() === maxPageCount.toString()
+                    ? {
+                        pointerEvents: "none",
+                        color: "black",
+                        fontWeight: "700",
+                      }
+                    : {}
+                }
+                onClick={handlePageNext}
+                next
+              />
             </PaginationItem>
           </Pagination>
         </div>

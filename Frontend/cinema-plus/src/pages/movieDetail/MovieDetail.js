@@ -11,7 +11,6 @@ function MovieDetail() {
     const { search } = useLocation();
     const params = new URLSearchParams(search);
     const [movies, setMovies] = useState({});
-    const [setAllMovies] = useState([]);
     const movieId = params.get("id");
   
     const getData = useCallback((id) => {
@@ -20,16 +19,9 @@ function MovieDetail() {
       });
     }, []);
   
-    const getAllMovies = useCallback((p, pPage) => {
-      movieService.getMovies(`?page=${p}&perPage=${pPage}`).then((res) => {
-        setAllMovies(res.data.data);
-      });
-    }, [setAllMovies]);
-  
     useEffect(() => {
       getData(movieId);
-      getAllMovies(1, 4);
-    }, [getData, getAllMovies, movieId]);
+    }, [getData, movieId]);
   return (
     <>
       <section id="owl-trailer">
@@ -72,7 +64,7 @@ function MovieDetail() {
               <Tab>DiGƏR FİLMLƏR</Tab>
             </TabList>
             <TabPanel className="another-films">
-              <Movie />
+              <Movie defaultPerPage={4}/>
             </TabPanel>
           </Tabs>
         </div>

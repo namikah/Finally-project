@@ -21,5 +21,8 @@ namespace CinemaPlus.Models.Entities
 
         public bool IsDeleted { get; set; }
 
+        public DateTime StartInCinema { get; set; }
+
+        public DateTime EndInCinema { get; set; }
     }
 }

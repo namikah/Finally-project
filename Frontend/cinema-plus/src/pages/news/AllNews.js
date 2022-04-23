@@ -44,14 +44,14 @@ function AllNews() {
   );
 
   const handlePagePrev = useCallback(
-    (curPage) => {
+    () => {
       const prevPage = curPage - 1;
       if (prevPage >= 1) {
         push(`?page=${prevPage}`);
         setCurPage(prevPage);
       }
     },
-    [push]
+    [push,curPage]
   );
 
   const maxPageCount = useMemo(
@@ -60,14 +60,14 @@ function AllNews() {
   );
 
   const handlePageNext = useCallback(
-    (curPage) => {
+    () => {
       const nextPage = Math.round(curPage) + 1;
       if (nextPage <= maxPageCount) {
         push(`?page=${nextPage}`);
         setCurPage(nextPage);
       }
     },
-    [push, maxPageCount]
+    [push, maxPageCount,curPage]
   );
 
   return (
@@ -100,20 +100,45 @@ function AllNews() {
           <Pagination>
             <PaginationItem>
               <PaginationLink
-                onClick={() => handlePagePrev(curPage)}
+                style={
+                  curPage.toString() === "1"
+                    ? {
+                        pointerEvents: "none",
+                        color: "black",
+                        fontWeight: "700",
+                      }
+                    : {}
+                }
+                onClick={handlePagePrev}
                 previous
               />
             </PaginationItem>
             {!!maxPageCount &&
               range(1, maxPageCount + 1).map((i) => (
                 <PaginationItem key={i}>
-                  <PaginationLink value={i} onClick={handlePageChange}>
+                  <PaginationLink  style={
+                      curPage.toString() === i.toString()
+                        ? {
+                            pointerEvents: "none",
+                            color: "black",
+                            fontWeight: "700",
+                          }
+                        : {}
+                    } value={i} onClick={handlePageChange}>
                     {i}
                   </PaginationLink>
                 </PaginationItem>
               ))}
             <PaginationItem>
-              <PaginationLink onClick={() => handlePageNext(curPage)} next />
+              <PaginationLink  style={
+                  curPage.toString() === maxPageCount.toString()
+                    ? {
+                        pointerEvents: "none",
+                        color: "black",
+                        fontWeight: "700",
+                      }
+                    : {}
+                } onClick={handlePageNext} next />
             </PaginationItem>
           </Pagination>
         </div>
