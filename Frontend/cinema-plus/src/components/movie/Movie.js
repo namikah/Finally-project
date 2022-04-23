@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { movieService } from "../../API/services/movieService";
@@ -14,6 +14,11 @@ function Movie({ defaultPerPage }) {
   const [curPage, setCurPage] = useState(1);
   const { push } = useHistory();
   const [{ loading, setLoading }] = useLoadingContext([]);
+
+  const scrolltoMovies = useRef(null)
+
+  const scrollToMovie = () => scrolltoMovies.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const scrollToTop = () =>  window.scrollTo(0, scrolltoMovies.offsetTop);
 
   const getData = useCallback(
     (page, PerPage) => {
@@ -35,6 +40,7 @@ function Movie({ defaultPerPage }) {
       const val = ev.target.value;
       push(`?page=${val}`);
       setCurPage(val);
+      scrollToMovie();
     },
     [push]
   );
@@ -44,6 +50,7 @@ function Movie({ defaultPerPage }) {
     if (prevPage >= 1) {
       push(`?page=${prevPage}`);
       setCurPage(prevPage);
+      scrollToMovie();
     }
   }, [push, curPage]);
 
@@ -57,12 +64,13 @@ function Movie({ defaultPerPage }) {
     if (nextPage <= maxPageCount) {
       push(`?page=${nextPage}`);
       setCurPage(nextPage);
+      scrollToMovie();
     }
   }, [push, maxPageCount, curPage]);
 
   return (
     <>
-      <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
+      <div ref={scrolltoMovies} className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
         <select
           onMouseDown={() => setOptionOne(true)}
           onMouseLeave={() => setOptionOne(false)}
@@ -111,7 +119,7 @@ function Movie({ defaultPerPage }) {
                   className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
                 >
                   <div className="card-image">
-                    <Link to={`/moviedetail?id=${item.id}`}>
+                    <Link onClick={scrollToTop} to={`/moviedetail?id=${item.id}`}>
                       <img
                         src={item.image}
                         className="card-img-top"
@@ -132,6 +140,7 @@ function Movie({ defaultPerPage }) {
                   </div>
                   <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
                     <Link
+                    onClick={scrollToTop}
                       to={`/moviedetail?id=${item.id}`}
                       className="btn btn-primary add-cart-button"
                     >
@@ -141,7 +150,7 @@ function Movie({ defaultPerPage }) {
                       to={`/moviedetail?id=${item.id}`}
                       className="age-limit"
                     >
-                      <span>{item.ageLimit}+</span>
+                      <span onClick={scrollToTop}>{item.ageLimit}+</span>
                     </Link>
                   </div>
                 </div>

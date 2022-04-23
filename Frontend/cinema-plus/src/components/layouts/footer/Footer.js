@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import MobileApp from "../../built-in/MobileApp";
 import Socials from "../../built-in/Socials";
 import "./footer.scss";
 
 function Footer() {
+  const scroll = useRef(null);
+
+  const scrollTo = () => window.scrollTo(0, scroll.offsetTop);
+
   return (
     <footer>
       <div className="container">
@@ -15,7 +19,7 @@ function Footer() {
                 <Link to={""}>Haqqımızda</Link>
               </li>
               <li>
-                <Link  to={""}>Xidmətlər</Link>
+                <Link to={""}>Xidmətlər</Link>
               </li>
               <li>
                 <Link to={""}>Haqqımızda</Link>
@@ -39,15 +43,22 @@ function Footer() {
         <div className="bottom-footer d-flex justify-content-between align-items-center">
           <div className="left-side">
             <p>Bütün hüquqlar qorunur. © CinemaPlus LLC 2012-2022</p>
-            <Link to={""}>Saytın tam versiyası</Link>
+            <Link onClick={scrollTo} to={"/"}>
+              Saytın tam versiyası
+            </Link>
           </div>
           <div className="right-side">
-            <Link to={""}>
+            <a
+              onClick={scrollTo}
+              target="_blank"
+              rel="noreferrer"
+              href="https://vipclubazerbaijan.com/"
+            >
               <img
                 src="https://www.cinemaplus.az/site/templates/images/vipclubcinema2.png"
                 alt="vip-club"
               ></img>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

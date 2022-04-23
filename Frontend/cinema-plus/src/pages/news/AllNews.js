@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { movieService } from "../../API/services/movieService";
 import { newsService } from "../../API/services/newsService";
@@ -13,6 +13,9 @@ function AllNews() {
   const [newsData, setNewsData] = useState();
   const [curPage, setCurPage] = useState(1);
   const { push } = useHistory();
+  const scrolltoNews = useRef(null)
+
+  const scrollTo = () =>  window.scrollTo(0, scrolltoNews.offsetTop);
 
   const getData = useCallback(() => {
     movieService.getMovies(`?page=1&per_page=4`).then((res) => {
@@ -39,6 +42,7 @@ function AllNews() {
       const val = ev.target.value;
       push(`?page=${val}`);
       setCurPage(val);
+      scrollTo();
     },
     [push]
   );
@@ -49,7 +53,8 @@ function AllNews() {
       if (prevPage >= 1) {
         push(`?page=${prevPage}`);
         setCurPage(prevPage);
-      }
+      scrollTo();
+    }
     },
     [push,curPage]
   );
@@ -65,13 +70,14 @@ function AllNews() {
       if (nextPage <= maxPageCount) {
         push(`?page=${nextPage}`);
         setCurPage(nextPage);
-      }
+      scrollTo();
+    }
     },
     [push, maxPageCount,curPage]
   );
 
   return (
-    <section id="all-news">
+    <section ref={scrolltoNews} id="all-news">
       <div className="container">
         <div className="row justify-content-between align-items-start">
           <div className="left-side col-md-7 col-sm-12 row justify-content-start align-items-start">
@@ -163,7 +169,7 @@ function AllNews() {
                   </div>
                 </div>
               ))}
-            <Link className="button-all" to={"/"}>
+            <Link onClick={scrollTo} className="button-all" to={"/"}>
               Bütün filmlər
             </Link>
           </div>

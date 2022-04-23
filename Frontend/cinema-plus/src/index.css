@@ -31,13 +31,13 @@ code {
   #news-detail .button-all {
     padding: 10px 20px !important;
   }
-  #tab-header{
+  #tab-header {
     margin-top: 30px !important;
   }
 }
 
 @media screen and (max-width: 768px) {
-  #tab-header{
+  #tab-header {
     margin-top: 10px !important;
   }
   #tab-header div ul .react-tabs__tab {
@@ -74,5 +74,8 @@ code {
   #movie-about .row .left-side .image img {
     width: 200px !important;
     height: 300px !important;
+  }
+  #about .about-us {
+    text-align: center;
   }
 }

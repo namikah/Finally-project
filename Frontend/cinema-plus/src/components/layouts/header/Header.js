@@ -1,10 +1,13 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import MobileApp from "../../built-in/MobileApp";
 import "./header.scss";
 
 function Header() {
   const [state, setState] = useState(false);
+  const scroll = useRef(null);
+
+  const scrollTo = () => window.scrollTo(0, scroll.offsetTop);
 
   const toggleClick = useCallback(() => {
     setState(!state);
@@ -18,16 +21,24 @@ function Header() {
             <div className="left-side col-md-5"></div>
             <ul className="right-side col-md-7 d-flex justify-content-between align-items-center">
               <li className="main-menu">
-                <Link to={"/platinum"}>Platinum</Link>
+                <Link onClick={scrollTo} to={"/platinum"}>
+                  Platinum
+                </Link>
               </li>
               <li className="main-menu">
-                <Link to={"/dolbyatmos"}>Dolby Atmos</Link>
+                <Link onClick={scrollTo} to={"/dolbyatmos"}>
+                  Dolby Atmos
+                </Link>
               </li>
               <li className="main-menu">
-                <Link to={"/services"}>Xidmətlər</Link>
+                <Link onClick={scrollTo} to={"/services"}>
+                  Xidmətlər
+                </Link>
               </li>
               <li className="main-menu">
-                <Link to={"/about"}>Haqqımızda</Link>
+                <Link onClick={scrollTo} to={"/about"}>
+                  Haqqımızda
+                </Link>
               </li>
               <li className="lang">
                 <Link to={"/az"}>AZ</Link>
@@ -36,14 +47,24 @@ function Header() {
 
                 <Link to={"/en"}>EN</Link>
 
-                <a className="icon-app" target="_blank" rel="noreferrer" href="https://apps.apple.com/us/app/cinemaplus/id1072140418">
+                <a
+                  className="icon-app"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://apps.apple.com/us/app/cinemaplus/id1072140418"
+                >
                   <img
                     src="https://cinemaplus.az/site/templates/images/ios.svg"
                     alt="ios"
                   ></img>
                 </a>
 
-                <a className="icon-app"  target="_blank" rel="noreferrer" href="https://play.google.com/store/apps/details?id=com.promote.cinemaplus">
+                <a
+                  className="icon-app"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://play.google.com/store/apps/details?id=com.promote.cinemaplus"
+                >
                   <img
                     src="https://cinemaplus.az/site/templates/images/android.svg"
                     alt="android"
@@ -58,17 +79,21 @@ function Header() {
             <div className="row align-items-center">
               <div className="left-side col-md-5"></div>
               <ul className="right-side col-md-7 d-flex justify-content-between align-items-center">
-                <li className="main-menu">
+                <li onClick={scrollTo} to={"/"} className="main-menu">
                   <Link to={"/"}>Baş səhifə</Link>
                 </li>
                 <li className="main-menu">
-                  <Link to={"/sessions"}>Aksiyalar</Link>
+                  <Link onClick={scrollTo} to={"/sessions"}>
+                    Aksiyalar
+                  </Link>
                 </li>
                 <li className="main-menu">
-                  <Link to={"/tariffs"}>Tariflər</Link>
+                  <Link onClick={scrollTo} to={"/tariffs"}>
+                    Tariflər
+                  </Link>
                 </li>
                 <li className="cine-bonus main-menu">
-                  <Link to={"/cinebonus"}>
+                  <Link onClick={scrollTo} to={"/cinebonus"}>
                     CineBonus<span>Loyalty program</span>
                   </Link>
                 </li>
@@ -85,7 +110,11 @@ function Header() {
             </div>
           </div>
         </div>
-        <Link to={"/"} className="header-left-side d-flex justify-content-center">
+        <Link
+          onClick={scrollTo}
+          to={"/"}
+          className="header-left-side d-flex justify-content-center"
+        >
           <img
             src="https://cinemaplus.az/site/templates/images/cpluslogo.svg"
             alt="logo"
@@ -130,14 +159,20 @@ function Header() {
         <div className="header-bottom d-flex justify-content-between align-items-center">
           <div className="container">
             <div className="d-flex justify-content-between align-items-center">
-              <div className="logo-side d-flex justify-content-center">
-                <img
-                  src="https://cinemaplus.az/site/templates/images/cpluslogo.svg"
-                  alt="logo"
-                ></img>
+              <div
+                onClick={scrollTo}
+                to={"/"}
+                className="logo-side d-flex justify-content-center"
+              >
+                <Link to={"/"}>
+                  <img
+                    src="https://cinemaplus.az/site/templates/images/cpluslogo.svg"
+                    alt="logo"
+                  ></img>
+                </Link>
               </div>
-              <div className="button-side"  onClick={() => toggleClick()}>
-                <Link to={""}>
+              <div className="button-side" onClick={() => toggleClick()}>
+                <Link to={"#"}>
                   <span></span>
                 </Link>
               </div>
@@ -150,24 +185,64 @@ function Header() {
             <div className="container">
               <ul>
                 <li className="main-menu">
-                  <Link to={""}>Platinum</Link>
+                  <Link
+                    onClick={() => {
+                      scrollTo();
+                      toggleClick();
+                    }}
+                    to={"/platinum"}
+                  >
+                    Platinum
+                  </Link>
                 </li>
                 <li className="main-menu">
-                  <Link to={""}>Aksiyalar</Link>
+                  <Link
+                    onClick={() => {
+                      scrollTo();
+                      toggleClick();
+                    }}
+                    to={"/sessions"}
+                  >
+                    Aksiyalar
+                  </Link>
                 </li>
                 <li className="main-menu">
-                  <Link to={""}>Tariflər</Link>
+                  <Link
+                    onClick={() => {
+                      scrollTo();
+                      toggleClick();
+                    }}
+                    to={"/tariffs"}
+                  >
+                    Tariflər
+                  </Link>
                 </li>
                 <li className="main-menu">
-                  <Link to={""}>Haqqımızda</Link>
+                  <Link
+                    onClick={() => {
+                      scrollTo();
+                      toggleClick();
+                    }}
+                    to={"/about"}
+                  >
+                    Haqqımızda
+                  </Link>
                 </li>
                 <li className="cine-bonus main-menu">
-                  <Link to={""}>Əlaqə</Link>
+                  <Link
+                    onClick={() => {
+                      scrollTo();
+                      toggleClick();
+                    }}
+                    to={"/contact"}
+                  >
+                    Əlaqə
+                  </Link>
                 </li>
               </ul>
               <div className="d-flex justify-content-center align-items-center">
                 <div className="app-icon">
-                <MobileApp/>
+                  <MobileApp />
                 </div>
                 <div className="social-icon"></div>
               </div>

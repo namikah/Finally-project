@@ -16,7 +16,6 @@ function About() {
     getData();
   }, [getData]);
 
-  console.log(cinemaData);
   return (
     <section id="about">
       <div className="container">
