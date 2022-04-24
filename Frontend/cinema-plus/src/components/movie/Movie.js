@@ -147,7 +147,7 @@ function Movie({ defaultPerPage }) {
                       SEANSLAR
                     </Link>
                     <Link
-                      to={`/moviedetail?id=${item.id}`}
+                     v
                       className="age-limit"
                     >
                       <span onClick={scrollToTop}>{item.ageLimit}+</span>

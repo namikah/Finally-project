@@ -1,6 +1,7 @@
 import React from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import Movie from "../movie/Movie";
+import Session from "../session/Session";
 import "./tabHeader.scss";
 
 function TabHeader() {
@@ -17,7 +18,7 @@ function TabHeader() {
             <Movie defaultPerPage={8}/>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <Session/>
           </TabPanel>
           <TabPanel>
             <h2>Any content 3</h2>

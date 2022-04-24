@@ -19,20 +19,20 @@ function App() {
   return (
     <>
       <LoadingProvider>
-      <Header />
-      <Switch>
-        <Route path={"/"} exact component={Home} />
-        <Route path={"/moviedetail"} exact component={MovieDetail} />
-        <Route path={"/platinum"} exact component={Platinum} />
-        <Route path={"/dolbyatmos"} exact component={DolbyAtmos} />
-        <Route path={"/about"} exact component={About} />
-        <Route path={"/services"} exact component={Services} />
-        <Route path={"/cinebonus"} exact component={CineBonus} />
-        <Route path={"/newsdetail"} exact component={NewsDetail} />
-        <Route path={"/allnews"} exact component={AllNews} />
-        <Redirect to={"/error"} />
-      </Switch>
-      <Footer/>
+          <Header />
+          <Switch>
+            <Route path={"/"} exact component={Home} />
+            <Route path={"/moviedetail"} exact component={MovieDetail} />
+            <Route path={"/platinum"} exact component={Platinum} />
+            <Route path={"/dolbyatmos"} exact component={DolbyAtmos} />
+            <Route path={"/about"} exact component={About} />
+            <Route path={"/services"} exact component={Services} />
+            <Route path={"/cinebonus"} exact component={CineBonus} />
+            <Route path={"/newsdetail"} exact component={NewsDetail} />
+            <Route path={"/allnews"} exact component={AllNews} />
+            <Redirect to={"/error"} />
+          </Switch>
+          <Footer />
       </LoadingProvider>
     </>
   );

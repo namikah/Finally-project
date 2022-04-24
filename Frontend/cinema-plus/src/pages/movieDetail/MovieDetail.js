@@ -6,6 +6,7 @@ import Trailer from "../../components/trailer/Trailer";
 import { useLocation } from "react-router-dom";
 import { movieService } from "../../API/services/movieService";
 import Movie from "../../components/movie/Movie";
+import Session from "../../components/session/Session";
 
 function MovieDetail() {
     const { search } = useLocation();
@@ -46,7 +47,7 @@ function MovieDetail() {
               <Tab>TREYLER</Tab>
             </TabList>
             <TabPanel>
-              <h2>Seanslar</h2>
+             <Session movieId={movieId}/>
             </TabPanel>
             <TabPanel>
               <MovieAbout data={movies}/>

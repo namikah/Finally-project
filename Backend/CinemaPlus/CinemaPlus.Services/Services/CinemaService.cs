@@ -22,7 +22,9 @@ namespace CinemaPlus.Services.Services
             var cinemas = await GetAllRelations()
                .AsNoTracking()
                .AsQueryable()
-               .Include(x=>x.Halls)
+               .Include(x => x.Halls)
+               .Include(x => x.Tariffs)
+               .ThenInclude(x=>x.Format)
                .ToListAsync();
 
             return cinemas;
@@ -35,7 +37,7 @@ namespace CinemaPlus.Services.Services
             var cinema = await GetAllRelations()
                .AsNoTracking()
                .AsQueryable()
-               .Include(x=>x.Halls)
+               .Include(x => x.Halls)
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 
             return cinema;

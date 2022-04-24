@@ -14,5 +14,7 @@ namespace CinemaPlus.Models.Entities
         public string Name { get; set; }
 
         public ICollection<Hall> Halls { get; set; }
+
+        public ICollection<Tariff> Tariffs { get; set; }
     }
 }

@@ -1,0 +1,52 @@
+#session{
+    tbody {
+        tr {
+          td {
+            padding-top: 10px !important;
+            font-weight: 500;
+            a {
+              text-decoration: none;
+              font-weight: 600;
+              color: #334e9e;
+            }
+            &.row-format {
+              padding: 0 !important;
+              .format-icon {
+                width: 50px;
+                height: 50px;
+                padding: 3px;
+              }
+            }
+            &.row-buy {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .buy-ticket {
+                border: 1px solid #dcdcdc;
+                padding: 5px;
+                text-align: center;
+                border-radius: 5px;
+                width: 120px;
+                overflow: hidden;
+                margin: 0;
+                input {
+                  background: url("https://www.cinemaplus.az/site/templates/images/places_icon.svg")
+                    no-repeat right;
+                  border: none;
+                  width: 80px;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+      thead {
+        tr {
+          th {
+            color: #334e9e;
+            font-weight: 500;
+          }
+        }
+      }
+}

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Models.Entities
 {
-    public class Session:IEntity
+    public class Session : IEntity
     {
         public int Id { get; set; }
 

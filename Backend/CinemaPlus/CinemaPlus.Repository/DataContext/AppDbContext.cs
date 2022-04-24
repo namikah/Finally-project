@@ -44,5 +44,7 @@ namespace CinemaPlus.Repository.DataContext
         public DbSet<Session> Sessions { get; set; }
 
         public DbSet<News> News { get; set; }
+
+        public DbSet<Tariff> Tariffs { get; set; }
     }
 }
