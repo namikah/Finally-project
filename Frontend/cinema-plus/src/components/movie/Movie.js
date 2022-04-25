@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useHistory } from "react-router-dom";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { movieService } from "../../API/services/movieService";
@@ -15,10 +21,14 @@ function Movie({ defaultPerPage }) {
   const { push } = useHistory();
   const [{ loading, setLoading }] = useLoadingContext([]);
 
-  const scrolltoMovies = useRef(null)
+  const scrolltoMovies = useRef(null);
 
-  const scrollToMovie = () => scrolltoMovies.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  const scrollToTop = () =>  window.scrollTo(0, scrolltoMovies.offsetTop);
+  const scrollToMovie = () =>
+    scrolltoMovies.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  const scrollToTop = () => window.scrollTo(0, scrolltoMovies.offsetTop);
 
   const getData = useCallback(
     (page, PerPage) => {
@@ -70,7 +80,10 @@ function Movie({ defaultPerPage }) {
 
   return (
     <>
-      <div ref={scrolltoMovies} className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
+      <div
+        ref={scrolltoMovies}
+        className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3"
+      >
         <select
           onMouseDown={() => setOptionOne(true)}
           onMouseLeave={() => setOptionOne(false)}
@@ -111,7 +124,7 @@ function Movie({ defaultPerPage }) {
         <section id="movies">
           <div className="cards row justify-content-start">
             {loading ? (
-              <div className="loading text-center">Seanslar yüklənir. . .</div>
+              <div className="loading text-center">Filmlər yüklənir. . .</div>
             ) : (
               moviesData?.data.map((item) => (
                 <div
@@ -119,7 +132,10 @@ function Movie({ defaultPerPage }) {
                   className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
                 >
                   <div className="card-image">
-                    <Link onClick={scrollToTop} to={`/moviedetail?id=${item.id}`}>
+                    <Link
+                      onClick={scrollToTop}
+                      to={`/moviedetail?id=${item.id}`}
+                    >
                       <img
                         src={item.image}
                         className="card-img-top"
@@ -140,14 +156,14 @@ function Movie({ defaultPerPage }) {
                   </div>
                   <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
                     <Link
-                    onClick={scrollToTop}
+                      onClick={scrollToTop}
                       to={`/moviedetail?id=${item.id}`}
                       className="btn btn-primary add-cart-button"
                     >
                       SEANSLAR
                     </Link>
                     <Link
-                     v
+                      to={`/moviedetail?id=${item.id}`}
                       className="age-limit"
                     >
                       <span onClick={scrollToTop}>{item.ageLimit}+</span>
@@ -158,60 +174,64 @@ function Movie({ defaultPerPage }) {
             )}
           </div>
         </section>
-        <div className="pagination-component d-flex justify-content-center mt-5">
-          <Pagination>
-            <PaginationItem>
-              <PaginationLink
-                style={
-                  curPage.toString() === "1"
-                    ? {
-                        pointerEvents: "none",
-                        color: "black",
-                        fontWeight: "700",
+        {loading ? (
+          ""
+        ) : (
+          <div className="pagination-component d-flex justify-content-center mt-5">
+            <Pagination>
+              <PaginationItem>
+                <PaginationLink
+                  style={
+                    curPage.toString() === "1"
+                      ? {
+                          pointerEvents: "none",
+                          color: "black",
+                          fontWeight: "700",
+                        }
+                      : {}
+                  }
+                  onClick={handlePagePrev}
+                  previous
+                />
+              </PaginationItem>
+              {!!maxPageCount &&
+                range(1, maxPageCount + 1).map((i) => (
+                  <PaginationItem key={"page" + i}>
+                    <PaginationLink
+                      style={
+                        curPage.toString() === i.toString()
+                          ? {
+                              pointerEvents: "none",
+                              color: "black",
+                              fontWeight: "700",
+                            }
+                          : {}
                       }
-                    : {}
-                }
-                onClick={handlePagePrev}
-                previous
-              />
-            </PaginationItem>
-            {!!maxPageCount &&
-              range(1, maxPageCount + 1).map((i) => (
-                <PaginationItem key={"page" + i}>
-                  <PaginationLink
-                    style={
-                      curPage.toString() === i.toString()
-                        ? {
-                            pointerEvents: "none",
-                            color: "black",
-                            fontWeight: "700",
-                          }
-                        : {}
-                    }
-                    value={i}
-                    onClick={handlePageChange}
-                  >
-                    {i}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-            <PaginationItem>
-              <PaginationLink
-                style={
-                  curPage.toString() === maxPageCount.toString()
-                    ? {
-                        pointerEvents: "none",
-                        color: "black",
-                        fontWeight: "700",
-                      }
-                    : {}
-                }
-                onClick={handlePageNext}
-                next
-              />
-            </PaginationItem>
-          </Pagination>
-        </div>
+                      value={i}
+                      onClick={handlePageChange}
+                    >
+                      {i}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+              <PaginationItem>
+                <PaginationLink
+                  style={
+                    curPage.toString() === maxPageCount.toString()
+                      ? {
+                          pointerEvents: "none",
+                          color: "black",
+                          fontWeight: "700",
+                        }
+                      : {}
+                  }
+                  onClick={handlePageNext}
+                  next
+                />
+              </PaginationItem>
+            </Pagination>
+          </div>
+        )}
       </div>
     </>
   );

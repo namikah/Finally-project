@@ -21,10 +21,10 @@ function Session(props) {
   const getData = useCallback(() => {
     setLoading(true);
     sessionService.getSession().then((res) => {
-    setLoading(false);
-    setSessionData(res.data);
+      setLoading(false);
+      setSessionData(res.data);
     });
-  }, [setSessionData,setLoading]);
+  }, [setSessionData, setLoading]);
 
   useEffect(() => {
     getData();
@@ -39,7 +39,9 @@ function Session(props) {
     <section id="session">
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
         <div className="in-english d-flex justify-content-center align-items-center">
-          <Link to={"/"} data-date={today}>Bu gün</Link>
+          <Link to={"/"} data-date={today}>
+            Bu gün
+          </Link>
         </div>
         <div className="in-english d-flex justify-content-center align-items-center">
           <Link to={"/"} data-date={tomorrow}>
@@ -65,65 +67,69 @@ function Session(props) {
         </select>
       </div>
       <div className="container">
-      {loading? ( <div className="loading text-center">Seanslar yüklənir. . .</div>) : (  <Table responsive>
-          <thead>
-            <tr>
-              <th className="column-film">FILM</th>
-              <th className="column-session">SEANSLAR</th>
-              <th className="column-cinema">KINOTEATR</th>
-              <th className="column-hall">ZAL</th>
-              <th className="column-format">FORMAT</th>
-              <th className="column-price">QİYMƏT</th>
-              <th className="column-buy text-center">ALMAQ</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sessions?.map((item) => (
-              <tr key={item.id}>
-                <td className="row-film">
-                  <Link to={`/moviedetail?id=${item.movie.id}`}>
-                    {item.movie.name}
-                  </Link>
-                </td>
-                <td className="row-session">{item.start}</td>
-                <td className="row-cinema">
-                  <Link to={`/moviedetail?id=${item.movie.id}`}>
-                    {item.hall.cinema.name}
-                  </Link>
-                </td>
-                <td className="row-hall">{item.hall.name}</td>
-                <td className="row-format d-flex">
-                  {item.movie.movieFormats?.map(({ format }) => (
-                    <span key={format.id}>
-                      <img
-                        className="format-icon"
-                        src={format.icon}
-                        alt="format"
-                      ></img>
-                    </span>
-                  ))}
-                </td>
-                <td className="row-price">
-                  {item.hall.cinema.tariffs?.find(
-                    (tariff) =>
-                      tariff.startTime <= item.start &&
-                      tariff.endTime >= item.start
-                  ).price + ".00 AZN"}
-                </td>
-                <td className="row-buy text-center">
-                  <div className="buy-ticket">
-                    <input
-                      type="text"
-                      value={"Yerlər"}
-                      readOnly
-                      disabled
-                    ></input>
-                  </div>
-                </td>
+        {loading ? (
+          <div className="loading text-center">Seanslar yüklənir. . .</div>
+        ) : (
+          <Table responsive>
+            <thead>
+              <tr>
+                <th className="column-film">FILM</th>
+                <th className="column-session">SEANSLAR</th>
+                <th className="column-cinema">KINOTEATR</th>
+                <th className="column-hall">ZAL</th>
+                <th className="column-format">FORMAT</th>
+                <th className="column-price">QİYMƏT</th>
+                <th className="column-buy text-center">ALMAQ</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>)}
+            </thead>
+            <tbody>
+              {sessions?.map((item) => (
+                <tr key={item.id}>
+                  <td className="row-film">
+                    <Link to={`/moviedetail?id=${item.movie.id}`}>
+                      {item.movie.name}
+                    </Link>
+                  </td>
+                  <td className="row-session">{item.start}</td>
+                  <td className="row-cinema">
+                    <Link to={`/moviedetail?id=${item.movie.id}`}>
+                      {item.hall.cinema.name}
+                    </Link>
+                  </td>
+                  <td className="row-hall">{item.hall.name}</td>
+                  <td className="row-format">
+                    {item.movie.movieFormats?.map(({ format }) => (
+                      <span key={format.id}>
+                        <img
+                          className="format-icon"
+                          src={format.icon}
+                          alt="format"
+                        ></img>
+                      </span>
+                    ))}
+                  </td>
+                  <td className="row-price">
+                    {item.hall.cinema.tariffs?.find(
+                      (tariff) =>
+                        tariff.startTime <= item.start &&
+                        tariff.endTime >= item.start
+                    ).price + ".00 AZN"}
+                  </td>
+                  <td className="row-buy text-center">
+                    <div className="buy-ticket">
+                      <input
+                        type="text"
+                        value={"Yerlər"}
+                        readOnly
+                        disabled
+                      ></input>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </div>
     </section>
   );
