@@ -117,7 +117,7 @@ function Movie({ defaultPerPage }) {
           <option value="1799">Türkçe</option>
         </select>
         <div className="in-english d-flex justify-content-center align-items-center">
-          <Link to={""}>Movies in English</Link>
+          <div to={""}>Movies in English</div>
         </div>
       </div>
       <div className="container mt-3 mb-5">

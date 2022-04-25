@@ -18,7 +18,7 @@ function TabHeader() {
             <Movie defaultPerPage={8}/>
           </TabPanel>
           <TabPanel>
-            <Session/>
+            <Session />
           </TabPanel>
           <TabPanel>
             <h2>Any content 3</h2>

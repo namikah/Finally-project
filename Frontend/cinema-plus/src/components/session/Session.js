@@ -7,16 +7,17 @@ import dateFormat from "dateformat";
 import { useLoadingContext } from "../../context/loading";
 
 function Session(props) {
-  const [{ loading, setLoading }] = useLoadingContext(false);
-  const [optionOne, setOptionOne] = useState(false);
-  const [sessionData, setSessionData] = useState([]);
-
   let date = new Date();
   let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");
   let tomorrow = dateFormat(date.setDate(date.getDate() + 1), "dd.mm.yyyy");
   let tomorrow2 = dateFormat(date.setDate(date.getDate() + 1), "dd.mm.yyyy");
   let tomorrow3 = dateFormat(date.setDate(date.getDate() + 1), "dd.mm.yyyy");
   let tomorrow4 = dateFormat(date.setDate(date.getDate() + 1), "dd.mm.yyyy");
+
+  const [{ loading, setLoading }] = useLoadingContext(false);
+  const [optionOne, setOptionOne] = useState(false);
+  const [sessionData, setSessionData] = useState([]);
+  const [dateSelected, setDateSelected] = useState(today);
 
   const getData = useCallback(() => {
     setLoading(true);
@@ -39,16 +40,13 @@ function Session(props) {
     <section id="session">
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
         <div className="in-english d-flex justify-content-center align-items-center">
-          <Link to={"/"} data-date={today}>
-            Bu gün
-          </Link>
+          <div onClick={() => setDateSelected(today)}>Bu gün</div>
         </div>
         <div className="in-english d-flex justify-content-center align-items-center">
-          <Link to={"/"} data-date={tomorrow}>
-            Sabah
-          </Link>
+          <div onClick={() => setDateSelected(tomorrow)}>Sabah</div>
         </div>
         <select
+        onChange={(e)=> setDateSelected(e.target.value)}
           onMouseDown={() => setOptionOne(true)}
           onMouseLeave={() => setOptionOne(false)}
           style={
@@ -67,6 +65,7 @@ function Session(props) {
         </select>
       </div>
       <div className="container">
+        <div className="today-header text-center">Bu gün ({dateSelected})</div>
         {loading ? (
           <div className="loading text-center">Seanslar yüklənir. . .</div>
         ) : (

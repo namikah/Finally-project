@@ -1,4 +1,10 @@
 #session{
+  .today-header{
+    font-size: 18px;
+    color: #334e9e;
+font-weight: 600;
+padding: 20px 0 30px 0;
+  }
     tbody {
         tr {
           td {
@@ -51,6 +57,6 @@
       }
       .loading {
         color: red;
-        font-size: 20px;
+        font-size: 18px;
       }
 }
