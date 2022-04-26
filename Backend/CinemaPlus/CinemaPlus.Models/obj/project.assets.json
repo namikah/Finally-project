@@ -1024,11 +1024,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Desktop\\last\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj",
       "projectName": "CinemaPlus.Models",
-      "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj",
+      "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\last\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\last\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

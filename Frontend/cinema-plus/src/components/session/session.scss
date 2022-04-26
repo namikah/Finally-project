@@ -1,4 +1,30 @@
 #session {
+  .header-filter {
+    .filter-date {
+      // border-radius: 50px;
+      // overflow: hidden;
+      // width: 350px;
+      div {
+        border-radius: 0;
+        width: 90px;
+        &.date-today {
+          div{
+            border-radius: 50px 0 0 50px;
+          }
+        }
+      }
+      .date-custom {
+        border-radius: 0 50px 50px 0;
+        width: 150px;
+        padding-left: 15px;
+      }
+    }
+    .filter-cinemas{
+      border-radius: 50px;
+      width: 250px;
+      padding-left: 15px;
+    }
+  }
   .today-header {
     font-size: 18px;
     color: #334e9e;
@@ -27,6 +53,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          cursor: pointer;
           .buy-ticket {
             border: 1px solid #dcdcdc;
             padding: 5px;
@@ -59,11 +86,10 @@
     color: red;
     font-size: 18px;
   }
-  .logo-reklam{
-margin: 0 !important;
-    img{
-display: block;
-margin: 0 !important;
+  .logo-reklam {
+    img {
+      display: block;
+      margin: 0 !important;
     }
   }
   .zone {
@@ -79,7 +105,7 @@ margin: 0 !important;
     justify-content: center;
     align-items: center;
     .select-zone {
-      border-radius: 10px;
+      border-radius: 50px !important;
       background-color: white;
       width: calc(100% / 12 * 8);
       height: 100vh;

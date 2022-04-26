@@ -776,11 +776,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Desktop\\last\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj",
       "projectName": "CinemaPlus.infrastructure",
-      "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj",
+      "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\last\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\last\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

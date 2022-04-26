@@ -78,6 +78,15 @@ function Movie({ defaultPerPage }) {
     }
   }, [push, maxPageCount, curPage]);
 
+  document.addEventListener("click", function (event) {
+    if (!event.target.classList.contains("change-cinema")) {
+      setOptionOne(false);
+    }
+    if (!event.target.classList.contains("change-lang")) {
+      setOptionTwo(false);
+    }
+  });
+
   return (
     <>
       <div
@@ -85,8 +94,8 @@ function Movie({ defaultPerPage }) {
         className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3"
       >
         <select
-          onMouseDown={() => setOptionOne(true)}
-          onMouseLeave={() => setOptionOne(false)}
+        className="change-cinema"
+          onClick={() => setOptionOne(!optionOne)}
           style={
             optionOne
               ? { borderRadius: "20px 20px 0 0" }
@@ -102,8 +111,8 @@ function Movie({ defaultPerPage }) {
           <option value="2">Azerbaijan Cinema</option>
         </select>
         <select
-          onMouseDown={() => setOptionTwo(true)}
-          onMouseLeave={() => setOptionTwo(false)}
+        className="change-lang"
+          onClick={() => setOptionTwo(!optionTwo)}
           style={
             optionTwo
               ? { borderRadius: "20px 20px 0 0" }

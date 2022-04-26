@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
 import { sessionService } from "../../API/services/sessionService";
@@ -22,6 +16,8 @@ function Session(props) {
 
   const [{ loading, setLoading }] = useLoadingContext(false);
   const [optionOne, setOptionOne] = useState(false);
+  const [optionTwo, setOptionTwo] = useState(false);
+  const [optionThree, setOptionThree] = useState(false);
   const [sessionData, setSessionData] = useState([]);
   const [dateSelected, setDateSelected] = useState(today);
   const zone = useRef();
@@ -47,64 +43,107 @@ function Session(props) {
       (session) => session.movieId.toString() === props.movieId.toString()
     );
 
+  document.addEventListener("click", function (event) {
+    if (!event.target.classList.contains("change-cinema")) {
+      setOptionTwo(false);
+    }
+    if (!event.target.classList.contains("change-date")) {
+      setOptionOne(false);
+    }
+    if (!event.target.classList.contains("change-lang")) {
+      setOptionThree(false);
+    }
+  });
+
   return (
     <section id="session">
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
-        <div className="in-english d-flex justify-content-center align-items-center">
-          <div
-            onClick={() => setDateSelected(today)}
+        <div className="filter-date d-flex justify-content-center align-items-center">
+          <div className="in-english date-today d-flex justify-content-center align-items-center">
+            <div
+              onClick={() => setDateSelected(today)}
+              style={
+                dateSelected === today
+                  ? { backgroundColor: "#00ACEC", color: "white" }
+                  : {}
+              }
+            >
+              Bu gün
+            </div>
+          </div>
+          <div className="in-english date-tomorrow d-flex justify-content-center align-items-center">
+            <div
+              onClick={() => setDateSelected(tomorrow)}
+              style={
+                dateSelected === tomorrow
+                  ? { backgroundColor: "#00ACEC", color: "white" }
+                  : {}
+              }
+            >
+              Sabah
+            </div>
+          </div>
+          <select
+            className="date-custom change-date"
+            onChange={(e) => setDateSelected(e.target.value)}
+            onClick={() => setOptionOne(!optionOne)}
             style={
-              dateSelected === today
-                ? { backgroundColor: "#00ACEC", color: "white" }
-                : {}
+              optionOne
+                ? { borderRadius: "0 20px 0 0" }
+                : { borderRadius: "0 50px 50px 0" }
             }
           >
-            Bu gün
-          </div>
-        </div>
-        <div className="in-english d-flex justify-content-center align-items-center">
-          <div
-            onClick={() => setDateSelected(tomorrow)}
-            style={
-              dateSelected === tomorrow
-                ? { backgroundColor: "#00ACEC", color: "white" }
-                : {}
-            }
-          >
-            Sabah
-          </div>
+            <option value={today} defaultValue>
+              {today}
+            </option>
+            <option value={tomorrow}>{tomorrow}</option>
+            <option value={tomorrow2}>{tomorrow2}</option>
+            <option value={tomorrow3}>{tomorrow3}</option>
+            <option value={tomorrow4}>{tomorrow4}</option>
+          </select>
         </div>
         <select
+          className="filter-cinemas change-cinema"
           onChange={(e) => setDateSelected(e.target.value)}
-          onMouseDown={() => setOptionOne(true)}
-          onMouseLeave={() => setOptionOne(false)}
+          onClick={() => setOptionTwo(!optionTwo)}
           style={
-            optionOne
+            optionTwo
+              ? { borderRadius: "20px 20px 0 0" }
+              : { borderRadius: "50px" }
+          }
+        >
+          <option value={0} defaultValue>
+            Kinoteatrlar
+          </option>
+        </select>
+        <select
+        className="change-lang"
+          onClick={() => setOptionThree(!optionThree)}
+          style={
+            optionThree
               ? { borderRadius: "20px 20px 0 0" }
               : { borderRadius: "20px" }
           }
         >
-          <option value={today} defaultValue>
-            {today}
-          </option>
-          <option value={tomorrow}>{tomorrow}</option>
-          <option value={tomorrow2}>{tomorrow2}</option>
-          <option value={tomorrow3}>{tomorrow3}</option>
-          <option value={tomorrow4}>{tomorrow4}</option>
+          <option value="1">Bütün dillərdə</option>
+          <option value="2">Azərbaycanca</option>
+          <option value="3">На русском</option>
+          <option value="4">In English</option>
+          <option value="5">Türkçe</option>
         </select>
       </div>
       <div className="container">
         <div className="today-header text-center">
           {dateSelected === today
-            ? "Bu gün"
+            ? "Bu gün "
             : dateSelected === tomorrow
-            ? "Sabah"
+            ? "Sabah "
             : ""}
           ({dateSelected})
         </div>
         {loading ? (
           <div className="loading text-center">Seanslar yüklənir. . .</div>
-        ) : sessions.length == 0 ? (
+        ) : sessions.length === 0 ? (
           <div className="loading text-center">Seans yoxdur</div>
         ) : (
           <Table responsive>
@@ -170,9 +209,13 @@ function Session(props) {
             </tbody>
           </Table>
         )}
-        <Link className="logo-reklam d-flex justify-content-center align-items-center pt-4 pb-2">
-          <img src="https://www.cinemaplus.az/site/templates/images/pb-aze.png" alt="logo-pashabank"></img>
-        </Link>
+        <a href="https://www.pashabank.az/lang,az/" target="_blank" className="logo-reklam d-flex justify-content-center align-items-center pt-4 pb-2">
+          <img
+          className="img-fluid"
+            src="https://www.cinemaplus.az/site/templates/images/pb-aze.png"
+            alt="logo-pashabank"
+          ></img>
+        </a>
       </div>
       <div ref={zone} className="zone">
         <div className="select-zone">
