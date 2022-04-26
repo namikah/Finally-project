@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZuqSlcFS1lLQuUh6mitcqe4HKkpE6GA896v2yAIYqHuiSuC6Ak1c0+7y/dPF66SSLDf3707on/LzF2m0U3mbmg==",
+  "dgSpecHash": "iGBkxoJzWdPHPOrj0omlszm/rzv1d7fLXDmUhjelhp3+30wsKtfOuMliKAKDx/lgv9XJIhMIhNhrYR0e4Zq2cw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\last\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Repository\\CinemaPlus.Repository.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Repository\\CinemaPlus.Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
