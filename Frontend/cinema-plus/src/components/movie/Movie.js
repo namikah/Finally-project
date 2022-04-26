@@ -120,10 +120,10 @@ function Movie({ defaultPerPage }) {
           }
         >
           <option value="0">Bütün dillərdə</option>
-          <option value="1800">Azərbaycanca</option>
-          <option value="1798">На русском</option>
-          <option value="1797">In English</option>
-          <option value="1799">Türkçe</option>
+          <option value="1">Azərbaycanca</option>
+          <option value="2">На русском</option>
+          <option value="3">In English</option>
+          <option value="4">Türkçe</option>
         </select>
         <div className="in-english d-flex justify-content-center align-items-center">
           <div to={""}>Movies in English</div>
