@@ -6528,11 +6528,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
       "projectName": "CinemaPlus",
-      "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
+      "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6549,14 +6549,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj"
+            "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj"
             },
-            "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj": {
-              "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj"
+            "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj": {
+              "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj"
             },
-            "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\Data\\CinemaPlus.Data.csproj": {
-              "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\Data\\CinemaPlus.Data.csproj"
+            "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\Data\\CinemaPlus.Data.csproj": {
+              "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\Data\\CinemaPlus.Data.csproj"
             }
           }
         }

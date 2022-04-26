@@ -23,6 +23,7 @@ namespace CinemaPlus
     public class Startup
     {
         private readonly IWebHostEnvironment _environment;
+        readonly string origins = "defaultOrigins";
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
@@ -34,6 +35,16 @@ namespace CinemaPlus
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: origins,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+                                  });
+            });
+            //services.AddResponseCaching();
+
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<AppDbContext>(options =>
@@ -43,6 +54,7 @@ namespace CinemaPlus
                     builder.MigrationsAssembly("CinemaPlus.Repository");
                 });
             });
+
             services.AddAutoMapper(typeof(MapperProfile));
 
             services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
@@ -89,11 +101,16 @@ namespace CinemaPlus
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CinemaPlus v1"));
             }
 
+            app.UseCors();
             app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthentication();
+
+            app.UseCors(origins);
+            //app.UseResponseCaching();
+
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

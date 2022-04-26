@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FVSAT5+jOvibtPEOXRqssiX9wcvTX3Khvu7+rPkM9fRg5hhCFtI5twuoq7bpr3zD3DmTKO0yeqnhjKNFssT0OA==",
+  "dgSpecHash": "f6ID8LhGXNZqNvySM28SxNlNfkbtgE4O4TJVhCA+DHgsYx6rfLAXSVzZTNaVtkJt7Q5HDjvHr8QeKg02GKsJPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.16\\microsoft.aspnetcore.cryptography.internal.5.0.16.nupkg.sha512",

@@ -46,5 +46,6 @@ namespace CinemaPlus.Repository.DataContext
         public DbSet<News> News { get; set; }
 
         public DbSet<Tariff> Tariffs { get; set; }
+        public DbSet<CinemaImage> CinemaImages { get; set; }
     }
 }

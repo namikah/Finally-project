@@ -5680,11 +5680,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Repository\\CinemaPlus.Repository.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Repository\\CinemaPlus.Repository.csproj",
       "projectName": "CinemaPlus.Repository",
-      "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Repository\\CinemaPlus.Repository.csproj",
+      "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Repository\\CinemaPlus.Repository.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Repository\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5701,8 +5701,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj": {
-              "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj"
+            "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj": {
+              "projectPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Models\\CinemaPlus.Models.csproj"
             }
           }
         }

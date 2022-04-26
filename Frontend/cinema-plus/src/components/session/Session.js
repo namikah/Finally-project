@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
 import { sessionService } from "../../API/services/sessionService";
@@ -18,6 +24,7 @@ function Session(props) {
   const [optionOne, setOptionOne] = useState(false);
   const [sessionData, setSessionData] = useState([]);
   const [dateSelected, setDateSelected] = useState(today);
+  const zone = useRef();
 
   const getData = useCallback(() => {
     setLoading(true);
@@ -31,22 +38,44 @@ function Session(props) {
     getData();
   }, [getData]);
 
-  let sessions = sessionData;
+  let sessions = sessionData?.filter(
+    (session) => dateFormat(session.date, "dd.mm.yyyy") === dateSelected
+  );
+
   if (props.movieId !== undefined)
-    sessions = sessionData?.filter(
+    sessions = sessions?.filter(
       (session) => session.movieId.toString() === props.movieId.toString()
     );
+
   return (
     <section id="session">
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
         <div className="in-english d-flex justify-content-center align-items-center">
-          <div onClick={() => setDateSelected(today)}>Bu gün</div>
+          <div
+            onClick={() => setDateSelected(today)}
+            style={
+              dateSelected === today
+                ? { backgroundColor: "#00ACEC", color: "white" }
+                : {}
+            }
+          >
+            Bu gün
+          </div>
         </div>
         <div className="in-english d-flex justify-content-center align-items-center">
-          <div onClick={() => setDateSelected(tomorrow)}>Sabah</div>
+          <div
+            onClick={() => setDateSelected(tomorrow)}
+            style={
+              dateSelected === tomorrow
+                ? { backgroundColor: "#00ACEC", color: "white" }
+                : {}
+            }
+          >
+            Sabah
+          </div>
         </div>
         <select
-        onChange={(e)=> setDateSelected(e.target.value)}
+          onChange={(e) => setDateSelected(e.target.value)}
           onMouseDown={() => setOptionOne(true)}
           onMouseLeave={() => setOptionOne(false)}
           style={
@@ -65,9 +94,18 @@ function Session(props) {
         </select>
       </div>
       <div className="container">
-        <div className="today-header text-center">Bu gün ({dateSelected})</div>
+        <div className="today-header text-center">
+          {dateSelected === today
+            ? "Bu gün"
+            : dateSelected === tomorrow
+            ? "Sabah"
+            : ""}
+          ({dateSelected})
+        </div>
         {loading ? (
           <div className="loading text-center">Seanslar yüklənir. . .</div>
+        ) : sessions.length == 0 ? (
+          <div className="loading text-center">Seans yoxdur</div>
         ) : (
           <Table responsive>
             <thead>
@@ -115,7 +153,10 @@ function Session(props) {
                     ).price + ".00 AZN"}
                   </td>
                   <td className="row-buy text-center">
-                    <div className="buy-ticket">
+                    <div
+                      onClick={() => zone.current.classList.add("active-zone")}
+                      className="buy-ticket"
+                    >
                       <input
                         type="text"
                         value={"Yerlər"}
@@ -129,6 +170,22 @@ function Session(props) {
             </tbody>
           </Table>
         )}
+        <Link className="logo-reklam d-flex justify-content-center align-items-center pt-4 pb-2">
+          <img src="https://www.cinemaplus.az/site/templates/images/pb-aze.png" alt="logo-pashabank"></img>
+        </Link>
+      </div>
+      <div ref={zone} className="zone">
+        <div className="select-zone">
+          <div className="zone-header"></div>
+          <div className="zone-body"></div>
+          <div className="zone-footer"></div>
+          <div
+            onClick={() => zone.current.classList.remove("active-zone")}
+            className="zone-close"
+          >
+            <span>X</span>
+          </div>
+        </div>
       </div>
     </section>
   );

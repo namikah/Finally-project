@@ -12,11 +12,13 @@ function MovieDetail() {
     const { search } = useLocation();
     const params = new URLSearchParams(search);
     const [movies, setMovies] = useState({});
+    const [trailer, setTrailer] = useState("");
     const movieId = params.get("id");
   
     const getData = useCallback((id) => {
       movieService.getMovies(id).then((res) => {
         setMovies(res.data);
+        setTrailer(res.data.detail.trailer)
       });
     }, []);
   
@@ -30,7 +32,7 @@ function MovieDetail() {
           <iframe
             width="100%"
             height="600px"
-            src="https://www.youtube.com/embed/c9UTvqQ8rGU"
+            src={trailer}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -53,7 +55,7 @@ function MovieDetail() {
               <MovieAbout data={movies}/>
             </TabPanel>
             <TabPanel>
-              <Trailer />
+              <Trailer url={trailer}/>
             </TabPanel>
           </Tabs>
         </div>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "L3/bUufoVOwh1iTd1D5PhEknVKZMSsV9ThbsgjX40IlKgjd1KAmOn1I97nPKOkodht/RCTY8Mm2kDRos+2Rhrw==",
+  "dgSpecHash": "/81x+FISgHNLMU8dF4P8zJLPD9ZCTy+NrEQDySBIqYY2JJ0ce7qwWiyGM40e/Wv/V8xhqDvrOeMjYjZrksrejA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\New folder (2)\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
