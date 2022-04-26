@@ -1,9 +1,11 @@
 import React from "react";
 import Service from "../../components/services/Service";
+import Session from "../../components/session/Session";
 import "./platinum.scss";
 
 function Platinum() {
   return (
+   <>
     <div id="services">
       <div className="container">
         <div className="services-body row text-center">
@@ -20,6 +22,10 @@ function Platinum() {
         </div>
       </div>
     </div>
+    <div id="sessions">
+        <Session platinum={true}/>
+    </div>
+    </>
   );
 }
 

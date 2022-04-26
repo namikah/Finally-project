@@ -40,12 +40,6 @@ code {
   #session .row-format {
     display: none !important;
   }
-  /* #session .column-hall {
-    display: none;
-  }
-  #session .row-hall {
-    display: none;
-  }  */
 }
 
 @media screen and (max-width: 768px) {
@@ -90,18 +84,6 @@ code {
   #about .about-us {
     text-align: center;
   }
-  /* #session .column-session {
-    display: none;
-  }
-  #session .row-session {
-    display: none;
-  }
-  #session .column-cinema {
-    display: none;
-  }
-  #session .row-cinema {
-    display: none;
-  } */
   #session .column-format {
     display: block !important;
   }
@@ -124,5 +106,12 @@ code {
   }
   #session tbody .row-buy{
     border-bottom: 1px solid #dcdcdc;
+  }
+  #session .header-filter .filter-date .date-today, #session .header-filter .filter-date .date-tomorrow {
+    display: none !important;
+  }
+  #session .header-filter .filter-date .date-custom{
+    border-radius: 50px !important;
+    width: 250px !important;
   }
 }

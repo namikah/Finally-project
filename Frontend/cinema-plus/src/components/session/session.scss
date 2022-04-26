@@ -1,9 +1,6 @@
 #session {
   .header-filter {
     .filter-date {
-      // border-radius: 50px;
-      // overflow: hidden;
-      // width: 350px;
       div {
         border-radius: 0;
         width: 90px;
@@ -15,11 +12,16 @@
       }
       .date-custom {
         border-radius: 0 50px 50px 0;
-        width: 150px;
+        width: 200px;
         padding-left: 15px;
       }
     }
     .filter-cinemas{
+      border-radius: 50px;
+      width: 250px;
+      padding-left: 15px;
+    }
+    .filter-lang{
       border-radius: 50px;
       width: 250px;
       padding-left: 15px;

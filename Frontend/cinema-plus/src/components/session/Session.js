@@ -38,6 +38,11 @@ function Session(props) {
     (session) => dateFormat(session.date, "dd.mm.yyyy") === dateSelected
   );
 
+  if (props.platinum !== undefined)
+  sessions = sessions?.filter(
+    (session) => session.hall.name.includes("Platinum") || session.hall.name.includes("VIP")
+  );
+
   if (props.movieId !== undefined)
     sessions = sessions?.filter(
       (session) => session.movieId.toString() === props.movieId.toString()
@@ -117,7 +122,7 @@ function Session(props) {
           </option>
         </select>
         <select
-        className="change-lang"
+        className="filter-lang change-lang"
           onClick={() => setOptionThree(!optionThree)}
           style={
             optionThree
@@ -209,7 +214,7 @@ function Session(props) {
             </tbody>
           </Table>
         )}
-        <a href="https://www.pashabank.az/lang,az/" target="_blank" className="logo-reklam d-flex justify-content-center align-items-center pt-4 pb-2">
+        <a href="https://www.pashabank.az/lang,az/" target="_blank" rel="noreferrer" className="logo-reklam d-flex justify-content-center align-items-center pt-4 pb-2">
           <img
           className="img-fluid"
             src="https://www.cinemaplus.az/site/templates/images/pb-aze.png"
