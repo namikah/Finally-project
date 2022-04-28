@@ -64,7 +64,7 @@ function MovieDetail() {
         <div className="d-flex justify-content-center align-itmes-center gap-1">
           <Tabs className="w-100">
             <TabList className="bottom-bordered d-flex justify-content-center align-items-center gap-1">
-              <Tab>DiGƏR FİLMLƏR</Tab>
+              <Tab onClick={window.scrollTo(0, 0)}>DiGƏR FİLMLƏR</Tab>
             </TabList>
             <TabPanel className="another-films">
               <Movie defaultPerPage={4}/>

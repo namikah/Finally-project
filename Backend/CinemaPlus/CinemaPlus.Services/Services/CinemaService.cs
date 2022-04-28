@@ -20,12 +20,11 @@ namespace CinemaPlus.Services.Services
         public async Task<List<Cinema>> GetAllCinemaAsync()
         {
             var cinemas = await GetAllRelations()
-               .AsNoTracking()
-               .AsQueryable()
                .Include(x => x.Halls)
                .ThenInclude(x=>x.Seats)
                .Include(x => x.Tariffs)
                .ThenInclude(x=>x.Format)
+               .AsNoTracking()
                .ToListAsync();
 
             return cinemas;
@@ -37,7 +36,6 @@ namespace CinemaPlus.Services.Services
 
             var cinema = await GetAllRelations()
                .AsNoTracking()
-               .AsQueryable()
                .Include(x => x.Halls)
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 

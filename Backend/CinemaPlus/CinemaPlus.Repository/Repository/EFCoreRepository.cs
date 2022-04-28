@@ -24,9 +24,9 @@ namespace CinemaPlus.Repository.Repository
             return await DbContext.Set<T>().ToListAsync();
         }
 
-        public DbSet<T> GetAllRelations()
+        public IQueryable<T> GetAllRelations()
         {
-            return DbContext.Set<T>();
+            return DbContext.Set<T>().AsQueryable();
         }
 
 

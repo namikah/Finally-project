@@ -24,15 +24,7 @@ function Movie({ defaultPerPage }) {
   const [curPage, setCurPage] = useState(1);
   const { push } = useHistory();
   const [{ loading, setLoading }] = useLoadingContext();
-  const scrolltoMovies = useRef();
   const [{ sessionData, setSessionData }] = useSessionContext([]);
-
-  const scrollToMovie = () =>
-    scrolltoMovies.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  const scrollToTop = () => window.scrollTo(0, scrolltoMovies.offsetTop);
 
   const getData = useCallback(
     (page, PerPage) => {
@@ -45,14 +37,11 @@ function Movie({ defaultPerPage }) {
     [setLoading]
   );
 
-  const getCinemas = useCallback(
-    () => {
-      cinemaService.getCinema().then((res) => {
-        setCinemaData(res.data);
-      });
-    },
-    []
-  );
+  const getCinemas = useCallback(() => {
+    cinemaService.getCinema().then((res) => {
+      setCinemaData(res.data);
+    });
+  }, []);
 
   useEffect(() => {
     getData(curPage, defaultPerPage);
@@ -62,24 +51,29 @@ function Movie({ defaultPerPage }) {
     getCinemas();
   }, [getCinemas]);
 
-  const handlePageChange = useCallback(
-    (ev) => {
-      const val = ev.target.value;
-      push(`?page=${val}`);
-      setCurPage(val);
-      scrollToMovie();
-    },
-    [push]
-  );
+  const handlePageChange = useCallback((ev) => {
+    const val = ev.target.value;
+    // push(`?page=${val}`);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+    setCurPage(val);
+  }, []);
 
   const handlePagePrev = useCallback(() => {
     const prevPage = curPage - 1;
     if (prevPage >= 1) {
-      push(`?page=${prevPage}`);
+      // push(`?page=${prevPage}`);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
       setCurPage(prevPage);
-      scrollToMovie();
     }
-  }, [push, curPage]);
+  }, [curPage]);
 
   const maxPageCount = useMemo(
     () => !!moviesData && moviesData.totalPage,
@@ -89,11 +83,15 @@ function Movie({ defaultPerPage }) {
   const handlePageNext = useCallback(() => {
     const nextPage = Math.round(curPage) + 1;
     if (nextPage <= maxPageCount) {
-      push(`?page=${nextPage}`);
+      // push(`?page=${nextPage}`);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
       setCurPage(nextPage);
-      scrollToMovie();
     }
-  }, [push, maxPageCount, curPage]);
+  }, [maxPageCount, curPage]);
 
   document.addEventListener("click", function (event) {
     if (!event.target.classList.contains("change-cinema")) {
@@ -106,12 +104,9 @@ function Movie({ defaultPerPage }) {
 
   return (
     <>
-      <div
-        ref={scrolltoMovies}
-        className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3"
-      >
+      <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
         <select
-        className="change-cinema"
+          className="change-cinema"
           onClick={() => setOptionOne(!optionOne)}
           style={
             optionOne
@@ -122,12 +117,14 @@ function Movie({ defaultPerPage }) {
           <option value="0" defaultValue>
             Kinoteatrlar
           </option>
-          {cinemaData?.map((cinema)=>(
-            <option key={cinema.id} value={cinema.id}>{cinema.name}</option>
+          {cinemaData?.map((cinema) => (
+            <option key={cinema.id} value={cinema.id}>
+              {cinema.name}
+            </option>
           ))}
         </select>
         <select
-        className="change-lang"
+          className="change-lang"
           onClick={() => setOptionTwo(!optionTwo)}
           style={
             optionTwo
@@ -151,14 +148,18 @@ function Movie({ defaultPerPage }) {
             {loading ? (
               <div className="loading text-center">Filmlər yüklənir. . .</div>
             ) : (
-              sessionData?.map(({movie}) => (
+              moviesData?.data.map((movie) => (
                 <div
                   key={"card" + movie.id}
                   className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
                 >
                   <div className="card-image">
                     <Link
-                      onClick={scrollToTop}
+                      onClick={window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      })}
                       to={`/moviedetail?id=${movie.id}`}
                     >
                       <img
@@ -181,7 +182,11 @@ function Movie({ defaultPerPage }) {
                   </div>
                   <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
                     <Link
-                      onClick={scrollToTop}
+                      onClick={window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      })}
                       to={`/moviedetail?id=${movie.id}`}
                       className="btn btn-primary add-cart-button"
                     >
@@ -191,7 +196,15 @@ function Movie({ defaultPerPage }) {
                       to={`/moviedetail?id=${movie.id}`}
                       className="age-limit"
                     >
-                      <span onClick={scrollToTop}>{movie.ageLimit}+</span>
+                      <span
+                        onClick={window.scrollTo({
+                          top: 0,
+                          left: 0,
+                          behavior: "smooth",
+                        })}
+                      >
+                        {movie.ageLimit}+
+                      </span>
                     </Link>
                   </div>
                 </div>
@@ -202,61 +215,60 @@ function Movie({ defaultPerPage }) {
         {loading ? (
           ""
         ) : (
-          <></>
-          // <div className="pagination-component d-flex justify-content-center mt-5">
-          //   <Pagination>
-          //     <PaginationItem>
-          //       <PaginationLink
-          //         style={
-          //           curPage.toString() === "1"
-          //             ? {
-          //                 pointerEvents: "none",
-          //                 color: "black",
-          //                 fontWeight: "700",
-          //               }
-          //             : {}
-          //         }
-          //         onClick={handlePagePrev}
-          //         previous
-          //       />
-          //     </PaginationItem>
-          //     {!!maxPageCount &&
-          //       range(1, maxPageCount + 1).map((i) => (
-          //         <PaginationItem key={"page" + i}>
-          //           <PaginationLink
-          //             style={
-          //               curPage.toString() === i.toString()
-          //                 ? {
-          //                     pointerEvents: "none",
-          //                     color: "black",
-          //                     fontWeight: "700",
-          //                   }
-          //                 : {}
-          //             }
-          //             value={i}
-          //             onClick={handlePageChange}
-          //           >
-          //             {i}
-          //           </PaginationLink>
-          //         </PaginationItem>
-          //       ))}
-          //     <PaginationItem>
-          //       <PaginationLink
-          //         style={
-          //           curPage.toString() === maxPageCount.toString()
-          //             ? {
-          //                 pointerEvents: "none",
-          //                 color: "black",
-          //                 fontWeight: "700",
-          //               }
-          //             : {}
-          //         }
-          //         onClick={handlePageNext}
-          //         next
-          //       />
-          //     </PaginationItem>
-          //   </Pagination>
-          // </div>
+          <div className="pagination-component d-flex justify-content-center mt-5">
+            <Pagination>
+              <PaginationItem>
+                <PaginationLink
+                  style={
+                    curPage.toString() === "1"
+                      ? {
+                          pointerEvents: "none",
+                          color: "black",
+                          fontWeight: "700",
+                        }
+                      : {}
+                  }
+                  onClick={handlePagePrev}
+                  previous
+                />
+              </PaginationItem>
+              {!!maxPageCount &&
+                range(1, maxPageCount + 1).map((i) => (
+                  <PaginationItem key={"page" + i}>
+                    <PaginationLink
+                      style={
+                        curPage.toString() === i.toString()
+                          ? {
+                              pointerEvents: "none",
+                              color: "black",
+                              fontWeight: "700",
+                            }
+                          : {}
+                      }
+                      value={i}
+                      onClick={handlePageChange}
+                    >
+                      {i}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+              <PaginationItem>
+                <PaginationLink
+                  style={
+                    curPage.toString() === maxPageCount.toString()
+                      ? {
+                          pointerEvents: "none",
+                          color: "black",
+                          fontWeight: "700",
+                        }
+                      : {}
+                  }
+                  onClick={handlePageNext}
+                  next
+                />
+              </PaginationItem>
+            </Pagination>
+          </div>
         )}
       </div>
     </>

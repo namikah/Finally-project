@@ -180,7 +180,7 @@ function Session(props) {
               </tr>
             </thead>
             <tbody>
-              {sessions?.map((item) => (
+              {!!sessions && sessions?.map((item) => (
                 <tr key={item.id}>
                   <td className="row-film">
                     <Link to={`/moviedetail?id=${item.movie.id}`}>

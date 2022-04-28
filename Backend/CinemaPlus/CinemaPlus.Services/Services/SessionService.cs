@@ -20,7 +20,7 @@ namespace CinemaPlus.Services.Services
         public async Task<List<Session>> GetAllSessionAsync()
         {
             var sessions = await GetAllRelations()
-               .AsQueryable()
+               //.AsQueryable()
                .Include(x => x.Movie)
                .ThenInclude(x => x.Detail)
                .Include(x => x.Movie)
@@ -52,7 +52,7 @@ namespace CinemaPlus.Services.Services
             if (id == null) return new Session();
 
             var session = await GetAllRelations()
-               .AsQueryable()
+               //.AsQueryable()
                .Include(x => x.Movie)
                .ThenInclude(x => x.Detail)
                .Include(x => x.Movie)

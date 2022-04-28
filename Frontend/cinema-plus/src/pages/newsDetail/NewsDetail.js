@@ -54,6 +54,7 @@ function NewsDetail() {
             <div className="d-flex flex-column justify-content-start align-items-start">
               {allNews?.map((item) => (
                 <div
+                  onClick={window.scrollTo(0, 0)}
                   key={item.id}
                   className="card d-flex flex-column justify-content-start align-items-top p-3"
                 >
@@ -72,7 +73,9 @@ function NewsDetail() {
                 </div>
               ))}
             </div>
-              <Link className="button-all" to={"/allnews"}>Hamısını göstər</Link>
+            <Link onClick={window.scrollTo(0, 0)} className="button-all" to={"/allnews"}>
+              Hamısını göstər
+            </Link>
           </div>
         </div>
       </div>

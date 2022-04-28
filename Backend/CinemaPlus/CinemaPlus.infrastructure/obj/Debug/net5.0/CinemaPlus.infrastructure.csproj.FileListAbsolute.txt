@@ -2,7 +2,6 @@ C:\Users\Admin\OneDrive\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.in
 C:\Users\Admin\OneDrive\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\bin\Debug\net5.0\CinemaPlus.infrastructure.dll
 C:\Users\Admin\OneDrive\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\bin\Debug\net5.0\ref\CinemaPlus.infrastructure.dll
 C:\Users\Admin\OneDrive\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\bin\Debug\net5.0\CinemaPlus.infrastructure.pdb
-C:\Users\Admin\OneDrive\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.csproj.AssemblyReference.cache
 C:\Users\Admin\OneDrive\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Admin\OneDrive\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.AssemblyInfoInputs.cache
 C:\Users\Admin\OneDrive\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.AssemblyInfo.cs

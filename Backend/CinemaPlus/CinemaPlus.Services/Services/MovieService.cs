@@ -22,7 +22,6 @@ namespace CinemaPlus.Services.Services
 
             var movies = await GetAllRelations()
                .AsNoTracking()
-               .AsQueryable()
                .Include(x => x.Detail)
                .Include(x => x.MovieActors)
                .ThenInclude(x => x.Actor)
@@ -54,7 +53,6 @@ namespace CinemaPlus.Services.Services
 
             var movie = await GetAllRelations()
                  .AsNoTracking()
-                 .AsQueryable()
                 .Include(x => x.Detail)
                .Include(x => x.MovieActors)
                .ThenInclude(x => x.Actor)

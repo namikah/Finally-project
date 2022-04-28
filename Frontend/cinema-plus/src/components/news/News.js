@@ -10,9 +10,6 @@ function News({ page, perPage }) {
   const active2 = useRef();
   const active3 = useRef();
   const [news, setNews] = useState();
-  const scrolltoTop = useRef(null)
-
-  const scrollTo = () =>  window.scrollTo(0, scrolltoTop.offsetTop);
 
   const getData = useCallback((p, pPage) => {
     newsService.getNews(`?page=${p}&perPage=${pPage}`).then((res) => {
@@ -40,13 +37,34 @@ function News({ page, perPage }) {
             className="d-flex justify-content-start align-items-top gap-3"
           >
             {news?.map((item) => (
-              <div key={item.id} className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top">
+              <div
+                key={item.id}
+                className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-start align-items-top"
+              >
                 <div className="card-image d-flex justify-content-start align-item-left">
-                 <Link onClick={scrollTo} to={`/newsdetail?id=${item.id}`}><img src={item.image} className="card-img-top" alt="news" /></Link>
+                  <Link
+                    onClick={window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: "smooth",
+                    })}
+                    to={`/newsdetail?id=${item.id}`}
+                  >
+                    <img src={item.image} className="card-img-top" alt="news" />
+                  </Link>
                 </div>
                 <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
                   <h6>{dateFormat(item.date, "dd.mm.yyyy")}</h6>
-                  <Link onClick={scrollTo} to={`/newsdetail?id=${item.id}`}>{item.title}</Link>
+                  <Link
+                    onClick={window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: "smooth",
+                    })}
+                    to={`/newsdetail?id=${item.id}`}
+                  >
+                    {item.title}
+                  </Link>
                   <p>{item.snippet}</p>
                 </div>
               </div>
@@ -84,7 +102,16 @@ function News({ page, perPage }) {
             ></span>
           </div>
           <div className="all-news d-flex justify-content-center align-items-center">
-            <Link to={"/allnews"}>BÜTÜN XƏBƏRLƏR</Link>
+            <Link
+              to={"/allnews"}
+              onClick={window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              })}
+            >
+              BÜTÜN XƏBƏRLƏR
+            </Link>
           </div>
         </div>
       </div>

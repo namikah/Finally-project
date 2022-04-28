@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { movieService } from "../../API/services/movieService";
 import { newsService } from "../../API/services/newsService";
@@ -13,9 +13,6 @@ function AllNews() {
   const [newsData, setNewsData] = useState();
   const [curPage, setCurPage] = useState(1);
   const { push } = useHistory();
-  const scrolltoNews = useRef(null)
-
-  const scrollTo = () =>  window.scrollTo(0, scrolltoNews.offsetTop);
 
   const getData = useCallback(() => {
     movieService.getMovies(`?page=1&per_page=4`).then((res) => {
@@ -35,49 +32,55 @@ function AllNews() {
 
   useEffect(() => {
     getNewsData(curPage);
-  }, [getNewsData,curPage]);
+  }, [getNewsData, curPage]);
 
   const handlePageChange = useCallback(
     (ev) => {
       const val = ev.target.value;
       push(`?page=${val}`);
       setCurPage(val);
-      scrollTo();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      })
     },
     [push]
   );
 
-  const handlePagePrev = useCallback(
-    () => {
-      const prevPage = curPage - 1;
-      if (prevPage >= 1) {
-        push(`?page=${prevPage}`);
-        setCurPage(prevPage);
-      scrollTo();
+  const handlePagePrev = useCallback(() => {
+    const prevPage = curPage - 1;
+    if (prevPage >= 1) {
+      push(`?page=${prevPage}`);
+      setCurPage(prevPage);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      })
     }
-    },
-    [push,curPage]
-  );
+  }, [push, curPage]);
 
   const maxPageCount = useMemo(
     () => !!newsData && newsData.totalPage,
     [newsData]
   );
 
-  const handlePageNext = useCallback(
-    () => {
-      const nextPage = Math.round(curPage) + 1;
-      if (nextPage <= maxPageCount) {
-        push(`?page=${nextPage}`);
-        setCurPage(nextPage);
-      scrollTo();
+  const handlePageNext = useCallback(() => {
+    const nextPage = Math.round(curPage) + 1;
+    if (nextPage <= maxPageCount) {
+      push(`?page=${nextPage}`);
+      setCurPage(nextPage);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      })
     }
-    },
-    [push, maxPageCount,curPage]
-  );
+  }, [push, maxPageCount, curPage]);
 
   return (
-    <section ref={scrolltoNews} id="all-news">
+    <section id="all-news">
       <div className="container">
         <div className="row justify-content-between align-items-start">
           <div className="left-side col-md-7 col-sm-12 row justify-content-start align-items-start">
@@ -98,78 +101,90 @@ function AllNews() {
                   <div>
                     <Link to={`/newsdetail?id=${item.id}`}>{item.title}</Link>
                   </div>
-                    <h6>{dateFormat(item.date, "dd.mm.yyyy")}</h6>
+                  <h6>{dateFormat(item.date, "dd.mm.yyyy")}</h6>
                 </div>
               </div>
             ))}
-               <div className="d-flex justify-content-center mt-5">
-          <Pagination>
-            <PaginationItem>
-              <PaginationLink
-                style={
-                  curPage.toString() === "1"
-                    ? {
-                        pointerEvents: "none",
-                        color: "black",
-                        fontWeight: "700",
-                      }
-                    : {}
-                }
-                onClick={handlePagePrev}
-                previous
-              />
-            </PaginationItem>
-            {!!maxPageCount &&
-              range(1, maxPageCount + 1).map((i) => (
-                <PaginationItem key={i}>
-                  <PaginationLink  style={
-                      curPage.toString() === i.toString()
+            <div className="d-flex justify-content-center mt-5">
+              <Pagination>
+                <PaginationItem>
+                  <PaginationLink
+                    style={
+                      curPage.toString() === "1"
                         ? {
                             pointerEvents: "none",
                             color: "black",
                             fontWeight: "700",
                           }
                         : {}
-                    } value={i} onClick={handlePageChange}>
-                    {i}
-                  </PaginationLink>
+                    }
+                    onClick={handlePagePrev}
+                    previous
+                  />
                 </PaginationItem>
-              ))}
-            <PaginationItem>
-              <PaginationLink  style={
-                  curPage.toString() === maxPageCount.toString()
-                    ? {
-                        pointerEvents: "none",
-                        color: "black",
-                        fontWeight: "700",
-                      }
-                    : {}
-                } onClick={handlePageNext} next />
-            </PaginationItem>
-          </Pagination>
-        </div>
+                {!!maxPageCount &&
+                  range(1, maxPageCount + 1).map((i) => (
+                    <PaginationItem key={i}>
+                      <PaginationLink
+                        style={
+                          curPage.toString() === i.toString()
+                            ? {
+                                pointerEvents: "none",
+                                color: "black",
+                                fontWeight: "700",
+                              }
+                            : {}
+                        }
+                        value={i}
+                        onClick={handlePageChange}
+                      >
+                        {i}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                <PaginationItem>
+                  <PaginationLink
+                    style={
+                      curPage.toString() === maxPageCount.toString()
+                        ? {
+                            pointerEvents: "none",
+                            color: "black",
+                            fontWeight: "700",
+                          }
+                        : {}
+                    }
+                    onClick={handlePageNext}
+                    next
+                  />
+                </PaginationItem>
+              </Pagination>
+            </div>
           </div>
           <div className="right-side col-md-4 col-sm-12 d-flex flex-column justify-content-start align-items-center">
-              {moviesData?.data.map((item) => (
-                <div
-                  key={item.id}
-                  className="card d-flex flex-column justify-content-start align-items-top p-3"
-                >
-                  <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
-                    <Link to={`/movieDetail?id=${item.id}`}>{item.name}</Link>
-                  </div>
-                  <div className="card-image d-flex justify-content-start align-item-left">
-                    <Link to={`/movieDetail?id=${item.id}`}>
-                      <img
-                        src={item.image}
-                        className="card-img-top"
-                        alt="news"
-                      />
-                    </Link>
-                  </div>
+            {moviesData?.data.map((item) => (
+              <div
+                key={item.id}
+                className="card d-flex flex-column justify-content-start align-items-top p-3"
+              >
+                <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">
+                  <Link to={`/movieDetail?id=${item.id}`}>{item.name}</Link>
                 </div>
-              ))}
-            <Link onClick={scrollTo} className="button-all" to={"/"}>
+                <div className="card-image d-flex justify-content-start align-item-left">
+                  <Link to={`/movieDetail?id=${item.id}`}>
+                    <img src={item.image} className="card-img-top" alt="news" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+            <Link
+              className="button-all"
+              to={"/"}
+              onClick={window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              })}
+            >
               Bütün filmlər
             </Link>
           </div>
