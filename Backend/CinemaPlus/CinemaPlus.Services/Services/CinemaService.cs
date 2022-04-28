@@ -23,6 +23,7 @@ namespace CinemaPlus.Services.Services
                .AsNoTracking()
                .AsQueryable()
                .Include(x => x.Halls)
+               .ThenInclude(x=>x.Seats)
                .Include(x => x.Tariffs)
                .ThenInclude(x=>x.Format)
                .ToListAsync();

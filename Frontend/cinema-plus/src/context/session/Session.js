@@ -11,13 +11,13 @@ import { useLoadingContext } from "../loading";
 const SessionContext = createContext([]);
 
 function SessionProvider({ children }) {
+  const [{ setLoading }] = useLoadingContext();
   const [sessionData, setSessionData] = useState([]);
-  const [{ loading, setLoading }] = useLoadingContext([]);
 
   const getData = useCallback(() => {
-    setLoading(false);
+    setLoading(true);
     sessionService.getSession().then((res) => {
-      setLoading(true);
+      setLoading(false);
       setSessionData(res.data);
     });
   }, [setLoading]);

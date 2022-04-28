@@ -9,6 +9,10 @@ class SessionService extends HttpClient {
   async getSession(){
       return await this.get("session");
   };
+
+  async getSessionById(id){
+    return await this.get("session/" + id);
+};
 }
 
 export const sessionService = new SessionService()

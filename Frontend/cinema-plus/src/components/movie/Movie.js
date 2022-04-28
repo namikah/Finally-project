@@ -19,9 +19,8 @@ function Movie({ defaultPerPage }) {
   const [optionTwo, setOptionTwo] = useState(false);
   const [curPage, setCurPage] = useState(1);
   const { push } = useHistory();
-  const [{ loading, setLoading }] = useLoadingContext([]);
-
-  const scrolltoMovies = useRef(null);
+  const [{ loading, setLoading }] = useLoadingContext();
+  const scrolltoMovies = useRef();
 
   const scrollToMovie = () =>
     scrolltoMovies.current.scrollIntoView({
@@ -43,7 +42,7 @@ function Movie({ defaultPerPage }) {
 
   useEffect(() => {
     getData(curPage, defaultPerPage);
-  }, [getData, curPage, defaultPerPage]);
+  }, [curPage, defaultPerPage, getData]);
 
   const handlePageChange = useCallback(
     (ev) => {

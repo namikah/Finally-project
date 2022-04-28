@@ -37,9 +37,12 @@ namespace CinemaPlus.Services.Services
                .Include(x => x.Hall)
                .ThenInclude(x => x.Cinema)
                .ThenInclude(x=>x.Tariffs)
+               .Include(x=>x.Hall)
+               .ThenInclude(x=>x.Seats)
+               .ThenInclude(x=>x.SeatType)
                 .Include(x => x.Movie)
                .ThenInclude(x => x.Detail)
-               .OrderByDescending(x => x.Id)
+               .OrderBy(x => x.Start)
                .ToListAsync();
 
             return sessions;
@@ -53,7 +56,25 @@ namespace CinemaPlus.Services.Services
                .AsNoTracking()
                .AsQueryable()
                .Include(x => x.Movie)
+               .ThenInclude(x => x.MovieActors)
+               .ThenInclude(x => x.Actor)
+               .Include(x => x.Movie)
+               .ThenInclude(x => x.MovieDirectors)
+               .ThenInclude(x => x.Director)
+               .Include(x => x.Movie)
+               .ThenInclude(x => x.MovieFormats)
+               .ThenInclude(x => x.Format)
+               .Include(x => x.Movie)
+               .ThenInclude(x => x.MovieGenres)
+               .ThenInclude(x => x.Genre)
                .Include(x => x.Hall)
+               .ThenInclude(x => x.Cinema)
+               .ThenInclude(x => x.Tariffs)
+               .Include(x => x.Hall)
+               .ThenInclude(x => x.Seats)
+               .ThenInclude(x => x.SeatType)
+                .Include(x => x.Movie)
+               .ThenInclude(x => x.Detail)
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 
             return session;

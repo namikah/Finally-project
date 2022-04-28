@@ -5,7 +5,6 @@ using CinemaPlus.Repository.Repository;
 using CinemaPlus.Services.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,7 +30,7 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Director)
                .Include(x => x.MovieFormats)
                .ThenInclude(x => x.Format)
-               .ThenInclude(x=>x.Tariffs)
+               //.ThenInclude(x=>x.Tariffs)
                .Include(x => x.MovieGenres)
                .ThenInclude(x => x.Genre)
                .OrderByDescending(x => x.Id)
@@ -56,15 +55,16 @@ namespace CinemaPlus.Services.Services
             var movie = await GetAllRelations()
                  .AsNoTracking()
                  .AsQueryable()
-                 .Include(x => x.Detail)
-                 .Include(x => x.MovieActors)
-                 .ThenInclude(x => x.Actor)
-                 .Include(x => x.MovieDirectors)
-                 .ThenInclude(x => x.Director)
-                 .Include(x => x.MovieFormats)
-                 .ThenInclude(x => x.Format)
-                 .Include(x => x.MovieGenres)
-                 .ThenInclude(x => x.Genre)
+                .Include(x => x.Detail)
+               .Include(x => x.MovieActors)
+               .ThenInclude(x => x.Actor)
+               .Include(x => x.MovieDirectors)
+               .ThenInclude(x => x.Director)
+               .Include(x => x.MovieFormats)
+               .ThenInclude(x => x.Format)
+               //.ThenInclude(x=>x.Tariffs)
+               .Include(x => x.MovieGenres)
+               .ThenInclude(x => x.Genre)
                  .FirstOrDefaultAsync(x => x.Id == (int)id);
 
             return movie;

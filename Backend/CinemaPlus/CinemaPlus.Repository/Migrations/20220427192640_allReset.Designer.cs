@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaPlus.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220422214241_addStartInCinemaAndEndInCinemaToMovieTable")]
-    partial class addStartInCinemaAndEndInCinemaToMovieTable
+    [Migration("20220427192640_allReset")]
+    partial class allReset
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,12 +52,47 @@ namespace CinemaPlus.Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkTime")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Cinemas");
+                });
+
+            modelBuilder.Entity("CinemaPlus.Models.Entities.CinemaImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CinemaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CinemaId");
+
+                    b.ToTable("CinemaImages");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Customer", b =>
@@ -356,12 +391,58 @@ namespace CinemaPlus.Repository.Migrations
                     b.ToTable("News");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Seat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Column")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Row")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeatTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HallId");
+
+                    b.HasIndex("SeatTypeId");
+
+                    b.ToTable("Seats");
+                });
+
+            modelBuilder.Entity("CinemaPlus.Models.Entities.SeatType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SeatTypes");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.Session", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<TimeSpan>("End")
                         .HasColumnType("time");
@@ -382,6 +463,46 @@ namespace CinemaPlus.Repository.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Sessions");
+                });
+
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Tariff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CinemaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EndDayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("FormatId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("StartDayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CinemaId");
+
+                    b.HasIndex("FormatId");
+
+                    b.ToTable("Tariffs");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.User", b =>
@@ -587,6 +708,17 @@ namespace CinemaPlus.Repository.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.CinemaImage", b =>
+                {
+                    b.HasOne("CinemaPlus.Models.Entities.Cinema", "Cinema")
+                        .WithMany("Images")
+                        .HasForeignKey("CinemaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cinema");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.Hall", b =>
                 {
                     b.HasOne("CinemaPlus.Models.Entities.Cinema", "Cinema")
@@ -685,6 +817,25 @@ namespace CinemaPlus.Repository.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Seat", b =>
+                {
+                    b.HasOne("CinemaPlus.Models.Entities.Hall", "Hall")
+                        .WithMany("Seats")
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CinemaPlus.Models.Entities.SeatType", "SeatType")
+                        .WithMany("Seats")
+                        .HasForeignKey("SeatTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hall");
+
+                    b.Navigation("SeatType");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.Session", b =>
                 {
                     b.HasOne("CinemaPlus.Models.Entities.Hall", "Hall")
@@ -702,6 +853,25 @@ namespace CinemaPlus.Repository.Migrations
                     b.Navigation("Hall");
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Tariff", b =>
+                {
+                    b.HasOne("CinemaPlus.Models.Entities.Cinema", "Cinema")
+                        .WithMany("Tariffs")
+                        .HasForeignKey("CinemaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CinemaPlus.Models.Entities.Format", "Format")
+                        .WithMany("Tariffs")
+                        .HasForeignKey("FormatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cinema");
+
+                    b.Navigation("Format");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -763,6 +933,10 @@ namespace CinemaPlus.Repository.Migrations
             modelBuilder.Entity("CinemaPlus.Models.Entities.Cinema", b =>
                 {
                     b.Navigation("Halls");
+
+                    b.Navigation("Images");
+
+                    b.Navigation("Tariffs");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Director", b =>
@@ -773,11 +947,18 @@ namespace CinemaPlus.Repository.Migrations
             modelBuilder.Entity("CinemaPlus.Models.Entities.Format", b =>
                 {
                     b.Navigation("MovieFormats");
+
+                    b.Navigation("Tariffs");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Genre", b =>
                 {
                     b.Navigation("MovieGenres");
+                });
+
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Hall", b =>
+                {
+                    b.Navigation("Seats");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Movie", b =>
@@ -789,6 +970,11 @@ namespace CinemaPlus.Repository.Migrations
                     b.Navigation("MovieFormats");
 
                     b.Navigation("MovieGenres");
+                });
+
+            modelBuilder.Entity("CinemaPlus.Models.Entities.SeatType", b =>
+                {
+                    b.Navigation("Seats");
                 });
 #pragma warning restore 612, 618
         }
