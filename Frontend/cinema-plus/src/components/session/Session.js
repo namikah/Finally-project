@@ -32,7 +32,6 @@ function Session(props) {
   const [seatType, setSeatType] = useState();
   // const [selectedHallRowCount, setselectedHallRowCount] = useState(0);
   const zone = useRef();
-console.log(sessionData);
   const getSeatType = useCallback(() => {
     seatTypeService.getSeatType().then((res) => {
       setSeatType(res.data);
@@ -52,9 +51,6 @@ console.log(sessionData);
   var selectedSession = useMemo(() => {
     return sessions?.find((x) => x.id === selectedSessionId);
   }, [sessions, selectedSessionId]);
-
-  // let selectedSession = (id) =>
-  //   !!sessions && sessions?.find((x) => x.id === id);
 
   if (props.platinum !== undefined)
     sessions = sessions?.filter(

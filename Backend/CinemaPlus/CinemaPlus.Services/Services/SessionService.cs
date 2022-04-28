@@ -20,41 +20,9 @@ namespace CinemaPlus.Services.Services
         public async Task<List<Session>> GetAllSessionAsync()
         {
             var sessions = await GetAllRelations()
-               .AsNoTracking()
                .AsQueryable()
                .Include(x => x.Movie)
-               .ThenInclude(x => x.MovieActors)
-               .ThenInclude(x => x.Actor)
-               .Include(x => x.Movie)
-               .ThenInclude(x => x.MovieDirectors)
-               .ThenInclude(x => x.Director)
-               .Include(x => x.Movie)
-               .ThenInclude(x => x.MovieFormats)
-               .ThenInclude(x => x.Format)
-               .Include(x => x.Movie)
-               .ThenInclude(x => x.MovieGenres)
-               .ThenInclude(x => x.Genre)
-               .Include(x => x.Hall)
-               .ThenInclude(x => x.Cinema)
-               .ThenInclude(x=>x.Tariffs)
-               .Include(x=>x.Hall)
-               .ThenInclude(x=>x.Seats)
-               .ThenInclude(x=>x.SeatType)
-                .Include(x => x.Movie)
                .ThenInclude(x => x.Detail)
-               .OrderBy(x => x.Start)
-               .ToListAsync();
-
-            return sessions;
-        }
-
-        public async Task<Session> GetSessionByIdAsync(int? id)
-        {
-            if (id == null) return new Session();
-
-            var session = await GetAllRelations()
-               .AsNoTracking()
-               .AsQueryable()
                .Include(x => x.Movie)
                .ThenInclude(x => x.MovieActors)
                .ThenInclude(x => x.Actor)
@@ -73,8 +41,39 @@ namespace CinemaPlus.Services.Services
                .Include(x => x.Hall)
                .ThenInclude(x => x.Seats)
                .ThenInclude(x => x.SeatType)
-                .Include(x => x.Movie)
+               .AsNoTracking()
+               .ToListAsync();
+
+            return sessions;
+        }
+
+        public async Task<Session> GetSessionByIdAsync(int? id)
+        {
+            if (id == null) return new Session();
+
+            var session = await GetAllRelations()
+               .AsQueryable()
+               .Include(x => x.Movie)
                .ThenInclude(x => x.Detail)
+               .Include(x => x.Movie)
+               .ThenInclude(x => x.MovieActors)
+               .ThenInclude(x => x.Actor)
+               .Include(x => x.Movie)
+               .ThenInclude(x => x.MovieDirectors)
+               .ThenInclude(x => x.Director)
+               .Include(x => x.Movie)
+               .ThenInclude(x => x.MovieFormats)
+               .ThenInclude(x => x.Format)
+               .Include(x => x.Movie)
+               .ThenInclude(x => x.MovieGenres)
+               .ThenInclude(x => x.Genre)
+               .Include(x => x.Hall)
+               .ThenInclude(x => x.Cinema)
+               .ThenInclude(x => x.Tariffs)
+               .Include(x => x.Hall)
+               .ThenInclude(x => x.Seats)
+               .ThenInclude(x => x.SeatType)
+               .AsNoTracking()
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 
             return session;
