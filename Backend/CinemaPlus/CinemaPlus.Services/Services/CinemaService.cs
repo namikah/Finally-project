@@ -35,8 +35,11 @@ namespace CinemaPlus.Services.Services
             if (id == null) return new Cinema();
 
             var cinema = await GetAllRelations()
+                .Include(x => x.Halls)
+               .ThenInclude(x => x.Seats)
+               .Include(x => x.Tariffs)
+               .ThenInclude(x => x.Format)
                .AsNoTracking()
-               .Include(x => x.Halls)
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 
             return cinema;

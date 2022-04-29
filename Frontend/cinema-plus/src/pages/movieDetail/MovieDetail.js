@@ -16,7 +16,7 @@ function MovieDetail() {
     const movieId = params.get("id");
   
     const getData = useCallback((id) => {
-      movieService.getMovies(id).then((res) => {
+      movieService.getMovie(id).then((res) => {
         setMovies(res.data);
         setTrailer(res.data.detail.trailer)
       });
@@ -67,7 +67,7 @@ function MovieDetail() {
               <Tab onClick={window.scrollTo(0, 0)}>DiGƏR FİLMLƏR</Tab>
             </TabList>
             <TabPanel className="another-films">
-              <Movie defaultPerPage={4}/>
+              <Movie />
             </TabPanel>
           </Tabs>
         </div>

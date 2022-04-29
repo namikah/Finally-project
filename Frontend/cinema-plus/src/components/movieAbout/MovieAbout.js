@@ -3,7 +3,7 @@ import "./movieAbout.scss";
 import dateFormat from "dateformat";
 
 function MovieAbout({ data }) {
-  
+  console.log(data);
   return (
     <section id="movie-about">
       <div className="row">

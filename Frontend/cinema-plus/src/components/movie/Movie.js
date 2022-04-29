@@ -1,41 +1,24 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { useHistory } from "react-router-dom";
-import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import React, { useCallback, useEffect, useState } from "react";
 import { movieService } from "../../API/services/movieService";
-import { range } from "range";
 import "./movie.scss";
 import { Link } from "react-router-dom";
 import { useLoadingContext } from "../../context/loading";
 import { cinemaService } from "../../API/services/cinemaService";
-import { useSessionContext } from "../../context/session/Session";
 
-function Movie({ defaultPerPage }) {
+function Movie() {
   const [moviesData, setMoviesData] = useState();
   const [cinemaData, setCinemaData] = useState();
-  const [selectedCinema, setSelectedCinema] = useState(0);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
-  const [curPage, setCurPage] = useState(1);
-  const { push } = useHistory();
   const [{ loading, setLoading }] = useLoadingContext();
-  const [{ sessionData, setSessionData }] = useSessionContext([]);
 
-  const getData = useCallback(
-    (page, PerPage) => {
-      setLoading(true);
-      movieService.getMovies(`?page=${page}&perPage=${PerPage}`).then((res) => {
-        setMoviesData(res.data);
-        setLoading(false);
-      });
-    },
-    [setLoading]
-  );
+  const getData = useCallback(() => {
+    setLoading(true);
+    movieService.getMovies().then((res) => {
+      setMoviesData(res.data);
+      setLoading(false);
+    });
+  }, [setLoading]);
 
   const getCinemas = useCallback(() => {
     cinemaService.getCinema().then((res) => {
@@ -44,54 +27,12 @@ function Movie({ defaultPerPage }) {
   }, []);
 
   useEffect(() => {
-    getData(curPage, defaultPerPage);
-  }, [curPage, defaultPerPage, getData]);
+    getData();
+  }, [getData]);
 
   useEffect(() => {
     getCinemas();
   }, [getCinemas]);
-
-  const handlePageChange = useCallback((ev) => {
-    const val = ev.target.value;
-    // push(`?page=${val}`);
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-    setCurPage(val);
-  }, []);
-
-  const handlePagePrev = useCallback(() => {
-    const prevPage = curPage - 1;
-    if (prevPage >= 1) {
-      // push(`?page=${prevPage}`);
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-      setCurPage(prevPage);
-    }
-  }, [curPage]);
-
-  const maxPageCount = useMemo(
-    () => !!moviesData && moviesData.totalPage,
-    [moviesData]
-  );
-
-  const handlePageNext = useCallback(() => {
-    const nextPage = Math.round(curPage) + 1;
-    if (nextPage <= maxPageCount) {
-      // push(`?page=${nextPage}`);
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-      setCurPage(nextPage);
-    }
-  }, [maxPageCount, curPage]);
 
   document.addEventListener("click", function (event) {
     if (!event.target.classList.contains("change-cinema")) {
@@ -148,7 +89,7 @@ function Movie({ defaultPerPage }) {
             {loading ? (
               <div className="loading text-center">Filmlər yüklənir. . .</div>
             ) : (
-              moviesData?.data.map((movie) => (
+              moviesData?.map((movie) => (
                 <div
                   key={"card" + movie.id}
                   className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
@@ -212,7 +153,7 @@ function Movie({ defaultPerPage }) {
             )}
           </div>
         </section>
-        {loading ? (
+        {/* {loading ? (
           ""
         ) : (
           <div className="pagination-component d-flex justify-content-center mt-5">
@@ -269,7 +210,7 @@ function Movie({ defaultPerPage }) {
               </PaginationItem>
             </Pagination>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

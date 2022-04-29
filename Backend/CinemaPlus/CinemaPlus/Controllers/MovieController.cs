@@ -28,9 +28,9 @@ namespace CinemaPlus.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int page = 1, int perpage = 4)
+        public async Task<IActionResult> Get()
         {
-            return Ok(await _movieService.GetAllMoviesAsync(page, perpage));
+            return Ok(await _movieService.GetAllMoviesAsync());
         }
 
         [HttpGet("{id?}")]

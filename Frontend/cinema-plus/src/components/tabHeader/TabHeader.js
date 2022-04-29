@@ -15,7 +15,7 @@ function TabHeader() {
             <Tab>TEZLİKLƏ</Tab>
           </TabList>
           <TabPanel>
-            <Movie defaultPerPage={8}/>
+            <Movie />
           </TabPanel>
           <TabPanel>
             <Session />

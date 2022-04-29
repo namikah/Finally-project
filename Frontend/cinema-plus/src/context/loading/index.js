@@ -4,10 +4,9 @@ const LoadingContext = createContext([]);
 
 function LoadingProvider({ children }) {
   const [loading, setLoading] = useState(false);
-  const [localLogin, setLocalLogin] = useState(localStorage.getItem("login"));
 
   return (
-    <LoadingContext.Provider value={[{ loading, setLoading, localLogin, setLocalLogin }]}>
+    <LoadingContext.Provider value={[{ loading, setLoading}]}>
       {children}
     </LoadingContext.Provider>
   );

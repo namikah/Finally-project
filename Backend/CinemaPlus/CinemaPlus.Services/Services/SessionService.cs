@@ -20,7 +20,6 @@ namespace CinemaPlus.Services.Services
         public async Task<List<Session>> GetAllSessionAsync()
         {
             var sessions = await GetAllRelations()
-               //.AsQueryable()
                .Include(x => x.Movie)
                .ThenInclude(x => x.Detail)
                .Include(x => x.Movie)

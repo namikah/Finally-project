@@ -15,7 +15,7 @@ function AllNews() {
   const { push } = useHistory();
 
   const getData = useCallback(() => {
-    movieService.getMovies(`?page=1&per_page=4`).then((res) => {
+    movieService.getMovies().then((res) => {
       setMoviesData(res.data);
     });
   }, []);
@@ -161,7 +161,7 @@ function AllNews() {
             </div>
           </div>
           <div className="right-side col-md-4 col-sm-12 d-flex flex-column justify-content-start align-items-center">
-            {moviesData?.data.map((item) => (
+            {moviesData?.slice(0, 4).map((item) => (
               <div
                 key={item.id}
                 className="card d-flex flex-column justify-content-start align-items-top p-3"

@@ -6,9 +6,13 @@ class MovieService extends HttpClient {
         super("https://localhost:44392/api");
     }
 
-  async getMovies(props){
-      return await this.get("movie/" + props);
+  async getMovies(){
+      return await this.get("movie");
   };
+
+  async getMovie(id){
+    return await this.get("movie/" + id);
+};
 }
 
 export const movieService = new MovieService()
