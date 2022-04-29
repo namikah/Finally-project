@@ -88,9 +88,6 @@ function Session(props) {
     );
   }
   
-  
-    console.log("selectedCinemaId");
-    console.log(selectedCinemaId);
   if (selectedCinemaId !== undefined && selectedCinemaId !== "") {
     sessions = sessions?.filter(
       (s) => s.hall.cinemaId.toString() === selectedCinemaId.toString()
@@ -108,9 +105,6 @@ function Session(props) {
       setOptionThree(false);
     }
   });
-
-  console.log("sessions");
-  console.log(sessions);
 
   return (
     <section id="session">

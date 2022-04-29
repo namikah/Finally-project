@@ -52,3 +52,21 @@ C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlu
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\ref\CinemaPlus.Repository.dll
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.pdb
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.genruntimeconfig.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\bin\Debug\net5.0\CinemaPlus.Repository.deps.json
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\bin\Debug\net5.0\CinemaPlus.Repository.runtimeconfig.json
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\bin\Debug\net5.0\CinemaPlus.Repository.runtimeconfig.dev.json
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\bin\Debug\net5.0\CinemaPlus.Repository.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\bin\Debug\net5.0\CinemaPlus.Repository.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\bin\Debug\net5.0\CinemaPlus.Models.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\bin\Debug\net5.0\CinemaPlus.Models.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.csproj.AssemblyReference.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.AssemblyInfoInputs.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.AssemblyInfo.cs
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.csproj.CoreCompileInputs.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.csproj.CopyComplete
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\refint\CinemaPlus.Repository.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\CinemaPlus.Repository.genruntimeconfig.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Repository\obj\Debug\net5.0\ref\CinemaPlus.Repository.dll

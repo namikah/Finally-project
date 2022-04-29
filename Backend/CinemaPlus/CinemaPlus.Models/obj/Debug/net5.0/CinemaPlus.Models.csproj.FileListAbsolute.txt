@@ -41,3 +41,18 @@ C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlu
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\ref\CinemaPlus.Models.dll
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.pdb
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.genruntimeconfig.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\bin\Debug\net5.0\CinemaPlus.Models.deps.json
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\bin\Debug\net5.0\CinemaPlus.Models.runtimeconfig.json
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\bin\Debug\net5.0\CinemaPlus.Models.runtimeconfig.dev.json
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\bin\Debug\net5.0\CinemaPlus.Models.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\bin\Debug\net5.0\CinemaPlus.Models.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.csproj.AssemblyReference.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.AssemblyInfoInputs.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.AssemblyInfo.cs
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.csproj.CoreCompileInputs.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\refint\CinemaPlus.Models.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\CinemaPlus.Models.genruntimeconfig.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Models\obj\Debug\net5.0\ref\CinemaPlus.Models.dll

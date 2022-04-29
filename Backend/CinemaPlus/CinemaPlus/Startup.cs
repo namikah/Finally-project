@@ -35,16 +35,6 @@ namespace CinemaPlus
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: origins,
-                                  policy =>
-                                  {
-                                      policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
-                                  });
-            });
-            //services.AddResponseCaching();
-
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<AppDbContext>(options =>
@@ -91,6 +81,16 @@ namespace CinemaPlus
             services.AddControllersWithViews().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             Constants.SeedDataPath = Path.Combine(_environment.ContentRootPath, "Data", "SeedData");
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: origins,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+                                  });
+            });
+            services.AddResponseCaching();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -102,16 +102,15 @@ namespace CinemaPlus
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CinemaPlus v1"));
             }
 
-            app.UseCors();
             app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseCors(origins);
-            //app.UseResponseCaching();
+            app.UseResponseCaching();
 
             app.UseAuthorization();
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ff5UKK5PpGbARH03y5TZ/3M3tLXQu06jQadAj2Oco4Rgm8T6bc+W0S9s4t0J/+IqMfB8GMSBEVlX+25PIxRZTg==",
+  "dgSpecHash": "+yOBqDleGShCnK4jbMxHNzY78UeR5Ah47na6Xu6iuXMCSF5pXE4EAmCwwrnFKvMZiGfQyYNEgjKzRvtkL0htzA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj",
+  "projectFilePath": "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.diagnostics\\2.2.0\\microsoft.aspnetcore.diagnostics.2.2.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.abstractions\\2.2.0\\microsoft.aspnetcore.diagnostics.abstractions.2.2.0.nupkg.sha512",

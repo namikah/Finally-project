@@ -3,19 +3,27 @@ import { movieService } from "../../API/services/movieService";
 import "./movie.scss";
 import { Link } from "react-router-dom";
 import { useLoadingContext } from "../../context/loading";
+import dateFormat from "dateformat";
 
 function Movie({ movieCount, selectedSessions, selectedLanguage }) {
+  let date = new Date();
+  let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");
   const [moviesData, setMoviesData] = useState();
   const [{ loading, setLoading }] = useLoadingContext();
-  
   const getData = useCallback(() => {
     setLoading(true);
     movieService.getMovies().then((res) => {
-      setMoviesData(res.data);
+      setMoviesData(
+        res.data.filter(
+          (x) =>
+          dateFormat(x.detail.startInCinema, "dd.mm.yyyy") <= today &&
+          dateFormat(x.detail.endInCinema, "dd.mm.yyyy") >= today
+        )
+      );
       setLoading(false);
     });
   }, [setLoading]);
-  
+
   useEffect(() => {
     getData();
   }, [getData]);
@@ -33,7 +41,7 @@ function Movie({ movieCount, selectedSessions, selectedLanguage }) {
 
   if (selectedLanguage !== undefined && selectedLanguage !== "0")
     movies = movies?.filter((m) =>
-      m.movieFormats?.find(x=>x.format.name.includes(selectedLanguage))
+      m.movieFormats?.find((x) => x.format.name.includes(selectedLanguage))
     );
 
   return (

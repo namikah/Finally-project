@@ -49,3 +49,20 @@ C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlu
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.dll
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\ref\CinemaPlus.Data.dll
 C:\Users\Admin\OneDrive\Desktop\New folder (2)\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\bin\Debug\net5.0\CinemaPlus.Data.deps.json
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\bin\Debug\net5.0\CinemaPlus.Data.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\bin\Debug\net5.0\CinemaPlus.Data.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\bin\Debug\net5.0\CinemaPlus.Models.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\bin\Debug\net5.0\CinemaPlus.Repository.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\bin\Debug\net5.0\CinemaPlus.Repository.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\bin\Debug\net5.0\CinemaPlus.Models.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.csproj.AssemblyReference.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.AssemblyInfoInputs.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.AssemblyInfo.cs
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.csproj.CoreCompileInputs.cache
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.csproj.CopyComplete
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\refint\CinemaPlus.Data.dll
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\CinemaPlus.Data.pdb
+C:\my projects\Finally-project\Backend\CinemaPlus\Data\obj\Debug\net5.0\ref\CinemaPlus.Data.dll

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hlHAkNdTspVdSwa6NxL9Cjp7geAEF7mR51D8gOOcx1ccsEDuXTwRkG5Y/SFE6FCoSVgf36wtNh+LyOJZ0GFPHg==",
+  "dgSpecHash": "3VHFuVJk/n6Fb+XLpy/16OfNeYFZOmWDegzz7tQG9kIyFn8W8FnnPEVC8xkgt/cbSwFcrcpz+D9M7oOftJNecw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj",
+  "projectFilePath": "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.16\\microsoft.aspnetcore.cryptography.internal.5.0.16.nupkg.sha512",

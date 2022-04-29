@@ -8,9 +8,9 @@ function MovieFilter() {
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
   const [cinemaData, setCinemaData] = useState();
-  const [selectedCinemaId, setSelectedCinemaId] = useState(0);
   const [selectedLanguage, setSelectedLanguage] = useState("0");
   const [{ sessionData }] = useSessionContext([]);
+  const [selectedCinemaId, setSelectedCinemaId] = useState(0);
 
   const getCinemas = useCallback(() => {
     cinemaService.getCinema().then((res) => {
