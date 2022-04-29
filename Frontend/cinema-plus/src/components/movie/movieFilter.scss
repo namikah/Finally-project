@@ -1,0 +1,33 @@
+.header-filter {
+    width: 100%;
+    background: #334e9e;
+    padding: 25px;
+    // height: 100px;
+    select {
+      border-radius: 20px;
+      width: 220px;
+      height: 45px;
+      padding: 0 10px;
+      border: 1px solid gray;
+      font-weight: 500;
+    }
+    .in-english {
+      position: relative;
+      cursor: pointer;
+      div {
+        text-decoration: none;
+        color: black;
+        font-weight: 500;
+        width: 220px;
+        height: 45px;
+        border-radius: 20px;
+        margin: 0;
+        padding: 5px;
+        border: 1px solid gray;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }

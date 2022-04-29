@@ -1,6 +1,6 @@
 import React from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import Movie from "../movie/Movie";
+import MovieFilter from "../movie/MovieFilter";
 import Session from "../session/Session";
 import "./tabHeader.scss";
 
@@ -15,7 +15,7 @@ function TabHeader() {
             <Tab>TEZLİKLƏ</Tab>
           </TabList>
           <TabPanel>
-            <Movie />
+            <MovieFilter/>
           </TabPanel>
           <TabPanel>
             <Session />

@@ -67,7 +67,7 @@ function MovieDetail() {
               <Tab onClick={window.scrollTo(0, 0)}>DiGƏR FİLMLƏR</Tab>
             </TabList>
             <TabPanel className="another-films">
-              <Movie />
+              <Movie movieCount={4}/>
             </TabPanel>
           </Tabs>
         </div>

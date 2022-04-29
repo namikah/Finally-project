@@ -13,6 +13,7 @@ import { useLoadingContext } from "../../context/loading";
 import { useSessionContext } from "../../context/session/Session";
 import { range } from "range";
 import { seatTypeService } from "../../API/services/seatTypeService";
+import { cinemaService } from "../../API/services/cinemaService";
 
 function Session(props) {
   let date = new Date();
@@ -30,8 +31,21 @@ function Session(props) {
   const [dateSelected, setDateSelected] = useState(today);
   const [selectedSessionId, setSelectedSessionId] = useState();
   const [seatType, setSeatType] = useState();
-  // const [selectedHallRowCount, setselectedHallRowCount] = useState(0);
+  const [cinemaData, setCinemaData] = useState();
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedCinemaId, setSelectedCinemaId] = useState("");
   const zone = useRef();
+
+  const getCinemas = useCallback(() => {
+    cinemaService.getCinema().then((res) => {
+      setCinemaData(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    getCinemas();
+  }, [getCinemas]);
+
   const getSeatType = useCallback(() => {
     seatTypeService.getSeatType().then((res) => {
       setSeatType(res.data);
@@ -52,17 +66,36 @@ function Session(props) {
     return sessions?.find((x) => x.id === selectedSessionId);
   }, [sessions, selectedSessionId]);
 
-  if (props.platinum !== undefined)
+  if (props.platinum !== undefined) {
     sessions = sessions?.filter(
       (session) =>
         session.hall.name.includes("Platinum") ||
         session.hall.name.includes("VIP")
     );
+  }
 
-  if (props.movieId !== undefined)
+  if (props.movieId !== undefined) {
     sessions = sessions?.filter(
       (session) => session.movieId.toString() === props.movieId.toString()
     );
+  }
+  
+  if (selectedLanguage !== undefined && selectedLanguage !== "") {
+    sessions = sessions?.filter((s) =>
+    s.movie.movieFormats?.find((f) =>
+    f.format.name.includes(selectedLanguage)
+    )
+    );
+  }
+  
+  
+    console.log("selectedCinemaId");
+    console.log(selectedCinemaId);
+  if (selectedCinemaId !== undefined && selectedCinemaId !== "") {
+    sessions = sessions?.filter(
+      (s) => s.hall.cinemaId.toString() === selectedCinemaId.toString()
+    );
+  }
 
   document.addEventListener("click", function (event) {
     if (!event.target.classList.contains("change-cinema")) {
@@ -75,6 +108,9 @@ function Session(props) {
       setOptionThree(false);
     }
   });
+
+  console.log("sessions");
+  console.log(sessions);
 
   return (
     <section id="session">
@@ -125,20 +161,26 @@ function Session(props) {
         </div>
         <select
           className="filter-cinemas change-cinema"
-          onChange={(e) => setDateSelected(e.target.value)}
+          onChange={(e) => setSelectedCinemaId(e.target.value)}
           onClick={() => setOptionTwo(!optionTwo)}
           style={
             optionTwo
               ? { borderRadius: "20px 20px 0 0" }
-              : { borderRadius: "50px" }
+              : { borderRadius: "20px" }
           }
         >
-          <option value={0} defaultValue>
+          <option value="" defaultValue>
             Kinoteatrlar
           </option>
+          {cinemaData?.map((cinema) => (
+            <option key={cinema.id} value={cinema.id}>
+              {cinema.name}
+            </option>
+          ))}
         </select>
         <select
           className="filter-lang change-lang"
+          onChange={(e) => setSelectedLanguage(e.target.value)}
           onClick={() => setOptionThree(!optionThree)}
           style={
             optionThree
@@ -146,11 +188,11 @@ function Session(props) {
               : { borderRadius: "20px" }
           }
         >
-          <option value="1">Bütün dillərdə</option>
-          <option value="2">Azərbaycanca</option>
-          <option value="3">На русском</option>
-          <option value="4">In English</option>
-          <option value="5">Türkçe</option>
+          <option value="">Bütün dillərdə</option>
+          <option value="Az">Azərbaycanca</option>
+          <option value="Rus">На русском</option>
+          <option value="Eng">In English</option>
+          <option value="Tur">Türkçe</option>
         </select>
       </div>
       <div className="container">
@@ -180,52 +222,53 @@ function Session(props) {
               </tr>
             </thead>
             <tbody>
-              {!!sessions && sessions?.map((item) => (
-                <tr key={item.id}>
-                  <td className="row-film">
-                    <Link to={`/moviedetail?id=${item.movie.id}`}>
-                      {item.movie.name}
-                    </Link>
-                  </td>
-                  <td className="row-session">{item.start}</td>
-                  <td className="row-cinema">
-                    <Link to={`/moviedetail?id=${item.movie.id}`}>
-                      {item.hall.cinema.name}
-                    </Link>
-                  </td>
-                  <td className="row-hall">{item.hall.name}</td>
-                  <td className="row-format">
-                    {item.movie.movieFormats?.map(({ format }) => (
-                      <span key={format.id}>
-                        <img
-                          className="format-icon"
-                          src={format.icon}
-                          alt="format"
-                        ></img>
-                      </span>
-                    ))}
-                  </td>
-                  <td className="row-price">
-                    {item.hall.cinema.tariffs?.find(
-                      (tariff) =>
-                        tariff.startTime <= item.start &&
-                        tariff.endTime >= item.start
-                    ).price + ".00 AZN"}
-                  </td>
-                  <td className="row-buy text-center">
-                    <div
-                      onClick={() => {
-                        zone.current.classList.add("active-zone");
-                        setSelectedSessionId(item.id);
-                      }}
-                      className="buy-ticket"
-                      dataid={item.id}
-                    >
-                      Yerlər
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {!!sessions &&
+                sessions?.map((item) => (
+                  <tr key={item.id}>
+                    <td className="row-film">
+                      <Link to={`/moviedetail?id=${item.movie.id}`}>
+                        {item.movie.name}
+                      </Link>
+                    </td>
+                    <td className="row-session">{item.start}</td>
+                    <td className="row-cinema">
+                      <Link to={`/moviedetail?id=${item.movie.id}`}>
+                        {item.hall.cinema.name}
+                      </Link>
+                    </td>
+                    <td className="row-hall">{item.hall.name}</td>
+                    <td className="row-format">
+                      {item.movie.movieFormats?.map(({ format }) => (
+                        <span key={format.id}>
+                          <img
+                            className="format-icon"
+                            src={format.icon}
+                            alt="format"
+                          ></img>
+                        </span>
+                      ))}
+                    </td>
+                    <td className="row-price">
+                      {item.hall.cinema.tariffs?.find(
+                        (tariff) =>
+                          tariff.startTime <= item.start &&
+                          tariff.endTime >= item.start
+                      ).price + ".00 AZN"}
+                    </td>
+                    <td className="row-buy text-center">
+                      <div
+                        onClick={() => {
+                          zone.current.classList.add("active-zone");
+                          setSelectedSessionId(item.id);
+                        }}
+                        className="buy-ticket"
+                        dataid={item.id}
+                      >
+                        Yerlər
+                      </div>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
         )}
@@ -245,40 +288,27 @@ function Session(props) {
       <div ref={zone} className="zone">
         <div className="select-zone d-flex flex-column justify-content-between align-items-center">
           <div className="zone-header d-flex flex-column justify-content-center align-items-center">
+            <h6>{selectedSession && selectedSession.movie.name}</h6>
             <h6>
               {selectedSession &&
-                selectedSession.movie.name}
+                dateFormat(selectedSession.date, "dd.mm.yyyy")}
+              , {selectedSession && selectedSession.start.slice(0, 5)}
             </h6>
             <h6>
-              {selectedSession &&
-                dateFormat(
-                  selectedSession.date,
-                  "dd.mm.yyyy"
-                )}
-              ,{" "}
-              {selectedSession &&
-                selectedSession.start.slice(0, 5)}
-            </h6>
-            <h6>
-              {selectedSession &&
-                selectedSession.hall.cinema.name}
-              ,{" "}
-              {selectedSession &&
-                selectedSession.hall.name}
+              {selectedSession && selectedSession.hall.cinema.name},{" "}
+              {selectedSession && selectedSession.hall.name}
             </h6>
             <div className="row-format">
               {selectedSession &&
-                selectedSession.movie.movieFormats?.map(
-                  ({ format }) => (
-                    <span key={format.id}>
-                      <img
-                        className="format-icon"
-                        src={format.icon}
-                        alt="format"
-                      ></img>
-                    </span>
-                  )
-                )}
+                selectedSession.movie.movieFormats?.map(({ format }) => (
+                  <span key={format.id}>
+                    <img
+                      className="format-icon"
+                      src={format.icon}
+                      alt="format"
+                    ></img>
+                  </span>
+                ))}
             </div>
           </div>
           <div className="zone-body d-flex flex-column justify-content-center align-items-center gap-1">
@@ -329,7 +359,8 @@ function Session(props) {
               </div>
               {seatType &&
                 seatType?.map((type) =>
-                  !!selectedSession && selectedSession.hall.seats?.some(
+                  !!selectedSession &&
+                  selectedSession.hall.seats?.some(
                     (x) => x.seatTypeId === type.id
                   ) ? (
                     <div>
