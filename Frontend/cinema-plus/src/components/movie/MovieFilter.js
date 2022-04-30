@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { cinemaService } from "../../API/services/cinemaService";
 import { useSessionContext } from "../../context/session/Session";
@@ -9,11 +10,12 @@ function MovieFilter() {
   const [optionTwo, setOptionTwo] = useState(false);
   const [cinemaData, setCinemaData] = useState();
   const [selectedLanguage, setSelectedLanguage] = useState("0");
-  const [{ sessionData }] = useSessionContext([]);
+  // const [{ sessionData }] = useSessionContext([]);
+  const [sessionData, setSessionData] = useState([])
   const [selectedCinemaId, setSelectedCinemaId] = useState(0);
 
-  const getCinemas = useCallback(() => {
-    cinemaService.getCinema().then((res) => {
+  const getCinemas = useCallback(async() => {
+    await axios.get("https://localhost:44392/api/cinema").then((res) => {
       setCinemaData(res.data);
     });
   }, []);
@@ -21,6 +23,16 @@ function MovieFilter() {
   useEffect(() => {
     getCinemas();
   }, [getCinemas]);
+
+  const getData = useCallback(async() => {
+    await axios.get("https://localhost:44392/api/session").then((res) => {
+      setSessionData(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   let selectedSessions = useMemo(() => {
     return sessionData?.filter(

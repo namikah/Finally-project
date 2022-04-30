@@ -84,13 +84,13 @@ namespace CinemaPlus
 
             services.AddCors(options =>
             {
-                options.AddPolicy(name: origins,
+                options.AddPolicy(name:origins,
                                   policy =>
                                   {
-                                      policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+                                      policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                                   });
             });
-            services.AddResponseCaching();
+            //services.AddResponseCaching();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -107,10 +107,10 @@ namespace CinemaPlus
             app.UseRouting();
 
             app.UseCors(origins);
-            app.UseResponseCaching();
+            //app.UseResponseCaching();
 
             app.UseAuthorization();
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

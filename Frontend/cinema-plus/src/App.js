@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <LoadingProvider>
-        <SessionProvider>
+        {/* <SessionProvider> */}
             <Header />
             <Switch>
               <Route path={"/"} exact component={Home} />
@@ -35,7 +35,7 @@ function App() {
               <Redirect to={"/error"} />
             </Switch>
             <Footer />
-        </SessionProvider>
+        {/* </SessionProvider> */}
       </LoadingProvider>
     </>
   );

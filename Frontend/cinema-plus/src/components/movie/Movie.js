@@ -4,20 +4,30 @@ import "./movie.scss";
 import { Link } from "react-router-dom";
 import { useLoadingContext } from "../../context/loading";
 import dateFormat from "dateformat";
+import axios from "axios";
 
 function Movie({ movieCount, selectedSessions, selectedLanguage }) {
   let date = new Date();
-  let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");
+  // let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");
+  let today = date.getDate();
   const [moviesData, setMoviesData] = useState();
   const [{ loading, setLoading }] = useLoadingContext();
-  const getData = useCallback(() => {
+  const getData = useCallback(async () => {
     setLoading(true);
-    movieService.getMovies().then((res) => {
+    await axios.get("https://localhost:44392/api/movie").then((res) => {
+      // const start = new Date('02/20/2020');
+      // const end = new Date('03/01/2020');
+  
+      // const daysBetween = (end.getTime() - start.getTime())
+      
       setMoviesData(
-        res.data.filter(
-          (x) =>
-          dateFormat(x.detail.startInCinema, "dd.mm.yyyy") <= today &&
-          dateFormat(x.detail.endInCinema, "dd.mm.yyyy") >= today
+        res.data.filter((x) => true
+          //  dateFormat(x.detail.startInCinema).getyear() > today.getyear()
+          // new Date(dateFormat(x.detail.endInCinema,"dd.mm.yyyy")).getDate() >= new Date(dateFormat(today,"dd.mm.yyyy")).getDate()
+
+          // moment(x.detail.startInCinema, "mm.dd.yyyy").valueOf() <= moment(today,"dd.mm.yyyy")
+          // dateFormat(x.detail.startInCinema) <= today &&
+          // dateFormat(x.detail.endInCinema) >= today
         )
       );
       setLoading(false);

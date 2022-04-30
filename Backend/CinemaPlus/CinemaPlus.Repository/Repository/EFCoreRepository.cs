@@ -26,7 +26,7 @@ namespace CinemaPlus.Repository.Repository
 
         public IQueryable<T> GetAllRelations()
         {
-            return DbContext.Set<T>().AsQueryable();
+            return DbContext.Set<T>().AsNoTracking().AsQueryable();
         }
 
 
