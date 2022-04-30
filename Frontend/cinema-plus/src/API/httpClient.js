@@ -8,6 +8,6 @@ export class HttpClient {
   }
 
   async get(endpoint) {
-    return await axios.get(`${this.dataUrl}/${endpoint}`);
+    return await axios.request(`${this.dataUrl}/${endpoint}`);
   }
 }

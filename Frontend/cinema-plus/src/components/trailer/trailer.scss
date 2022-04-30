@@ -1,5 +1,8 @@
-.video-player{
-    iframe{
-    box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.26);
-   }
+#owl-trailer {
+  .video-player {
+      iframe {
+        border-radius: 10px;
+      box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.26);
+    }
+  }
 }

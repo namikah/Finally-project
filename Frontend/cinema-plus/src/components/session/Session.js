@@ -10,11 +10,10 @@ import { Table } from "reactstrap";
 import "./session.scss";
 import dateFormat from "dateformat";
 import { useLoadingContext } from "../../context/loading";
-import { useSessionContext } from "../../context/session/Session";
 import { range } from "range";
 import { seatTypeService } from "../../API/services/seatTypeService";
 import { cinemaService } from "../../API/services/cinemaService";
-import axios from "axios";
+import { sessionService } from "../../API/services/sessionService";
 
 function Session(props) {
   let date = new Date();
@@ -26,7 +25,7 @@ function Session(props) {
 
   const [{ loading }] = useLoadingContext();
   // const [{ sessionData }] = useSessionContext([]);
-  const [sessionData, setSessionData] = useState([])
+  const [sessionData, setSessionData] = useState([]);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
   const [optionThree, setOptionThree] = useState(false);
@@ -38,18 +37,18 @@ function Session(props) {
   const [selectedCinemaId, setSelectedCinemaId] = useState("");
   const zone = useRef();
 
-  const getCinemas = useCallback(async() => {
-    await axios.get("https://localhost:44392/api/cinema").then((res) => {
+  const getCinemas = useCallback(() => {
+    cinemaService.getCinema().then((res) => {
       setCinemaData(res.data);
     });
   }, []);
-  
+
   useEffect(() => {
     getCinemas();
   }, [getCinemas]);
 
-  const getData = useCallback(async() => {
-    await axios.get("https://localhost:44392/api/session").then((res) => {
+  const getData = useCallback(() => {
+    sessionService.getSession().then((res) => {
       setSessionData(res.data);
     });
   }, []);
@@ -57,7 +56,7 @@ function Session(props) {
   useEffect(() => {
     getData();
   }, [getData]);
-  
+
   const getSeatType = useCallback(() => {
     seatTypeService.getSeatType().then((res) => {
       setSeatType(res.data);
@@ -91,15 +90,15 @@ function Session(props) {
       (session) => session.movieId.toString() === props.movieId.toString()
     );
   }
-  
+
   if (selectedLanguage !== undefined && selectedLanguage !== "") {
     sessions = sessions?.filter((s) =>
-    s.movie.movieFormats?.find((f) =>
-    f.format.name.includes(selectedLanguage)
-    )
+      s.movie.movieFormats?.find((f) =>
+        f.format.name.includes(selectedLanguage)
+      )
     );
   }
-  
+
   if (selectedCinemaId !== undefined && selectedCinemaId !== "") {
     sessions = sessions?.filter(
       (s) => s.hall.cinemaId.toString() === selectedCinemaId.toString()
@@ -117,7 +116,6 @@ function Session(props) {
       setOptionThree(false);
     }
   });
-
   return (
     <section id="session">
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
@@ -254,7 +252,10 @@ function Session(props) {
                         </span>
                       ))}
                     </td>
-                    <td className="row-price">
+                    <td
+                      onClick={console.log(item.hall.cinema.tariffs)}
+                      className="row-price"
+                    >
                       {item.hall.cinema.tariffs?.find(
                         (tariff) =>
                           tariff.startTime <= item.start &&

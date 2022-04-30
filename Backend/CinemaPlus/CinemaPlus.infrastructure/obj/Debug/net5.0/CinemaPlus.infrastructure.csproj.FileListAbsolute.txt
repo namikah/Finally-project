@@ -33,3 +33,15 @@ C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\
 C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\refint\CinemaPlus.infrastructure.dll
 C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.pdb
 C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\ref\CinemaPlus.infrastructure.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\bin\Debug\net5.0\CinemaPlus.infrastructure.deps.json
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\bin\Debug\net5.0\CinemaPlus.infrastructure.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\bin\Debug\net5.0\CinemaPlus.infrastructure.pdb
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.csproj.AssemblyReference.cache
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.AssemblyInfoInputs.cache
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.AssemblyInfo.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\refint\CinemaPlus.infrastructure.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\CinemaPlus.infrastructure.pdb
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.infrastructure\obj\Debug\net5.0\ref\CinemaPlus.infrastructure.dll

@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import MobileApp from "../../built-in/MobileApp";
 import "./header.scss";
@@ -6,6 +7,7 @@ import "./header.scss";
 function Header() {
   const [state, setState] = useState(false);
   const scroll = useRef(null);
+  const { push } = useHistory();
 
   const scrollTo = () => window.scrollTo(0, scroll.offsetTop);
 
@@ -111,7 +113,10 @@ function Header() {
           </div>
         </div>
         <Link
-          onClick={scrollTo}
+          onClick={() => {
+            scrollTo();
+            push("/");
+          }}
           to={"/"}
           className="header-left-side d-flex justify-content-center"
         >
@@ -139,19 +144,29 @@ function Header() {
 
                 <Link to={""}>EN</Link>
 
-                <Link className="icon-app" to={""}>
+                <a
+                  className="icon-app"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://apps.apple.com/us/app/cinemaplus/id1072140418"
+                >
                   <img
                     src="https://cinemaplus.az/site/templates/images/ios.svg"
                     alt="ios"
                   ></img>
-                </Link>
+                </a>
 
-                <Link className="icon-app" to={""}>
+                <a
+                  className="icon-app"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://play.google.com/store/apps/details?id=com.promote.cinemaplus"
+                >
                   <img
                     src="https://cinemaplus.az/site/templates/images/android.svg"
                     alt="android"
                   ></img>
-                </Link>
+                </a>
               </div>
             </div>
           </div>

@@ -93,3 +93,22 @@ C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\
 C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\refint\CinemaPlus.Services.dll
 C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.pdb
 C:\my projects\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\ref\CinemaPlus.Services.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Services.deps.json
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Services.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Services.pdb
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Data.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Models.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Repository.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Repository.pdb
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Data.pdb
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\bin\Debug\net5.0\CinemaPlus.Models.pdb
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.csproj.AssemblyReference.cache
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.AssemblyInfoInputs.cache
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.AssemblyInfo.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.csproj.CoreCompileInputs.cache
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.csproj.CopyComplete
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\refint\CinemaPlus.Services.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\CinemaPlus.Services.pdb
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.Services\obj\Debug\net5.0\ref\CinemaPlus.Services.dll

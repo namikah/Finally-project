@@ -7,7 +7,7 @@ class CinemaService extends HttpClient {
     }
 
   async getCinema(){
-      return await this.get("cinema/");
+      return await this.get("cinema");
   };
 }
 

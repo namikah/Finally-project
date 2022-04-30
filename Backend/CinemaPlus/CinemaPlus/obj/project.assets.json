@@ -6523,23 +6523,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Users\\UGHUR\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
+      "projectUniqueName": "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
       "projectName": "CinemaPlus",
-      "projectPath": "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\obj\\",
+      "projectPath": "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\CinemaPlus.csproj",
+      "packagesPath": "C:\\Users\\UGHUR\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\UGHUR\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6554,14 +6554,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj": {
-              "projectPath": "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj"
+            "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj": {
+              "projectPath": "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.infrastructure\\CinemaPlus.infrastructure.csproj"
             },
-            "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj": {
-              "projectPath": "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj"
+            "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj": {
+              "projectPath": "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\CinemaPlus.Services\\CinemaPlus.Services.csproj"
             },
-            "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\Data\\CinemaPlus.Data.csproj": {
-              "projectPath": "C:\\my projects\\Finally-project\\Backend\\CinemaPlus\\Data\\CinemaPlus.Data.csproj"
+            "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\Data\\CinemaPlus.Data.csproj": {
+              "projectPath": "C:\\Users\\UGHUR\\Desktop\\Finally-project\\Backend\\CinemaPlus\\Data\\CinemaPlus.Data.csproj"
             }
           }
         }

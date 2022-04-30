@@ -14,13 +14,11 @@ import NewsDetail from "./pages/newsDetail/NewsDetail";
 import AllNews from "./pages/news/AllNews";
 import MovieDetail from "./pages/movieDetail/MovieDetail";
 import { LoadingProvider } from "./context/loading";
-import { SessionProvider } from "./context/session/Session";
 
 function App() {
   return (
     <>
       <LoadingProvider>
-        {/* <SessionProvider> */}
             <Header />
             <Switch>
               <Route path={"/"} exact component={Home} />
@@ -35,7 +33,6 @@ function App() {
               <Redirect to={"/error"} />
             </Switch>
             <Footer />
-        {/* </SessionProvider> */}
       </LoadingProvider>
     </>
   );

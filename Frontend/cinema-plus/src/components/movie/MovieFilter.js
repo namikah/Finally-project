@@ -1,7 +1,5 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { cinemaService } from "../../API/services/cinemaService";
-import { useSessionContext } from "../../context/session/Session";
 import Movie from "./Movie";
 import "./movieFilter.scss";
 

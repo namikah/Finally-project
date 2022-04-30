@@ -7,7 +7,7 @@ class SeatTypeService extends HttpClient {
     }
 
   async getSeatType(){
-      return await this.get("seatType/");
+      return await this.get("seatType");
   };
 }
 
