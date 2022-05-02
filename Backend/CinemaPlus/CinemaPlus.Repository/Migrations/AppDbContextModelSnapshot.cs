@@ -466,12 +466,37 @@ namespace CinemaPlus.Repository.Migrations
                     b.ToTable("Sessions");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.SessionFormats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FormatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormatId");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("SessionFormats");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.Tariff", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AudioFormat")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CinemaId")
                         .HasColumnType("int");
@@ -856,6 +881,25 @@ namespace CinemaPlus.Repository.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.SessionFormats", b =>
+                {
+                    b.HasOne("CinemaPlus.Models.Entities.Format", "Format")
+                        .WithMany("SessionFormats")
+                        .HasForeignKey("FormatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CinemaPlus.Models.Entities.Session", "Session")
+                        .WithMany("SessionFormats")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Format");
+
+                    b.Navigation("Session");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.Tariff", b =>
                 {
                     b.HasOne("CinemaPlus.Models.Entities.Cinema", "Cinema")
@@ -949,6 +993,8 @@ namespace CinemaPlus.Repository.Migrations
                 {
                     b.Navigation("MovieFormats");
 
+                    b.Navigation("SessionFormats");
+
                     b.Navigation("Tariffs");
                 });
 
@@ -976,6 +1022,11 @@ namespace CinemaPlus.Repository.Migrations
             modelBuilder.Entity("CinemaPlus.Models.Entities.SeatType", b =>
                 {
                     b.Navigation("Seats");
+                });
+
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Session", b =>
+                {
+                    b.Navigation("SessionFormats");
                 });
 #pragma warning restore 612, 618
         }

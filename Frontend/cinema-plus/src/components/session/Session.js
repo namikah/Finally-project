@@ -24,7 +24,6 @@ function Session(props) {
   let tomorrow4 = dateFormat(date.setDate(date.getDate() + 1), "dd.mm.yyyy");
 
   const [{ loading }] = useLoadingContext();
-  // const [{ sessionData }] = useSessionContext([]);
   const [sessionData, setSessionData] = useState([]);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
@@ -35,6 +34,8 @@ function Session(props) {
   const [cinemaData, setCinemaData] = useState();
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCinemaId, setSelectedCinemaId] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [maxSelectedSeats, setMaxSelectedSeats] = useState(0);
   const zone = useRef();
 
   const getCinemas = useCallback(() => {
@@ -93,9 +94,7 @@ function Session(props) {
 
   if (selectedLanguage !== undefined && selectedLanguage !== "") {
     sessions = sessions?.filter((s) =>
-      s.movie.movieFormats?.find((f) =>
-        f.format.name.includes(selectedLanguage)
-      )
+      s.sessionFormats?.find((f) => f.format.name.includes(selectedLanguage))
     );
   }
 
@@ -211,7 +210,10 @@ function Session(props) {
         {loading ? (
           <div className="loading text-center">Seanslar yüklənir. . .</div>
         ) : sessions.length === 0 ? (
-          <div className="loading text-center">Seans yoxdur</div>
+          <div className="loading text-center">
+            Seçiminizə uyğun seans tapılmadı. Zəhmət olmasa, birazdan yenidən
+            cəhd edin,
+          </div>
         ) : (
           <Table responsive>
             <thead>
@@ -242,7 +244,7 @@ function Session(props) {
                     </td>
                     <td className="row-hall">{item.hall.name}</td>
                     <td className="row-format">
-                      {item.movie.movieFormats?.map(({ format }) => (
+                      {item.sessionFormats?.map(({ format }) => (
                         <span key={format.id}>
                           <img
                             className="format-icon"
@@ -252,10 +254,7 @@ function Session(props) {
                         </span>
                       ))}
                     </td>
-                    <td
-                      onClick={console.log(item.hall.cinema.tariffs)}
-                      className="row-price"
-                    >
+                    <td className="row-price">
                       {item.hall.cinema.tariffs?.find(
                         (tariff) =>
                           tariff.startTime <= item.start &&
@@ -266,6 +265,7 @@ function Session(props) {
                       <div
                         onClick={() => {
                           zone.current.classList.add("active-zone");
+                          zone.current.classList.remove("deactive-zone");
                           setSelectedSessionId(item.id);
                         }}
                         className="buy-ticket"
@@ -292,7 +292,7 @@ function Session(props) {
           ></img>
         </a>
       </div>
-      <div ref={zone} className="zone">
+      <div ref={zone} className="zone" id="zone-buy">
         <div className="select-zone d-flex flex-column justify-content-between align-items-center">
           <div className="zone-header d-flex flex-column justify-content-center align-items-center">
             <h6>{selectedSession && selectedSession.movie.name}</h6>
@@ -318,40 +318,58 @@ function Session(props) {
                 ))}
             </div>
           </div>
-          <div className="zone-body d-flex flex-column justify-content-center align-items-center gap-1">
-            {range(1, 3 + 1).map((i) => (
-              <div
-                key={i}
-                className="d-flex justify-content-center align-items-center gap-1"
-              >
-                {selectedSession &&
-                  selectedSession.hall.seats?.map((seat) =>
-                    seat.row === i ? (
-                      <Link
-                        to={"#"}
-                        key={seat.id}
-                        style={
-                          seat.seatTypeId === 1
-                            ? { backgroundColor: "white", color: "#334e9e" }
-                            : seat.seatTypeId === 2
-                            ? { backgroundColor: "pink", color: "#334e9e" }
-                            : seat.seatTypeId === 3
-                            ? { backgroundColor: "#00acec", color: "#334e9e" }
-                            : {}
-                        }
-                        className={seat.seatTypeId === 4 ? "another" : ""}
-                      >
-                        <span>{seat.column}</span>
-                      </Link>
-                    ) : (
-                      ""
-                    )
-                  )}
-              </div>
-            ))}
+          <div className="zone-body d-flex flex-column justify-content-center align-items-center gap-1 pt-3">
+            {range(1, selectedSession && selectedSession.hall.rowCount + 1).map(
+              (i) => (
+                <div
+                  key={i}
+                  className="d-flex justify-content-center align-items-center gap-2"
+                >
+                  {selectedSession &&
+                    selectedSession.hall.seats?.map((seat) =>
+                      seat.row === i ? (
+                        <Link
+                          to={"#"}
+                          key={seat.id}
+                          style={
+                            seat.seatTypeId === 1
+                              ? {
+                                  backgroundColor: "white",
+                                  color: "rgb(0 0 0 / 60%)",
+                                }
+                              : seat.seatTypeId === 2
+                              ? {
+                                  backgroundColor: "pink",
+                                  color: "rgb(0 0 0 / 60%)",
+                                }
+                              : seat.seatTypeId === 3
+                              ? {
+                                  backgroundColor: "#49e1ea",
+                                  color: "rgb(0 0 0 / 60%)",
+                                }
+                              : {}
+                          }
+                          className={seat.seatTypeId === 4 ? "another" : ""}
+                        >
+                          <span
+                            datatype={seat.seatType.name}
+                            onClick={(e) => {}}
+                          >
+                            {seat.column}
+                          </span>
+                        </Link>
+                      ) : (
+                        ""
+                      )
+                    )}
+                </div>
+              )
+            )}
+            <div className="screen-text">EKRAN</div>
+            <div className="zone-screen"></div>
           </div>
           <div className="zone-footer pt-3">
-            <div className="seats-color d-flex flex-wrap justify-content-center align-items-center gap-4">
+            <div className="seats-color col-12 d-flex flex-wrap justify-content-center align-items-center gap-4">
               <div>
                 <span className="empty-seat"></span>
                 <h6>Boş yerlər</h6>
@@ -370,7 +388,7 @@ function Session(props) {
                   selectedSession.hall.seats?.some(
                     (x) => x.seatTypeId === type.id
                   ) ? (
-                    <div>
+                    <div key={type.id}>
                       <span className={`seat${type.id}`}></span>
                       <h6>{type.name}</h6>
                     </div>
@@ -379,11 +397,17 @@ function Session(props) {
                   )
                 )}
             </div>
-            <div className="col-8"></div>
+            <div className="col-8">
+              <p className="total-title">Umumi mebleg</p>
+              <p className="total-price">{}</p>
+            </div>
             <div className="col-4"></div>
           </div>
           <div
-            onClick={() => zone.current.classList.remove("active-zone")}
+            onClick={() => {
+              zone.current.classList.remove("active-zone");
+              zone.current.classList.add("deactive-zone");
+            }}
             className="zone-close"
           >
             <span>X</span>

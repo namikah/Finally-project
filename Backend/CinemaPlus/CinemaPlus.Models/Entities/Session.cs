@@ -17,6 +17,8 @@ namespace CinemaPlus.Models.Entities
 
         public TimeSpan End { get; set; }
 
+        public ICollection<SessionFormats> SessionFormats { get; set; }
+
         public int MovieId { get; set; }
 
         public Movie Movie { get; set; }

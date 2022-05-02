@@ -46,7 +46,10 @@ function Movie({ movieCount, selectedSessions, selectedLanguage }) {
           {loading ? (
             <div className="loading text-center">Filmlər yüklənir. . .</div>
           ) : movies?.length === 0 ? (
-            <div className="loading text-center">Film yoxdur</div>
+            <div className="loading text-center">
+              Seçiminizə uyğun film tapılmadı. Zəhmət olmasa, birazdan yenidən
+              cəhd edin,
+            </div>
           ) : (
             movies?.map((movie) => (
               <div

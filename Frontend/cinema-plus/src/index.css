@@ -90,10 +90,10 @@ code {
   #session .row-format {
     display: block !important;
   }
-  #session thead{
+  #session thead {
     display: none;
   }
-  #session tbody tr{
+  #session tbody tr {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -101,17 +101,24 @@ code {
     padding: 0;
     margin: 0;
   }
-  #session tbody tr td{
-  border: 0;
+  #session tbody tr td {
+    border: 0;
   }
-  #session tbody .row-buy{
+  #session tbody .row-buy {
     border-bottom: 1px solid #dcdcdc;
   }
-  #session .header-filter .filter-date .date-today, #session .header-filter .filter-date .date-tomorrow {
+  #session .header-filter .filter-date .date-today,
+  #session .header-filter .filter-date .date-tomorrow {
     display: none !important;
   }
-  #session .header-filter .filter-date .date-custom{
+  #session .header-filter .filter-date .date-custom {
     border-radius: 50px !important;
     width: 250px !important;
+  }
+  .zone .select-zone {
+    width: 100% !important;
+  }
+  .zone .select-zone .zone-footer .zone-screen .screen-text {
+    font-size: 14px !important;
   }
 }

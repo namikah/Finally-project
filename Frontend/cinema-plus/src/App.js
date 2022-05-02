@@ -14,6 +14,7 @@ import NewsDetail from "./pages/newsDetail/NewsDetail";
 import AllNews from "./pages/news/AllNews";
 import MovieDetail from "./pages/movieDetail/MovieDetail";
 import { LoadingProvider } from "./context/loading";
+import Tariffs from "./pages/tariffs/Tariffs";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path={"/cinebonus"} exact component={CineBonus} />
               <Route path={"/newsdetail"} exact component={NewsDetail} />
               <Route path={"/allnews"} exact component={AllNews} />
+              <Route path={"/tariffs"} exact component={Tariffs} />
               <Redirect to={"/error"} />
             </Switch>
             <Footer />

@@ -21,7 +21,7 @@ namespace CinemaPlus.Repository.Repository
 
         public async Task<IList<T>> GetAllAsync()
         {
-            return await DbContext.Set<T>().ToListAsync();
+            return await DbContext.Set<T>().AsNoTracking().ToListAsync();
         }
 
         public IQueryable<T> GetAllRelations()

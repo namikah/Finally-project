@@ -1,0 +1,17 @@
+#tariff{
+    .container{
+        .row{
+            background-color: #334e9e;
+            padding-bottom: 50px;
+            > div{
+                h2{
+                    color: white;
+                }
+                table{
+                    color: white;
+                    border: 1px solid white;
+                }
+            }
+        }
+    }
+}
