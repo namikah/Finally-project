@@ -10,10 +10,11 @@ import { Table } from "reactstrap";
 import "./session.scss";
 import dateFormat from "dateformat";
 import { useLoadingContext } from "../../context/loading";
-import { range } from "range";
 import { seatTypeService } from "../../API/services/seatTypeService";
 import { cinemaService } from "../../API/services/cinemaService";
 import { sessionService } from "../../API/services/sessionService";
+import Seat from "../seat/Seat";
+import { useContsantContext } from "../../context/constant";
 
 function Session(props) {
   let date = new Date();
@@ -24,6 +25,8 @@ function Session(props) {
   let tomorrow4 = dateFormat(date.setDate(date.getDate() + 1), "dd.mm.yyyy");
 
   const [{ loading }] = useLoadingContext();
+  const [{ totalPay, setTotalPay }] = useContsantContext(0);
+  const [{ tickets, setTickets }] = useContsantContext([]);
   const [sessionData, setSessionData] = useState([]);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
@@ -34,8 +37,6 @@ function Session(props) {
   const [cinemaData, setCinemaData] = useState();
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCinemaId, setSelectedCinemaId] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [maxSelectedSeats, setMaxSelectedSeats] = useState(0);
   const zone = useRef();
 
   const getCinemas = useCallback(() => {
@@ -115,6 +116,7 @@ function Session(props) {
       setOptionThree(false);
     }
   });
+
   return (
     <section id="session">
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
@@ -319,57 +321,12 @@ function Session(props) {
             </div>
           </div>
           <div className="zone-body d-flex flex-column justify-content-center align-items-center gap-1 pt-3">
-            {range(1, selectedSession && selectedSession.hall.rowCount + 1).map(
-              (i) => (
-                <div
-                  key={i}
-                  className="d-flex justify-content-center align-items-center gap-2"
-                >
-                  {selectedSession &&
-                    selectedSession.hall.seats?.map((seat) =>
-                      seat.row === i ? (
-                        <Link
-                          to={"#"}
-                          key={seat.id}
-                          style={
-                            seat.seatTypeId === 1
-                              ? {
-                                  backgroundColor: "white",
-                                  color: "rgb(0 0 0 / 60%)",
-                                }
-                              : seat.seatTypeId === 2
-                              ? {
-                                  backgroundColor: "pink",
-                                  color: "rgb(0 0 0 / 60%)",
-                                }
-                              : seat.seatTypeId === 3
-                              ? {
-                                  backgroundColor: "#49e1ea",
-                                  color: "rgb(0 0 0 / 60%)",
-                                }
-                              : {}
-                          }
-                          className={seat.seatTypeId === 4 ? "another" : ""}
-                        >
-                          <span
-                            datatype={seat.seatType.name}
-                            onClick={(e) => {}}
-                          >
-                            {seat.column}
-                          </span>
-                        </Link>
-                      ) : (
-                        ""
-                      )
-                    )}
-                </div>
-              )
-            )}
+            <Seat selectedSession={selectedSession} />
             <div className="screen-text">EKRAN</div>
             <div className="zone-screen"></div>
           </div>
-          <div className="zone-footer pt-3">
-            <div className="seats-color col-12 d-flex flex-wrap justify-content-center align-items-center gap-4">
+          <div className="zone-footer row pt-3">
+            <div className="seats-color col-12 d-flex flex-wrap justify-content-center align-items-center pb-4 gap-4">
               <div>
                 <span className="empty-seat"></span>
                 <h6>Boş yerlər</h6>
@@ -397,11 +354,13 @@ function Session(props) {
                   )
                 )}
             </div>
-            <div className="col-8">
-              <p className="total-title">Umumi mebleg</p>
-              <p className="total-price">{}</p>
+            <div className="total-amount col-md-7 d-flex flex-column justify-content-center align-items-end">
+              <p className="total-title">Umumi mebleg:</p>
+              <p className="total-price">{totalPay} AZN</p>
             </div>
-            <div className="col-4"></div>
+            <div className="payment-button col-md-5 d-flex flex-column justify-content-center align-items-end">
+              <Link to={"#"}>Təsdiqləmək</Link>
+            </div>
           </div>
           <div
             onClick={() => {

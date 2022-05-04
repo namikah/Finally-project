@@ -26,5 +26,7 @@ namespace CinemaPlus.Models.Entities
         public int HallId { get; set; }
 
         public Hall Hall { get; set; }
+
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

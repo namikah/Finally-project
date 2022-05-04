@@ -121,4 +121,10 @@ code {
   .zone .select-zone .zone-footer .zone-screen .screen-text {
     font-size: 14px !important;
   }
+  .zone .select-zone .zone-footer .total-amount{
+    align-items: center !important;
+  }
+  .zone .select-zone .zone-footer .payment-button{
+    align-items: center !important;
+  }
 }

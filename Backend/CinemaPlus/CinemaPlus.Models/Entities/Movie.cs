@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Models.Entities
 {
-    public class Movie : TimeStampableObject, IEntity
+    public class Movie : IEntity
     {
         public int Id { get; set; }
 

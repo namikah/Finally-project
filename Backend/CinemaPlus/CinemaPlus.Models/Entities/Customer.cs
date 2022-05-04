@@ -16,5 +16,7 @@ namespace CinemaPlus.Models.Entities
         public string Surname { get; set; }
 
         public string Gender { get; set; }
+
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

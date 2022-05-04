@@ -19,8 +19,6 @@ namespace CinemaPlus.Services.Services
 
         public async Task<List<Movie>> GetAllMoviesAsync()
         {
-            var totalMoviesCount = (await GetAllAsync()).Count;
-
             return await GetAllRelations()
                .AsNoTracking()
                .Include(x => x.Detail)
@@ -30,7 +28,6 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Director)
                .Include(x => x.MovieFormats)
                .ThenInclude(x => x.Format)
-               //.ThenInclude(x=>x.Tariffs)
                .Include(x => x.MovieGenres)
                .ThenInclude(x => x.Genre)
                .OrderByDescending(x => x.Id)
@@ -50,7 +47,6 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Director)
                .Include(x => x.MovieFormats)
                .ThenInclude(x => x.Format)
-               //.ThenInclude(x=>x.Tariffs)
                .Include(x => x.MovieGenres)
                .ThenInclude(x => x.Genre)
                  .FirstOrDefaultAsync(x => x.Id == (int)id);

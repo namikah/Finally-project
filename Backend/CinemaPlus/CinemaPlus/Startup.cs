@@ -54,6 +54,7 @@ namespace CinemaPlus
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<ISeatTypeService, SeatTypeService>();
             services.AddScoped<ITariffService, TariffService>();
+            services.AddScoped<ITicketService, TicketService>();
 
             services.AddScoped(typeof(IUserService), typeof(UserService));
 
