@@ -35,13 +35,20 @@ using CinemaPlus.Models.Entities;
 #nullable disable
 #nullable restore
 #line 4 "C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\Views\_ViewImports.cshtml"
+using CinemaPlus.AdminPanel.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\Views\_ViewImports.cshtml"
 using System.Globalization;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff70", @"/Views/Movie/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cb8e2165a30e35b8ecf4a0b765c33506d257c365", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b2799cb604341674b684080db859df7a1d9ff24d", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Movie_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
@@ -92,7 +99,7 @@ using System.Globalization;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<div class=\"content content-wrapper\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"text-right pt-3 pb-3\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff707810", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff708037", async() => {
                 WriteLiteral("<i class=\"ti-upload btn-icon-prepend\"></i>Create");
             }
             );
@@ -219,7 +226,7 @@ WriteAttributeValue("", 1704, item.Image, 1704, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("+</td>\r\n                                <td class=\"text-right\">\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff7014350", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff7014577", async() => {
                 WriteLiteral("\r\n                                        Detail\r\n                                        <i class=\"fas fa-pencil-alt\"></i>\r\n                                    ");
             }
             );
@@ -251,7 +258,7 @@ WriteAttributeValue("", 1704, item.Image, 1704, 11, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff7016860", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff7017087", async() => {
                 WriteLiteral("\r\n                                        Update\r\n                                        <i class=\"fas fa-pencil-alt\"></i>\r\n                                    ");
             }
             );
@@ -283,7 +290,7 @@ WriteAttributeValue("", 1704, item.Image, 1704, 11, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff7019367", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff7019594", async() => {
                 WriteLiteral("\r\n                                        Delete\r\n                                        <i class=\"fas fa-trash\"></i>\r\n                                    ");
             }
             );
@@ -326,7 +333,7 @@ WriteAttributeValue("", 1704, item.Image, 1704, 11, false);
             WriteLiteral("                    </tbody>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n");
             DefineSection("Scripts", async() => {
                 WriteLiteral("\r\n");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff7022495", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "3bb8b39f84b2ebe4e9eb3d4426beaca55c2aff7022722", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();

@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    UserViewModel userVM = Model;
+}
+
+<div class="content content-wrapper">
+    <div class="container-fluid">
+         <div class="text-right pt-3 pb-3">
+                <a asp-controller="User" asp-action="AddUser" class="btn btn-danger btn-icon-text"><i class="ti-upload btn-icon-prepend"></i>Add User</a>
+            </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Users</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Fullname</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>IsActive</th>
+                            <th class="operation-row"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in userVM.Users)
+                        {
+                            var roleName = userVM.Roles.Where(x => x.Id == userVM.UserRoles.Find(x => x.UserId == item.Id)?.RoleId).FirstOrDefault()?.Name;
+
+                            <tr class="table-info">
+                                <td><a style="text-decoration:none" asp-controller="UserManager" asp-action="Detail" asp-route-id="@item.Id">@item.UserName</a></td>
+                                <td>@item.FullName</td>
+                                <td>@item.Email</td>
+                                <td>@roleName</td>
+                                <td>@((item.IsActive) ? "Active" : "Deactive")</td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" asp-action="ChangeIsActive" asp-route-id="@item.Id" asp-route-isActive="@item.IsActive">
+                                        @((item.IsActive) ? "Deactive" : "Active")
+                                        @*<i class="fas fa-folder"></i>*@
+                                    </a>
+                                    <a class="btn btn-info btn-sm" asp-action="ChangePassword" asp-route-id="@item.Id">
+                                        Password
+                                        @*<i class="fas fa-pencil-alt"></i>*@
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" asp-action="ChangeRole" asp-route-id="@item.Id">
+                                        Role
+                                        @*<i class="fas fa-trash"></i>*@
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

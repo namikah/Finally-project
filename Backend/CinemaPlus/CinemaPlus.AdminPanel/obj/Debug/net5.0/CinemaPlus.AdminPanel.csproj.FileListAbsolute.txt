@@ -88,3 +88,5 @@ C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Movie\Detail.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Movie\Create.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Shared\_CKEditorPartial.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\User\Index.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\User\Login.cshtml.g.cs

@@ -122,7 +122,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             }
 
             var fileName = await movie.Photo.GenerateFile(Path.Combine(Constants.SeedDataPath, "movies"));
-            movie.Image = fileName;
+            movie.Image = Path.Combine(Constants.SeedDataPath, "movies", fileName);
 
             var movieActors = new List<MovieActors>();
             if (movie.ActorsId != null)

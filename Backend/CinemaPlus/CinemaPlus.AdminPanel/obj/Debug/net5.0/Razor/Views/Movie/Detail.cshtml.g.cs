@@ -34,6 +34,13 @@ using CinemaPlus.Models.Entities;
 #line hidden
 #nullable disable
 #nullable restore
+#line 4 "C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\Views\_ViewImports.cshtml"
+using CinemaPlus.AdminPanel.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\Views\Movie\Detail.cshtml"
 using System.Globalization;
 
@@ -41,7 +48,7 @@ using System.Globalization;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bb4fee1dc858e7f1602133db1f8a9de367ff1e1c", @"/Views/Movie/Detail.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cb8e2165a30e35b8ecf4a0b765c33506d257c365", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b2799cb604341674b684080db859df7a1d9ff24d", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Movie_Detail : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Movie>
     #nullable disable
