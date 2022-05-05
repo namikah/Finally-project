@@ -10,4 +10,7 @@ export class HttpClient {
   async get(endpoint) {
     return await axios.request(`${this.dataUrl}/${endpoint}`);
   }
+  async post(endpoint, tickets) {
+    return await axios.post(`${this.dataUrl}/${endpoint}`, tickets);
+  }
 }

@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using CinemaPlus.Models.DTOs;
 using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.Repository.Contracts;
 using CinemaPlus.Services.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CinemaPlus.Controllers
@@ -42,9 +44,28 @@ namespace CinemaPlus.Controllers
             return Ok(ticket);
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody] IEnumerable<TicketDto> ticketDtos)
+        //{
+        //    var tickets = new List<Ticket>();
+
+        //    foreach (var item in ticketDtos)
+        //    {
+        //        var ticket = _mapper.Map<Ticket>(item);
+        //        tickets.Add(ticket);
+        //    }
+
+        //    await _ticketService.AddAsync(tickets);
+
+        //    return Ok(tickets);
+        //}
+
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] Ticket ticket)
+        public async Task<IActionResult> Post([FromForm] TicketDto ticketDto)
         {
+
+            var ticket = _mapper.Map<Ticket>(ticketDto);
+
             await _ticketService.AddAsync(ticket);
 
             return Ok(ticket);

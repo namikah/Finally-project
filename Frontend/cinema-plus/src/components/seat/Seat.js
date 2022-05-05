@@ -40,21 +40,8 @@ function Seat({ selectedSession }) {
       }
       console.log(maxSeatSelected);
     },
-    [maxSeatSelected, setTotalPay, totalPay]
+    [maxSeatSelected, setTotalPay, totalPay,selectedSession,setTickets,tickets]
   );
-
-  //   const setTicket = (seat, inc, dec) => {
-  // const { name, value } = e.target;
-  // setProducts({ ...products, [name]: value });
-
-  //     const ticket = {
-  //       Price: 5,
-  //       Seat: seat,
-  //       Session: selectedSession,
-  //       Customer: { name: "Namik", surname: "Heydarov", Gender: "Male" },
-  //     };
-  //     setTickets([...tickets, ticket]);
-  //   };
 
   console.log(tickets);
 

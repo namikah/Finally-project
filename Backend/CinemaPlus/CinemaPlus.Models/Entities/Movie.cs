@@ -29,11 +29,25 @@ namespace CinemaPlus.Models.Entities
 
         public ICollection<MovieActors> MovieActors { get; set; }
 
+
         public ICollection<MovieDirectors> MovieDirectors { get; set; }
+
 
         public ICollection<MovieFormats> MovieFormats { get; set; }
 
         public ICollection<MovieGenres> MovieGenres { get; set; }
+
+        [NotMapped]
+        public List<int> ActorsId { get; set; }
+
+        [NotMapped]
+        public List<int> DirectorsId { get; set; }
+
+        [NotMapped]
+        public List<int> FormatsId { get; set; }
+
+        [NotMapped]
+        public List<int> GenresId { get; set; }
 
         public bool IsDeleted { get; set; }
     }

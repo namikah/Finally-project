@@ -15,6 +15,7 @@ import { cinemaService } from "../../API/services/cinemaService";
 import { sessionService } from "../../API/services/sessionService";
 import Seat from "../seat/Seat";
 import { useContsantContext } from "../../context/constant";
+import { ticketService } from "../../API/services/ticketService";
 
 function Session(props) {
   let date = new Date();
@@ -116,6 +117,29 @@ function Session(props) {
       setOptionThree(false);
     }
   });
+
+  const getTicket = useCallback(
+    () => {
+      ticketService.getTicket().then((res) => {
+        console.log("get tickets");
+        console.log(res.data);
+      });
+    },
+    []
+  );
+
+  const addTicket = useCallback(
+    (tickets) => {
+      ticketService.postTickets(tickets).then((res) => {
+        console.log("tickets");
+        console.log(tickets);
+        getTicket();
+      });
+    },
+    [getTicket]
+  );
+
+ 
 
   return (
     <section id="session">
@@ -359,7 +383,9 @@ function Session(props) {
               <p className="total-price">{totalPay} AZN</p>
             </div>
             <div className="payment-button col-md-5 d-flex flex-column justify-content-center align-items-end">
-              <Link to={"#"}>Təsdiqləmək</Link>
+              <Link to={"#"} onClick={() => addTicket(tickets)}>
+                Təsdiqləmək
+              </Link>
             </div>
           </div>
           <div

@@ -22,9 +22,9 @@ namespace CinemaPlus.Services.Services
             return await GetAllRelations()
                .AsNoTracking()
                .Include(x => x.Session)
-               .ThenInclude(x=>x.Movie)
+               .ThenInclude(x => x.Movie)
                .Include(x => x.Seat)
-               .ThenInclude(x=>x.Hall)
+               .ThenInclude(x => x.Hall)
                .Include(x => x.Customer)
                .ToListAsync();
         }
@@ -41,6 +41,18 @@ namespace CinemaPlus.Services.Services
                  .FirstOrDefaultAsync(x => x.Id == (int)id);
 
             return movie;
+        }
+
+        public async Task<List<Ticket>> AddTicketsAsync(List<Ticket> tickets)
+        {
+            if (tickets == null)
+            {
+                throw new Exception("Not found");
+            }
+
+            await AddAsync(tickets);
+
+            return tickets;
         }
     }
 }

@@ -14,5 +14,7 @@ namespace CinemaPlus.Services.Services.Contracts
         Task<List<Ticket>> GetAllTicketAsync();
 
         Task<Ticket> GetTicketByIdAsync(int? id);
+
+        Task<List<Ticket>> AddTicketsAsync(List<Ticket> tickets);
     }
 }

@@ -57,6 +57,7 @@ namespace CinemaPlus
             services.AddScoped<ITicketService, TicketService>();
 
             services.AddScoped(typeof(IUserService), typeof(UserService));
+            services.AddScoped(typeof(ITicketService), typeof(TicketService));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

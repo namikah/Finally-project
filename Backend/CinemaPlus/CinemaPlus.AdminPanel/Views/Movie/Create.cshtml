@@ -1,0 +1,116 @@
+﻿@model Movie
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+                            <div class="form-group" id="photoDiv">
+                                <label asp-for="Photo">Photo</label>
+                                <input class="form-control" placeholder="Photo" asp-for="Photo" accept="image/*">
+                                <span asp-validation-for="Photo" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Name">Name</label>
+                                <input class="form-control" placeholder="Name" asp-for="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="AgeLimit">Age</label>
+                                <input class="form-control" placeholder="age" asp-for="AgeLimit">
+                                <span asp-validation-for="AgeLimit" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Detail.Country">Country</label>
+                                <input class="form-control" placeholder="Country" asp-for="Detail.Country">
+                                <span asp-validation-for="Detail.Country" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Detail.Duration">Duration</label>
+                                <input class="form-control" placeholder="Duration" asp-for="Detail.Duration">
+                                <span asp-validation-for="Detail.Duration" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Detail.Trailer">Trailer</label>
+                                <input class="form-control" placeholder="url" asp-for="Detail.Trailer">
+                                <span asp-validation-for="Detail.Trailer" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Detail.StartInCinema">Start In Cinema</label>
+                                <input class="form-control" placeholder="start in cinema" asp-for="Detail.StartInCinema">
+                                <span asp-validation-for="Detail.StartInCinema" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Detail.EndInCinema">End In Cinema</label>
+                                <input class="form-control" placeholder="end in cinema" asp-for="Detail.EndInCinema">
+                                <span asp-validation-for="Detail.EndInCinema" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Detail.Description">Description</label>
+                                <textarea class="form-control" placeholder="description" asp-for="Detail.Description" id="create-context-ck-editor"></textarea>
+                                <span asp-validation-for="Detail.Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Actors</label>
+                                <select asp-for="@Model.ActorsId" asp-items="@(new SelectList( ViewBag.Actors,"Id","Name"))" class="form-control">
+                                    <option disabled>--Please Select--</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Actors</label>
+                                <select asp-for="@Model.DirectorsId" asp-items="@(new SelectList( ViewBag.Directors,"Id","Name"))" class="form-control">
+                                    <option disabled>--Please Select--</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Actors</label>
+                                <select asp-for="@Model.GenresId" asp-items="@(new SelectList( ViewBag.Genres,"Id","Name"))" class="form-control">
+                                    <option disabled>--Please Select--</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Actors</label>
+                                <select asp-for="@Model.FormatsId" asp-items="@(new SelectList( ViewBag.Formats,"Id","Name"))" class="form-control">
+                                    <option disabled>--Please Select--</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+<partial name="_CKEditorPartial" />
+
+<script>
+    $(document).on("change", "#parentPosition", function(){
+        var parentPositionId = $(this).val();
+        $.ajax({
+            type: "GET",
+            url: "/AdminPanel/Teacher/LoadChildrens?parentPositionId=" + parentPositionId,
+            success: function(res) {
+                $("#childPosition").empty();
+                $("#childPosition").append(res);
+            }
+        });
+    });
+         ClassicEditor
+        .create( document.querySelector( '#create-context-ck-editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+}

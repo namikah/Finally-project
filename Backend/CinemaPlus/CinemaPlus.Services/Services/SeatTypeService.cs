@@ -38,5 +38,13 @@ namespace CinemaPlus.Services.Services
 
             return seatType;
         }
+
+        public async Task<SeatType> AddSeatType(SeatType seatType)
+        {
+            await DbContext.AddAsync(seatType);
+            await DbContext.SaveChangesAsync();
+
+            return seatType;
+        }
     }
 }

@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaPlus.Data", "Data\Cin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaPlus.Services", "CinemaPlus.Services\CinemaPlus.Services.csproj", "{B8EF41CC-2B6F-4EB5-A634-05FFBFC708D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaPlus.infrastructure", "CinemaPlus.infrastructure\CinemaPlus.infrastructure.csproj", "{2638CE5C-A8BC-431D-AF1B-F834C3313D68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaPlus.infrastructure", "CinemaPlus.infrastructure\CinemaPlus.infrastructure.csproj", "{2638CE5C-A8BC-431D-AF1B-F834C3313D68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaPlus.AdminPanel", "CinemaPlus.AdminPanel\CinemaPlus.AdminPanel.csproj", "{E0688859-2315-490D-B875-C6E178A16E15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2638CE5C-A8BC-431D-AF1B-F834C3313D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2638CE5C-A8BC-431D-AF1B-F834C3313D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2638CE5C-A8BC-431D-AF1B-F834C3313D68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0688859-2315-490D-B875-C6E178A16E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0688859-2315-490D-B875-C6E178A16E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0688859-2315-490D-B875-C6E178A16E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0688859-2315-490D-B875-C6E178A16E15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

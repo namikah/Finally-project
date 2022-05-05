@@ -41,9 +41,13 @@ namespace CinemaPlus.Repository.Repository
             await DbContext.SaveChangesAsync();
         }
 
-        public Task AddAsync(IEnumerable<T> entity)
+        public async Task AddAsync(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            foreach (var item in entities)
+            {
+                await DbContext.Set<T>().AddAsync(item);
+            }
+                await DbContext.SaveChangesAsync();
         }
 
         public Task AddAsync(params T[] entity)
