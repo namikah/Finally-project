@@ -24,6 +24,9 @@ namespace CinemaPlus.AdminPanel.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
             var movies = await _dbContext.Movies
                 .Where(x => x.IsDeleted == false)
                 .Include(x => x.Detail)
@@ -37,6 +40,9 @@ namespace CinemaPlus.AdminPanel.Controllers
 
         public async Task<ActionResult> Detail(int? id)
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
             if (id == null)
                 return NotFound();
 
@@ -60,6 +66,9 @@ namespace CinemaPlus.AdminPanel.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
             if (id == null)
                 return NotFound();
 
@@ -81,6 +90,9 @@ namespace CinemaPlus.AdminPanel.Controllers
 
         public async Task<IActionResult> Create()
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
             ViewBag.Actors = await _dbContext.Actors.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Directors = await _dbContext.Directors.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Genres = await _dbContext.Genres.Where(x => x.IsDeleted == false).ToListAsync();
@@ -92,6 +104,9 @@ namespace CinemaPlus.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Movie movie)
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
             ViewBag.Actors = await _dbContext.Actors.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Directors = await _dbContext.Directors.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Genres = await _dbContext.Genres.Where(x => x.IsDeleted == false).ToListAsync();
@@ -190,147 +205,5 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             return RedirectToAction("Index");
         }
-
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //        return NotFound();
-
-        //    var existEvent = await _dbContext.Events
-        //        .FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
-        //    if (existEvent == null)
-        //        return NotFound();
-
-        //    existEvent.IsDeleted = true;
-
-        //    var path = Path.Combine(Constants.ImageFolderPath, "event", existEvent.Image);
-        //    if (System.IO.File.Exists(path))
-        //        System.IO.File.Delete(path);
-
-        //    await _dbContext.SaveChangesAsync();
-
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //public async Task<IActionResult> Update(int? id)
-        //{
-        //    var events = await _dbContext.Events
-        //      .Include(x => x.EventSpeakers)
-        //      .ThenInclude(x => x.Speaker)
-        //      .Include(x => x.Category)
-        //      .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
-
-        //    var speakers = await _dbContext.Speakers.Where(x => x.IsDeleted == false).ToListAsync();
-        //    var categories = await _dbContext.Categories.ToListAsync();
-        //    var tags = await _dbContext.Tags.ToListAsync();
-
-        //    ViewBag.Tags = tags;
-        //    ViewBag.SelectedTags = await _dbContext.EventTags.Where(x => x.EventId == id).ToListAsync();
-        //    ViewBag.SelectedSpeakers = await _dbContext.EventSpeakers.Where(x => x.EventId == id).ToListAsync();
-        //    ViewBag.Speakers = speakers;
-        //    ViewBag.Categories = categories;
-
-        //    return View(events);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Update(int? id, Event eventM, int selectedCategoryId)
-        //{
-        //    if (id == null)
-        //        return NotFound();
-
-        //    if (id != eventM.Id)
-        //        return BadRequest();
-
-        //    var existEvent = await _dbContext.Events
-        //      .Include(x => x.EventSpeakers)
-        //      .ThenInclude(x => x.Speaker)
-        //      .Include(x => x.Category)
-        //      .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
-
-        //    var speakers = await _dbContext.Speakers.Where(x => x.IsDeleted == false).ToListAsync();
-        //    var categories = await _dbContext.Categories.ToListAsync();
-        //    var tags = await _dbContext.Tags.ToListAsync();
-
-        //    ViewBag.Tags = tags;
-        //    ViewBag.SelectedTags = await _dbContext.EventTags.Where(x => x.TagId == id).ToListAsync();
-        //    ViewBag.SelectedSpeakers = await _dbContext.EventSpeakers.Where(x => x.EventId == id).ToListAsync();
-        //    ViewBag.Speakers = speakers;
-        //    ViewBag.Categories = categories;
-
-        //    if (!ModelState.IsValid)
-        //        return View(existEvent);
-
-        //    var isExistEvent = await _dbContext.Events
-        //         .AnyAsync(x => x.Name.ToLower() == eventM.Name.ToLower() && x.IsDeleted == false && x.Id != id);
-
-        //    if (eventM.Photo != null)
-        //    {
-        //        if (!eventM.Photo.IsImage())
-        //        {
-        //            ModelState.AddModelError("Photo", $"{eventM.Photo.Name} select image type.");
-        //            return View(existEvent);
-        //        }
-
-        //        if (!eventM.Photo.IsAllowedSize(2))
-        //        {
-        //            ModelState.AddModelError("Photo", $"{eventM.Photo.Name} 2Mb-max size of file.");
-        //            return View(existEvent);
-        //        }
-
-        //        var path = Path.Combine(Constants.ImageFolderPath, "event", existEvent.Image);
-        //        if (System.IO.File.Exists(path))
-        //            System.IO.File.Delete(path);
-
-        //        var fileName = await eventM.Photo.GenerateFile(Path.Combine(Constants.ImageFolderPath, "event"));
-        //        eventM.Image = fileName;
-        //        existEvent.Image = eventM.Image;
-        //    }
-
-        //    var eventSpeakers = new List<EventSpeakers>();
-        //    if (eventM.SpeakersId != null)
-        //    {
-        //        foreach (var item in eventM.SpeakersId)
-        //        {
-        //            EventSpeakers eventSpeaker = new EventSpeakers()
-        //            {
-        //                EventId = eventM.Id,
-        //                SpeakerId = item,
-        //            };
-        //            eventSpeakers.Add(eventSpeaker);
-        //        }
-        //    }
-
-        //    var eventTags = new List<EventTags>();
-        //    if (eventM.TagsId != null)
-        //    {
-        //        foreach (var item in eventM.TagsId)
-        //        {
-        //            EventTags eventTag = new EventTags()
-        //            {
-        //                EventId = eventM.Id,
-        //                TagId = item
-        //            };
-        //            eventTags.Add(eventTag);
-        //        }
-        //    }
-
-        //    existEvent.EventTags = eventTags;
-        //    existEvent.EventSpeakers = eventSpeakers;
-        //    existEvent.Name = eventM.Name;
-        //    existEvent.Date = eventM.Date;
-        //    existEvent.Duration = eventM.Duration;
-        //    existEvent.Venue = eventM.Venue;
-        //    existEvent.Context = eventM.Context;
-        //    existEvent.IsDeleted = false;
-        //    existEvent.CategoryId = selectedCategoryId;
-
-        //    await _dbContext.SaveChangesAsync();
-
-        //    return RedirectToAction("Index");
-        //}
-
-
     }
 }

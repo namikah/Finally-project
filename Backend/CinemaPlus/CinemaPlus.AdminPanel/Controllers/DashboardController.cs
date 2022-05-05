@@ -8,6 +8,9 @@ namespace CinemaPlus.AdminPanel.Controllers
     {
         public IActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login","User");
+
             return View();
         }
     }

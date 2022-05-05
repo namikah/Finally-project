@@ -1,0 +1,38 @@
+﻿@model RoleManagerViewModel
+@{
+    ViewData["Title"] = "ChangeRole";
+}
+
+<div class="container" style="height:100vh;">
+    <div class="row mb-5 mt-5 justify-content-center">
+        <form class="pt-3 col-4 pb-5" method="post" style="background-color:white;">
+            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+            <div class="form-group" id="parentCategoryDiv">
+                <label asp-for="RoleId">Roles</label>
+                <select class="form-control" name="RoleId" id="all-roles">
+                    @foreach (var item in ViewBag.AllRoles)
+                    {
+                        @if (item.Name == ViewBag.CurrentRoleName)
+                        {
+                            <option selected value="@item.Id">@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <a class="btn btn-light" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+}
+
