@@ -366,6 +366,9 @@ namespace CinemaPlus.Repository.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Snippet")
                         .HasColumnType("nvarchar(max)");
 
@@ -439,6 +442,9 @@ namespace CinemaPlus.Repository.Migrations
                     b.Property<int>("HallId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
@@ -498,6 +504,9 @@ namespace CinemaPlus.Repository.Migrations
                     b.Property<int>("FormatId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -528,6 +537,9 @@ namespace CinemaPlus.Repository.Migrations
 
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

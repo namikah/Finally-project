@@ -32,5 +32,7 @@ namespace CinemaPlus.Models.Entities
         public int EndDayOfWeek { get; set; }
 
         public string AudioFormat { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

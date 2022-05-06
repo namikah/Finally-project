@@ -70,7 +70,6 @@ C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\CinemaPlus.AdminPanel.TagHelpers.output.cache
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\CinemaPlus.AdminPanel.RazorCoreGenerate.cache
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Dashboard\Index.cshtml.g.cs
-C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
@@ -93,3 +92,8 @@ C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\User\AddUser.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\User\ChangePassword.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\User\ChangeRole.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Session\Create.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Session\Detail.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Session\Index.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Session\Update.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Movie\Update.cshtml.g.cs

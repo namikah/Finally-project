@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CinemaPlus.Models.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CinemaPlus.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaPlus.Repository.DataContext
 {
@@ -35,6 +30,8 @@ namespace CinemaPlus.Repository.DataContext
 
         public DbSet<MovieGenres> MovieGenres { get; set; }
 
+        public DbSet<SessionFormats> SessionFormats { get; set; }
+
         public DbSet<Cinema> Cinemas { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
@@ -46,6 +43,7 @@ namespace CinemaPlus.Repository.DataContext
         public DbSet<News> News { get; set; }
 
         public DbSet<Tariff> Tariffs { get; set; }
+
         public DbSet<CinemaImage> CinemaImages { get; set; }
 
         public DbSet<Seat> Seats { get; set; }

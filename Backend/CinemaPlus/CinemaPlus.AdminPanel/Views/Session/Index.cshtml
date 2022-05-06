@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    List<Session> sessions = Model;
+}
+
+<div class="content content-wrapper">
+    <div class="container-fluid">
+        <div class="text-right pt-3 pb-3">
+            <a asp-controller="Session" asp-action="Create" class="btn btn-danger btn-icon-text"><i class="ti-upload btn-icon-prepend"></i>Create</a>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Events</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th>Movie</th>
+                            <th>Date</th>
+                            <th>Session</th>
+                            <th>Cinema</th>
+                            <th>Hall</th>
+                            <th>Formats</th>
+                            <th>Price</th>
+                            <th class="operation-row"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var session in sessions)
+                        {
+                            <tr class="table-info">
+                                <td>@session.Movie.Name</td>
+                                <td>@session.Date.ToString("dd MMM yyyy",CultureInfo.InvariantCulture)</td>
+                                <td>@session.Start.ToString().Substring(0,5) - @session.End.ToString().Substring(0,5)</td>
+                                <td>@session.Hall.Cinema.Name</td>
+                                <td>@session.Hall.Name</td>
+                                 <td>
+                                    @foreach (var format in session.SessionFormats?.ToList())
+                                    {
+                                       <span><img src="@format.Format.Icon" style="width:40px; height:40px;" /></span>
+                                    }
+                                </td>
+                                <td>@session.Hall.Cinema.Tariffs?.FirstOrDefault(x=>x.StartTime <= session.Start && x.EndTime >= session.End)?.Price AZN</td>
+                                <td class="text-right">
+                                    <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@session.Id">
+                                        Update
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a class="btn btn-danger btn-sm delete-slider" id="delete-slider" asp-action="Delete" asp-route-id="@session.Id">
+                                        Delete
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<partial name="_ValidationPartial" />
+}

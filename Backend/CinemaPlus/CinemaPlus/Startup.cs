@@ -83,7 +83,7 @@ namespace CinemaPlus
 
             services.AddControllersWithViews().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            Constants.SeedDataPath = Path.Combine(_environment.WebRootPath, "Data", "SeedData");
+            Constants.SeedDataPath = Path.Combine(_environment.ContentRootPath, "Data", "SeedData");
 
             services.AddCors(options =>
             {

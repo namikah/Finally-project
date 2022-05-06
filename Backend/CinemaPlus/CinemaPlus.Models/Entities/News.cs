@@ -27,5 +27,7 @@ namespace CinemaPlus.Models.Entities
         public string Description { get; set; }
 
         public string Trailer { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

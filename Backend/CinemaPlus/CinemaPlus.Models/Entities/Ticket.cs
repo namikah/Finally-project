@@ -22,5 +22,7 @@ namespace CinemaPlus.Models.Entities
         public Seat Seat { get; set; }
 
         public Customer Customer { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

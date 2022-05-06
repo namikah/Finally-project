@@ -1,6 +1,7 @@
 ﻿using CinemaPlus.Models.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,5 +29,10 @@ namespace CinemaPlus.Models.Entities
         public Hall Hall { get; set; }
 
         public ICollection<Ticket> Tickets { get; set; }
+        
+        [NotMapped]
+        public ICollection<int> FormatsId { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

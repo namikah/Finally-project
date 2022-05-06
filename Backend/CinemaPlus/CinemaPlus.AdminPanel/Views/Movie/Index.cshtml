@@ -40,7 +40,7 @@
                                     <img src="@item.Image" class="img-fluid" style="width:100px;"><img>
                                 </td>
                                 <td>@item.Name</td>
-                                <td>@item.Detail.StartInCinema.ToString("dd MMM yyyy",CultureInfo.InvariantCulture) - @item.Detail.EndInCinema.ToString("dd MMM yyyy",CultureInfo.InvariantCulture)</td>
+                                <td>@item.Detail.StartInCinema.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture) - @item.Detail.EndInCinema.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture)</td>
                                 <td>
                                     @foreach (var movieActor in item.MovieActors.ToList())
                                     {

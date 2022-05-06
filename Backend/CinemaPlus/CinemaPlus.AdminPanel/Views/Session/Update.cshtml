@@ -1,0 +1,82 @@
+﻿@model Session
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-6 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
+                        <form class="forms-sample" method="post">
+                            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+                            <div class="form-group" id="photoDiv">
+                                <label asp-for="Date">Date</label>
+                                <input class="form-control" placeholder="date" asp-for="Date">
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Start">Start</label>
+                                <input class="form-control" placeholder="session start" asp-for="Start">
+                                <span asp-validation-for="Start" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="End">End</label>
+                                <input class="form-control" placeholder="session end" asp-for="End">
+                                <span asp-validation-for="End" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Movies</label>
+                                <select class="form-control" name="selectedMovieId" id="selectedMovieId">
+                                    @foreach (var item in ViewBag.Movies)
+                                    {
+                                        <option selected="@(item.Id == Model.MovieId)" value="@item.Id">@item.Name (@item.AgeLimit+)</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Halls</label>
+                                <select class="form-control" name="selectedHallId" id="selectedHallId">
+                                    @foreach (var item in ViewBag.Halls)
+                                    {
+                                        <option selected="@(item.Id == Model.HallId)" value="@item.Id">@item.Name (@item.Cinema.Name)</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Formats</label>
+                                <select asp-for="FormatsId" class="form-control" name="FormatsId" id="formatsId">
+                                    @foreach (var item in ViewBag.Formats)
+                                    {
+                                        int count = 0;
+                                        foreach (var sessionFromat in ViewBag.SelectedFormats)
+                                        {
+                                            if (item.Id == sessionFromat.FormatId)
+                                                count++;
+                                        }
+                                        if (count > 0)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+}
