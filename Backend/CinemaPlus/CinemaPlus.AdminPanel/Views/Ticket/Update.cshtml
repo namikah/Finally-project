@@ -1,4 +1,4 @@
-﻿@model Movie
+﻿@model Ticket
 @{
     ViewData["Title"] = "Update";
 }
@@ -10,140 +10,39 @@
                 <div class="col-lg-6 mx-auto">
                     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                         <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
-                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                      <form class="forms-sample" method="post">
                             <div class="text-danger" asp-validation-summary=ModelOnly></div>
-                            <div class="form-group" id="photoDiv">
-                                <label asp-for="Photo">Photo</label>
-                                <input class="form-control" placeholder="Photo" asp-for="Photo" accept="image/*">
-                                <span asp-validation-for="Photo" class="text-danger"></span>
-                            </div>
                             <div class="form-group">
-                                <label asp-for="Name">Name</label>
-                                <input class="form-control" placeholder="Name" asp-for="Name">
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="AgeLimit">Age</label>
-                                <input class="form-control" placeholder="age" asp-for="AgeLimit">
-                                <span asp-validation-for="AgeLimit" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Detail.Country">Country</label>
-                                <input class="form-control" placeholder="Country" asp-for="Detail.Country">
-                                <span asp-validation-for="Detail.Country" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Detail.Duration">Duration</label>
-                                <input class="form-control" placeholder="Duration" asp-for="Detail.Duration">
-                                <span asp-validation-for="Detail.Duration" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Detail.Trailer">Trailer</label>
-                                <input class="form-control" placeholder="url" asp-for="Detail.Trailer">
-                                <span asp-validation-for="Detail.Trailer" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Detail.StartInCinema">Start In Cinema</label>
-                                <input class="form-control" placeholder="start in cinema" asp-for="Detail.StartInCinema">
-                                <span asp-validation-for="Detail.StartInCinema" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Detail.EndInCinema">End In Cinema</label>
-                                <input class="form-control" placeholder="end in cinema" asp-for="Detail.EndInCinema">
-                                <span asp-validation-for="Detail.EndInCinema" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Detail.Description">Description</label>
-                                <textarea class="form-control" placeholder="description" asp-for="Detail.Description" id="create-context-ck-editor"></textarea>
-                                <span asp-validation-for="Detail.Description" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label>Actors</label>
-                                <select asp-for="ActorsId" class="form-control" name="ActorsId" id="actorsId">
-                                    @foreach (var item in ViewBag.Actors)
+                                <label>Sessions</label>
+                                <select class="form-control" id="selected-session" name="selectedSessionId">
+                                    @foreach (var item in ViewBag.Sessions)
                                     {
-                                        int count = 0;
-                                        foreach (var movieActor in ViewBag.SelectedActors)
-                                        {
-                                            if (item.Id == movieActor.ActorId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
+                                        <option selected="@(item.Id == Model.Session.Id)" value="@item.Id">@item.Movie?.Name - @item.Date.ToString("dd.MM.yyyy") - @item.Start.ToString().Substring(0,5) - @item.End.ToString().Substring(0,5)</option>
                                     }
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Directors</label>
-                                <select asp-for="DirectorsId" class="form-control" name="DirectorsId" id="directorsId">
-                                    @foreach (var item in ViewBag.Directors)
+                                <label>Seats</label>
+                                <select id="selected-seats" class="form-control" name="selectedSeatId">
+                                    @foreach (var item in ViewBag.Seats)
                                     {
-                                        int count = 0;
-                                        foreach (var movieDirector in ViewBag.SelectedDirectors)
-                                        {
-                                            if (item.Id == movieDirector.DirectorId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
+                                        <option selected="@(item.Id == Model.SeatId)" value="@item.Id">row: @item.Row - col: @item.Column (@item.Hall.Name - @item.Hall.Cinema.Name)</option>
                                     }
                                 </select>
                             </div>
+                            <label>Customer</label>
                             <div class="form-group">
-                                <label>Genres</label>
-                                <select asp-for="GenresId" class="form-control" name="GenresId" id="genresId">
-                                    @foreach (var item in ViewBag.Genres)
-                                    {
-                                        int count = 0;
-                                        foreach (var movieGenre in ViewBag.SelectedGenres)
-                                        {
-                                            if (item.Id == movieGenre.GenreId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    }
-                                </select>
+                                <input class="form-control" placeholder="name" asp-for="Customer.Name">
+                                <span asp-validation-for="Customer.Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label>Formats</label>
-                                <select asp-for="FormatsId" class="form-control" name="FormatsId" id="formatsId">
-                                    @foreach (var item in ViewBag.Formats)
-                                    {
-                                        int count = 0;
-                                        foreach (var sessionFromat in ViewBag.SelectedFormats)
-                                        {
-                                            if (item.Id == sessionFromat.FormatId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    }
-                                </select>
+                                <input class="form-control" placeholder="surname" asp-for="Customer.Surname">
+                                <span asp-validation-for="Customer.Surname" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price">Price</label>
+                                <input id="seat-price" class="form-control" placeholder="price" asp-for="Price">
+                                <span asp-validation-for="Price" class="text-danger"></span>
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             <a class="btn btn-light" asp-action="Index">Cancel</a>
@@ -157,13 +56,4 @@
 
 @section Scripts {
 <partial name="_ValidationPartial" />
-<partial name="_CKEditorPartial" />
-
-<script>
-         ClassicEditor
-        .create( document.querySelector( '#create-context-ck-editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
 }

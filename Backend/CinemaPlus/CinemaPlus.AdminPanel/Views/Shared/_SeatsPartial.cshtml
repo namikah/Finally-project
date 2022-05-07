@@ -1,9 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Index";
     List<Seat> seats = Model;
+    List<Ticket> tickets = ViewBag.Tickets;
+    Session session = ViewBag.Session;
 }
 
 @foreach (var item in seats)
 {
-    <option value="@item.Id">row: @item.Row - col: @item.Column - @item.Hall.Name - @item.Hall.Cinema.Name</option>
+    if (!tickets.Any(x => x.Seat == item && x.Session == session))
+    {
+        <option value="@item.Id">row: @item.Row - col: @item.Column - @item.Hall.Name - @item.Hall.Cinema.Name</option>
+    }
+
 }

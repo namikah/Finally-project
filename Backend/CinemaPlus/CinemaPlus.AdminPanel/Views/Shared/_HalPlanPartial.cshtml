@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Hall hall = Model;
+
+    List<Ticket> tickets = ViewBag.Tickets;
+}
+@if (hall.Seats.Count != 0)
+{
+    @for (var i = 1; i < hall.RowCount; i++)
+    {
+        <div class="col-1" style="background-color:#4ee2a8; border-radius:10px; border: 1px solid #4ee2a8; ">@i</div>
+        <div class="col-10 d-flex justify-content-center align-items-center gap-1 w-100">
+            @foreach (var seat in hall.Seats)
+            {
+                @if (seat.Row == i)
+                {
+                    <span data-id="@seat.Id" data-row="@i" data-column="@seat.Column" data-seat-type=@seat.SeatType.Name class="seat m-1" style="border-radius:10px; border: 1px solid #4ee2a8; padding: 1px 10px; cursor:pointer; @(seat.SeatType.Name.Contains("Normal") ? "background-color: #d3d3d3;" : seat.SeatType.Name.Contains("SkyBox") ? "background-color: pink;" : seat.SeatTypeId == 4 ? "pointer-eventes:none;" : "") @(tickets.Any(x=>x.Seat == seat && x.Session.Id == ViewBag.SessionId) ? "background-color: black; color:white; pointer-events:none;" : "")">@seat.Column</span>
+                }
+            }
+        </div>
+        <div class="col-1" style="background-color:#4ee2a8; border-radius:10px; border: 1px solid #4ee2a8; ">@i</div>
+    }
+    <div class="text-center mt-5" style="background-color:#4ee2a8; color:white; width:200px; border-radius:5px;">EKRAN</div>
+
+}
+

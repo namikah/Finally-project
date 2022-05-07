@@ -76,13 +76,18 @@ namespace CinemaPlus.AdminPanel.Controllers
             var sessions = await _dbContext.Sessions
             .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
             .Include(x => x.Movie)
-            .OrderBy(x=>x.Start)
+            .OrderBy(x => x.Start)
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
+            ViewBag.Tickets = await _dbContext.Tickets
+              .Include(x => x.Seat)
+              .Include(x => x.Session)
+          .ToListAsync();
+
             ViewBag.Seats = await _dbContext.Seats
-                .Include(x=>x.Hall.Cinema.Tariffs)
-                .Where(x=>x.HallId == sessions[0].HallId)
+                .Include(x => x.Hall.Cinema.Tariffs)
+                .Where(x => x.HallId == sessions[0].HallId)
             .ToListAsync();
 
             return View();
@@ -99,7 +104,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             var sessions = await _dbContext.Sessions
             .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
             .Include(x => x.Movie)
-            .OrderBy(x=>x.Start)
+            .OrderBy(x => x.Start)
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
@@ -111,10 +116,10 @@ namespace CinemaPlus.AdminPanel.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            var existTicket = await _dbContext.Tickets
-                .FirstOrDefaultAsync(x => x.Session == ticket.Session && x.Seat == ticket.Seat && x.IsDeleted == false);
+            var isExistTicket = await _dbContext.Tickets
+                .AnyAsync(x => x.Session.Id == selectedSessionId && x.SeatId == selectedSeatId && x.IsDeleted == false);
 
-            if (existTicket != null)
+            if (isExistTicket)
             {
                 ModelState.AddModelError("", "Ticket already exist");
                 return View();
@@ -135,11 +140,18 @@ namespace CinemaPlus.AdminPanel.Controllers
             if (selectedSessionId == null)
                 return Json(null);
 
+            ViewBag.Tickets = await _dbContext.Tickets
+            .Include(x => x.Seat)
+            .Include(x => x.Session)
+            .ToListAsync();
+
             var session = await _dbContext.Sessions.FindAsync(selectedSessionId);
 
+            ViewBag.Session = session;
+
             var seats = await _dbContext.Seats
-                .Include(x=>x.Hall.Cinema)
-                .Where(x=>x.HallId == session.HallId)
+                .Include(x => x.Hall.Cinema)
+                .Where(x => x.HallId == session.HallId)
                 .ToListAsync();
 
             return PartialView("_SeatsPartial", seats);
@@ -152,20 +164,42 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return Json(null);
 
             var session = await _dbContext.Sessions
-                .Include(x=>x.Hall.Cinema.Tariffs)
-                .ThenInclude(x=>x.SeatType)
-                .FirstOrDefaultAsync(x=>x.Id == selectedSessionId);
+                .Include(x => x.Hall.Cinema.Tariffs)
+                .ThenInclude(x => x.SeatType)
+                .FirstOrDefaultAsync(x => x.Id == selectedSessionId);
 
             var seat = await _dbContext.Seats
                 .FindAsync(selectedSeatId);
 
             var price = session.Hall.Cinema.Tariffs?
-                .FirstOrDefault(x => x.StartTime <= session.Start 
-                && x.EndTime >= session.End 
-                && x.StartDayOfWeek <= (int)session.Date.DayOfWeek 
+                .FirstOrDefault(x => x.StartTime <= session.Start
+                && x.EndTime >= session.End
+                && x.StartDayOfWeek <= (int)session.Date.DayOfWeek
                 && x.EndDayOfWeek >= (int)session.Date.DayOfWeek && x.SeatType.Id == seat.SeatTypeId).Price;
 
             return Json(price);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> LoadHallPlan(int? selectedSessionId)
+        {
+            //if (selectedHallId == null)
+            //    return Json(null);
+            var session = await _dbContext.Sessions.FindAsync(selectedSessionId);
+
+            var hall = await _dbContext.Halls
+                .Include(x => x.Seats)
+                .ThenInclude(x => x.SeatType)
+                .FirstOrDefaultAsync(x => x.Id == session.HallId);
+
+            ViewBag.Tickets = await _dbContext.Tickets
+                 .Include(x => x.Session)
+                 .Include(x => x.Seat)
+                 .ToListAsync();
+
+            ViewBag.SessionId = selectedSessionId;
+
+            return PartialView("_HalPlanPartial", hall);
         }
 
         public async Task<IActionResult> Update(int? id)
@@ -173,140 +207,82 @@ namespace CinemaPlus.AdminPanel.Controllers
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "User");
 
-            var existMovie = await _dbContext.Movies
-              .Include(x => x.Detail)
+            DateTime dt = DateTime.Today;
+
+            var sessions = await _dbContext.Sessions
+            .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
+            .Include(x => x.Movie)
+            .OrderBy(x => x.Start)
+            .ToListAsync();
+            ViewBag.Sessions = sessions;
+
+            ViewBag.Seats = await _dbContext.Seats
+                .Include(x => x.Hall.Cinema.Tariffs)
+                .Where(x => x.HallId == sessions[0].HallId)
+            .ToListAsync();
+
+            var existTicket = await _dbContext.Tickets
+                .Include(x => x.Customer)
               .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
 
-            ViewBag.Actors = await _dbContext.Actors.Where(x => x.IsDeleted == false).ToListAsync();
-            ViewBag.Directors = await _dbContext.Directors.Where(x => x.IsDeleted == false).ToListAsync();
-            ViewBag.Genres = await _dbContext.Genres.Where(x => x.IsDeleted == false).ToListAsync();
-            ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
-
-            ViewBag.SelectedActors = await _dbContext.MovieActors.Where(x => x.MovieId == id).ToListAsync();
-            ViewBag.SelectedDirectors = await _dbContext.MovieDirectors.Where(x => x.MovieId == id).ToListAsync();
-            ViewBag.SelectedGenres = await _dbContext.MovieGenres.Where(x => x.MovieId == id).ToListAsync();
-            ViewBag.SelectedFormats = await _dbContext.MovieFormats.Where(x => x.MovieId == id).ToListAsync();
-
-            return View(existMovie);
+            return View(existTicket);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, Movie movie)
+        public async Task<IActionResult> Update(int? id, Ticket ticket, int selectedSessionId, int selectedSeatId)
         {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "User");
-
             if (id == null)
                 return NotFound();
 
-            if (id != movie.Id)
+            if (id != ticket.Id)
                 return BadRequest();
 
-            var existMovie = await _dbContext.Movies
-              .Include(x => x.Detail)
+
+            DateTime dt = DateTime.Today;
+
+            var sessions = await _dbContext.Sessions
+            .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
+            .Include(x => x.Movie)
+            .OrderBy(x => x.Start)
+            .ToListAsync();
+            ViewBag.Sessions = sessions;
+
+            ViewBag.Seats = await _dbContext.Seats
+                .Include(x => x.Hall.Cinema.Tariffs)
+                .Where(x => x.HallId == sessions[0].HallId)
+            .ToListAsync();
+
+            var existTicket = await _dbContext.Tickets
+                .Include(x => x.Customer)
               .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
 
-            ViewBag.Actors = await _dbContext.Actors.Where(x => x.IsDeleted == false).ToListAsync();
-            ViewBag.Directors = await _dbContext.Directors.Where(x => x.IsDeleted == false).ToListAsync();
-            ViewBag.Genres = await _dbContext.Genres.Where(x => x.IsDeleted == false).ToListAsync();
-            ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
-
-            ViewBag.SelectedActors = await _dbContext.MovieActors.Where(x => x.MovieId == id).ToListAsync();
-            ViewBag.SelectedDirectors = await _dbContext.MovieDirectors.Where(x => x.MovieId == id).ToListAsync();
-            ViewBag.SelectedGenres = await _dbContext.MovieGenres.Where(x => x.MovieId == id).ToListAsync();
-            ViewBag.SelectedFormats = await _dbContext.MovieFormats.Where(x => x.MovieId == id).ToListAsync();
-
             if (!ModelState.IsValid)
-                return View(existMovie);
+                return View(existTicket);
 
-            var isExistMovie = await _dbContext.Movies
-                .AnyAsync(x => x.IsDeleted == false && x.Name == movie.Name && x.Detail == movie.Detail && x.Id != id);
+            var isExistTicket = await _dbContext.Tickets
+                .AnyAsync(x => x.IsDeleted == false && x.Session.Id == selectedSessionId
+                && x.SeatId == selectedSeatId && x.Id != id);
 
-            if (isExistMovie)
+            if (isExistTicket)
             {
-                ModelState.AddModelError("", "Session already exist");
-                return View(existMovie);
+                ModelState.AddModelError("", "Ticket already exist");
+                return View(existTicket);
             }
 
-            var movieActors = new List<MovieActors>();
-            if (movie.ActorsId != null)
+            var existSession = await _dbContext.Sessions.FirstOrDefaultAsync(x => x.Id == selectedSessionId && x.IsDeleted == false);
+            var existSeat = await _dbContext.Seats.FirstOrDefaultAsync(x => x.Id == selectedSeatId);
+
+            if (existSession == null || existSeat == null)
             {
-                foreach (var item in movie.ActorsId)
-                {
-                    MovieActors movieActor = new()
-                    {
-                        MovieId = movie.Id,
-                        ActorId = item
-                    };
-                    movieActors.Add(movieActor);
-                }
-            }
-            var movieDirectors = new List<MovieDirectors>();
-            if (movie.DirectorsId != null)
-            {
-                foreach (var item in movie.DirectorsId)
-                {
-                    MovieDirectors movieDirector = new()
-                    {
-                        MovieId = movie.Id,
-                        DirectorId = item
-                    };
-                    movieDirectors.Add(movieDirector);
-                }
-            }
-            var movieGenres = new List<MovieGenres>();
-            if (movie.GenresId != null)
-            {
-                foreach (var item in movie.GenresId)
-                {
-                    MovieGenres movieGenre = new()
-                    {
-                        MovieId = movie.Id,
-                        GenreId = item
-                    };
-                    movieGenres.Add(movieGenre);
-                }
-            }
-            var movieFormats = new List<MovieFormats>();
-            if (movie.FormatsId != null)
-            {
-                foreach (var item in movie.FormatsId)
-                {
-                    MovieFormats movieFormat = new()
-                    {
-                        MovieId = movie.Id,
-                        FormatId = item
-                    };
-                    movieFormats.Add(movieFormat);
-                }
+                ModelState.AddModelError("", "Incorrect selection");
+                return View(existSession);
             }
 
-            if (movie.Photo != null)
-            {
-                if (!movie.Photo.IsImage())
-                {
-                    ModelState.AddModelError("Photo", $"{movie.Photo.Name} select correct image type.");
-                    return View();
-                }
-
-                if (!movie.Photo.IsAllowedSize(2))
-                {
-                    ModelState.AddModelError("Photo", $"{movie.Photo.Name} file size must be max 2Mb.");
-                    return View();
-                }
-
-                existMovie.Image = FileExtensions.UploadImage(movie.Photo.FileName, movie.Photo.OpenReadStream()).Url.ToString();
-            }
-
-            existMovie.Name = movie.Name;
-            existMovie.AgeLimit = movie.AgeLimit;
-            existMovie.Detail = movie.Detail;
-            existMovie.MovieActors = movieActors;
-            existMovie.MovieDirectors = movieDirectors;
-            existMovie.MovieGenres = movieGenres;
-            existMovie.MovieFormats = movieFormats;
-            existMovie.IsDeleted = false;
+            existTicket.Session = existSession;
+            existTicket.Seat = existSeat;
+            existTicket.Customer = ticket.Customer;
+            existTicket.IsDeleted = false;
 
             await _dbContext.SaveChangesAsync();
 
