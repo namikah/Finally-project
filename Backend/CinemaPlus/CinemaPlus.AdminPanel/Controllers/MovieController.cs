@@ -1,9 +1,12 @@
 ﻿using CinemaPlus.Data;
 using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.DataContext;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.AdminPanel.Controllers
 {
-    //[Authorize(Roles = RoleConstants.AdminRole)]
+    [Authorize(Roles = RoleConstants.AdminRole)]
     public class MovieController : Controller
     {
         private readonly AppDbContext _dbContext;
@@ -21,7 +24,6 @@ namespace CinemaPlus.AdminPanel.Controllers
             _dbContext = dbContext;
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             if (!User.Identity.IsAuthenticated)
@@ -115,9 +117,6 @@ namespace CinemaPlus.AdminPanel.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            var isMovieExist = await _dbContext.Movies
-                .AnyAsync(x => x.Name.ToLower() == movie.Name.ToLower() && x.IsDeleted == false);
-
             if (movie.Photo == null || movie.Photo.Length == 0)
             {
                 ModelState.AddModelError("Photo", "Upload image.");
@@ -136,8 +135,7 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return View();
             }
 
-            var fileName = await movie.Photo.GenerateFile(Path.Combine(Constants.SeedDataPath, "movies"));
-            movie.Image = Path.Combine(Constants.SeedDataPath, "movies", fileName);
+            movie.Image = FileExtensions.UploadImage(movie.Photo.FileName, movie.Photo.OpenReadStream()).Url.ToString();
 
             var movieActors = new List<MovieActors>();
             if (movie.ActorsId != null)
@@ -334,17 +332,7 @@ namespace CinemaPlus.AdminPanel.Controllers
                     return View();
                 }
 
-                try
-                {
-                    var path = Path.Combine(Constants.SeedDataPath, "movies", existMovie.Image);
-                    if (System.IO.File.Exists(path))
-                        System.IO.File.Delete(path);
-                }
-                catch { }
-
-                var fileName = await movie.Photo.GenerateFile(Path.Combine(Constants.SeedDataPath, "movies"));
-                movie.Image = fileName;
-                existMovie.Image = movie.Image;
+                existMovie.Image = FileExtensions.UploadImage(movie.Photo.FileName, movie.Photo.OpenReadStream()).Url.ToString();
             }
 
             existMovie.Name = movie.Name;

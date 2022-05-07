@@ -26,6 +26,7 @@ namespace CinemaPlus.Services.Services
                .Include(x => x.Seat)
                .ThenInclude(x => x.Hall)
                .Include(x => x.Customer)
+               .Where(x => x.IsDeleted == false)
                .ToListAsync();
         }
 
@@ -34,11 +35,11 @@ namespace CinemaPlus.Services.Services
             if (id == null) return new Ticket();
 
             var movie = await GetAllRelations()
-                 .AsNoTracking()
-                .Include(x => x.Session)
+               .AsNoTracking()
+               .Include(x => x.Session)
                .Include(x => x.Seat)
                .Include(x => x.Customer)
-                 .FirstOrDefaultAsync(x => x.Id == (int)id);
+               .FirstOrDefaultAsync(x => x.Id == (int)id && x.IsDeleted == false);
 
             return movie;
         }

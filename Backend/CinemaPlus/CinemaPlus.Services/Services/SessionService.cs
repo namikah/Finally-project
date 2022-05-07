@@ -39,6 +39,7 @@ namespace CinemaPlus.Services.Services
                .Include(x => x.Hall)
                .ThenInclude(x => x.Seats)
                .ThenInclude(x => x.SeatType)
+               .Where(x => x.IsDeleted == false)
                .AsNoTracking()
                .ToListAsync();
 
@@ -70,7 +71,7 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Seats)
                .ThenInclude(x => x.SeatType)
                .AsNoTracking()
-               .FirstOrDefaultAsync(x => x.Id == (int)id);
+               .FirstOrDefaultAsync(x => x.Id == (int)id && x.IsDeleted == false);
 
             return session;
         }

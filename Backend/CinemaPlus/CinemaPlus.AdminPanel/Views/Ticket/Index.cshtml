@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    List<Ticket> tickets = Model;
+}
+
+<div class="content content-wrapper">
+    <div class="container-fluid">
+        <div class="text-right pt-3 pb-3">
+            <a asp-controller="Ticket" asp-action="Create" class="btn btn-danger btn-icon-text"><i class="ti-upload btn-icon-prepend"></i>Create</a>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Tickets</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th>Movie</th>
+                            <th>Date</th>
+                            <th>Session</th>
+                            <th>Hall</th>
+                            <th>Seat</th>
+                            <th>Customer</th>
+                            <th>Price</th>
+                            <th class="operation-row"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in tickets)
+                        {
+                            <tr class="table-info">
+                                <td>
+                                    <img src="@item.Session.Movie.Image" class="img-fluid" style="width:80px;"><img>
+                                </td>
+                                <td>@item.Session.Date.ToString("dd MMM yyyy",CultureInfo.InvariantCulture)</td>
+                                <td>@item.Session.Start.ToString().Substring(0,5) - @item.Session.End.ToString().Substring(0,5)</td>
+                                <td>@item.Session.Hall.Name (@item.Session.Hall.Cinema.Name)</td>
+                                <td>Sira: @item.Seat.Row <br /> Sutun: @item.Seat.Column</td>
+                                <td>@item.Customer.Name @item.Customer.Surname</td>
+                                <td>@item.Price AZN</td>
+                                <td class="text-right">
+                                    <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@item.Id">
+                                        Update
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a class="btn btn-danger btn-sm delete-slider" id="delete-slider" asp-action="Delete" asp-route-id="@item.Id">
+                                        Delete
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<partial name="_ValidationPartial" />
+}

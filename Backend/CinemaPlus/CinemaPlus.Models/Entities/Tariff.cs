@@ -33,6 +33,8 @@ namespace CinemaPlus.Models.Entities
 
         public string AudioFormat { get; set; }
 
+        public SeatType SeatType { get; set; }
+
         public bool IsDeleted { get; set; }
     }
 }

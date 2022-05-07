@@ -31,6 +31,7 @@ namespace CinemaPlus.Services.Services
                .Include(x => x.MovieGenres)
                .ThenInclude(x => x.Genre)
                .OrderByDescending(x => x.Id)
+               .Where(x=>x.IsDeleted == false)
                .ToListAsync();
         }
 
@@ -49,7 +50,7 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Format)
                .Include(x => x.MovieGenres)
                .ThenInclude(x => x.Genre)
-                 .FirstOrDefaultAsync(x => x.Id == (int)id);
+                 .FirstOrDefaultAsync(x => x.Id == (int)id && x.IsDeleted == false);
 
             return movie;
         }

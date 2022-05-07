@@ -10,8 +10,7 @@ function MovieAbout({ data }) {
           <div className="image">
             <img src={data?.image} alt="movie-poster"></img>
           </div>
-          <div className="description">
-            <p>{data?.detail.description}</p>
+          <div className="description" dangerouslySetInnerHTML={{__html: data?.detail.description}}>
           </div>
         </div>
         <div className="right-side col-lg-6 col-md-12">

@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    List<Seat> seats = Model;
+}
+
+@foreach (var item in seats)
+{
+    <option value="@item.Id">row: @item.Row - col: @item.Column (@item.Hall.Name - @item.Hall.Cinema.Name)</option>
+}

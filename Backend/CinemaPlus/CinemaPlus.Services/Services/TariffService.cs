@@ -20,8 +20,9 @@ namespace CinemaPlus.Services.Services
         public async Task<List<Tariff>> GetAllTariffAsync()
         {
             var tarifss = await GetAllRelations()
-                .Include(x=>x.Cinema)
-                .Include(x=>x.Format)
+                .Include(x => x.Cinema)
+                .Include(x => x.Format)
+                .Where(x => x.IsDeleted == false)
                 .ToListAsync();
 
             return tarifss;
@@ -31,7 +32,8 @@ namespace CinemaPlus.Services.Services
         {
             if (id == null) return new Tariff();
 
-            var tariff = await GetAsync((int)id);
+            var tariff = await GetAllRelations()
+                .FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
 
             return tariff;
         }

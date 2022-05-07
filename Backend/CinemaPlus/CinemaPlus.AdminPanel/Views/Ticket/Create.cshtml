@@ -1,0 +1,95 @@
+﻿@model Ticket
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-8 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
+                        <form class="forms-sample" method="post">
+                            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+                            <div class="form-group">
+                                <label>Sessions</label>
+                                <select class="form-control" id="selected-session" name="selectedSessionId">
+                                    @foreach (var item in ViewBag.Sessions)
+                                    {
+                                        <option value="@item.Id">@item.Movie?.Name - @item.Date.ToString("dd.MM.yyyy") - @item.Start.ToString().Substring(0,5) - @item.End.ToString().Substring(0,5)</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Seats</label>
+                                <select id="selected-seats" class="form-control" name="selectedSeatId">
+                                    @foreach (var item in ViewBag.Seats)
+                                    {
+                                        <option value="@item.Id">row: @item.Row - col: @item.Column (@item.Hall.Name - @item.Hall.Cinema.Name)</option>
+                                    }
+                                </select>
+                            </div>
+                            <label>Customer</label>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="name" asp-for="Customer.Name">
+                                <span asp-validation-for="Customer.Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="surname" asp-for="Customer.Surname">
+                                <span asp-validation-for="Customer.Surname" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price">Price</label>
+                                <input id="seat-price" class="form-control" placeholder="price" asp-for="Price">
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+<partial name="_CKEditorPartial" />
+
+<script>
+        $(document).on("change", "#selected-session", function(){
+        var selected = $(this).val();
+        $.ajax({
+            type: "GET",
+            url: "/Ticket/LoadSelectedHallSeats?selectedSessionId=" + selected,
+            success: function(res) {
+                $("#selected-seats").empty();
+                $("#selected-seats").append(res);
+
+            }
+        });
+    });
+      $(document).on("change", "#selected-seats", function(){
+        var seatId = $(this).val();
+        var sessionId = $("#selected-session").val();
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: "/Ticket/LoadPrice?selectedSeatId=" + seatId + "&selectedSessionId=" + sessionId,
+            success: function(res) {
+                $("#seat-price").val(res);
+                console.log(seatId);
+                console.log(sessionId);
+            }
+        });
+    });
+
+     ClassicEditor
+    .create( document.querySelector( '#create-context-ck-editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+}

@@ -513,6 +513,9 @@ namespace CinemaPlus.Repository.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int?>("SeatTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StartDayOfWeek")
                         .HasColumnType("int");
 
@@ -524,6 +527,8 @@ namespace CinemaPlus.Repository.Migrations
                     b.HasIndex("CinemaId");
 
                     b.HasIndex("FormatId");
+
+                    b.HasIndex("SeatTypeId");
 
                     b.ToTable("Tariffs");
                 });
@@ -944,9 +949,15 @@ namespace CinemaPlus.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CinemaPlus.Models.Entities.SeatType", "SeatType")
+                        .WithMany("Tariffs")
+                        .HasForeignKey("SeatTypeId");
+
                     b.Navigation("Cinema");
 
                     b.Navigation("Format");
+
+                    b.Navigation("SeatType");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Ticket", b =>
@@ -1080,6 +1091,8 @@ namespace CinemaPlus.Repository.Migrations
             modelBuilder.Entity("CinemaPlus.Models.Entities.SeatType", b =>
                 {
                     b.Navigation("Seats");
+
+                    b.Navigation("Tariffs");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Session", b =>

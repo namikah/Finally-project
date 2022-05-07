@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.AdminPanel.Controllers
 {
-    //[Authorize(Roles = RoleConstants.AdminRole)]
+    [Authorize(Roles = RoleConstants.AdminRole)]
     public class SessionController : Controller
     {
         private readonly AppDbContext _dbContext;
