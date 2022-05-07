@@ -6,7 +6,7 @@
 }
 @if (hall.Seats.Count != 0)
 {
-    @for (var i = 1; i < hall.RowCount; i++)
+    @for (var i = 1; i < hall.RowCount + 1; i++)
     {
         <div class="col-1" style="background-color:#4ee2a8; border-radius:10px; border: 1px solid #4ee2a8; ">@i</div>
         <div class="col-10 d-flex justify-content-center align-items-center gap-1 w-100">

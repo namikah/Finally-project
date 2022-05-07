@@ -131,7 +131,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             await _dbContext.Tickets.AddAsync(ticket);
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
         }
 
         [AllowAnonymous]

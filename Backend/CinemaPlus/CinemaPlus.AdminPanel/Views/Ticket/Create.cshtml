@@ -9,13 +9,13 @@
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth px-0">
-            <div class="row col-12 w-100 mx-0">
-                  <h5 class=" col-8 brand-logo" style="color:#6610f2;">Create</h5>
-                    <h5 class="col-4 brand-logo" style="color:#6610f2;">Hall</h5
-            </div>
+            @*  <div class="row col-12">
+                <h5 class=" col-8 brand-logo" style="color:#6610f2;">Create</h5>
+                <h5 class="col-4 brand-logo" style="color:#6610f2;">Hall</h5>
+                </div>*@
             <div class="row w-100 mx-0">
                 <div class="col-lg-8 mx-auto" style="border:1px solid #d3d3d3;">
-                     
+
                     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                         <form class="forms-sample" method="post">
                             <div class="text-danger" asp-validation-summary=ModelOnly></div>
@@ -33,8 +33,9 @@
                                 <select id="selected-seats" class="form-control" name="selectedSeatId">
                                     @foreach (var item in seats)
                                     {
-                                        if(!tickets.Any(x=>x.Seat == item && x.Session.Id == sessions[0].Id)){
-                                        <option value="@item.Id">row: @item.Row - col: @item.Column - @item.Hall.Name - @item.Hall.Cinema.Name</option>
+                                        if (!tickets.Any(x => x.Seat == item && x.Session.Id == sessions[0].Id))
+                                        {
+                                            <option value="@item.Id">row: @item.Row - col: @item.Column - @item.Hall.Name - @item.Hall.Cinema.Name</option>
                                         }
                                     }
                                 </select>
@@ -82,7 +83,6 @@
             success: function(res) {
                 $("#hall-plan").empty();
                 $("#hall-plan").append(res);
-                console.log(res);
             }
         });
         $.ajax({
@@ -111,13 +111,14 @@
             success: function(res) {
                 $("#hall-plan").empty();
                 $("#hall-plan").append(res);
-                console.log(res);
             }
         });
     });
       $(document).on("change", "#selected-seats", function(){
         var seatId = $(this).val();
         var sessionId = $("#selected-session").val();
+         $(".seat").css( "border-color","#4ee2a8" );
+          $('.seat[data-id=' + seatId + ']').css( "border-color","red" );
         $.ajax({
             type: "GET",
             dataType: 'json',
