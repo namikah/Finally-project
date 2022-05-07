@@ -1,21 +1,23 @@
 ﻿@model Ticket
 @{
     ViewData["Title"] = "Update";
+    List<Ticket> tickets = ViewBag.Tickets;
+    List<Session> sessions = ViewBag.Sessions;
+    List<Seat> seats = ViewBag.Seats;
 }
 
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth px-0">
             <div class="row w-100 mx-0">
-                <div class="col-lg-6 mx-auto">
+                <div class="col-lg-8 mx-auto" style="border:1px solid #d3d3d3;">
                     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                        <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
-                      <form class="forms-sample" method="post">
+                        <form class="forms-sample" method="post">
                             <div class="text-danger" asp-validation-summary=ModelOnly></div>
                             <div class="form-group">
                                 <label>Sessions</label>
                                 <select class="form-control" id="selected-session" name="selectedSessionId">
-                                    @foreach (var item in ViewBag.Sessions)
+                                    @foreach (var item in sessions)
                                     {
                                         <option selected="@(item.Id == Model.Session.Id)" value="@item.Id">@item.Movie?.Name - @item.Date.ToString("dd.MM.yyyy") - @item.Start.ToString().Substring(0,5) - @item.End.ToString().Substring(0,5)</option>
                                     }
@@ -24,9 +26,12 @@
                             <div class="form-group">
                                 <label>Seats</label>
                                 <select id="selected-seats" class="form-control" name="selectedSeatId">
-                                    @foreach (var item in ViewBag.Seats)
+                                    @foreach (var item in seats)
                                     {
-                                        <option selected="@(item.Id == Model.SeatId)" value="@item.Id">row: @item.Row - col: @item.Column (@item.Hall.Name - @item.Hall.Cinema.Name)</option>
+                                        if (!tickets.Any(x => x.Seat == item && x.Session.Id == Model.Session.Id))
+                                        {
+                                            <option selected="@(item.Id == Model.SeatId)" value="@item.Id">row: @item.Row - col: @item.Column (@item.Hall.Name - @item.Hall.Cinema.Name)</option>
+                                        }
                                     }
                                 </select>
                             </div>
@@ -49,6 +54,7 @@
                         </form>
                     </div>
                 </div>
+                <div class="col-lg-4 row mx-auto pt-5 justify-content-center align-items-center" id="hall-plan" style="border:1px solid #d3d3d3;"></div>
             </div>
         </div>
     </div>
@@ -56,4 +62,72 @@
 
 @section Scripts {
 <partial name="_ValidationPartial" />
+
+
+<script>
+     $(document).on("click", ".seat", function(){
+        var selected = $(this).val();
+                $("#selected-seats").val($(this).attr("data-id"));
+                $(".seat").css( "border-color","#4ee2a8" );
+                $(this).css( "border-color","red" );
+        });
+
+      $.ajax({
+            type: "GET",
+            url: "/Ticket/LoadHallPlan?selectedSessionId=" +   $("#selected-session").val(),
+            success: function(res) {
+                $("#hall-plan").empty();
+                $("#hall-plan").append(res);
+            }
+        });
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: "/Ticket/LoadPrice?selectedSeatId=" + $("#selected-seats").val() + "&selectedSessionId=" + $("#selected-session").val(),
+            success: function(res) {
+                $("#seat-price").val(res);
+            }
+        });
+
+        $(document).on("change", "#selected-session", function(){
+        var selected = $(this).val();
+        $.ajax({
+            type: "GET",
+            url: "/Ticket/LoadSelectedHallSeats?selectedSessionId=" + selected,
+            success: function(res) {
+                $("#selected-seats").empty();
+                $("#selected-seats").append(res);
+
+            }
+        });
+         $.ajax({
+            type: "GET",
+            url: "/Ticket/LoadHallPlan?selectedSessionId=" + selected,
+            success: function(res) {
+                $("#hall-plan").empty();
+                $("#hall-plan").append(res);
+            }
+        });
+    });
+      $(document).on("change", "#selected-seats", function(){
+        var seatId = $(this).val();
+        var sessionId = $("#selected-session").val();
+         $(".seat").css( "border-color","#4ee2a8" );
+          $('.seat[data-id=' + seatId + ']').css( "border-color","red" );
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: "/Ticket/LoadPrice?selectedSeatId=" + seatId + "&selectedSessionId=" + sessionId,
+            success: function(res) {
+                $("#seat-price").val(res);
+            }
+        });
+    });
+
+     ClassicEditor
+    .create( document.querySelector( '#create-context-ck-editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
 }

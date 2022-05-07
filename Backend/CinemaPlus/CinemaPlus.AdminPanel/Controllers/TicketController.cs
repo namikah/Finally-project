@@ -81,13 +81,13 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.Sessions = sessions;
 
             ViewBag.Tickets = await _dbContext.Tickets
-              .Include(x => x.Seat)
-              .Include(x => x.Session)
-          .ToListAsync();
+            .Include(x => x.Seat)
+            .Include(x => x.Session)
+            .ToListAsync();
 
             ViewBag.Seats = await _dbContext.Seats
-                .Include(x => x.Hall.Cinema.Tariffs)
-                .Where(x => x.HallId == sessions[0].HallId)
+            .Include(x => x.Hall.Cinema.Tariffs)
+            .Where(x => x.HallId == sessions[0].HallId)
             .ToListAsync();
 
             return View();
@@ -108,9 +108,14 @@ namespace CinemaPlus.AdminPanel.Controllers
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
+            ViewBag.Tickets = await _dbContext.Tickets
+            .Include(x => x.Seat)
+            .Include(x => x.Session)
+            .ToListAsync();
+
             ViewBag.Seats = await _dbContext.Seats
-                .Include(x => x.Hall.Cinema.Tariffs)
-                .Where(x => x.HallId == sessions[0].HallId)
+            .Include(x => x.Hall.Cinema.Tariffs)
+            .Where(x => x.HallId == sessions[0].HallId)
             .ToListAsync();
 
             if (!ModelState.IsValid)
@@ -208,7 +213,6 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return RedirectToAction("Login", "User");
 
             DateTime dt = DateTime.Today;
-
             var sessions = await _dbContext.Sessions
             .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
             .Include(x => x.Movie)
@@ -216,13 +220,27 @@ namespace CinemaPlus.AdminPanel.Controllers
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
-            ViewBag.Seats = await _dbContext.Seats
-                .Include(x => x.Hall.Cinema.Tariffs)
-                .Where(x => x.HallId == sessions[0].HallId)
+            var tickets = await _dbContext.Tickets
+            .Include(x => x.Seat)
+            .Include(x => x.Session)
             .ToListAsync();
+            ViewBag.Tickets = tickets;
+
+            var selectedTicket = tickets.FirstOrDefault(x => x.Id == id);
+
+            var session = await _dbContext.Sessions
+                .FirstOrDefaultAsync(x => x.Id == selectedTicket.Session.Id);
+
+            ViewBag.Seats = await _dbContext.Seats
+            .Include(x => x.Hall.Cinema.Tariffs)
+            .Where(x => x.HallId == session.HallId)
+            .ToListAsync();
+
 
             var existTicket = await _dbContext.Tickets
                 .Include(x => x.Customer)
+                .Include(x=>x.Session)
+                .Include(x=>x.Seat)
               .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
 
             return View(existTicket);
@@ -240,7 +258,6 @@ namespace CinemaPlus.AdminPanel.Controllers
 
 
             DateTime dt = DateTime.Today;
-
             var sessions = await _dbContext.Sessions
             .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
             .Include(x => x.Movie)
@@ -248,13 +265,27 @@ namespace CinemaPlus.AdminPanel.Controllers
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
-            ViewBag.Seats = await _dbContext.Seats
-                .Include(x => x.Hall.Cinema.Tariffs)
-                .Where(x => x.HallId == sessions[0].HallId)
+            var tickets = await _dbContext.Tickets
+            .Include(x => x.Seat)
+            .Include(x => x.Session)
             .ToListAsync();
+            ViewBag.Tickets = tickets;
+
+            var selectedTicket = tickets.FirstOrDefault(x => x.Id == id);
+
+            var session = await _dbContext.Sessions
+                .FirstOrDefaultAsync(x => x.Id == selectedTicket.Session.Id);
+
+            ViewBag.Seats = await _dbContext.Seats
+            .Include(x => x.Hall.Cinema.Tariffs)
+            .Where(x => x.HallId == session.HallId)
+            .ToListAsync();
+
 
             var existTicket = await _dbContext.Tickets
                 .Include(x => x.Customer)
+                .Include(x => x.Session)
+                .Include(x => x.Seat)
               .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
 
             if (!ModelState.IsValid)
