@@ -100,23 +100,21 @@ function Session(props) {
     );
   }
 
-  
   if (selectedCinemaId !== undefined && selectedCinemaId !== "") {
     sessions = sessions?.filter(
       (s) => s.hall.cinemaId.toString() === selectedCinemaId.toString()
-      );
-    }
-    
-    const selectCinema = useCallback(()=>{
-      if (props.selectedCinemaId !== undefined && props.selectedCinemaId !== "") {
-        setSelectedCinemaId(props.selectedCinemaId);
-      }
-    },[props.selectedCinemaId]);
+    );
+  }
 
-    useEffect(()=>{
-      selectCinema();
-    },[selectCinema])
-    
+  const selectCinema = useCallback(() => {
+    if (props.selectedCinemaId !== undefined && props.selectedCinemaId !== "") {
+      setSelectedCinemaId(props.selectedCinemaId);
+    }
+  }, [props.selectedCinemaId]);
+
+  useEffect(() => {
+    selectCinema();
+  }, [selectCinema]);
 
   document.addEventListener("click", function (event) {
     if (!event.target.classList.contains("change-cinema")) {
@@ -130,13 +128,9 @@ function Session(props) {
     }
   });
 
-  const getTicket = useCallback(
-    () => {
-      ticketService.getTicket().then((res) => {
-      });
-    },
-    []
-  );
+  const getTicket = useCallback(() => {
+    ticketService.getTicket().then((res) => {});
+  }, []);
 
   const addTicket = useCallback(
     (tickets) => {
@@ -194,44 +188,48 @@ function Session(props) {
             <option value={tomorrow4}>{tomorrow4}</option>
           </select>
         </div>
-        {(props.selectedCinemaId === undefined || props.selectedCinemaId === "") ? (
-        <>
-          <select
-          className="filter-cinemas change-cinema"
-          onChange={(e) => setSelectedCinemaId(e.target.value)}
-          onClick={() => setOptionTwo(!optionTwo)}
-          style={
-            optionTwo
-              ? { borderRadius: "20px 20px 0 0" }
-              : { borderRadius: "20px" }
-          }
-        >
-          <option value="" defaultValue>
-            Kinoteatrlar
-          </option>
-          {cinemaData?.map((cinema) => (
-            <option key={cinema.id} value={cinema.id}>
-              {cinema.name}
-            </option>
-          ))}
-        </select>
-        <select
-          className="filter-lang change-lang"
-          onChange={(e) => setSelectedLanguage(e.target.value)}
-          onClick={() => setOptionThree(!optionThree)}
-          style={
-            optionThree
-              ? { borderRadius: "20px 20px 0 0" }
-              : { borderRadius: "20px" }
-          }
-        >
-          <option value="">Bütün dillərdə</option>
-          <option value="Az">Azərbaycanca</option>
-          <option value="Rus">На русском</option>
-          <option value="Eng">In English</option>
-          <option value="Tur">Türkçe</option>
-        </select>
-        </>) : ("")}
+        {props.selectedCinemaId === undefined ||
+        props.selectedCinemaId === "" ? (
+          <>
+            <select
+              className="filter-cinemas change-cinema"
+              onChange={(e) => setSelectedCinemaId(e.target.value)}
+              onClick={() => setOptionTwo(!optionTwo)}
+              style={
+                optionTwo
+                  ? { borderRadius: "20px 20px 0 0" }
+                  : { borderRadius: "20px" }
+              }
+            >
+              <option value="" defaultValue>
+                Kinoteatrlar
+              </option>
+              {cinemaData?.map((cinema) => (
+                <option key={cinema.id} value={cinema.id}>
+                  {cinema.name}
+                </option>
+              ))}
+            </select>
+            <select
+              className="filter-lang change-lang"
+              onChange={(e) => setSelectedLanguage(e.target.value)}
+              onClick={() => setOptionThree(!optionThree)}
+              style={
+                optionThree
+                  ? { borderRadius: "20px 20px 0 0" }
+                  : { borderRadius: "20px" }
+              }
+            >
+              <option value="">Bütün dillərdə</option>
+              <option value="Az">Azərbaycanca</option>
+              <option value="Rus">На русском</option>
+              <option value="Eng">In English</option>
+              <option value="Tur">Türkçe</option>
+            </select>
+          </>
+        ) : (
+          ""
+        )}
       </div>
       <div className="container">
         <div className="today-header text-center">

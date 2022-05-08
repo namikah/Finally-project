@@ -1,0 +1,40 @@
+#contact-cinema {
+  background-color: #171f26;
+    .row {
+      .left-side {
+        ul {
+          list-style: none;
+          text-align: center;
+          padding: 50px 0;
+          li {
+            border-bottom: 1px solid #333E48;
+            padding: 15px 0;
+            span {
+              color: #60ccee;
+              font-size: 16px;
+              line-height: 22px;
+            }
+            p {
+                margin: 0 !important;
+              color: white;
+              font-size: 16px;
+              line-height: 22px;
+            }
+            div {
+              padding: 20px 80px;
+              border-radius: 8px;
+              background-color: #0075bc;
+              font-weight: 700;
+            }
+            &.write-us{
+                padding: 50px 0;
+            }
+          }
+        }
+      }
+      .right-side{
+          height: 100% !important;
+          padding: 7px 20px;
+      }
+    }
+}

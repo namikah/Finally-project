@@ -40,6 +40,10 @@ code {
   #session .row-format {
     display: none !important;
   }
+  .right-side .gmap_canvas #gmap_canvas{
+    height: 650px !important;
+    width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 768px) {

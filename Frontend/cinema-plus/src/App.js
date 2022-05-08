@@ -19,6 +19,7 @@ import { ConstantProvider } from "./context/constant";
 import Cinema from "./pages/cinema/Cinema";
 import Campaigns from "./pages/campaigns/Campaigns";
 import Error from "./pages/error/Error";
+import Contact from "./pages/contact/Contact";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path={"/tariffs"} exact component={Tariffs} />
             <Route path={"/cinema"} exact component={Cinema} />
             <Route path={"/campaigns"} exact component={Campaigns} />
+            <Route path={"/contact"} exact component={Contact} />
             <Route path={"/error"} exact component={Error} />
             <Redirect to={"/error"}  exact component={Error}/>
           </Switch>

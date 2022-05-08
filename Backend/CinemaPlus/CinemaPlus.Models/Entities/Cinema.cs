@@ -14,6 +14,7 @@ namespace CinemaPlus.Models.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
+
         public string Address { get; set; }
 
         public string Description { get; set; }
@@ -32,5 +33,11 @@ namespace CinemaPlus.Models.Entities
         public ICollection<Hall> Halls { get; set; }
 
         public ICollection<Tariff> Tariffs { get; set; }
+
+        public string TarifUrl { get; set; }
+
+        public string MarketingMail { get; set; }
+
+        public string MapUrl { get; set; }
     }
 }

@@ -16,24 +16,24 @@ function Footer() {
           <div className="left-side col-lg-4 col-md-12 d-flex justify-content-center align-items-center pb-3">
             <ul>
               <li>
-                <Link to={""}>Haqqımızda</Link>
+                <Link to={"/about"}>Haqqımızda</Link>
               </li>
               <li>
-                <Link to={""}>Xidmətlər</Link>
+                <Link to={"/services"}>Xidmətlər</Link>
               </li>
               <li>
-                <Link to={""}>Haqqımızda</Link>
+                <Link to={"/rules"}>Qaydalar</Link>
               </li>
             </ul>
             <ul>
               <li>
-                <Link to={""}>FAQ</Link>
+                <Link to={"/faq"}>FAQ</Link>
               </li>
               <li>
-                <Link to={""}>Vakansiyalar</Link>
+                <Link to={"/vacancies"}>Vakansiyalar</Link>
               </li>
               <li>
-                <Link to={""}>Əlaqə</Link>
+                <Link to={"/Contact"}>Əlaqə</Link>
               </li>
             </ul>
           </div>

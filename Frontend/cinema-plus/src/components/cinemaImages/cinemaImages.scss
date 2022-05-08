@@ -1,0 +1,24 @@
+#cinema-images {
+  .container {
+    .row {
+        div {
+          padding: 0 !important;
+        border: 1px solid black;
+        border-radius: 10px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: .5s all;
+        width: 240px;
+        &:hover{
+            box-shadow: 0px 0px 8px 8px rgba(68, 67, 67, 0.225);
+            img{
+                transform: scale(1.2);
+            }
+        }
+        img {
+            transition: .5s all;
+        }
+      }
+    }
+  }
+}

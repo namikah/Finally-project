@@ -51,5 +51,7 @@ namespace CinemaPlus.Repository.DataContext
         public DbSet<SeatType> SeatTypes { get; set; }
 
         public DbSet<Ticket> Tickets { get; set; }
+
+        public DbSet<About> Abouts { get; set; }
     }
 }

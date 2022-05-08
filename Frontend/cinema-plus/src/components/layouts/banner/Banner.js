@@ -5,7 +5,11 @@ function Banner({ cinema }) {
   return (
     <div
       className="layout-banner d-flex justify-content-center align-items-center text-center"
-      style={{ backgroundImage: `url(${cinema.images && cinema.images[0].image})` }}
+      style={{
+        backgroundImage: `url(${
+          cinema.images && cinema.images.length !== 0 && cinema.images[0].image
+        })`,
+      }}
     >
       <div className="container">
         <h4>{cinema.name}</h4>
