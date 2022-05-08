@@ -16,6 +16,9 @@ import MovieDetail from "./pages/movieDetail/MovieDetail";
 import { LoadingProvider } from "./context/loading";
 import Tariffs from "./pages/tariffs/Tariffs";
 import { ConstantProvider } from "./context/constant";
+import Cinema from "./pages/cinema/Cinema";
+import Campaigns from "./pages/campaigns/Campaigns";
+import Error from "./pages/error/Error";
 
 function App() {
   return (
@@ -34,7 +37,10 @@ function App() {
             <Route path={"/newsdetail"} exact component={NewsDetail} />
             <Route path={"/allnews"} exact component={AllNews} />
             <Route path={"/tariffs"} exact component={Tariffs} />
-            <Redirect to={"/error"} />
+            <Route path={"/cinema"} exact component={Cinema} />
+            <Route path={"/campaigns"} exact component={Campaigns} />
+            <Route path={"/error"} exact component={Error} />
+            <Redirect to={"/error"}  exact component={Error}/>
           </Switch>
           <Footer />
         </ConstantProvider>

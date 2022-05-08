@@ -108,6 +108,7 @@
       background-color: white;
       width: calc(100% / 12 * 8);
       overflow: auto;
+      height: 100vh;
       .zone-header {
         background-color: #334e9e;
         width: 100%;
@@ -128,7 +129,8 @@
       .zone-body {
         background-color: white;
         width: 100%;
-        position: relative;
+      height: 100vh;
+      position: relative;
         div {
           a {
             position: relative;
@@ -231,30 +233,29 @@
             }
           }
         }
-      .total-amount{
-        p{
-          font-weight: 700px;
-          font-size: 18px;
+        .total-amount {
+          p {
+            font-weight: 700px;
+            font-size: 18px;
+          }
+          .total-title {
+            color: #00b0f0;
+          }
+          .total-price {
+            color: white;
+          }
         }
-        .total-title{
-          color: #00b0f0;
+        .payment-button {
+          a {
+            padding: 10px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            background-color: #696969;
+            color: white;
+            font-weight: 700px;
+            // pointer-events: none;
+          }
         }
-        .total-price{
-          color: white;
-
-        }
-      }
-      .payment-button{
-      a{
-        padding: 10px 30px;
-        border-radius: 5px;
-        text-decoration: none;
-        background-color: #696969;
-        color: white;
-        font-weight: 700px;
-        // pointer-events: none;
-      }
-      }
       }
       .zone-close {
         position: absolute;

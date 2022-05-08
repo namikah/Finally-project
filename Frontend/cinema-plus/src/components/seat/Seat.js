@@ -43,8 +43,6 @@ function Seat({ selectedSession }) {
     [maxSeatSelected, setTotalPay, totalPay,selectedSession,setTickets,tickets]
   );
 
-  console.log(tickets);
-
   return (
     <>
       {range(1, selectedSession && selectedSession.hall.rowCount + 1).map(

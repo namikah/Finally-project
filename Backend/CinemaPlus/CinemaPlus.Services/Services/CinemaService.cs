@@ -20,10 +20,10 @@ namespace CinemaPlus.Services.Services
         public async Task<List<Cinema>> GetAllCinemaAsync()
         {
             var cinemas = await GetAllRelations()
-               .Include(x => x.Halls)
-               .ThenInclude(x=>x.Seats)
-               .Include(x => x.Tariffs)
-               .ThenInclude(x=>x.Format)
+               //.Include(x => x.Halls)
+               //.ThenInclude(x => x.Seats)
+               //.Include(x => x.Tariffs)
+               //.ThenInclude(x => x.Format)
                .AsNoTracking()
                .ToListAsync();
 
@@ -35,10 +35,11 @@ namespace CinemaPlus.Services.Services
             if (id == null) return new Cinema();
 
             var cinema = await GetAllRelations()
-                .Include(x => x.Halls)
-               .ThenInclude(x => x.Seats)
-               .Include(x => x.Tariffs)
-               .ThenInclude(x => x.Format)
+                .Include(x=>x.Images)
+               // .Include(x => x.Halls)
+               //.ThenInclude(x => x.Seats)
+               //.Include(x => x.Tariffs)
+               //.ThenInclude(x => x.Format)
                .AsNoTracking()
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 

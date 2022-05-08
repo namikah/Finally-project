@@ -100,11 +100,23 @@ function Session(props) {
     );
   }
 
+  
   if (selectedCinemaId !== undefined && selectedCinemaId !== "") {
     sessions = sessions?.filter(
       (s) => s.hall.cinemaId.toString() === selectedCinemaId.toString()
-    );
-  }
+      );
+    }
+    
+    const selectCinema = useCallback(()=>{
+      if (props.selectedCinemaId !== undefined && props.selectedCinemaId !== "") {
+        setSelectedCinemaId(props.selectedCinemaId);
+      }
+    },[props.selectedCinemaId]);
+
+    useEffect(()=>{
+      selectCinema();
+    },[selectCinema])
+    
 
   document.addEventListener("click", function (event) {
     if (!event.target.classList.contains("change-cinema")) {
@@ -121,8 +133,6 @@ function Session(props) {
   const getTicket = useCallback(
     () => {
       ticketService.getTicket().then((res) => {
-        console.log("get tickets");
-        console.log(res.data);
       });
     },
     []
@@ -131,15 +141,11 @@ function Session(props) {
   const addTicket = useCallback(
     (tickets) => {
       ticketService.postTickets(tickets).then((res) => {
-        console.log("tickets");
-        console.log(tickets);
         getTicket();
       });
     },
     [getTicket]
   );
-
- 
 
   return (
     <section id="session">
@@ -188,7 +194,9 @@ function Session(props) {
             <option value={tomorrow4}>{tomorrow4}</option>
           </select>
         </div>
-        <select
+        {(props.selectedCinemaId === undefined || props.selectedCinemaId === "") ? (
+        <>
+          <select
           className="filter-cinemas change-cinema"
           onChange={(e) => setSelectedCinemaId(e.target.value)}
           onClick={() => setOptionTwo(!optionTwo)}
@@ -223,6 +231,7 @@ function Session(props) {
           <option value="Eng">In English</option>
           <option value="Tur">Türkçe</option>
         </select>
+        </>) : ("")}
       </div>
       <div className="container">
         <div className="today-header text-center">
@@ -319,7 +328,7 @@ function Session(props) {
         </a>
       </div>
       <div ref={zone} className="zone" id="zone-buy">
-        <div className="select-zone d-flex flex-column justify-content-between align-items-center">
+        <div className="select-zone d-flex flex-column justify-content-between   align-items-center">
           <div className="zone-header d-flex flex-column justify-content-center align-items-center">
             <h6>{selectedSession && selectedSession.movie.name}</h6>
             <h6>
@@ -344,7 +353,7 @@ function Session(props) {
                 ))}
             </div>
           </div>
-          <div className="zone-body d-flex flex-column justify-content-center align-items-center gap-1 pt-3">
+          <div className="zone-body d-flex flex-column justify-content-end align-items-center gap-1 pt-3">
             <Seat selectedSession={selectedSession} />
             <div className="screen-text">EKRAN</div>
             <div className="zone-screen"></div>

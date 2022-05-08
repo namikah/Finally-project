@@ -1,0 +1,28 @@
+.layout-banner{
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    min-height: 200px;
+    background-repeat: no-repeat;
+    position: relative;
+    &::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        background-color: rgba(0, 0, 0, 0.541);
+    }
+   .container{
+    z-index: 99;
+
+    h4{
+        color: white;
+    } 
+    h6{
+        color: white;
+    }
+   }
+}

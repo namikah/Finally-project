@@ -85,7 +85,7 @@ function Header() {
                   <Link to={"/"}>Baş səhifə</Link>
                 </li>
                 <li className="main-menu">
-                  <Link onClick={scrollTo} to={"/sessions"}>
+                  <Link onClick={scrollTo} to={"/campaigns"}>
                     Aksiyalar
                   </Link>
                 </li>

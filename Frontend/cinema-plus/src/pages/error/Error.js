@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import "./error.scss";
 
 function Error() {
   return (
-    <div>Error</div>
-  )
+    <section id="error-section">
+      <div className="container">
+        <div>
+          <h4>404 Not Found</h4>
+        </div>
+      </div>
+    </section>
+  );
 }
 
-export default Error
+export default Error;

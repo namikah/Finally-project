@@ -3,13 +3,13 @@ import { movieService } from "../../API/services/movieService";
 import "./movie.scss";
 import { Link } from "react-router-dom";
 import { useLoadingContext } from "../../context/loading";
+import dateFormat from "dateformat";
 
-function Movie({ movieCount, selectedSessions, selectedLanguage }) {
+function Movie({ movieCount, selectedSessions, selectedLanguage, soon }) {
+  let date = new Date();
+  let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");
   const [moviesData, setMoviesData] = useState();
   const [{ loading, setLoading }] = useLoadingContext();
-  // let date = new Date();
-  // let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");
-  // let today = date.getDate();
 
   const getData = useCallback(() => {
     setLoading(true);
@@ -37,6 +37,11 @@ function Movie({ movieCount, selectedSessions, selectedLanguage }) {
   if (selectedLanguage !== undefined && selectedLanguage !== "0")
     movies = movies?.filter((m) =>
       m.movieFormats?.find((x) => x.format.name.includes(selectedLanguage))
+    );
+
+    if (soon !== undefined && soon !== "0")
+    movies = movies?.filter((m) =>
+      dateFormat(m.detail.startInCinema,"dd.MM.yyyy") > today
     );
 
   return (

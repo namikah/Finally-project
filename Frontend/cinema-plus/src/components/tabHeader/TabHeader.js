@@ -1,5 +1,6 @@
 import React from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import Movie from "../movie/Movie";
 import MovieFilter from "../movie/MovieFilter";
 import Session from "../session/Session";
 import "./tabHeader.scss";
@@ -21,7 +22,7 @@ function TabHeader() {
             <Session />
           </TabPanel>
           <TabPanel>
-            <h2>Any content 3</h2>
+          <Movie soon={true}/>
           </TabPanel>
         </Tabs>
       </div>
