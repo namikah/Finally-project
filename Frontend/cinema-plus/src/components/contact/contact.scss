@@ -1,40 +1,89 @@
 #contact-cinema {
   background-color: #171f26;
-    .row {
-      .left-side {
-        ul {
-          list-style: none;
-          text-align: center;
-          padding: 50px 0;
-          li {
-            border-bottom: 1px solid #333E48;
-            padding: 15px 0;
-            span {
-              color: #60ccee;
-              font-size: 16px;
-              line-height: 22px;
-            }
-            p {
-                margin: 0 !important;
-              color: white;
-              font-size: 16px;
-              line-height: 22px;
-            }
-            div {
-              padding: 20px 80px;
-              border-radius: 8px;
-              background-color: #0075bc;
-              font-weight: 700;
-            }
-            &.write-us{
-                padding: 50px 0;
-            }
+  .row {
+    .left-side {
+      ul {
+        list-style: none;
+        text-align: center;
+        padding: 50px 0;
+        li {
+          border-bottom: 1px solid #333e48;
+          padding: 15px 0;
+          span {
+            color: #60ccee;
+            font-size: 16px;
+            line-height: 22px;
+          }
+          p {
+            margin: 0 !important;
+            color: white;
+            font-size: 16px;
+            line-height: 22px;
+          }
+          div {
+            padding: 15px 80px;
+            border-radius: 8px;
+            background-color: #0075bc;
+            font-weight: 700;
+          }
+          &.write-us {
+            padding: 50px 0;
           }
         }
       }
-      .right-side{
-          height: 100% !important;
-          padding: 7px 20px;
+    }
+    .right-side {
+      height: 100% !important;
+      padding: 7px 20px;
+    }
+  }
+}
+#send-mail-us {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.851);
+  z-index: 999999999;
+  transition: 1s;
+  > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    h2 {
+      color: white;
+      padding-bottom: 20px;
+    }
+    form {
+      > div {
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        input {
+          text-align: center;
+          background: transparent;
+          border: 0;
+          color: white;
+          font-size: 16px;
+          font-weight: 600;
+        }
+        textarea {
+          text-align: center;
+          background: transparent;
+          border: 0;
+          color: white;
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+      button{
+        margin-top: 30px;
+        width: 100%;
+        background-color: #FFFFFF;
+        color: black;
       }
     }
+  }
 }

@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { cinemaService } from "../../API/services/cinemaService";
 import "./contact.scss";
+import { Button, Form, FormGroup, Input} from "reactstrap";
 
-function ContactComponent({ cinemaId}) {
+function ContactComponent({ cinemaId }) {
   const [cinema, setCinema] = useState({});
+  const [sendMail, setSendMail] = useState(false);
 
   const getData = useCallback((id) => {
     cinemaService.getCinemaById(id).then((res) => {
@@ -13,7 +15,7 @@ function ContactComponent({ cinemaId}) {
 
   useEffect(() => {
     getData(cinemaId);
-  }, [getData,cinemaId]);
+  }, [getData, cinemaId]);
 
   return (
     <section id="contact-cinema">
@@ -41,7 +43,12 @@ function ContactComponent({ cinemaId}) {
               <p>{cinema.workTime}</p>
             </li>
             <li className="write-us">
-              <div className="btn btn-primary">Bizə yazın</div>
+              <div
+                className="btn btn-primary"
+                onClick={() => setSendMail(!sendMail)}
+              >
+                Bizə yazın
+              </div>
             </li>
           </ul>
         </div>
@@ -63,6 +70,51 @@ function ContactComponent({ cinemaId}) {
           </div>
         </div>
       </div>
+      <section
+        style={sendMail ? { display: "flex" } : { display: "none" }}
+        onClick={(e) =>
+          e.target.classList.contains("background-side") &&
+          setSendMail(!sendMail)
+        }
+        id="send-mail-us"
+        className="background-side row justify-content-center align-items.center"
+      >
+        <div className="col-3">
+          <div>
+            <h2 className="text-center">Bize yazin</h2>
+          </div>
+          <Form className="text-center">
+            <FormGroup>
+              <Input type="text" name="name" id="name" placeholder="adiniz" />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                type="email"
+                name="email"
+                id="exampleEmail"
+                placeholder="elektron poct"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="metn basligi"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                type="metn"
+                name="message"
+                id="message"
+                placeholder="metn"
+              />
+            </FormGroup>
+            <Button>Gonder</Button>
+          </Form>
+        </div>
+      </section>
     </section>
   );
 }
