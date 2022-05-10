@@ -1,0 +1,18 @@
+#faq {
+  .container {
+    .row {
+      .accordion {
+          .accordion-item {
+            border: 0;
+          h2 {
+            button {
+              font-weight: 500 !important;
+              color: #007ec6;
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

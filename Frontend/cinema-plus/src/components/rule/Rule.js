@@ -24,11 +24,11 @@ function Rules() {
               ?.filter((x) => x.isMain)
               ?.map((parent,index) => (
                 <>
-                 <div dangerouslySetInnerHTML={{__html: parent.subtitle}} style={index ===0 ? {borderBottom:"1px solid black"} : {}} ></div>
+                 <div key={parent.id} dangerouslySetInnerHTML={{__html: parent.subtitle}} style={index ===0 ? {borderBottom:"1px solid black"} : {}} ></div>
                   {rules
                     ?.filter((x) => x.parentId === parent.id)
                     .map((children) => (
-                      <div  dangerouslySetInnerHTML={{__html: children.subtitle}}></div>
+                      <div key={children.id} dangerouslySetInnerHTML={{__html: children.subtitle}}></div>
                     ))}
                 </>
               ))}
