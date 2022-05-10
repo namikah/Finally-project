@@ -42,13 +42,5 @@ namespace CinemaPlus.Controllers
 
             return Ok(seatType);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post([FromForm] SeatType seatType)
-        {
-            await _seatTypeService.AddAsync(seatType);
-
-            return Ok(seatType);
-        }
     }
 }

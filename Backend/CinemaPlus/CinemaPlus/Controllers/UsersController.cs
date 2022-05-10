@@ -20,13 +20,6 @@ namespace CinemaPlus.WebAPI.Controllers
             _userService = userService;
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult> RegisterAsync([FromForm]UserDto model)
-        {
-            var result = await _userService.RegisterAsync(model);
-            return Ok(result);
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {

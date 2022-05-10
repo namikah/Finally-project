@@ -42,46 +42,5 @@ namespace CinemaPlus.Controllers
 
             return Ok(tariff);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post([FromForm] Tariff tariff)
-        {
-            await _tariffService.AddAsync(tariff);
-
-            return Ok(tariff);
-        }
-
-        [HttpPut("{id?}")]
-        public async Task<IActionResult> Put([FromRoute] int? id, [FromForm] Tariff tariff)
-        {
-            if (id == null)
-                throw new Exception("Not found");
-
-            if (id != tariff.Id)
-                throw new Exception("Invalid Credential");
-
-            var existTariff = await _tariffService.GetAsync(id.Value);
-            if (existTariff == null)
-                throw new Exception("Not found");
-
-            await _tariffRepository.UpdateAsync(tariff);
-
-            return Ok();
-        }
-
-        [HttpDelete("{id?}")]
-        public async Task<IActionResult> Delete([FromRoute] int? id)
-        {
-            if (id == null)
-                throw new Exception("Not found");
-
-            var tariff = await _tariffService.GetAsync(id.Value);
-            if (tariff == null)
-                throw new Exception("Not found");
-
-            await _tariffRepository.DeleteAsync(tariff);
-
-            return NoContent();
-        }
     }
 }

@@ -407,6 +407,32 @@ namespace CinemaPlus.Repository.Migrations
                     b.ToTable("News");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Rule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subtitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Rules");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.Seat", b =>
                 {
                     b.Property<int>("Id")
@@ -900,6 +926,15 @@ namespace CinemaPlus.Repository.Migrations
                     b.Navigation("Genre");
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Rule", b =>
+                {
+                    b.HasOne("CinemaPlus.Models.Entities.Rule", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Seat", b =>

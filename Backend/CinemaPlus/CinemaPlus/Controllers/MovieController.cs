@@ -45,46 +45,5 @@ namespace CinemaPlus.Controllers
 
             return Ok(movie);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post([FromForm] Movie movie)
-        {
-            await _movieService.AddAsync(movie);
-
-            return Ok(movie);
-        }
-
-        [HttpPut("{id?}")]
-        public async Task<IActionResult> Put([FromRoute] int? id, [FromForm] Movie movie)
-        {
-            if (id == null)
-                throw new Exception("Not found");
-
-            if (id != movie.Id)
-                throw new Exception("Invalid Credential");
-
-            var existMovie = await _movieService.GetAsync(id.Value);
-            if (existMovie == null)
-                throw new Exception("Not found");
-
-            await _movieRepository.UpdateAsync(movie);
-
-            return Ok();
-        }
-
-        [HttpDelete("{id?}")]
-        public async Task<IActionResult> Delete([FromRoute] int? id)
-        {
-            if (id == null)
-                throw new Exception("Not found");
-
-            var movie = await _movieService.GetAsync(id.Value);
-            if (movie == null)
-                throw new Exception("Not found");
-
-            await _movieRepository.DeleteAsync(movie);
-
-            return NoContent();
-        }
     }
 }

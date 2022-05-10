@@ -42,46 +42,5 @@ namespace CinemaPlus.Controllers
 
             return Ok(session);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post([FromForm] Session session)
-        {
-            await _sessionService.AddAsync(session);
-
-            return Ok(session);
-        }
-
-        [HttpPut("{id?}")]
-        public async Task<IActionResult> Put([FromRoute] int? id, [FromForm] Session session)
-        {
-            if (id == null)
-                throw new Exception("Not found");
-
-            if (id != session.Id)
-                throw new Exception("Invalid Credential");
-
-            var existSession = await _sessionService.GetAsync(id.Value);
-            if (existSession == null)
-                throw new Exception("Not found");
-
-            await _sessionRepository.UpdateAsync(session);
-
-            return Ok();
-        }
-
-        [HttpDelete("{id?}")]
-        public async Task<IActionResult> Delete([FromRoute] int? id)
-        {
-            if (id == null)
-                throw new Exception("Not found");
-
-            var session = await _sessionService.GetAsync(id.Value);
-            if (session == null)
-                throw new Exception("Not found");
-
-            await _sessionRepository.DeleteAsync(session);
-
-            return NoContent();
-        }
     }
 }

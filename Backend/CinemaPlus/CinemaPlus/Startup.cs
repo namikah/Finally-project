@@ -56,6 +56,7 @@ namespace CinemaPlus
             services.AddScoped<ITariffService, TariffService>();
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<IAboutService, AboutService>();
+            services.AddScoped<IRuleService, RuleService>();
 
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped(typeof(ITicketService), typeof(TicketService));
