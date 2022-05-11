@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import { messageService } from "../../API/services/messageService";
 import { useLoadingContext } from "../../context/loading";
 import ProgressBar from "../progress/ProgressBar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const messageDto = {
   name: "",
@@ -15,7 +17,6 @@ const messageDto = {
 };
 
 function ContactComponent({ cinemaId }) {
-  const [{ progress, setProgress }] = useLoadingContext(false);
   const [cinema, setCinema] = useState({});
   const [sendMail, setSendMail] = useState(false);
   const [message, setMessage] = useState(messageDto);
@@ -37,23 +38,32 @@ function ContactComponent({ cinemaId }) {
       message.email === "" ||
       message.body === "" ||
       message.title === ""
-    )
+    ) {
+      toast.error("zəhmət olmasa, xanaları düzgün doldurun !", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       return;
-    setProgress(true);
+    }
+
     messageService
       .postMessage(message)
       .then((res) => {
-        setTimeout(() => {
-          setProgress(false);
+        if (res.status === 200) {
+          toast.success("Message göndərildi. Təşəkkür edirik...", {
+            position: toast.POSITION.TOP_CENTER,
+          });
           push({
             pathname: "/contact",
-            search: "",
-            state: true,
           });
-        }, 3000);
+        } else
+          toast.info("Səhv baş verdi !", {
+            position: toast.POSITION.TOP_CENTER,
+          });
       })
-      .catch((res) => {
-        setProgress(false);
+      .catch(() => {
+        toast.info("Səhv baş verdi !", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       });
   }, [message, push]);
 
@@ -169,13 +179,19 @@ function ContactComponent({ cinemaId }) {
                 onChange={getElementValues}
               />
             </FormGroup>
-            <Button onClick={createMessage}>Gonder</Button>
+            <Button
+              className="btn"
+              id="animate.css"
+              onClick={() => {
+                createMessage();
+              }}
+            >
+              Gonder
+            </Button>
+            <ToastContainer autoClose={3000} />
           </Form>
         </div>
       </section>
-      {progress && (
-        <ProgressBar title={"Message göndərildi. Təşəkkür edirik..."} />
-      )}
     </section>
   );
 }
