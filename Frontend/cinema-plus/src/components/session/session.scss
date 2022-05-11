@@ -246,7 +246,7 @@
           }
         }
         .payment-button {
-          a {
+          div {
             padding: 10px 30px;
             border-radius: 5px;
             text-decoration: none;
@@ -254,6 +254,7 @@
             color: white;
             font-weight: 700px;
             // pointer-events: none;
+            cursor: pointer;
           }
         }
       }

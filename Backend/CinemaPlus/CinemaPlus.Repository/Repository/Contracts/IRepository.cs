@@ -14,7 +14,7 @@ namespace CinemaPlus.Repository.Repository.Contracts
         IQueryable<T> GetAllRelations();
         Task<T> GetAsync(int id);
         Task AddAsync(T entity);
-        Task AddAsync(IEnumerable<T> entities);
+        Task AddAsync(List<T> entities);
         Task AddAsync(params T[] entity);
         Task UpdateAsync(T entity);
         Task UpdateAsync(IEnumerable<T> entity);

@@ -1,4 +1,6 @@
-﻿using CinemaPlus.Models.Entities;
+﻿using AutoMapper;
+using CinemaPlus.Models.DTOs;
+using CinemaPlus.Models.Entities;
 using CinemaPlus.Repository.Repository.Contracts;
 using CinemaPlus.Services.Services;
 using CinemaPlus.Services.Services.Contracts;
@@ -17,11 +19,13 @@ namespace CinemaPlus.Controllers
     {
         private readonly IRepository<Session> _sessionRepository;
         private readonly ISessionService _sessionService;
+        private readonly IMapper _mapper;
 
-        public SessionController(IRepository<Session> sessionRepository, ISessionService sessionService)
+        public SessionController(IRepository<Session> sessionRepository, ISessionService sessionService, IMapper mapper)
         {
             _sessionRepository = sessionRepository;
             _sessionService = sessionService;
+            _mapper = mapper;
         }
 
         [HttpGet]

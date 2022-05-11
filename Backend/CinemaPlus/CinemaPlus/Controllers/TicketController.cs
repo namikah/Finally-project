@@ -44,32 +44,51 @@ namespace CinemaPlus.Controllers
             return Ok(ticket);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post([FromBody] IEnumerable<TicketDto> ticketDtos)
-        //{
-        //    var tickets = new List<Ticket>();
-
-        //    foreach (var item in ticketDtos)
-        //    {
-        //        var ticket = _mapper.Map<Ticket>(item);
-        //        tickets.Add(ticket);
-        //    }
-
-        //    await _ticketService.AddAsync(tickets);
-
-        //    return Ok(tickets);
-        //}
-
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] TicketDto ticketDto)
+        public async Task<IActionResult> Post([FromBody] List<TicketDto> ticketDtos)
         {
+            var tickets = new List<Ticket>();
 
-            var ticket = _mapper.Map<Ticket>(ticketDto);
+            //foreach (var item in ticketDtos)
+            //{
+            //    var ticket = _mapper.Map<Ticket>(item);
+            //    tickets.Add(ticket);
+            //}
 
-            await _ticketService.AddAsync(ticket);
+            //await _ticketService.AddAsync(tickets);
+
+            //return Ok(tickets);
+
+            //foreach (var item in ticketDtos)
+            //{
+            //    var ticket = _mapper.Map<Ticket>(item);
+            //    tickets.Add(ticket);
+            //}
+            Session session = ticketDtos[0].Session;
+            var ticket = new Ticket()
+            {
+                SeatId = 2,
+                IsDeleted = false,
+                Price = 1111,
+                CustomerId = 2,
+                Session = null,
+            };
+
+            await _ticketService.AddTicketsAsync(ticket);
 
             return Ok(ticket);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody] TicketDto ticketDto)
+        //{
+
+        //    var ticket = _mapper.Map<Ticket>(ticketDto);
+
+        //    await _ticketService.AddAsync(ticket);
+
+        //    return Ok(ticket);
+        //}
 
         [HttpPut("{id?}")]
         public async Task<IActionResult> Put([FromRoute] int? id, [FromForm] Ticket ticket)

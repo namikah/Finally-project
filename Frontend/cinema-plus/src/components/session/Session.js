@@ -134,11 +134,18 @@ function Session(props) {
 
   const addTicket = useCallback(
     (tickets) => {
+      console.log(tickets);
       ticketService.postTickets(tickets).then((res) => {
-        getTicket();
+        // getTicket();
+        console.log("succes");
+        console.log(res);
+      }).catch((rest)=>{
+        console.log("catch");
+        console.log(rest);
+
       });
     },
-    [getTicket]
+    []
   );
 
   return (
@@ -352,7 +359,7 @@ function Session(props) {
             </div>
           </div>
           <div className="zone-body d-flex flex-column justify-content-end align-items-center gap-1 pt-3">
-            <Seat selectedSession={selectedSession} />
+            {selectedSession && <Seat selectedSession2={selectedSession} />}
             <div className="screen-text">EKRAN</div>
             <div className="zone-screen"></div>
           </div>
@@ -390,9 +397,9 @@ function Session(props) {
               <p className="total-price">{totalPay} AZN</p>
             </div>
             <div className="payment-button col-md-5 d-flex flex-column justify-content-center align-items-end">
-              <Link to={"#"} onClick={() => addTicket(tickets)}>
+              <div to="#" onClick={() => addTicket(tickets)}>
                 Təsdiqləmək
-              </Link>
+              </div>
             </div>
           </div>
           <div

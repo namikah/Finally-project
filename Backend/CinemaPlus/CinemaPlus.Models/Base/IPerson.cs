@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Models.Base
 {
-    public interface IPerson
+    public interface IPerson: IEntity
     {
         public string Name { get; set; }
 

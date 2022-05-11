@@ -1,11 +1,25 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { cinemaService } from "../../API/services/cinemaService";
 import "./contact.scss";
-import { Button, Form, FormGroup, Input} from "reactstrap";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { messageService } from "../../API/services/messageService";
+import { useLoadingContext } from "../../context/loading";
+import ProgressBar from "../progress/ProgressBar";
+
+const messageDto = {
+  name: "",
+  email: "",
+  title: "",
+  body: "",
+};
 
 function ContactComponent({ cinemaId }) {
+  const [{ progress, setProgress }] = useLoadingContext(false);
   const [cinema, setCinema] = useState({});
   const [sendMail, setSendMail] = useState(false);
+  const [message, setMessage] = useState(messageDto);
+  const { push } = useHistory();
 
   const getData = useCallback((id) => {
     cinemaService.getCinemaById(id).then((res) => {
@@ -16,6 +30,41 @@ function ContactComponent({ cinemaId }) {
   useEffect(() => {
     getData(cinemaId);
   }, [getData, cinemaId]);
+
+  const sendMessage = useCallback(() => {
+    if (
+      message.name === "" ||
+      message.email === "" ||
+      message.body === "" ||
+      message.title === ""
+    )
+      return;
+    setProgress(true);
+    messageService
+      .postMessage(message)
+      .then((res) => {
+        setTimeout(() => {
+          setProgress(false);
+          push({
+            pathname: "/contact",
+            search: "",
+            state: true,
+          });
+        }, 3000);
+      })
+      .catch((res) => {
+        setProgress(false);
+      });
+  }, [message, push]);
+
+  const createMessage = () => {
+    sendMessage();
+  };
+
+  const getElementValues = (e) => {
+    const { name, value } = e.target;
+    setMessage({ ...message, [name]: value });
+  };
 
   return (
     <section id="contact-cinema">
@@ -85,14 +134,21 @@ function ContactComponent({ cinemaId }) {
           </div>
           <Form className="text-center">
             <FormGroup>
-              <Input type="text" name="name" id="name" placeholder="adiniz" />
+              <Input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="adınız"
+                onChange={getElementValues}
+              />
             </FormGroup>
             <FormGroup>
               <Input
                 type="email"
                 name="email"
-                id="exampleEmail"
-                placeholder="elektron poct"
+                id="email"
+                placeholder="elektron poçt"
+                onChange={getElementValues}
               />
             </FormGroup>
             <FormGroup>
@@ -100,21 +156,26 @@ function ContactComponent({ cinemaId }) {
                 type="text"
                 name="title"
                 id="title"
-                placeholder="metn basligi"
+                placeholder="mətn başlığı"
+                onChange={getElementValues}
               />
             </FormGroup>
             <FormGroup>
               <Input
-                type="metn"
-                name="message"
-                id="message"
-                placeholder="metn"
+                type="text"
+                name="body"
+                id="body"
+                placeholder="mətn"
+                onChange={getElementValues}
               />
             </FormGroup>
-            <Button>Gonder</Button>
+            <Button onClick={createMessage}>Gonder</Button>
           </Form>
         </div>
       </section>
+      {progress && (
+        <ProgressBar title={"Message göndərildi. Təşəkkür edirik..."} />
+      )}
     </section>
   );
 }

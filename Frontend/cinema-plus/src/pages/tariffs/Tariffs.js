@@ -7,11 +7,12 @@ import "./tariffs.scss";
 
 function Tariffs() {
   const [cinemaData, setCinemaData] = useState();
-  const [selectedCinemaId, setSelectedCinemaId] = useState(0);
+  const [selectedCinema, setSelectedCinema] = useState({});
 
   const getData = useCallback(() => {
     cinemaService.getCinema().then((res) => {
       setCinemaData(res.data);
+      res.data && setSelectedCinema(res.data[0]);
     });
   }, []);
 
@@ -34,18 +35,18 @@ function Tariffs() {
             <TabPanel className="another-films">
               <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
                 <ul className="cinemas-us col-md-7 text-center">
-                  {cinemaData?.map(({ id, name }, index) => (
-                    <li key={id}>
+                  {cinemaData?.map((item, index) => (
+                    <li key={item.id}>
                       <Link
                         to={"#"}
                         className={index === 0 ? "selected" : ""}
                         onClick={(e) => {
                           handleChange();
                           e.target.classList.toggle("selected");
-                          setSelectedCinemaId(id);
+                          setSelectedCinema(item);
                         }}
                       >
-                        {name}
+                        {item.name}
                       </Link>
                     </li>
                   ))}
@@ -55,7 +56,7 @@ function Tariffs() {
           </Tabs>
         </div>
       </section>
-      <Tariff cinemaId={selectedCinemaId}/>
+      <Tariff cinema={selectedCinema}/>
     </>
   );
 }

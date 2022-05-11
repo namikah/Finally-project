@@ -57,5 +57,7 @@ namespace CinemaPlus.Repository.DataContext
         public DbSet<Rule> Rules { get; set; }
 
         public DbSet<Faq> Faqs { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
     }
 }

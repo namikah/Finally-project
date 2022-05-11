@@ -2,7 +2,7 @@
     .select-zone{
         .zone-body{
             div {
-                a {
+                div {
                   position: relative;
                   border: 1px solid rgba(0, 0, 0, 0.215);
                   width: 27px;
@@ -10,6 +10,7 @@
                   text-decoration: none;
                   border-radius: 5px;
                   overflow: hidden;
+                  cursor: pointer;
                   span {
                     display: inline-block;
                     position: absolute;

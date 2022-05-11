@@ -1,0 +1,31 @@
+#vacancies {
+    padding: 50px 0;
+  .container {
+    .row {
+      ul {
+        list-style: none;
+        li {
+          padding-top: 10px;
+          &:first-child {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.326);
+          }
+          h6 {
+            padding-top: 20px;
+            color: #314ca0;
+          }
+          img {
+            background-size: cover;
+            background-position: center;
+            width: 100% !important;
+          }
+          p {
+            margin: 0;
+            font-size: 14px;
+            color: #000000a0;
+            line-height: 25px;
+          }
+        }
+      }
+    }
+  }
+}

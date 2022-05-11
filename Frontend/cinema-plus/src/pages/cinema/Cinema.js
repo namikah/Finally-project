@@ -7,6 +7,7 @@ import CinemaImages from "../../components/cinemaImages/CinemaImages";
 import ContactComponent from "../../components/contact/ContactComponent";
 import Banner from "../../components/layouts/banner/Banner";
 import Session from "../../components/session/Session";
+import Tariff from "../../components/tariff/Tariff";
 import "./cinema.scss";
 
 function Cinema() {
@@ -18,6 +19,16 @@ function Cinema() {
   const [tabIndex, setTabIndex] = useState(0);
   const cinemaId = params.get("id");
 
+  const getDatas = useCallback(() => {
+    cinemaService.getCinema().then((res) => {
+      setCinemas(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    getDatas();
+  }, [getDatas]);
+  
   const getData = useCallback((id) => {
     cinemaService.getCinemaById(id).then((res) => {
       setCinema(res.data);
@@ -28,15 +39,7 @@ function Cinema() {
     getData(cinemaId);
   }, [getData, cinemaId]);
 
-  const getDatas = useCallback(() => {
-    cinemaService.getCinema().then((res) => {
-      setCinemas(res.data);
-    });
-  }, []);
 
-  useEffect(() => {
-    getDatas();
-  }, [getDatas]);
 
   const getTabIndex = useCallback(() => {
     setTabIndex(
@@ -88,16 +91,10 @@ function Cinema() {
               <CinemaImages cinema={cinema} />
             </TabPanel>
             <TabPanel>
-              <section id="tariff-image">
-                <div className="container">
-                  <div className="row">
-                    <img src={cinema.tarifUrl} alt="" className="img-fluid"></img>
-                  </div>
-                </div>
-              </section>
+              <Tariff cinema={cinema} />
             </TabPanel>
             <TabPanel>
-             <ContactComponent cinemaId={cinemaId}/>
+              <ContactComponent cinemaId={cinemaId} />
             </TabPanel>
           </Tabs>
         </div>

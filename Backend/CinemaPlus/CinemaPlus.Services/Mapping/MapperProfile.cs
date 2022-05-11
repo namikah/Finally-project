@@ -13,6 +13,8 @@ namespace CinemaPlus.Services.Mapping
             CreateMap<News, NewsDto>().ReverseMap();
 
             CreateMap<Ticket, TicketDto>().ReverseMap();
+
+            CreateMap<Session, SessionDto>().ReverseMap();
         }
     }
 }

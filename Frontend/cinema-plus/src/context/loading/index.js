@@ -4,9 +4,12 @@ const LoadingContext = createContext([]);
 
 function LoadingProvider({ children }) {
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(false);
 
   return (
-    <LoadingContext.Provider value={[{ loading, setLoading}]}>
+    <LoadingContext.Provider
+      value={[{ loading, setLoading, progress, setProgress }]}
+    >
       {children}
     </LoadingContext.Provider>
   );

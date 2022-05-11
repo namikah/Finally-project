@@ -55,5 +55,12 @@ namespace CinemaPlus.Services.Services
 
             return tickets;
         }
+
+        public async Task<Ticket> AddTicketsAsync(Ticket ticket)
+        {
+            await AddAsync(ticket);
+
+            return ticket;
+        }
     }
 }

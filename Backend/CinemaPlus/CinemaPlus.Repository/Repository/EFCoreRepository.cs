@@ -41,13 +41,13 @@ namespace CinemaPlus.Repository.Repository
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task AddAsync(IEnumerable<T> entities)
+        public async Task AddAsync(List<T> entities)
         {
             foreach (var item in entities)
             {
                 await DbContext.Set<T>().AddAsync(item);
-            }
                 await DbContext.SaveChangesAsync();
+            }
         }
 
         public Task AddAsync(params T[] entity)

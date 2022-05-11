@@ -19,7 +19,6 @@ namespace BackendProject.Areas.AdminPanel.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly AppDbContext _dbContext;
         private readonly SignInManager<User> _signInManager;
-        private readonly IMapper _mapper;
 
         public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager = null, AppDbContext dbContext = null, SignInManager<User> signInManager = null)
         {
