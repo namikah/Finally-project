@@ -48,47 +48,24 @@ namespace CinemaPlus.Controllers
         public async Task<IActionResult> Post([FromBody] List<TicketDto> ticketDtos)
         {
             var tickets = new List<Ticket>();
-
-            //foreach (var item in ticketDtos)
-            //{
-            //    var ticket = _mapper.Map<Ticket>(item);
-            //    tickets.Add(ticket);
-            //}
-
-            //await _ticketService.AddAsync(tickets);
-
-            //return Ok(tickets);
-
-            //foreach (var item in ticketDtos)
-            //{
-            //    var ticket = _mapper.Map<Ticket>(item);
-            //    tickets.Add(ticket);
-            //}
-            Session session = ticketDtos[0].Session;
-            var ticket = new Ticket()
+            foreach (var item in ticketDtos)
             {
-                SeatId = 2,
-                IsDeleted = false,
-                Price = 1111,
-                CustomerId = 2,
-                Session = null,
-            };
+                var ticket = new Ticket()
+                {
+                    SeatId = item.Seat.Id,
+                    IsDeleted = false,
+                    Price = item.Price,
+                    Customer = item.Customer,
+                    Session = null
+                    //Session = item.Session
+                };
+                tickets.Add(ticket);
+            }
 
-            await _ticketService.AddTicketsAsync(ticket);
+            await _ticketService.AddTicketsAsync(tickets);
 
-            return Ok(ticket);
+            return Ok(tickets);
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> Post([FromBody] TicketDto ticketDto)
-        //{
-
-        //    var ticket = _mapper.Map<Ticket>(ticketDto);
-
-        //    await _ticketService.AddAsync(ticket);
-
-        //    return Ok(ticket);
-        //}
 
         [HttpPut("{id?}")]
         public async Task<IActionResult> Put([FromRoute] int? id, [FromForm] Ticket ticket)

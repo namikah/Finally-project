@@ -6,37 +6,35 @@ import { useContsantContext } from "../../context/constant";
 import { useLoadingContext } from "../../context/loading";
 import "./seat.scss";
 
-function Seat({ selectedSession2 }) {
-  const [{ totalPay, setTotalPay, maxSeatSelected, setMaxSeatSelected }] = useContsantContext(0);
+function Seat({ session }) {
+  const [{ totalPay, setTotalPay }] = useContsantContext(0);
+  const [{ maxSeatSelected, setMaxSeatSelected }] = useContsantContext(0);
   const [{ tickets, setTickets }] = useContsantContext([]);
   const [{ loading, setLoading }] = useLoadingContext(false);
-  const [selectedSession, setSelectedSession] = useState(selectedSession2);
+  const [selectedSession, setSelectedSession] = useState(session);
 
   const getSelectedSession = useCallback((id) => {
     setLoading(true);
     sessionService.getSessionById(id).then((res) => {
       setSelectedSession(res.data);
       setLoading(false);
+      setMaxSeatSelected(0);
+      setTotalPay(0);
+      setTickets([]);
     });
-  }, [setLoading]);
+  }, [setLoading,setMaxSeatSelected,setTickets,setTotalPay]);
 
   useEffect(() => {
-    getSelectedSession(selectedSession2.id);
-  }, [getSelectedSession, selectedSession2.id]);
-
-  useEffect(() => {
-    setMaxSeatSelected(0);
-    setTotalPay(0);
-    setTickets([]);
-  }, [setTotalPay, setTickets,setMaxSeatSelected]);
+    getSelectedSession(session.id);
+  }, [getSelectedSession, session.id]);
 
   const selectedSeat = useCallback(
-    (e, seat) => {
+    (e, seat, session) => {
       const ticket = {
-        Price: 13,
+        Price: 11,
         Seat: seat,
-        Session: selectedSession,
-        Customer: { id: 1, name: "Namik", surname: "Heydarov", Gender: "Male" },
+        Session: session,
+        Customer: { name: "", surname: "", Gender: "Male" },
         IsDeleted: false,
       };
 
@@ -54,12 +52,12 @@ function Seat({ selectedSession2 }) {
           setTickets([...tickets, ticket]);
         }
       }
+      console.log(tickets);
     },
     [
       maxSeatSelected,
       setTotalPay,
       totalPay,
-      selectedSession,
       setTickets,
       tickets,
       setMaxSeatSelected
@@ -105,8 +103,7 @@ function Seat({ selectedSession2 }) {
                       <span
                         datatype={seat.seatType.name}
                         onClick={(e) => {
-                          selectedSeat(e, seat);
-                          // setTicket(seat);
+                          selectedSeat(e, seat, selectedSession);
                         }}
                       >
                         {seat.column}

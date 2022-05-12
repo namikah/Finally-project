@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
+import { ticketService } from "../../API/services/ticketService";
 import { useContsantContext } from "../../context/constant";
 import "./payment.scss";
 
-function Payment() {
+function Payment({customer}) {
   const [{ totalPay }] = useContsantContext(0);
-  console.log(totalPay);
+  const [{ tickets, setTickets }] = useContsantContext([]);
+  console.log(customer);
 
   async function handleToken(token) {
     axios
@@ -18,6 +20,23 @@ function Payment() {
       })
       .then((res) => {
         console.log(res);
+        if (res.data.status === "succeeded") {
+          tickets.forEach(element => {
+            element.customer=customer;
+          });
+          console.log(tickets);
+          ticketService
+          .postTickets(tickets)
+          .then((result) => {
+            console.log("succes");
+            console.log(result);
+          })
+          .catch((rest) => {
+            console.log("catch");
+            console.log(rest);
+          });
+        } else {
+        }
       });
   }
 

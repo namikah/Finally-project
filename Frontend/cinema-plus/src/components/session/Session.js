@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Link } from "react-router-dom";
-import { Table } from "reactstrap";
+import { Button, Form, FormGroup, Input, Table } from "reactstrap";
 import "./session.scss";
 import dateFormat from "dateformat";
 import { useLoadingContext } from "../../context/loading";
@@ -17,6 +17,12 @@ import Seat from "../seat/Seat";
 import { useContsantContext } from "../../context/constant";
 import { ticketService } from "../../API/services/ticketService";
 import Payment from "../payment/Payment";
+
+const customerDto = {
+  name: "",
+  surname: "",
+  gender: "Male",
+};
 
 function Session(props) {
   let date = new Date();
@@ -29,7 +35,6 @@ function Session(props) {
   const [{ loading }] = useLoadingContext();
   const [{ totalPay, setTotalPay }] = useContsantContext(0);
   const [{ tickets, setTickets }] = useContsantContext([]);
-  const [{ maxSeatSelected, setMaxSeatSelected }] = useContsantContext(0);
   const [sessionData, setSessionData] = useState([]);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
@@ -40,6 +45,7 @@ function Session(props) {
   const [cinemaData, setCinemaData] = useState();
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCinemaId, setSelectedCinemaId] = useState("");
+  const [customer, setCustomer] = useState(customerDto);
   const zone = useRef();
 
   const getCinemas = useCallback(() => {
@@ -130,24 +136,10 @@ function Session(props) {
     }
   });
 
-  const getTicket = useCallback(() => {
-    ticketService.getTicket().then((res) => {});
-  }, []);
-
-  const addTicket = useCallback((tickets) => {
-    console.log(tickets);
-    ticketService
-      .postTickets(tickets)
-      .then((res) => {
-        // getTicket();
-        console.log("succes");
-        console.log(res);
-      })
-      .catch((rest) => {
-        console.log("catch");
-        console.log(rest);
-      });
-  }, []);
+  const getElementValues = (e) => {
+    const { name, value } = e.target;
+    setCustomer({ ...customer, [name]: value });
+  };
 
   return (
     <section id="session">
@@ -360,7 +352,7 @@ function Session(props) {
             </div>
           </div>
           <div className="zone-body d-flex flex-column justify-content-end align-items-center gap-1 pt-3">
-            {selectedSession && <Seat selectedSession2={selectedSession} />}
+            {selectedSession && <Seat session={selectedSession} />}
             <div className="screen-text">EKRAN</div>
             <div className="zone-screen"></div>
           </div>
@@ -400,7 +392,8 @@ function Session(props) {
             <div className="payment-button col-md-5 d-flex flex-column justify-content-center align-items-end">
               <div
                 onClick={() => {
-                  document.querySelector(".StripeCheckout").click();
+                  // document.querySelector(".StripeCheckout").click();
+                  document.querySelector("#customer-for-payment").classList.toggle("active");
                 }}
               >
                 Təsdiqləmək
@@ -416,7 +409,51 @@ function Session(props) {
           >
             <span>X</span>
           </div>
-          <Payment />
+          <Payment customer={customer} />
+          <div id="customer-for-payment">
+            <Form className="text-center">
+              <FormGroup>
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="adınız"
+                  onChange={getElementValues}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  type="text"
+                  name="surname"
+                  id="surname"
+                  placeholder="soyadınız"
+                  onChange={getElementValues}
+                />
+              </FormGroup>
+              <FormGroup>
+                <select
+                  type="select"
+                  name="gender"
+                  id="gender"
+                  placeholder="soyadınız"
+                  onChange={getElementValues}
+                >
+                  <option selected={true}>Male</option>
+                  <option>female</option>
+                </select>
+              </FormGroup>
+              <Button
+                className="btn"
+                id="animate.css"
+                onClick={(e) => {
+                  document.querySelector("#customer-for-payment").classList.remove("active");
+                  document.querySelector(".StripeCheckout").click();
+                }}
+              >
+                Gonder
+              </Button>
+            </Form>
+          </div>
         </div>
       </div>
     </section>

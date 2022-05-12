@@ -23,12 +23,8 @@ namespace CinemaPlus.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Payment paymentDetails)
+        public IActionResult Post([FromBody] PaymentDto paymentDetails)
         {
-            //var paymentDetails = payment;
-
-            //paymentDetails.Amount = 678 * 100;
-
             #region Create Customer
             var customerOption = new CustomerCreateOptions
             {

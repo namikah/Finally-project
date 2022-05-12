@@ -4,8 +4,6 @@ import "./contact.scss";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { messageService } from "../../API/services/messageService";
-import { useLoadingContext } from "../../context/loading";
-import ProgressBar from "../progress/ProgressBar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

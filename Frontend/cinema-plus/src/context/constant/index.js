@@ -16,7 +16,7 @@ function ConstantProvider({ children }) {
           maxSeatSelected,
           setMaxSeatSelected,
           tickets,
-          setTickets
+          setTickets,
         },
       ]}
     >
