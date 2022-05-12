@@ -29,6 +29,7 @@ function Session(props) {
   const [{ loading }] = useLoadingContext();
   const [{ totalPay, setTotalPay }] = useContsantContext(0);
   const [{ tickets, setTickets }] = useContsantContext([]);
+  const [{ maxSeatSelected, setMaxSeatSelected }] = useContsantContext(0);
   const [sessionData, setSessionData] = useState([]);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
@@ -399,7 +400,7 @@ function Session(props) {
             <div className="payment-button col-md-5 d-flex flex-column justify-content-center align-items-end">
               <div
                 onClick={() => {
-                  document.getElementsByClassName("StripeCheckout")[0].click();
+                  document.querySelector(".StripeCheckout").click();
                 }}
               >
                 Təsdiqləmək

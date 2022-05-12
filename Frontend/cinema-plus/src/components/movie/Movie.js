@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useLoadingContext } from "../../context/loading";
 import dateFormat from "dateformat";
 
+
 function Movie({ movieCount, selectedSessions, selectedLanguage, soon }) {
   let date = new Date();
   let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");

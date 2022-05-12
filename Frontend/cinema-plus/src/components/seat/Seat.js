@@ -7,8 +7,7 @@ import { useLoadingContext } from "../../context/loading";
 import "./seat.scss";
 
 function Seat({ selectedSession2 }) {
-  const [maxSeatSelected, setMaxSeatSelected] = useState(0);
-  const [{ totalPay, setTotalPay }] = useContsantContext(0);
+  const [{ totalPay, setTotalPay, maxSeatSelected, setMaxSeatSelected }] = useContsantContext(0);
   const [{ tickets, setTickets }] = useContsantContext([]);
   const [{ loading, setLoading }] = useLoadingContext(false);
   const [selectedSession, setSelectedSession] = useState(selectedSession2);
@@ -19,19 +18,17 @@ function Seat({ selectedSession2 }) {
       setSelectedSession(res.data);
       setLoading(false);
     });
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     getSelectedSession(selectedSession2.id);
   }, [getSelectedSession, selectedSession2.id]);
 
-  console.log("selectedSession");
-  console.log(selectedSession);
   useEffect(() => {
     setMaxSeatSelected(0);
     setTotalPay(0);
     setTickets([]);
-  }, [setTotalPay, setTickets]);
+  }, [setTotalPay, setTickets,setMaxSeatSelected]);
 
   const selectedSeat = useCallback(
     (e, seat) => {
@@ -65,6 +62,7 @@ function Seat({ selectedSession2 }) {
       selectedSession,
       setTickets,
       tickets,
+      setMaxSeatSelected
     ]
   );
 

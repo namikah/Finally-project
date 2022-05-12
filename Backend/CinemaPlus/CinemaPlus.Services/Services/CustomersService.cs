@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Services.Services
 {
-    public class CustomerService : EFCoreRepository<Customer>, ICustomerService
+    public class CustomersService : EFCoreRepository<Customer>, ICustomerService
     {
-        public CustomerService(AppDbContext dbContext) : base(dbContext)
+        public CustomersService(AppDbContext dbContext) : base(dbContext)
         {
         }
 

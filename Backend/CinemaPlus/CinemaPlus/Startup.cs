@@ -60,7 +60,7 @@ namespace CinemaPlus
             services.AddScoped<IFaqService, FaqService>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<ISeatService, SeatService>();
-            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<ICustomerService, CustomersService>();
 
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped(typeof(ITicketService), typeof(TicketService));

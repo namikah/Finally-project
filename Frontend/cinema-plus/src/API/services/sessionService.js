@@ -10,6 +10,10 @@ class SessionService extends HttpClient {
       return await this.get("session");
   };
 
+  async getSessionWithSeats(){
+    return await this.get("session/seats");
+};
+
   async getSessionById(id){
     return await this.get("session/" + id);
 };

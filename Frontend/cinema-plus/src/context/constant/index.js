@@ -5,6 +5,7 @@ const ConstantContext = createContext([]);
 function ConstantProvider({ children }) {
   const [totalPay, setTotalPay] = useState(false);
   const [tickets, setTickets] = useState([]);
+  const [maxSeatSelected, setMaxSeatSelected] = useState(0);
 
   return (
     <ConstantContext.Provider
@@ -12,6 +13,8 @@ function ConstantProvider({ children }) {
         {
           totalPay,
           setTotalPay,
+          maxSeatSelected,
+          setMaxSeatSelected,
           tickets,
           setTickets
         },

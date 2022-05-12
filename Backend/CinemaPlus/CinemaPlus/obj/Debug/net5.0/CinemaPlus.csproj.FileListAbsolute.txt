@@ -529,3 +529,4 @@ C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus\obj\Debug\n
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus\obj\Debug\net5.0\ref\CinemaPlus.dll
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus\bin\Debug\net5.0\CloudinaryDotNet.dll
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus\bin\Debug\net5.0\Microsoft.Extensions.WebEncoders.dll
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus\bin\Debug\net5.0\Stripe.net.dll
