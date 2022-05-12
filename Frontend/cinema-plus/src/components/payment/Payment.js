@@ -1,6 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { toast, ToastContainer } from "react-toastify";
 import { ticketService } from "../../API/services/ticketService";
@@ -10,8 +9,7 @@ import "./payment.scss";
 function Payment({ customer }) {
   const [{ totalPay, setTotalPay }] = useContsantContext(0);
   const [{ tickets, setTickets }] = useContsantContext([]);
-  const [{ maxSeatSelected, setMaxSeatSelected }] = useContsantContext(0);
-  const { push } = useHistory();
+  const [{ setMaxSeatSelected }] = useContsantContext(0);
 
   async function handleToken(token) {
     toast.info("Ödənişiniz yoxlanılır. Zəhmət olmasa gözləyin", {
@@ -26,19 +24,14 @@ function Payment({ customer }) {
         name: `${customer.name} ${customer.surname}`,
       })
       .then((res) => {
-        console.log(res);
-
         if (res.data.status === "succeeded") {
           tickets.forEach((element) => {
             element.customer = customer;
           });
-          console.log(tickets);
 
           ticketService
             .postTickets(tickets)
             .then((result) => {
-              console.log("succes");
-              console.log(result);
               setTickets([]);
               setMaxSeatSelected(0);
               setTotalPay(0);
@@ -49,10 +42,7 @@ function Payment({ customer }) {
                 document.querySelector(".zone-close").click();
               }, 6000);
             })
-            .catch((rest) => {
-              console.log("catch");
-              console.log(rest);
-            });
+            .catch((rest) => {});
         } else {
         }
       });

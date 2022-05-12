@@ -1,8 +1,8 @@
 import { range } from "range";
 import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { sessionService } from "../../API/services/sessionService";
 import { tariffService } from "../../API/services/tariffService";
+import { ticketService } from "../../API/services/ticketService";
 import { useContsantContext } from "../../context/constant";
 import { useLoadingContext } from "../../context/loading";
 import "./seat.scss";
@@ -14,6 +14,7 @@ function Seat({ session }) {
   const [{ loading, setLoading }] = useLoadingContext(false);
   const [selectedSession, setSelectedSession] = useState(session);
   const [tariff, setTariff] = useState([]);
+  const [existTickets, setExistTickets] = useState([]);
 
   const getSelectedSession = useCallback(
     (id) => {
@@ -36,19 +37,33 @@ function Seat({ session }) {
   const getTariff = useCallback(() => {
     tariffService.getTariff().then((res) => {
       setTariff(res.data);
-      console.log("test for price");
     });
   }, [setTariff]);
-  
+
   useEffect(() => {
     getTariff();
   }, [getTariff]);
-  
+
+  const getExistTickets = useCallback(() => {
+    ticketService.getTicket().then((res) => {
+      setExistTickets(res.data);
+    });
+  }, [setExistTickets]);
+
+  useEffect(() => {
+    getExistTickets();
+  }, [getExistTickets]);
+
   const selectedSeat = useCallback(
     (e, seat, session, tariffs) => {
-      console.log();
       const ticket = {
-        Price: tariffs.find(x=>x.cinemaId === 1 && x.startTime <= session.start &&x.endTime >= session.end&& x.seatType.id === seat.seatTypeId).price,
+        Price: tariffs.find(
+          (x) =>
+            x.cinemaId === 1 &&
+            x.startTime <= session.start &&
+            x.endTime >= session.end &&
+            x.seatType.id === seat.seatTypeId
+        ).price,
         Seat: seat,
         Session: session,
         Customer: { name: "", surname: "", Gender: "Male" },
@@ -69,7 +84,6 @@ function Seat({ session }) {
           setTickets([...tickets, ticket]);
         }
       }
-      console.log(tickets);
     },
     [
       maxSeatSelected,
@@ -95,37 +109,54 @@ function Seat({ session }) {
               {selectedSession &&
                 selectedSession.hall.seats?.map((seat) =>
                   seat.row === i ? (
-                    <div
-                      key={seat.id}
-                      style={
-                        seat.seatTypeId === 1
-                          ? {
-                              backgroundColor: "white",
-                              color: "rgb(0 0 0 / 60%)",
-                            }
-                          : seat.seatTypeId === 2
-                          ? {
-                              backgroundColor: "pink",
-                              color: "rgb(0 0 0 / 60%)",
-                            }
-                          : seat.seatTypeId === 3
-                          ? {
-                              backgroundColor: "#49e1ea",
-                              color: "rgb(0 0 0 / 60%)",
-                            }
-                          : {}
-                      }
-                      className={seat.seatTypeId === 4 ? "another" : ""}
-                    >
-                      <span
-                        datatype={seat.seatType.name}
-                        onClick={(e) => {
-                          selectedSeat(e, seat, selectedSession, tariff);
-                        }}
+                    existTickets.some(
+                      (x) =>
+                        x.seatId === seat.id &&
+                        x.sessionId === selectedSession.id
+                    ) ? (
+                      <div
+                        key={seat.id}
+                        style={{backgroundColor: "#000000c4",color: "rgb(255 255 255 / 32%)", cursor:"default"}}
                       >
-                        {seat.column}
-                      </span>
-                    </div>
+                        <span
+                          datatype={seat.seatType.name}
+                        >
+                          {seat.column}
+                        </span>
+                      </div>
+                    ) : (
+                      <div
+                        key={seat.id}
+                        style={
+                          seat.seatTypeId === 1
+                            ? {
+                                backgroundColor: "white",
+                                color: "rgb(0 0 0 / 60%)",
+                              }
+                            : seat.seatTypeId === 2
+                            ? {
+                                backgroundColor: "pink",
+                                color: "rgb(0 0 0 / 60%)",
+                              }
+                            : seat.seatTypeId === 3
+                            ? {
+                                backgroundColor: "#49e1ea",
+                                color: "rgb(0 0 0 / 60%)",
+                              }
+                            : {}
+                        }
+                        className={seat.seatTypeId === 4 ? "another" : ""}
+                      >
+                        <span
+                          datatype={seat.seatType.name}
+                          onClick={(e) => {
+                            selectedSeat(e, seat, selectedSession, tariff);
+                          }}
+                        >
+                          {seat.column}
+                        </span>
+                      </div>
+                    )
                   ) : (
                     ""
                   )

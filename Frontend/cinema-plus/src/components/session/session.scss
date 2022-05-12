@@ -291,7 +291,7 @@
         form {
           label {
             display: flex;
-            justify-content: start;
+            justify-content: flex-start;
             color: white;
           }
           select {
@@ -308,18 +308,5 @@
   }
   .active-zone {
     display: flex !important;
-  }
-}
-
-#StripeCheckoutConfig {
-  visibility: hidden !important;
-
-  .overlayView {
-    .testMode {
-      visibility: hidden !important;
-    }
-    .brandingLogoView {
-      visibility: hidden !important;
-    }
   }
 }

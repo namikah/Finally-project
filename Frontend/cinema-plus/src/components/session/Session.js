@@ -15,7 +15,6 @@ import { cinemaService } from "../../API/services/cinemaService";
 import { sessionService } from "../../API/services/sessionService";
 import Seat from "../seat/Seat";
 import { useContsantContext } from "../../context/constant";
-import { ticketService } from "../../API/services/ticketService";
 import Payment from "../payment/Payment";
 
 const customerDto = {
@@ -33,8 +32,7 @@ function Session(props) {
   let tomorrow4 = dateFormat(date.setDate(date.getDate() + 1), "dd.mm.yyyy");
 
   const [{ loading }] = useLoadingContext();
-  const [{ totalPay, setTotalPay }] = useContsantContext(0);
-  const [{ tickets, setTickets }] = useContsantContext([]);
+  const [{ totalPay }] = useContsantContext(0);
   const [sessionData, setSessionData] = useState([]);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
@@ -418,7 +416,7 @@ function Session(props) {
           <div id="customer-for-payment">
             <Form className="text-center">
               <FormGroup>
-                <label for="name">Ad</label>
+                <label>Ad</label>
                 <Input
                   type="text"
                   name="name"
@@ -428,7 +426,7 @@ function Session(props) {
                 />
               </FormGroup>
               <FormGroup>
-                <label for="surname">Soyad</label>
+                <label>Soyad</label>
                 <Input
                   type="text"
                   name="surname"
@@ -438,7 +436,7 @@ function Session(props) {
                 />
               </FormGroup>
               <FormGroup>
-                <label for="gender">Gender</label>
+                <label>Gender</label>
                 <select
                   type="select"
                   name="gender"
