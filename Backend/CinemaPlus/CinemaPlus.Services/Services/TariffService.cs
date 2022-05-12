@@ -22,6 +22,7 @@ namespace CinemaPlus.Services.Services
             var tarifss = await GetAllRelations()
                 .Include(x => x.Cinema)
                 .Include(x => x.Format)
+                .Include(x=>x.SeatType)
                 .Where(x => x.IsDeleted == false)
                 .ToListAsync();
 

@@ -20,6 +20,7 @@ namespace CinemaPlus.Services.Services
         public async Task<List<Seat>> GetAllSeatAsync()
         {
             var seats = await GetAllRelations()
+                .Include(x=>x.SeatType)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -31,6 +32,7 @@ namespace CinemaPlus.Services.Services
             if (id == null) return new Seat();
 
             var seat = await GetAllRelations()
+                .Include(x=>x.SeatType)
                .AsNoTracking()
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 

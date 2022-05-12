@@ -28,7 +28,7 @@ namespace CinemaPlus.Controllers
             #region Create Customer
             var customerOption = new CustomerCreateOptions
             {
-                Name = paymentDetails.Email,
+                Name = paymentDetails.Name,
                 Email = paymentDetails.Email,
                 Source = paymentDetails.Source
             };

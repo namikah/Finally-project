@@ -14,6 +14,8 @@ namespace CinemaPlus.Models.Entities
 
         public double Price { get; set; }
 
+        public int? SessionId { get; set; }
+
         public Session Session { get; set; }
 
         [ForeignKey("Seat")]

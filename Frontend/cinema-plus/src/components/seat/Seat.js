@@ -2,6 +2,7 @@ import { range } from "range";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { sessionService } from "../../API/services/sessionService";
+import { tariffService } from "../../API/services/tariffService";
 import { useContsantContext } from "../../context/constant";
 import { useLoadingContext } from "../../context/loading";
 import "./seat.scss";
@@ -12,26 +13,42 @@ function Seat({ session }) {
   const [{ tickets, setTickets }] = useContsantContext([]);
   const [{ loading, setLoading }] = useLoadingContext(false);
   const [selectedSession, setSelectedSession] = useState(session);
+  const [tariff, setTariff] = useState([]);
 
-  const getSelectedSession = useCallback((id) => {
-    setLoading(true);
-    sessionService.getSessionById(id).then((res) => {
-      setSelectedSession(res.data);
-      setLoading(false);
-      setMaxSeatSelected(0);
-      setTotalPay(0);
-      setTickets([]);
-    });
-  }, [setLoading,setMaxSeatSelected,setTickets,setTotalPay]);
+  const getSelectedSession = useCallback(
+    (id) => {
+      setLoading(true);
+      sessionService.getSessionById(id).then((res) => {
+        setSelectedSession(res.data);
+        setLoading(false);
+        setMaxSeatSelected(0);
+        setTotalPay(0);
+        setTickets([]);
+      });
+    },
+    [setLoading, setMaxSeatSelected, setTickets, setTotalPay]
+  );
 
   useEffect(() => {
     getSelectedSession(session.id);
   }, [getSelectedSession, session.id]);
 
+  const getTariff = useCallback(() => {
+    tariffService.getTariff().then((res) => {
+      setTariff(res.data);
+      console.log("test for price");
+    });
+  }, [setTariff]);
+  
+  useEffect(() => {
+    getTariff();
+  }, [getTariff]);
+  
   const selectedSeat = useCallback(
-    (e, seat, session) => {
+    (e, seat, session, tariffs) => {
+      console.log();
       const ticket = {
-        Price: 11,
+        Price: tariffs.find(x=>x.cinemaId === 1 && x.startTime <= session.start &&x.endTime >= session.end&& x.seatType.id === seat.seatTypeId).price,
         Seat: seat,
         Session: session,
         Customer: { name: "", surname: "", Gender: "Male" },
@@ -60,7 +77,7 @@ function Seat({ session }) {
       totalPay,
       setTickets,
       tickets,
-      setMaxSeatSelected
+      setMaxSeatSelected,
     ]
   );
 
@@ -103,7 +120,7 @@ function Seat({ session }) {
                       <span
                         datatype={seat.seatType.name}
                         onClick={(e) => {
-                          selectedSeat(e, seat, selectedSession);
+                          selectedSeat(e, seat, selectedSession, tariff);
                         }}
                       >
                         {seat.column}

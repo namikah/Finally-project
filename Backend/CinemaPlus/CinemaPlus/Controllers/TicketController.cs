@@ -56,8 +56,7 @@ namespace CinemaPlus.Controllers
                     IsDeleted = false,
                     Price = item.Price,
                     Customer = item.Customer,
-                    Session = null
-                    //Session = item.Session
+                    SessionId = item.Session.Id
                 };
                 tickets.Add(ticket);
             }

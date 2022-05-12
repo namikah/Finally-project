@@ -392,8 +392,9 @@ function Session(props) {
             <div className="payment-button col-md-5 d-flex flex-column justify-content-center align-items-end">
               <div
                 onClick={() => {
-                  // document.querySelector(".StripeCheckout").click();
-                  document.querySelector("#customer-for-payment").classList.toggle("active");
+                  document
+                    .querySelector("#customer-for-payment")
+                    .classList.toggle("active");
                 }}
               >
                 Təsdiqləmək
@@ -404,6 +405,10 @@ function Session(props) {
             onClick={() => {
               zone.current.classList.remove("active-zone");
               zone.current.classList.add("deactive-zone");
+              setSelectedSessionId(0);
+              document
+                .querySelector("#customer-for-payment")
+                .classList.remove("active");
             }}
             className="zone-close"
           >
@@ -413,6 +418,7 @@ function Session(props) {
           <div id="customer-for-payment">
             <Form className="text-center">
               <FormGroup>
+                <label for="name">Ad</label>
                 <Input
                   type="text"
                   name="name"
@@ -422,6 +428,7 @@ function Session(props) {
                 />
               </FormGroup>
               <FormGroup>
+                <label for="surname">Soyad</label>
                 <Input
                   type="text"
                   name="surname"
@@ -431,6 +438,7 @@ function Session(props) {
                 />
               </FormGroup>
               <FormGroup>
+                <label for="gender">Gender</label>
                 <select
                   type="select"
                   name="gender"
@@ -438,19 +446,32 @@ function Session(props) {
                   placeholder="soyadınız"
                   onChange={getElementValues}
                 >
-                  <option selected={true}>Male</option>
+                  <option>Male</option>
                   <option>female</option>
                 </select>
               </FormGroup>
               <Button
-                className="btn"
+                className="btn btn-success"
                 id="animate.css"
                 onClick={(e) => {
-                  document.querySelector("#customer-for-payment").classList.remove("active");
+                  document
+                    .querySelector("#customer-for-payment")
+                    .classList.remove("active");
                   document.querySelector(".StripeCheckout").click();
                 }}
               >
                 Gonder
+              </Button>
+              <Button
+                className="btn btn-danger"
+                id="animate.css"
+                onClick={(e) => {
+                  document
+                    .querySelector("#customer-for-payment")
+                    .classList.remove("active");
+                }}
+              >
+                Cancel
               </Button>
             </Form>
           </div>
