@@ -54,7 +54,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             if (id == null)
                 return NotFound();
 
-            var existTicket = await _dbContext.Movies
+            var existTicket = await _dbContext.Tickets
                 .FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
             if (existTicket == null)
                 return NotFound();
@@ -74,13 +74,14 @@ namespace CinemaPlus.AdminPanel.Controllers
             DateTime dt = DateTime.Today;
 
             var sessions = await _dbContext.Sessions
-            .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
+            .Where(x => x.IsDeleted == false /*&& x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour*/)
             .Include(x => x.Movie)
             .OrderBy(x => x.Start)
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
             ViewBag.Tickets = await _dbContext.Tickets
+                .Where(x => x.IsDeleted == false)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();
@@ -109,6 +110,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.Sessions = sessions;
 
             ViewBag.Tickets = await _dbContext.Tickets
+                .Where(x => x.IsDeleted == false)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();
@@ -138,7 +140,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             await _dbContext.Tickets.AddAsync(ticket);
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
 
         [AllowAnonymous]
@@ -148,6 +150,7 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return Json(null);
 
             ViewBag.Tickets = await _dbContext.Tickets
+                .Where(x => x.IsDeleted == false)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();
@@ -200,6 +203,7 @@ namespace CinemaPlus.AdminPanel.Controllers
                 .FirstOrDefaultAsync(x => x.Id == session.HallId);
 
             ViewBag.Tickets = await _dbContext.Tickets
+                .Where(x => x.IsDeleted == false)
                  .Include(x => x.Session)
                  .Include(x => x.Seat)
                  .ToListAsync();
@@ -223,6 +227,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.Sessions = sessions;
 
             var tickets = await _dbContext.Tickets
+                .Where(x => x.IsDeleted == false)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();
@@ -241,8 +246,8 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             var existTicket = await _dbContext.Tickets
                 .Include(x => x.Customer)
-                .Include(x=>x.Session)
-                .Include(x=>x.Seat)
+                .Include(x => x.Session)
+                .Include(x => x.Seat)
               .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
 
             return View(existTicket);
@@ -268,6 +273,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.Sessions = sessions;
 
             var tickets = await _dbContext.Tickets
+                .Where(x => x.IsDeleted == false)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();

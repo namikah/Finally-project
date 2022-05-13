@@ -17,7 +17,7 @@ import Seat from "../seat/Seat";
 import { useContsantContext } from "../../context/constant";
 import Payment from "../payment/Payment";
 import { ticketService } from "../../API/services/ticketService";
-import Counter from "../counter/Counter";
+import { ToastContainer } from "react-toastify";
 
 const customerDto = {
   name: "",
@@ -45,8 +45,8 @@ function Session(props) {
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCinemaId, setSelectedCinemaId] = useState("");
   const [customer, setCustomer] = useState(customerDto);
-  const [{ totalPay, setTotalPay }] = useContsantContext(0);
-  const [{ tickets, setTickets }] = useContsantContext([]);
+  const [{ totalPay }] = useContsantContext(0);
+  const [{ tickets }] = useContsantContext([]);
   const [{ isCounter, setIsCounter }] = useContsantContext(false);
 
   const zone = useRef();
@@ -365,6 +365,17 @@ function Session(props) {
                 ))}
             </div>
           </div>
+          <ToastContainer
+              autoClose={3000}
+              position="top-center"
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss={false}
+              draggable
+              pauseOnHover={false}
+            />
           <div className="zone-body d-flex flex-column justify-content-end align-items-center gap-1 pt-3">
             {selectedSession && <Seat session={selectedSession} />}
             <div className="screen-text">EKRAN</div>
