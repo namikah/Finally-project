@@ -37,9 +37,7 @@ function ContactComponent({ cinemaId }) {
       message.body === "" ||
       message.title === ""
     ) {
-      toast.error("zəhmət olmasa, xanaları düzgün doldurun !", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.info("zəhmət olmasa, xanaları düzgün doldurun !");
       return;
     }
 
@@ -47,21 +45,15 @@ function ContactComponent({ cinemaId }) {
       .postMessage(message)
       .then((res) => {
         if (res.status === 200) {
-          toast.success("Message göndərildi. Təşəkkür edirik...", {
-            position: toast.POSITION.TOP_CENTER,
-          });
-          push({
-            pathname: "/contact",
-          });
+          toast.success("Message göndərildi. Təşəkkür edirik...");
+       setTimeout(() => {
+         document.querySelector("#send-mail-us").style.display="none";
+       }, 5000);
         } else
-          toast.info("Səhv baş verdi !", {
-            position: toast.POSITION.TOP_CENTER,
-          });
+          toast.error("Səhv baş verdi !");
       })
       .catch(() => {
-        toast.info("Səhv baş verdi !", {
-          position: toast.POSITION.TOP_CENTER,
-        });
+        toast.error("Səhv baş verdi !");
       });
   }, [message, push]);
 
@@ -186,7 +178,17 @@ function ContactComponent({ cinemaId }) {
             >
               Gonder
             </Button>
-            <ToastContainer autoClose={3000} />
+            <ToastContainer
+              autoClose={3000}
+              position="top-center"
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss={false}
+              draggable
+              pauseOnHover={false}
+            />
           </Form>
         </div>
       </section>

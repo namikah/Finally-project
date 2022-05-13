@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
+using CinemaPlus.Data;
 using CinemaPlus.Models.DTOs;
 using CinemaPlus.Models.Entities;
+using CinemaPlus.Repository.DataContext;
 using CinemaPlus.Repository.Repository.Contracts;
 using CinemaPlus.Services.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CinemaPlus.Controllers
@@ -17,12 +21,14 @@ namespace CinemaPlus.Controllers
         private readonly IRepository<Ticket> _ticketRepository;
         private readonly ITicketService _ticketService;
         private readonly IMapper _mapper;
+        private readonly AppDbContext _dbContext;
 
-        public TicketController(IRepository<Ticket> ticketRepository, ITicketService ticketService, IMapper mapper)
+        public TicketController(IRepository<Ticket> ticketRepository, ITicketService ticketService, IMapper mapper, AppDbContext dbContext)
         {
             _ticketRepository = ticketRepository;
             _ticketService = ticketService;
             _mapper = mapper;
+            _dbContext = dbContext;
         }
 
         [HttpGet]
@@ -53,50 +59,49 @@ namespace CinemaPlus.Controllers
                 var ticket = new Ticket()
                 {
                     SeatId = item.Seat.Id,
-                    IsDeleted = false,
                     Price = item.Price,
                     Customer = item.Customer,
-                    SessionId = item.Session.Id
+                    SessionId = item.Session.Id,
+                    IsDeleted = false,
+                    IsConfirmed = false,
                 };
                 tickets.Add(ticket);
             }
 
             await _ticketService.AddTicketsAsync(tickets);
 
+            Thread.Sleep(40000);
+
+            var DeletedTickets = new List<Ticket>();
+            foreach (var item in tickets)
+            {
+                var ticket = await _dbContext.Tickets.FirstOrDefaultAsync(x => x.SeatId == item.SeatId && x.SessionId == item.SessionId && x.IsConfirmed == false && x.IsDeleted == false);
+
+                if (ticket == null)
+                    continue;
+
+                ticket.IsDeleted = true;
+                await _dbContext.SaveChangesAsync();
+            }
+
             return Ok(tickets);
         }
 
-        [HttpPut("{id?}")]
-        public async Task<IActionResult> Put([FromRoute] int? id, [FromForm] Ticket ticket)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] List<TicketDto> ticketDtos)
         {
-            if (id == null)
+            if (ticketDtos == null || ticketDtos.Count ==0)
                 throw new Exception("Not found");
 
-            if (id != ticket.Id)
-                throw new Exception("Invalid Credential");
+            var DeletedTickets = new List<Ticket>();
+            foreach (var item in ticketDtos)
+            {
+                var ticket = await _dbContext.Tickets.FirstOrDefaultAsync(x => x.SeatId == item.Seat.Id && x.SessionId == item.Session.Id && x.IsConfirmed == false && x.IsDeleted == false);
+                ticket.IsConfirmed = true;
+                await _dbContext.SaveChangesAsync();
+            }
 
-            var existTicket = await _ticketService.GetAsync(id.Value);
-            if (existTicket == null)
-                throw new Exception("Not found");
-
-            await _ticketRepository.UpdateAsync(ticket);
-
-            return Ok();
-        }
-
-        [HttpDelete("{id?}")]
-        public async Task<IActionResult> Delete([FromRoute] int? id)
-        {
-            if (id == null)
-                throw new Exception("Not found");
-
-            var ticket = await _ticketService.GetAsync(id.Value);
-            if (ticket == null)
-                throw new Exception("Not found");
-
-            await _ticketRepository.DeleteAsync(ticket);
-
-            return NoContent();
+            return Ok(DeletedTickets);
         }
     }
 }

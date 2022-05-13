@@ -132,6 +132,8 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             ticket.SeatId = selectedSeatId;
             ticket.Session = await _dbContext.Sessions.FindAsync(selectedSessionId);
+            ticket.IsConfirmed = true;
+            ticket.IsDeleted = false;
 
             await _dbContext.Tickets.AddAsync(ticket);
             await _dbContext.SaveChangesAsync();

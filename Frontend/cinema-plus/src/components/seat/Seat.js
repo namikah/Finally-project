@@ -116,10 +116,11 @@ function Seat({ session }) {
                     ) ? (
                       <div
                         key={seat.id}
-                        style={{backgroundColor: "#000000c4",color: "rgb(255 255 255 / 32%)", cursor:"default"}}
+                        style={{backgroundColor: "#000000c4", color: "rgb(255 255 255 / 32%)", cursor:"default"}}
                       >
                         <span
                           datatype={seat.seatType.name}
+                          className="busy-seat"
                         >
                           {seat.column}
                         </span>
@@ -145,7 +146,7 @@ function Seat({ session }) {
                               }
                             : {}
                         }
-                        className={seat.seatTypeId === 4 ? "another" : ""}
+                        className={seat.seatTypeId === 4 ? "empty-seat another" : "empty-seat"}
                       >
                         <span
                           datatype={seat.seatType.name}

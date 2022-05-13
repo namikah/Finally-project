@@ -62,5 +62,24 @@ namespace CinemaPlus.Services.Services
 
             return ticket;
         }
+
+        public async Task<List<Ticket>> DeleteTicketsAsync(List<Ticket> tickets)
+        {
+            if (tickets == null)
+            {
+                throw new Exception("Not found");
+            }
+
+            await DeleteAsync(tickets);
+
+            return tickets;
+        }
+
+        public async Task<Ticket> DeleteTicketsAsync(Ticket ticket)
+        {
+            await DeleteAsync(ticket);
+
+            return ticket;
+        }
     }
 }

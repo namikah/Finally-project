@@ -16,6 +16,8 @@ import { sessionService } from "../../API/services/sessionService";
 import Seat from "../seat/Seat";
 import { useContsantContext } from "../../context/constant";
 import Payment from "../payment/Payment";
+import { ticketService } from "../../API/services/ticketService";
+import Counter from "../counter/Counter";
 
 const customerDto = {
   name: "",
@@ -32,7 +34,6 @@ function Session(props) {
   let tomorrow4 = dateFormat(date.setDate(date.getDate() + 1), "dd.mm.yyyy");
 
   const [{ loading }] = useLoadingContext();
-  const [{ totalPay }] = useContsantContext(0);
   const [sessionData, setSessionData] = useState([]);
   const [optionOne, setOptionOne] = useState(false);
   const [optionTwo, setOptionTwo] = useState(false);
@@ -44,6 +45,10 @@ function Session(props) {
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCinemaId, setSelectedCinemaId] = useState("");
   const [customer, setCustomer] = useState(customerDto);
+  const [{ totalPay, setTotalPay }] = useContsantContext(0);
+  const [{ tickets, setTickets }] = useContsantContext([]);
+  const [{ isCounter, setIsCounter }] = useContsantContext(false);
+
   const zone = useRef();
 
   const getCinemas = useCallback(() => {
@@ -139,6 +144,17 @@ function Session(props) {
     setCustomer({ ...customer, [name]: value });
   };
 
+  const handleAddTicketPending = (tickets) => {
+    tickets.forEach((element) => {
+      element.customer = customer;
+    });
+
+    ticketService.postTickets(tickets).then((result) => {
+      setIsCounter(false);
+    });
+
+   
+  };
   return (
     <section id="session">
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
@@ -404,6 +420,7 @@ function Session(props) {
               zone.current.classList.remove("active-zone");
               zone.current.classList.add("deactive-zone");
               setSelectedSessionId(0);
+              setIsCounter(false);
               document
                 .querySelector("#customer-for-payment")
                 .classList.remove("active");
@@ -412,7 +429,7 @@ function Session(props) {
           >
             <span>X</span>
           </div>
-          <Payment customer={customer} />
+          {isCounter ? <Payment customer={customer} /> : ""}
           <div id="customer-for-payment">
             <Form className="text-center">
               <FormGroup>
@@ -448,17 +465,19 @@ function Session(props) {
                   <option>female</option>
                 </select>
               </FormGroup>
+            <p>Qeyd:  'Təsdiqlə' tuşuna basdıqdan sonra, ödəniş etmək üçün sizin <br/> <span>30</span> saniyəniz olacaq !</p>
               <Button
                 className="btn btn-success"
                 id="animate.css"
                 onClick={(e) => {
                   document
-                    .querySelector("#customer-for-payment")
-                    .classList.remove("active");
-                  document.querySelector(".StripeCheckout").click();
+                  .querySelector("#customer-for-payment")
+                  .classList.remove("active");
+                  handleAddTicketPending(tickets);
+                  setIsCounter(true);
                 }}
               >
-                Gonder
+                Təsdiqlə
               </Button>
               <Button
                 className="btn btn-danger"
@@ -467,9 +486,10 @@ function Session(props) {
                   document
                     .querySelector("#customer-for-payment")
                     .classList.remove("active");
+                    setIsCounter(false);
                 }}
               >
-                Cancel
+                İmtina
               </Button>
             </Form>
           </div>

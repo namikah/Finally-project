@@ -1,0 +1,14 @@
+#deadline-for-payment{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5px;
+    background-color: yellow;
+    color: red;
+    border-radius: 50%;
+    font-size: 40px;
+    text-align: center;
+    padding: 10px 20px;
+    font-weight: 700;
+    z-index: 2147483647;
+  }

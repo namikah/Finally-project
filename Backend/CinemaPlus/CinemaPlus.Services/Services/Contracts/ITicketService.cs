@@ -17,6 +17,10 @@ namespace CinemaPlus.Services.Services.Contracts
 
         Task<List<Ticket>> AddTicketsAsync(List<Ticket> tickets);
 
+        Task<List<Ticket>> DeleteTicketsAsync(List<Ticket> tickets);
+
+        Task<Ticket> DeleteTicketsAsync(Ticket ticket);
+
         Task<Ticket> AddTicketsAsync(Ticket ticket);
     }
 }

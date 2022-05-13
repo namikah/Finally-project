@@ -13,6 +13,10 @@ class TicketService extends HttpClient {
     return await this.post("ticket", tickets);
   }
 
+  async putTickets(tickets) {
+    return await this.put("ticket", tickets);
+  }
+
   async deleteTickets(id) {
     return await this.delete(`ticket/${id}`);
   }

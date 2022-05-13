@@ -61,9 +61,13 @@ namespace CinemaPlus.Repository.Repository
             await DbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(IEnumerable<T> entity)
+        public async Task DeleteAsync(IEnumerable<T> entity)
         {
-            throw new NotImplementedException();
+            foreach (var item in entity)
+            {
+                DbContext.Set<T>().Remove(item);
+                await DbContext.SaveChangesAsync();
+            }
         }
 
         public Task DeleteAsync(params T[] entity)

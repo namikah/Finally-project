@@ -285,6 +285,7 @@
         transform: translate(-50%, -50%);
         display: none;
         min-width: 250px;
+        max-width: 320px;
         &.active {
           display: flex !important;
         }
@@ -302,6 +303,13 @@
           button {
             margin: 10px
           }
+          p{
+            span{
+              color: yellow;
+              font-weight: 600;
+              font-size: 24px;
+            }
+          }
         }
       }
     }
@@ -309,4 +317,7 @@
   .active-zone {
     display: flex !important;
   }
+}
+.stripe_checkout_app{
+
 }
