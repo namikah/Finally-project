@@ -1,5 +1,5 @@
 #about {
-  background: url("https://www.cinemaplus.az/site/templates/images/about.jpg")
+  background: url("https://res.cloudinary.com/cinemaplus/image/upload/v1652566774/about_g6pges.jpg")
     no-repeat center;
   background-size: cover;
   position: relative;
@@ -25,7 +25,7 @@
         list-style: none;
         li {
           p {
-            font-size: 19px;
+            font-size: 16px;
             line-height: 22px;
             color: white;
             font-weight: 500;
@@ -64,7 +64,7 @@
           padding-bottom: 30px;
           img{
             padding-bottom: 20px;
-            height: 85px;
+            height: 100px;
           }
           p{
             font-size: 16px;

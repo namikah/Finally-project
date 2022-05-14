@@ -1,5 +1,5 @@
 #services {
-  background: url("https://www.cinemaplus.az/site/templates/images/about.jpg")
+  background: url("https://res.cloudinary.com/cinemaplus/image/upload/v1652566774/about_g6pges.jpg")
     no-repeat center;
   background-size: cover;
   position: relative;
@@ -19,28 +19,12 @@
       padding-top: 80px;
       > div {
         z-index: 1;
-        padding-bottom: 30px;
-        img {
-          padding-bottom: 20px;
-          height: 85px;
-        }
-        p {
-          font-size: 16px;
+        h4 {
           line-height: 22px;
           color: white;
           font-weight: 500;
-          &.title{
-            font-size: 24px;
-            color: white;
-            font-weight: 700;
-            letter-spacing: .7px;
-          }
-          &.subtitle{
-            font-size: 18px;
-            color: #61ccee;
-            font-weight: 700;
-            letter-spacing: .7px;
-          }
+          padding-right: 30px;
+          padding-bottom: 50px;
         }
       }
     }

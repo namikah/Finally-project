@@ -1,4 +1,3 @@
-import React from "react";
 import Service from "../../components/services/Service";
 import "./services.scss";
 
@@ -8,9 +7,9 @@ function Services() {
       <div className="container">
         <div className="services-body row text-center">
           <div className="col-12">
-            <p className="title">Xidmətler</p>
+            <h4 className="title">Xidmətler</h4>
           </div>
-       <Service/>
+          <Service note="Normal" />
         </div>
       </div>
     </div>

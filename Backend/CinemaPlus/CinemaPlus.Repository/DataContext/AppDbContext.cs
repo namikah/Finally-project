@@ -61,5 +61,6 @@ namespace CinemaPlus.Repository.DataContext
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<DolbyAtmos> DolbyAtmos { get; set; }
+        public DbSet<CinemaServices> CinemaServices { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+#platinum-services {
+  background: url("https://res.cloudinary.com/cinemaplus/image/upload/v1652566718/1385637250gas_32822_onqftb.jpg")
+    no-repeat center;
+  background-size: cover;
+  position: relative;
+  &::after {
+    content: "";
+    background: rgba(23, 31, 38, 0.651);
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+  }
+  .container {
+    .services-body {
+      padding-top: 80px;
+      > div {
+        z-index: 1;
+        line-height: 22px;
+        color: white;
+        font-weight: 500;
+        padding-bottom: 50px;
+        img {
+          padding-bottom: 20px;
+          height: 120px;
+        }
+      }
+    }
+  }
+}

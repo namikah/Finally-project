@@ -6,11 +6,11 @@ import "./platinum.scss";
 function Platinum() {
   return (
    <>
-    <div id="services">
+    <div id="platinum-services">
       <div className="container">
         <div className="services-body row text-center">
           <div className="col-12">
-            <p className="title">Platinum</p>
+            <h4 className="title">Platinum</h4>
             <p>
               Platinum – premium sinfindən olan kinozaldır, hansı ki,
               tamaşaçılara maksimum komfort hiss etmək və təsvirin yüksək
@@ -18,7 +18,7 @@ function Platinum() {
               və üstünlüyü:
             </p>
           </div>
-          <Service />
+          <Service note="Platinum"/>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { aboutService } from "../../API/services/aboutService";
 import { cinemaService } from "../../API/services/cinemaService";
+import Service from "../../components/services/Service";
 import "./about.scss";
 
 function About() {
@@ -58,50 +59,7 @@ function About() {
               ))}
           </ul>
           <div className="services-us row text-center">
-            <div className="col-md-6">
-              <img
-                src="https://www.cinemaplus.az/site/templates/images/about1.png"
-                alt=""
-              ></img>
-              <p>
-                CinemaPlus şəbəkəsinə 9 kinoteatr, 50+ ekran və 5000+ oturacaq
-                daxildir.
-              </p>
-            </div>
-            <div className="col-md-6">
-              <img
-                src="https://www.cinemaplus.az/site/templates/images/about2.png"
-                alt=""
-              ></img>
-              <p>
-                Bizim kinoteatrın “Platinum Movie Suites” zalında film
-                izləyəndən sonra Sizdə unudulmaz təəssüratlar qalacaq. Bu
-                premium-zalın konsepsiyası tamaşaçılara yüksək komfortlu, arxaya
-                açılan təmtəraqlı italyan dəri kreslolarında, kinoseans zamanı
-                qida və içki sifariş etmək imkanı olan zalda film izləmək imkanı
-                təklif edir.
-              </p>
-            </div>
-            <div className="col-md-6">
-              <img
-                src="https://www.cinemaplus.az/site/templates/images/about3.png"
-                alt=""
-              ></img>
-              <p>
-                “CinemaPlus” öz qonaqları üçün bileti müxtəlif rahat üsullar ilə
-                almaq imkanı yaradır: kinoteatrın www.cinemaplus.az rəsmi
-                saytından, İOS və Android əməliyyat sistemləri tərəfindən idarə
-                olunan smartfonlar üçün təzəlikcə işə düşmüş mobil tətbiq
-                vasitəsilə və ya kinoteatrın bilet kassasından.
-              </p>
-            </div>
-            <div className="col-md-6">
-              <img
-                src="https://www.cinemaplus.az/site/templates/images/about4.png"
-                alt=""
-              ></img>
-              <p>asdasda</p>
-            </div>
+          <Service note="About"/>
           </div>
         </div>
       </div>
