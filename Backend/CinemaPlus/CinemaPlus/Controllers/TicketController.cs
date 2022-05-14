@@ -70,9 +70,10 @@ namespace CinemaPlus.Controllers
 
             await _ticketService.AddTicketsAsync(tickets);
 
-            Thread.Sleep(40000);
+            Thread.Sleep(15000);
 
             var DeletedTickets = new List<Ticket>();
+            var counter = 0;
             foreach (var item in tickets)
             {
                 var ticket = await _dbContext.Tickets.FirstOrDefaultAsync(x => x.SeatId == item.SeatId && x.SessionId == item.SessionId && x.IsConfirmed == false && x.IsDeleted == false);
@@ -80,11 +81,12 @@ namespace CinemaPlus.Controllers
                 if (ticket == null)
                     continue;
 
+                counter++;
                 ticket.IsDeleted = true;
                 await _dbContext.SaveChangesAsync();
             }
 
-            return Ok(tickets);
+            return Ok(counter);
         }
 
         [HttpPut]

@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { useLoadingContext } from "../../context/loading";
 import dateFormat from "dateformat";
 
-
-function Movie({ movieCount, selectedSessions, selectedLanguage, soon }) {
+function Movie({ movieCount, selectedSessions, selectedLanguage, soon, movieId }) {
   let date = new Date();
   let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");
   const [moviesData, setMoviesData] = useState();
@@ -28,7 +27,7 @@ function Movie({ movieCount, selectedSessions, selectedLanguage, soon }) {
     return moviesData;
   }, [moviesData]);
 
-  if (movieCount !== undefined) movies = movies?.slice(0, 4);
+  if (movieCount !== undefined) movies = movies?.filter(x=>x.id.toString() !== movieId.toString()).slice(0, 4);
 
   if (selectedSessions !== undefined && selectedSessions.length !== 0)
     movies = movies?.filter((m) =>
@@ -40,9 +39,9 @@ function Movie({ movieCount, selectedSessions, selectedLanguage, soon }) {
       m.movieFormats?.find((x) => x.format.name.includes(selectedLanguage))
     );
 
-    if (soon !== undefined && soon !== "0")
-    movies = movies?.filter((m) =>
-      dateFormat(m.detail.startInCinema,"dd.MM.yyyy") > today
+  if (soon !== undefined && soon !== "0")
+    movies = movies?.filter(
+      (m) => dateFormat(m.detail.startInCinema, "dd.MM.yyyy") > today
     );
 
   return (
@@ -62,6 +61,12 @@ function Movie({ movieCount, selectedSessions, selectedLanguage, soon }) {
                 key={"card" + movie.id}
                 className="card col-lg-3 col-md-6 col-sm-12 d-flex flex-column justify-content-between align-item-center"
               >
+                <Link
+                  to={`/moviedetail?id=${movie.id}`}
+                  className="card-header"
+                >
+                  {movie.name}
+                </Link>
                 <div className="card-image">
                   <Link
                     onClick={window.scrollTo({
@@ -73,21 +78,19 @@ function Movie({ movieCount, selectedSessions, selectedLanguage, soon }) {
                   >
                     <img
                       src={movie.image}
-                      className="card-img-top"
+                      className="card-img-top img-fluid"
                       alt="film"
                     />
                   </Link>
                 </div>
                 <div className="card-body d-flex justify-content-center align-item-center">
-                  <div className="card-title">
-                    <ul className="d-flex flex-wrap justify-content-center align-item-center">
-                      {movie.movieFormats?.map(({ format }) => (
-                        <li key={"format" + format.id}>
-                          <img src={format.icon} alt="film-format"></img>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <ul className="d-flex flex-wrap justify-content-center align-item-center">
+                    {movie.movieFormats?.map(({ format }) => (
+                      <li key={"format" + format.id}>
+                        <img src={format.icon} alt="film-format" className="img-fluid"></img>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div className="card-bottom d-flex flex-wrap justify-content-center align-item-center">
                   <Link

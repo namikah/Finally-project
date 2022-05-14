@@ -48,35 +48,34 @@
   background: rgba(0, 0, 0, 0.851);
   z-index: 999999999;
   transition: 1s;
-  > div {
+  form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 250px;
     h2 {
       color: white;
       padding-bottom: 20px;
     }
-    form {
-      > div {
-        margin: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        input {
-          text-align: center;
-          background: transparent;
-          border: 0;
-          color: white;
-          font-size: 16px;
-          font-weight: 600;
-        }
-        textarea {
-          text-align: center;
-          background: transparent;
-          border: 0;
-          color: white;
-          font-size: 16px;
-          font-weight: 600;
-        }
+    > div.mb-3 {
+      margin: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      input {
+        text-align: center;
+        background: transparent;
+        border: 0;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      textarea {
+        text-align: center;
+        background: transparent;
+        border: 0;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
       }
     }
   }

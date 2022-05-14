@@ -1,6 +1,6 @@
 import { range } from "range";
 import React, { useCallback, useEffect, useState } from "react";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import { sessionService } from "../../API/services/sessionService";
 import { tariffService } from "../../API/services/tariffService";
 import { ticketService } from "../../API/services/ticketService";

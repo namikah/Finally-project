@@ -187,9 +187,7 @@ function Header() {
                 </Link>
               </div>
               <div className="button-side" onClick={() => toggleClick()}>
-                <Link to={"#"}>
                   <span></span>
-                </Link>
               </div>
             </div>
           </div>

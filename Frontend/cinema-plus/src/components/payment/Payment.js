@@ -1,20 +1,20 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { ticketService } from "../../API/services/ticketService";
 import { useContsantContext } from "../../context/constant";
 import Counter from "../counter/Counter";
 import "./payment.scss";
 
 function Payment({ customer }) {
-  const [{ totalPay, setTotalPay }] = useContsantContext(0);
-  const [{ tickets, setTickets }] = useContsantContext([]);
-  const [{ setMaxSeatSelected }] = useContsantContext(0);
+  const [{ totalPay }] = useContsantContext(0);
+  const [{ tickets }] = useContsantContext([]);
 
   useEffect(() => {
     document.querySelector(".StripeCheckout").click();
   }, []);
+
   async function handleToken(token) {
     toast.info("Ödənişiniz yoxlanılır. Zəhmət olmasa gözləyin", {
       position: toast.POSITION.TOP_CENTER,
@@ -32,37 +32,8 @@ function Payment({ customer }) {
           tickets.forEach((element) => {
             element.customer = customer;
           });
-
-          ticketService
-            .putTickets(tickets)
-            .then((result) => {
-              console.log(result);
-              setTickets([]);
-              setMaxSeatSelected(0);
-              setTotalPay(0);
-              toast.success("Ödənişiniz uğurla tamamlandı.");
-              setTimeout(() => {
-                document.querySelector(".zone-close").click();
-              }, 6000);
-            })
-            .catch((rest) => {
-              toast.error("Uğursuz ödəniş. Yenidən cəhd edin");
-              setTimeout(() => {
-                document.querySelector(".zone-close").click();
-              }, 6000);
-            });
-        } else {
-          toast.error("Uğursuz ödəniş. Yenidən cəhd edin");
-          setTimeout(() => {
-            document.querySelector(".zone-close").click();
-          }, 6000);
+          ticketService.putTickets(tickets);
         }
-      })
-      .catch(() => {
-        toast.error("Uğursuz ödəniş. Yenidən cəhd edin");
-        setTimeout(() => {
-          document.querySelector(".zone-close").click();
-        }, 6000);
       });
   }
 
@@ -74,17 +45,6 @@ function Payment({ customer }) {
         token={handleToken}
         amount={totalPay * 100}
         name="Pasha Bank"
-      />
-      <ToastContainer
-        autoClose={4000}
-        position="top-center"
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover={false}
       />
     </>
   );

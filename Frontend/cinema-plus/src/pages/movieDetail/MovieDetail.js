@@ -67,7 +67,7 @@ function MovieDetail() {
               <Tab>DiGƏR FİLMLƏR</Tab>
             </TabList>
             <TabPanel className="another-films">
-              <Movie movieCount={4}/>
+              <Movie movieCount={4} movieId={movieId}/>
             </TabPanel>
           </Tabs>
         </div>

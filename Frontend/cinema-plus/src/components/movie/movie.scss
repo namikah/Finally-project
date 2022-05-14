@@ -58,37 +58,59 @@
     .card {
       padding: 15px;
       border: 0;
+      &:hover {
+        .card-image {
+          box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.15);
+          img {
+            transform: scale(1.2);
+          }
+        }
+        .card-header {
+          background: #334e9e;
+          box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.15);
+
+          color: #fff;
+        }
+        .card-bottom {
+          background-color: #f3f3f396;
+        }
+      }
+      .card-header {
+        transition: 0.5s ease-in-out;
+        text-align: center;
+        height: 65px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 17px;
+        color: #000000;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999999;
+      }
       .card-image {
         cursor: pointer;
         overflow: hidden;
         transition: 0.5s;
-        &:hover {
-          box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.26);
-        }
+        height: 420px;
         img {
           transition: 0.5s ease-in-out;
-          &:hover {
-            transform: scale(1.2);
-          }
         }
       }
       .card-body {
-        padding: 5px;
-        min-height: 60px;
-        .card-title {
+        padding: 1px;
+        ul {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0;
           margin: 0;
-          ul {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0;
-            margin: 0;
-            li {
-              list-style: none;
-              img {
-                width: 50px;
-                height: 50px;
-              }
+          li {
+            list-style: none;
+            img {
+              width: 48px;
+              height: 44px;
             }
           }
         }
@@ -96,9 +118,6 @@
       .card-bottom {
         background-color: #f3f3f3;
         position: relative;
-        &:hover {
-          background-color: #f3f3f396;
-        }
         .add-cart-button {
           text-decoration: none;
           color: white;

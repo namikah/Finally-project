@@ -34,7 +34,7 @@ function News({ page, perPage }) {
         <div className="container">
           <div
             ref={change}
-            className="d-flex justify-content-start align-items-top gap-3"
+            className="d-flex justify-content-start align-items-top "
           >
             {news?.map((item) => (
               <div

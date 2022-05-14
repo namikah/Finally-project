@@ -2,11 +2,11 @@
   padding: 50px 0;
   .container {
     .row {
-        margin: 0;
+      margin: 0;
       .left-side {
         .tab-header-news {
-            border-bottom: 5px solid #314ca0;
-            padding: 10px 0;
+          border-bottom: 5px solid #314ca0;
+          padding: 10px 0;
           a {
             color: white;
             font-size: 18px;
@@ -25,13 +25,13 @@
           flex-direction: row;
           padding: 20px 0;
           .card-image {
-              width: 250px;
-              min-width: 250px;
-                overflow: hidden;
-                transition: .2s all;
-                &:hover{
-                  box-shadow: 2px 2px 15px 5px rgb(193, 193, 193);
-                  }
+            width: 250px;
+            min-width: 250px;
+            overflow: hidden;
+            transition: 0.2s all;
+            &:hover {
+              box-shadow: 2px 2px 15px 5px rgb(193, 193, 193);
+            }
           }
           .card-body {
             padding: 0 5px 0 15px;
@@ -43,8 +43,8 @@
                 color: #314ca0;
                 font-size: 16px;
                 font-weight: 500;
-                transition: .2s all;
-                &:hover{
+                transition: 0.2s all;
+                &:hover {
                   color: #00aff0;
                 }
               }
@@ -89,14 +89,30 @@
           background-color: transparent;
           border: 0;
           border-bottom: 1px solid rgba(0, 0, 0, 0.258);
+          &:hover {
+            .card-body {
+              a {
+                color: white;
+              }
+            }
+            .card-image {
+              a {
+                box-shadow: 2px 2px 15px 5px white;
+              }
+            }
+          }
           .card-body {
             a {
               text-decoration: none;
               color: #00aff0;
+              transition: 0.5s;
             }
           }
-          .card-image{
-          
+          .card-image {
+            a {
+              overflow: hidden;
+              transition: 0.3s;
+            }
           }
         }
         .button-all {

@@ -17,7 +17,7 @@ import Seat from "../seat/Seat";
 import { useContsantContext } from "../../context/constant";
 import Payment from "../payment/Payment";
 import { ticketService } from "../../API/services/ticketService";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const customerDto = {
   name: "",
@@ -45,9 +45,10 @@ function Session(props) {
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCinemaId, setSelectedCinemaId] = useState("");
   const [customer, setCustomer] = useState(customerDto);
-  const [{ totalPay }] = useContsantContext(0);
-  const [{ tickets }] = useContsantContext([]);
+  const [{ totalPay, setTotalPay }] = useContsantContext(0);
+  const [{ tickets, setTickets }] = useContsantContext([]);
   const [{ isCounter, setIsCounter }] = useContsantContext(false);
+  const [{ setMaxSeatSelected }] = useContsantContext(0);
 
   const zone = useRef();
 
@@ -149,11 +150,20 @@ function Session(props) {
       element.customer = customer;
     });
 
-    ticketService.postTickets(tickets).then((result) => {
-      setIsCounter(false);
+    setIsCounter(false);
+    ticketService.postTickets(tickets).then(({ data }) => {
+      if (data === 0) {
+        toast.success("Ödənişiniz uğurla tamamlandı.");
+      } else {
+        toast.error("Uğursuz ödəniş. Yenidən cəhd edin");
+      }
+      setTimeout(() => {
+        setTickets([]);
+        setMaxSeatSelected(0);
+        setTotalPay(0);
+        document.querySelector(".zone-close").click();
+      }, 6000);
     });
-
-   
   };
   return (
     <section id="session">
@@ -340,6 +350,17 @@ function Session(props) {
         </a>
       </div>
       <div ref={zone} className="zone" id="zone-buy">
+        <ToastContainer
+          autoClose={3000}
+          position="top-center"
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover={false}
+        />
         <div className="select-zone d-flex flex-column justify-content-between   align-items-center">
           <div className="zone-header d-flex flex-column justify-content-center align-items-center">
             <h6>{selectedSession && selectedSession.movie.name}</h6>
@@ -365,17 +386,7 @@ function Session(props) {
                 ))}
             </div>
           </div>
-          <ToastContainer
-              autoClose={3000}
-              position="top-center"
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss={false}
-              draggable
-              pauseOnHover={false}
-            />
+
           <div className="zone-body d-flex flex-column justify-content-end align-items-center gap-1 pt-3">
             {selectedSession && <Seat session={selectedSession} />}
             <div className="screen-text">EKRAN</div>
@@ -476,14 +487,17 @@ function Session(props) {
                   <option>female</option>
                 </select>
               </FormGroup>
-            <p>Qeyd:  'Təsdiqlə' tuşuna basdıqdan sonra, ödəniş etmək üçün sizin <br/> <span>30</span> saniyəniz olacaq !</p>
+              <p>
+                Qeyd: 'Təsdiqlə' tuşuna basdıqdan sonra, ödəniş etmək üçün sizin{" "}
+                <br /> <span>30</span> saniyəniz olacaq !
+              </p>
               <Button
                 className="btn btn-success"
                 id="animate.css"
                 onClick={(e) => {
                   document
-                  .querySelector("#customer-for-payment")
-                  .classList.remove("active");
+                    .querySelector("#customer-for-payment")
+                    .classList.remove("active");
                   handleAddTicketPending(tickets);
                   setIsCounter(true);
                 }}
@@ -497,7 +511,7 @@ function Session(props) {
                   document
                     .querySelector("#customer-for-payment")
                     .classList.remove("active");
-                    setIsCounter(false);
+                  setIsCounter(false);
                 }}
               >
                 İmtina

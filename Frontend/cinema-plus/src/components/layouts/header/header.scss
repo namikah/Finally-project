@@ -152,7 +152,6 @@ header {
       }
       .button-side {
         cursor: pointer;
-        a {
           span {
             background: #fff;
             display: inline-block;
@@ -176,7 +175,6 @@ header {
               top: -10px;
             }
           }
-        }
       }
       .toggle-menu {
         transition: 0.5s ease-out;

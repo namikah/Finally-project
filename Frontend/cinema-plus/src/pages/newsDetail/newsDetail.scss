@@ -35,23 +35,29 @@
           background-color: transparent;
           border: 0;
           border-bottom: 1px solid rgba(0, 0, 0, 0.258);
+          &:hover {
+            .card-body {
+              a {
+                color: white;
+              }
+            }
+            .card-image {
+              a {
+                box-shadow: 2px 2px 15px 5px white;
+              }
+            }
+          }
           .card-body {
             a {
               text-decoration: none;
               color: #00aff0;
-              transition: .5s;
-              &:hover{
-                color: white;
-              }
+              transition: 0.5s;
             }
           }
           .card-image {
             a {
               overflow: hidden;
-              transition: .3s;
-              &:hover{
-                box-shadow: 2px 2px 15px 5px white;
-                }
+              transition: 0.3s;
             }
           }
         }

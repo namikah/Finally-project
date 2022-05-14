@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { cinemaService } from "../../API/services/cinemaService";
 import "./contact.scss";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { useHistory } from "react-router-dom";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import { messageService } from "../../API/services/messageService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,7 +17,6 @@ function ContactComponent({ cinemaId }) {
   const [cinema, setCinema] = useState({});
   const [sendMail, setSendMail] = useState(false);
   const [message, setMessage] = useState(messageDto);
-  const { push } = useHistory();
 
   const getData = useCallback((id) => {
     cinemaService.getCinemaById(id).then((res) => {
@@ -55,7 +53,7 @@ function ContactComponent({ cinemaId }) {
       .catch(() => {
         toast.error("Səhv baş verdi !");
       });
-  }, [message, push]);
+  }, [message]);
 
   const createMessage = () => {
     sendMessage();
@@ -105,7 +103,7 @@ function ContactComponent({ cinemaId }) {
           <div class="mapouter">
             <div class="gmap_canvas">
               <iframe
-                // title="unique"
+                title="unique"
                 width="100%"
                 height="650"
                 id="gmap_canvas"
@@ -128,11 +126,19 @@ function ContactComponent({ cinemaId }) {
         id="send-mail-us"
         className="background-side row justify-content-center align-items.center"
       >
-        <div className="col-3">
-          <div>
+          <Form className="text-center col-3">
+          <ToastContainer
+              autoClose={3000}
+              position="top-center"
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss={false}
+              draggable
+              pauseOnHover={false}
+            />
             <h2 className="text-center">Bize yazin</h2>
-          </div>
-          <Form className="text-center">
             <FormGroup>
               <Input
                 type="text"
@@ -178,19 +184,7 @@ function ContactComponent({ cinemaId }) {
             >
               Gonder
             </Button>
-            <ToastContainer
-              autoClose={3000}
-              position="top-center"
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss={false}
-              draggable
-              pauseOnHover={false}
-            />
           </Form>
-        </div>
       </section>
     </section>
   );
