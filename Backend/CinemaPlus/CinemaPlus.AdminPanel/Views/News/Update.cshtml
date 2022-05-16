@@ -1,0 +1,94 @@
+﻿@model News
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0 justify-content-center pt-3">
+                        <div class="d-flex flex-wrap justify-content-center align-items-start col-12 pb-3">
+                            @foreach (var item in Model.Medias?.Where(x => x.Name == "photo"))
+                            {
+                                <div class="text-center m-1" style="border-radius:5px;">
+                                    <img src=@item.Url alt="news" style="width:100px;height:100px; display:block;" class="img-fluid" />
+                                    <a asp-controller="NewsMedia" asp-action="Delete" asp-route-id="@item.Id">
+                                        <div class="btn btn-danger p-0" style="height:25px;width:100%;">Delete</div>
+                                    </a>
+                                </div>
+                            }
+                            
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center align-items-start col-12 pb-3">
+                              @foreach (var item in Model.Medias?.Where(x => x.Name == "video"))
+                            {
+                                <div class="text-center m-1" style="border-radius:5px;">
+                                    <iframe class="col-12"
+                                                height="200"
+                                                src="@item.Url"
+                                                title="YouTube video player"
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen></iframe>
+                                    <a asp-controller="NewsMedia" asp-action="Delete" asp-route-id="@item.Id">
+                                        <div class="btn btn-danger p-0" style="height:25px;width:100%;">Delete</div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                <div class="col-lg-6 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+                            <div class="form-group">
+                                <label asp-for="Date">Date</label>
+                                <input class="form-control" placeholder="Date" asp-for="Date">
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <input class="form-control" placeholder="Title" asp-for="Title">
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Snippet">Subtitle</label>
+                                <input class="form-control" placeholder="Subtitle" asp-for="Snippet">
+                                <span asp-validation-for="Snippet" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <input class="form-control" placeholder="Description" asp-for="Description">
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" id="photoDiv">
+                                <label asp-for="Photos">Photos</label>
+                                <input class="form-control" placeholder="Photos" asp-for="Photos" accept="image/*">
+                                <span asp-validation-for="Photos" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" id="photoDiv">
+                                <label asp-for="Video">Video</label>
+                                <input class="form-control" placeholder="url" asp-for="Video">
+                                <span asp-validation-for="Video" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+<partial name="_CKEditorPartial" />
+
+<script>
+     ClassicEditor
+    .create( document.querySelector( '#create-context-ck-editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+}

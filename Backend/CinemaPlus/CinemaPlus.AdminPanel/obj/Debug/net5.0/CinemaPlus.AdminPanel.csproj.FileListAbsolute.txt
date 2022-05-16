@@ -105,3 +105,7 @@ C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Shared\_SeatsPartial.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Ticket\Update.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Shared\_HalPlanPartial.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\News\Create.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\News\Index.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\News\Update.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\News\Detail.cshtml.g.cs

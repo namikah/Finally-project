@@ -1,0 +1,51 @@
+﻿@using System.Globalization
+@model News
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="content content-wrapper">
+    <div class="container-fluid">
+        <div class="event-details-area blog-area pt-150 pb-140">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="event-details row justify-content-between align-items-center">
+                           <div class="col-12 pt-3" style="max-height:600px;">
+                                <img class="d-inline-block img-fluid" src="@Model.Medias?.FirstOrDefault(x=>x.Name == "photo").Url" alt="event-details">
+                           </div>
+                            <div class="event-details-content col-12 pl-4 pt-3">
+                                <h2 class="pt-2 pb-2">@Model.Title</h2>
+                                <p class="pt-2 pb-2">@Model.Snippet</p>
+                                <p>@Html.Raw(Model.Description)</p>
+                                <ul class="videos p-2" style="list-style:none">
+                                    @foreach (var video in Model.Medias?.Where(x =>x.Name == "video").ToList())
+                                    {
+                                        <li>
+                                            <iframe class="col-12"
+                                                height="600"
+                                                src="@video.Url"
+                                                title="YouTube video player"
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen></iframe>
+                                        </li>
+                                    }
+                                </ul>
+                                <ul class="photos p-2 row" style="list-style:none">
+                                    @foreach (var photo in Model.Medias?.Where(x =>x.Name == "photo").ToList())
+                                    {
+                                        <li class="col-3" style="border-radius:5px;">
+                                            <img class="d-inline-block img-fluid pt-3" src=@photo.Url alt="news-photo" style="cursor:pointer;">
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Event Details End -->

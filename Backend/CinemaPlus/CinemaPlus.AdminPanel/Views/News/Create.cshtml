@@ -1,0 +1,66 @@
+﻿@model News
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+                            <div class="form-group">
+                                <label asp-for="Date">Date</label>
+                                <input class="form-control" placeholder="Date" asp-for="Date">
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <input class="form-control" placeholder="Title" asp-for="Title">
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Snippet">Subtitle</label>
+                                <input class="form-control" placeholder="Subtitle" asp-for="Snippet">
+                                <span asp-validation-for="Snippet" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <input class="form-control" placeholder="Description" asp-for="Description">
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                             <div class="form-group" id="photoDiv">
+                                <label asp-for="Photos">Photos</label>
+                                <input class="form-control" placeholder="Photos" asp-for="Photos" accept="image/*">
+                                <span asp-validation-for="Photos" class="text-danger"></span>
+                            </div>
+                              <div class="form-group" id="photoDiv">
+                                <label asp-for="Video">Video</label>
+                                <input class="form-control" placeholder="url" asp-for="Video">
+                                <span asp-validation-for="Video" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+<partial name="_CKEditorPartial" />
+
+<script>
+         ClassicEditor
+        .create( document.querySelector( '#create-context-ck-editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+}

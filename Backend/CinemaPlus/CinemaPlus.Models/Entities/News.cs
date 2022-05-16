@@ -20,7 +20,10 @@ namespace CinemaPlus.Models.Entities
         public ICollection<NewsMedia> Medias { get; set; }
 
         [NotMapped]
-        public IFormFile Photos { get; set; }
+        public ICollection<IFormFile> Photos { get; set; }
+
+        [NotMapped]
+        public string Video { get; set; }
 
         public string Snippet { get; set; }
 

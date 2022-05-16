@@ -81,10 +81,6 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             existMovie.IsDeleted = true;
 
-            var path = Path.Combine(Constants.SeedDataPath, "event", existMovie.Image);
-            if (System.IO.File.Exists(path))
-                System.IO.File.Delete(path);
-
             await _dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
