@@ -17,16 +17,14 @@ namespace CinemaPlus.Models.Entities
 
         public DateTime Date { get; set; }
 
-        public string Image { get; set; }
+        public ICollection<NewsMedia> Medias { get; set; }
 
         [NotMapped]
-        public IFormFile Photo { get; set; }
+        public IFormFile Photos { get; set; }
 
         public string Snippet { get; set; }
 
         public string Description { get; set; }
-
-        public string Trailer { get; set; }
 
         public bool IsDeleted { get; set; }
     }

@@ -69,6 +69,10 @@ code {
   #news-detail .button-all {
     padding: 10px 0 !important;
   }
+  #news-detail .news-detail-responsive{
+justify-content: center !important;
+align-items: center !important;
+  }
 
   #all-news .left-side .card {
     padding-bottom: 20px;

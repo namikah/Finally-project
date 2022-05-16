@@ -43,7 +43,7 @@ function AllNews() {
         top: 0,
         left: 0,
         behavior: "smooth",
-      })
+      });
     },
     [push]
   );
@@ -57,7 +57,7 @@ function AllNews() {
         top: 0,
         left: 0,
         behavior: "smooth",
-      })
+      });
     }
   }, [push, curPage]);
 
@@ -75,7 +75,7 @@ function AllNews() {
         top: 0,
         left: 0,
         behavior: "smooth",
-      })
+      });
     }
   }, [push, maxPageCount, curPage]);
 
@@ -94,7 +94,14 @@ function AllNews() {
               >
                 <div className="card-image col-md-3 col-sm-12">
                   <Link to={`/newsdetail?id=${item.id}`}>
-                    <img src={item.image} className="card-img-top" alt="news" />
+                    <img
+                      src={
+                        item.medias &&
+                        item.medias?.find((x) => x.name === "photo").url
+                      }
+                      className="card-img-top"
+                      alt="news"
+                    />
                   </Link>
                 </div>
                 <div className="card-body col-md-3 col-sm-12">

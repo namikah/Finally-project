@@ -143,7 +143,6 @@ function Header() {
                 <Link to={""}>RU</Link>
 
                 <Link to={""}>EN</Link>
-
                 <a
                   className="icon-app"
                   target="_blank"
@@ -151,7 +150,7 @@ function Header() {
                   href="https://apps.apple.com/us/app/cinemaplus/id1072140418"
                 >
                   <img
-                    src="https://cinemaplus.az/site/templates/images/ios.svg"
+                    src="https://res.cloudinary.com/cinemaplus/image/upload/v1652698954/ios_webmy5.svg"
                     alt="ios"
                   ></img>
                 </a>
@@ -163,7 +162,7 @@ function Header() {
                   href="https://play.google.com/store/apps/details?id=com.promote.cinemaplus"
                 >
                   <img
-                    src="https://cinemaplus.az/site/templates/images/android.svg"
+                    src="https://res.cloudinary.com/cinemaplus/image/upload/v1652698954/android_enx9d3.svg"
                     alt="android"
                   ></img>
                 </a>
@@ -181,7 +180,7 @@ function Header() {
               >
                 <Link to={"/"}>
                   <img
-                    src="https://cinemaplus.az/site/templates/images/cpluslogo.svg"
+                    src="https://res.cloudinary.com/cinemaplus/image/upload/v1652699069/cpluslogo_a68ha4.svg"
                     alt="logo"
                   ></img>
                 </Link>

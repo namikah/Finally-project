@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -53,6 +54,9 @@ namespace CinemaPlus.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<TicketDto> ticketDtos)
         {
+            var result = true;
+            var existTickets = await _dbContext.Tickets.Where(x=>x.IsDeleted==false).ToListAsync();
+
             var tickets = new List<Ticket>();
             foreach (var item in ticketDtos)
             {
@@ -65,15 +69,17 @@ namespace CinemaPlus.Controllers
                     IsDeleted = false,
                     IsConfirmed = false,
                 };
-                tickets.Add(ticket);
+                if (existTickets.Any(x=>x.SeatId == ticket.SeatId && x.SessionId == ticket.SessionId)) {
+                    return Ok(false);
+                }
+                    tickets.Add(ticket);
             }
 
             await _ticketService.AddTicketsAsync(tickets);
 
-            Thread.Sleep(15000);
+            Thread.Sleep(20000);
 
             var DeletedTickets = new List<Ticket>();
-            var counter = 0;
             foreach (var item in tickets)
             {
                 var ticket = await _dbContext.Tickets.FirstOrDefaultAsync(x => x.SeatId == item.SeatId && x.SessionId == item.SessionId && x.IsConfirmed == false && x.IsDeleted == false);
@@ -81,12 +87,12 @@ namespace CinemaPlus.Controllers
                 if (ticket == null)
                     continue;
 
-                counter++;
+                result = false;
                 ticket.IsDeleted = true;
                 await _dbContext.SaveChangesAsync();
             }
 
-            return Ok(counter);
+            return Ok(result);
         }
 
         [HttpPut]

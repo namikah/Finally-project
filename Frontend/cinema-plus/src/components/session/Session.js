@@ -152,7 +152,7 @@ function Session(props) {
 
     setIsCounter(false);
     ticketService.postTickets(tickets).then(({ data }) => {
-      if (data === 0) {
+      if (data) {
         toast.success("Ödənişiniz uğurla tamamlandı.");
       } else {
         toast.error("Uğursuz ödəniş. Yenidən cəhd edin");

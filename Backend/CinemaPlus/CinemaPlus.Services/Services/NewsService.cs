@@ -22,8 +22,7 @@ namespace CinemaPlus.Services.Services
             var totalNewsCount = (await GetAllAsync()).Count;
 
             var news = await GetAllRelations()
-               .AsNoTracking()
-               .AsQueryable()
+                .Include(x=>x.Medias)
                .OrderByDescending(x => x.Id)
                .Skip((page - 1) * perPage)
                .Take(perPage)
@@ -44,8 +43,7 @@ namespace CinemaPlus.Services.Services
             if (id == null) return new News();
 
             var news = await GetAllRelations()
-               .AsNoTracking()
-               .AsQueryable()
+                .Include(x=>x.Medias)
                .FirstOrDefaultAsync(x => x.Id == (int)id);
 
             return news;

@@ -33,22 +33,48 @@ function NewsDetail() {
     <section id="news-detail">
       <div className="container">
         <div className="row gap-5 justify-content-between">
-          <div className="left-side col-md-7 d-flex flex-column justify-content-start align-items-start">
+          <div className="left-side col-md-7 d-flex flex-column justify-content-start align-items-start news-detail-responsive">
             <p className="title">{news.title}</p>
             <h6>{dateFormat(news.date, "dd.mm.yyyy")}</h6>
             <div className="img-news">
-              <img src={news.image} alt="news"></img>
+              <img
+                src={news.medias?.find((x) => x.name === "photo").url}
+                alt="news"
+              ></img>
             </div>
             <p>{news.snippet}</p>
-            <p>{news.description}</p>
-            <iframe
-              title={news.title}
-              allowFullScreen
-              frameBorder={0}
-              width={"100%"}
-              height={400}
-              src={news.trailer}
-            ></iframe>
+            <div dangerouslySetInnerHTML={{ __html: news.description }}></div>
+            <div className="news-media-videos w-100">
+              {news.medias &&
+                news.medias?.map(
+                  (media) =>
+                    media.name === "video" && (
+                      <iframe
+                        title={news.title}
+                        allowFullScreen
+                        frameBorder={0}
+                        width={"100%"}
+                        height={400}
+                        src={media.url}
+                      ></iframe>
+                    )
+                )}
+            </div>
+            <div className="news-media-photos w-100 row justify-content-center">
+              {news.medias &&
+                news.medias?.map(
+                  (media) =>
+                    media.name === "photo" && (
+                      <div className="card-news-photo col-lg-3 col-md-6 col-sm-12 mb-3">
+                        <img
+                          src={media.url}
+                          className="img-fluid"
+                          alt="news"
+                        />
+                      </div>
+                    )
+                )}
+            </div>
           </div>
           <div className="right-side col-md-4 d-flex flex-column justify-content-start align-items-center">
             <div className="d-flex flex-column justify-content-start align-items-start">
@@ -64,7 +90,10 @@ function NewsDetail() {
                   <div className="card-image d-flex justify-content-start align-item-left">
                     <Link to={`/newsdetail?id=${item.id}`}>
                       <img
-                        src={item.image}
+                        src={
+                          item.medias &&
+                          item.medias?.find((x) => x.name === "photo").url
+                        }
                         className="card-img-top"
                         alt="news"
                       />
@@ -73,7 +102,11 @@ function NewsDetail() {
                 </div>
               ))}
             </div>
-            <Link onClick={window.scrollTo(0, 0)} className="button-all" to={"/allnews"}>
+            <Link
+              onClick={window.scrollTo(0, 0)}
+              className="button-all"
+              to={"/allnews"}
+            >
               Hamısını göstər
             </Link>
           </div>

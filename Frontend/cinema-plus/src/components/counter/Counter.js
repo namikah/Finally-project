@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useContsantContext } from "../../context/constant";
 import "./counter.scss";
 function Counter() {
-  const [counter, setCounter] = useState(10);
+  const [counter, setCounter] = useState(15);
   const [{ setIsCounter }] = useContsantContext(false);
 
   React.useEffect(() => {
