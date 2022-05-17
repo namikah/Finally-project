@@ -228,6 +228,9 @@
                 color: white;
                 background-color: white;
               }
+              &.seat5 {
+                background-color: #92e6f9;
+              }
             }
             h6 {
               color: white;
@@ -320,7 +323,4 @@
   .active-zone {
     display: flex !important;
   }
-}
-.stripe_checkout_app{
-
 }

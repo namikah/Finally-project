@@ -74,14 +74,14 @@ namespace CinemaPlus.AdminPanel.Controllers
             DateTime dt = DateTime.Today;
 
             var sessions = await _dbContext.Sessions
-            .Where(x => x.IsDeleted == false /*&& x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour*/)
+            .Where(x => x.IsDeleted == false && x.Date >= dt.Date)
             .Include(x => x.Movie)
             .OrderBy(x => x.Start)
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
             ViewBag.Tickets = await _dbContext.Tickets
-                .Where(x => x.IsDeleted == false)
+            .Where(x => x.IsDeleted == false && x.Session.Date >= dt.Date)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();
@@ -103,14 +103,14 @@ namespace CinemaPlus.AdminPanel.Controllers
             DateTime dt = DateTime.Today;
 
             var sessions = await _dbContext.Sessions
-            .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
+            .Where(x => x.IsDeleted == false && x.Date >= dt.Date)
             .Include(x => x.Movie)
             .OrderBy(x => x.Start)
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
             ViewBag.Tickets = await _dbContext.Tickets
-                .Where(x => x.IsDeleted == false)
+            .Where(x => x.IsDeleted == false && x.Session.Date >= dt.Date)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();
@@ -122,6 +122,13 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             if (!ModelState.IsValid)
                 return View();
+
+            var existTicket = await _dbContext.Tickets.FirstOrDefaultAsync(x => x.SessionId == selectedSessionId && x.SeatId == selectedSeatId && x.IsDeleted == false);
+            if (existTicket != null)
+            {
+                ModelState.AddModelError("", "Ticket already exist");
+                return View();
+            }
 
             var isExistTicket = await _dbContext.Tickets
                 .AnyAsync(x => x.Session.Id == selectedSessionId && x.SeatId == selectedSeatId && x.IsDeleted == false);
@@ -220,14 +227,14 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             DateTime dt = DateTime.Today;
             var sessions = await _dbContext.Sessions
-            .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
+            .Where(x => x.IsDeleted == false && x.Date >= dt.Date)
             .Include(x => x.Movie)
             .OrderBy(x => x.Start)
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
             var tickets = await _dbContext.Tickets
-                .Where(x => x.IsDeleted == false)
+                .Where(x => x.IsDeleted == false && x.Session.Date >= dt.Date)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();
@@ -266,14 +273,14 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             DateTime dt = DateTime.Today;
             var sessions = await _dbContext.Sessions
-            .Where(x => x.IsDeleted == false && x.Date >= dt.Date && x.Start.Hours >= dt.AddMinutes(30).Hour)
+            .Where(x => x.IsDeleted == false && x.Date >= dt.Date)
             .Include(x => x.Movie)
             .OrderBy(x => x.Start)
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
             var tickets = await _dbContext.Tickets
-                .Where(x => x.IsDeleted == false)
+            .Where(x => x.IsDeleted == false && x.Session.Date >= dt.Date)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();

@@ -40,6 +40,7 @@ function Session(props) {
   const [optionThree, setOptionThree] = useState(false);
   const [dateSelected, setDateSelected] = useState(today);
   const [selectedSessionId, setSelectedSessionId] = useState();
+  const [existSession, setExistSession] = useState({});
   const [seatType, setSeatType] = useState();
   const [cinemaData, setCinemaData] = useState();
   const [selectedLanguage, setSelectedLanguage] = useState("");
@@ -89,6 +90,10 @@ function Session(props) {
   }, [sessionData, dateSelected]);
 
   var selectedSession = useMemo(() => {
+    selectedSessionId &&
+      sessionService.getSessionById(selectedSessionId).then((res) => {
+        setExistSession(res.data);
+      });
     return sessions?.find((x) => x.id === selectedSessionId);
   }, [sessions, selectedSessionId]);
 
@@ -295,7 +300,7 @@ function Session(props) {
                     </td>
                     <td className="row-session">{item.start}</td>
                     <td className="row-cinema">
-                      <Link to={`/moviedetail?id=${item.movie.id}`}>
+                      <Link   to={`/cinema?id=${item.hall.cinemaId}`}>
                         {item.hall.cinema.name}
                       </Link>
                     </td>
@@ -321,9 +326,11 @@ function Session(props) {
                     <td className="row-buy text-center">
                       <div
                         onClick={() => {
-                          zone.current.classList.add("active-zone");
-                          zone.current.classList.remove("deactive-zone");
-                          setSelectedSessionId(item.id);
+                          if (dateFormat(item.date, "dd.mm.yyyy") >= today) {
+                            zone.current.classList.add("active-zone");
+                            zone.current.classList.remove("deactive-zone");
+                            setSelectedSessionId(item.id);
+                          }
                         }}
                         className="buy-ticket"
                         dataid={item.id}
@@ -408,8 +415,8 @@ function Session(props) {
               </div>
               {seatType &&
                 seatType?.map((type) =>
-                  !!selectedSession &&
-                  selectedSession.hall.seats?.some(
+                  !!existSession.hall &&
+                  existSession.hall.seats?.some(
                     (x) => x.seatTypeId === type.id
                   ) ? (
                     <div key={type.id}>

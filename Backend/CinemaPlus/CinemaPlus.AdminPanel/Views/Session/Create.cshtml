@@ -66,17 +66,6 @@
 <partial name="_CKEditorPartial" />
 
 <script>
-    $(document).on("change", "#parentPosition", function(){
-        var parentPositionId = $(this).val();
-        $.ajax({
-            type: "GET",
-            url: "/AdminPanel/Teacher/LoadChildrens?parentPositionId=" + parentPositionId,
-            success: function(res) {
-                $("#childPosition").empty();
-                $("#childPosition").append(res);
-            }
-        });
-    });
          ClassicEditor
         .create( document.querySelector( '#create-context-ck-editor' ) )
         .catch( error => {

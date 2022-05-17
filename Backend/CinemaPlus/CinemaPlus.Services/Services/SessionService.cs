@@ -19,6 +19,8 @@ namespace CinemaPlus.Services.Services
 
         public async Task<List<Session>> GetAllSessionAsync()
         {
+            DateTime dt = DateTime.Today;
+
             var sessions = await GetAllRelations()
                .Include(x => x.Movie)
                .ThenInclude(x => x.Detail)
@@ -36,10 +38,7 @@ namespace CinemaPlus.Services.Services
                .Include(x => x.Hall)
                .ThenInclude(x => x.Cinema)
                .ThenInclude(x => x.Tariffs)
-               //.Include(x => x.Hall)
-               //.ThenInclude(x => x.Seats)
-               //.ThenInclude(x => x.SeatType)
-               .Where(x => x.IsDeleted == false)
+               .Where(x => x.IsDeleted == false && x.Date >= dt.Date)
                .AsNoTracking()
                .ToListAsync();
 
@@ -49,6 +48,8 @@ namespace CinemaPlus.Services.Services
         public async Task<Session> GetSessionByIdAsync(int? id)
         {
             if (id == null) return new Session();
+
+            DateTime dt = DateTime.Today;
 
             var session = await GetAllRelations()
                .Include(x => x.Movie)
@@ -71,7 +72,7 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Seats)
                .ThenInclude(x => x.SeatType)
                .AsNoTracking()
-               .FirstOrDefaultAsync(x => x.Id == (int)id && x.IsDeleted == false);
+               .FirstOrDefaultAsync(x => x.Id == (int)id && x.IsDeleted == false && x.Date >= dt.Date);
 
             return session;
         }

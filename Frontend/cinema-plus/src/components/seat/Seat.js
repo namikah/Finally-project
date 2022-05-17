@@ -81,7 +81,6 @@ function Seat({ session }) {
             Customer: { name: "", surname: "", Gender: "Male" },
             IsDeleted: false,
           };
-          console.log(ticket.Price);
           if (e.target.classList.contains("selected")) {
             e.target.classList.remove("selected");
             setMaxSeatSelected(maxSeatSelected - 1);
@@ -91,11 +90,14 @@ function Seat({ session }) {
             );
             setTickets(newTicketList);
           } else {
-            if (maxSeatSelected < 5) {
+            if (maxSeatSelected < 6) {
               e.target.classList.add("selected");
               setMaxSeatSelected(maxSeatSelected + 1);
               setTotalPay(totalPay + ticket.Price);
               setTickets([...tickets, ticket]);
+            }
+            else{
+              toast.info("Siz maksimum 6 yer seçə bilərsiniz");
             }
           }
         }
@@ -123,7 +125,7 @@ function Seat({ session }) {
               className="d-flex justify-content-center align-items-center gap-2"
             >
               {selectedSession &&
-                selectedSession.hall.seats?.map((seat) =>
+                selectedSession.hall.seats?.map((seat, index) =>
                   seat.row === i ? (
                     existTickets.some(
                       (x) =>

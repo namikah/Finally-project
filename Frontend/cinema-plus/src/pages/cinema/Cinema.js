@@ -80,9 +80,9 @@ function Cinema() {
           <Tabs className="w-100">
             <TabList className="bottom-bordered d-flex justify-content-center align-items-center gap-1">
               <Tab>CƏDVƏL</Tab>
-              <Tab>SEKILLER</Tab>
-              <Tab>TARIFLER</Tab>
-              <Tab>ELAQE</Tab>
+              <Tab>ŞƏKİLLƏR</Tab>
+              <Tab>TARİFLƏR</Tab>
+              <Tab>ƏLAQƏ</Tab>
             </TabList>
             <TabPanel>
               <Session selectedCinemaId={cinemaId} />

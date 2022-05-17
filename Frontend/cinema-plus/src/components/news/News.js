@@ -58,26 +58,6 @@ function News({ page, perPage }) {
                       className="card-img-top"
                       alt="news"
                     />
-
-                    {/* {item.medias && item.medias?.map(() =>
-                      item.name === "photo" ? (
-                        <img
-                          src={item.url}
-                          className="card-img-top"
-                          alt="news"
-                        />
-                      ) : (
-                        <iframe
-                          width="100%"
-                          height="600px"
-                          src={item.url}
-                          title="YouTube video player"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        ></iframe>
-                      )
-                    )} */}
                   </Link>
                 </div>
                 <div className="card-body d-flex flex-column justify-content-start align-item-top text-left">

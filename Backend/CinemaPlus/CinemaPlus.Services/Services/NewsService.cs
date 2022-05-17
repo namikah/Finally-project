@@ -19,7 +19,10 @@ namespace CinemaPlus.Services.Services
 
         public async Task<PaginationDto<News>> GetAllNewsAsync(int page, int perPage)
         {
-            var totalNewsCount = (await GetAllAsync()).Count;
+            var totalNewsCount = (await GetAllRelations().
+                Where(x => x.IsDeleted == false)
+                .Include(x => x.Medias)
+               .OrderByDescending(x => x.Id).ToListAsync()).Count;
 
             var news = await GetAllRelations()
                 .Where(x => x.IsDeleted == false)
