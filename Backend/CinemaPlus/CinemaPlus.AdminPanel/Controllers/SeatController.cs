@@ -57,6 +57,9 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             foreach (var item in seats)
             {
+                if (item.HallId == 0 || item.SeatTypeId == 0)
+                    continue;
+
                 var seat = new Seat()
                 {
                     Row=item.Row,

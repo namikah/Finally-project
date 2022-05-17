@@ -7,20 +7,14 @@
     <div class="container text-center row justify-content-center">
         <div class="col-12">
             <label for="row-count">Row count</label>
-            <input id="row-count" value="1" type="number" class="m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />
+            <input id="row-count" value="0" type="number" class="m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />
             <label for="col-count">Column count</label>
-            <input id="col-count" value="1" type="number" class="m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />
+            <input id="col-count" value="0" type="number" class="m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />
         </div>
         <div class="seats row col-12  mt-3 pt-3" style="border-top:1px solid black">
-            @for (var i = 1; i < 2; i++)
-            {
                 <div class="seat-row d-flex justify-content-center align-items-center gap-1 w-100">
-                    @for (var j = 1; j < 2; j++)
-                    {
-                        <input value="@j" type="number" data-id="@j" data-row="@i" data-column="@j" data-seat-type=@j class="seat m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />
-                    }
+                        @*<input value="0" type="number" data-id="0" data-row="0" data-column="0" data-seat-type="0" class="seat m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />*@
                 </div>
-            }
         </div>
         <div class="col-12 d-flex justify-content-center mb-3 pb-3" style="border-bottom:1px solid black">
             <div class="text-center mt-5 col-4" style="background-color:#4ee2a8; color:white; width:200px; border-radius:5px;">EKRAN</div>
@@ -30,7 +24,7 @@
             <select class="form-control" name="selectedHallId" id="selectedHallId">
                 @foreach (var item in ViewBag.Halls)
                 {
-                    <option value="@item.Id">@item.Name (@item.Cinema.Name)</option>
+                    <option data-row-count="@item.RowCount" value="@item.Id">@item.Name (@item.Cinema.Name)</option>
                 }
             </select>
         </div>
@@ -38,11 +32,12 @@
             <button id="create-hall-plan-btn" type="button" class="btn btn-primary mr-2">Create</button>
         </div>
         <div class="col-12 pt-5 text-left">
-            <ul style="list-style:none; text-align:left;">
-                <li style=" color:red; font-weight:600; pb-5">SeatTypes</li>
+            <ul style="list-style:none; text-align:left;" class="pb-5">
+                <li style=" color:red; font-weight:600;">SeatTypes</li>
+                <li><span style="color:red;">0</span> - for nothing</li>
                 @foreach (var item in ViewBag.SeatTypes)
                 {
-                    <li><span style="color:red;">@item.Id</span> - for @item.Name seat type</li>
+                    <li class="seat-type"><span style="color:red;">@item.Id</span> - for @item.Name seat type</li>
                 }
             </ul>
 
@@ -57,6 +52,10 @@
 <script>
       $(document).on("change", "#row-count", function(){
        var selected = $(this).val();
+          if(selected > $("#selectedHallId").attr("data-row-count")){
+             $(this).val($("#selectedHallId").attr("data-row-count"));
+             var selected = $(this).val();
+          }
        var selectedColCount = $("#col-count").val();
 
                $(".seats").empty();
@@ -65,7 +64,7 @@
                 </div>`);
                }
                   for(var i =1; i<Math.round(selectedColCount) + 1;i++){
-               $(".seat-row").append(` <input value="0" type="number" data-row="0" data-column=${i} data-seat-type="null" class="seat m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />`);
+               $(".seat-row").append(` <input value="0" type="number" data-row="0" data-column=${i} data-seat-type="0" class="seat m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />`);
                }
        });
 
@@ -74,17 +73,17 @@
 
                $(".seat-row").empty();
                for(var i = 1; i< Math.round(selected) + 1;i++){
-               $(".seat-row").append(` <input value="0" type="number" data-row="0" data-column=${i} data-seat-type="null" class="seat m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />`);
+               $(".seat-row").append(` <input value="0" type="number" data-row="0" data-column=${i} data-seat-type="0" class="seat m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />`);
                }
        });
 
     $(document).on("change", ".seat", function(){
        var selected = $(this).val();
-       if(selected<=5){
+       if(selected <= $(".seat-type").length){
                $(this).css( "border-color","red" );
        }
        else{
-           $(this).val(5);
+           $(this).val($(".seat-type").length);
        }
         if(selected >= 0){
                $(this).css( "border-color","red" );
@@ -115,10 +114,21 @@
             data: {seats:hallPlan},
             url: "/Seat/Create",
             success: function(res) {
-                $("#row-count").val(1);
-                $("#col-count").val(1);
+              window.location.href = '/Seat/index';
             }
         });
        });
+        $(document).on("change", "#selectedHallId", function(){
+            let element = document.getElementById("selectedHallId");
+            let rowCount = element.options[element.selectedIndex].getAttribute("data-row-count");
+            $("#selectedHallId").attr("data-row-count",rowCount)
+            $("#row-count").val(0);
+            $("#col-count").val(0);
+            $(".seats").empty()
+
+        });
+         let element = document.getElementById("selectedHallId");
+            let rowCount = element.options[element.selectedIndex].getAttribute("data-row-count");
+            $("#selectedHallId").attr("data-row-count",rowCount)
 </script>
 }
