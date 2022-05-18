@@ -62,7 +62,7 @@ namespace CinemaPlus.Controllers
             {
                 var ticket = new Ticket()
                 {
-                    SeatId = item.Seat.Id,
+                    SeatId = item.SeatId,
                     Price = item.Price,
                     Customer = item.Customer,
                     SessionId = item.Session.Id,
@@ -104,7 +104,7 @@ namespace CinemaPlus.Controllers
             var DeletedTickets = new List<Ticket>();
             foreach (var item in ticketDtos)
             {
-                var ticket = await _dbContext.Tickets.FirstOrDefaultAsync(x => x.SeatId == item.Seat.Id && x.SessionId == item.Session.Id && x.IsConfirmed == false && x.IsDeleted == false);
+                var ticket = await _dbContext.Tickets.FirstOrDefaultAsync(x => x.SeatId == item.SeatId && x.SessionId == item.Session.Id && x.IsConfirmed == false && x.IsDeleted == false);
                 ticket.IsConfirmed = true;
                 await _dbContext.SaveChangesAsync();
             }

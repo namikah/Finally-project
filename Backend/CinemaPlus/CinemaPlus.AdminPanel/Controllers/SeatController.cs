@@ -25,19 +25,22 @@ namespace CinemaPlus.AdminPanel.Controllers
             _dbContext = dbContext;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Create()
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "User");
 
             ViewBag.SeatTypes = await _dbContext.SeatTypes.ToListAsync();
-           var allHalls = await _dbContext.Halls
-                .Include(x=>x.Cinema)
-                .ToListAsync();
+
+            var halls = await _dbContext.Halls
+                 .Include(x => x.Cinema)
+                 .ToListAsync();
 
             var seats = await _dbContext.Seats.ToListAsync();
             var selectedHalls = new List<Hall>();
-            foreach (var item in allHalls)
+
+            foreach (var item in halls)
             {
                 if (seats.Any(x => x.HallId == item.Id))
                     continue;
@@ -60,17 +63,17 @@ namespace CinemaPlus.AdminPanel.Controllers
                 if (item.HallId == 0 || item.SeatTypeId == 0)
                     continue;
 
-                var seat = new Seat()
+                await _dbContext.Seats.AddAsync(new Seat()
                 {
-                    Row=item.Row,
+                    Row = item.Row,
                     Column = item.Column,
                     HallId = item.HallId,
                     SeatTypeId = item.SeatTypeId
-                };
-                await _dbContext.Seats.AddAsync(seat);
-                await _dbContext.SaveChangesAsync();
+                });
             }
-            return RedirectToAction("Index");
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Create");
         }
     }
 }

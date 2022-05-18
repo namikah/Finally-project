@@ -1,23 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
     Seat seat = Model;
 }
 
 <div class="content content-wrapper">
-    <div class="container text-center row justify-content-center">
+    <div class="container text-center d-flex flex-column align-items-center justify-content-center">
         <div class="col-12">
             <label for="row-count">Row count</label>
-            <input id="row-count" value="0" type="number" class="m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" min="0"/>
+            <input id="row-count" value="0" type="number" class="m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" min="0" />
             <label for="col-count">Column count</label>
-            <input id="col-count" value="0" type="number" class="m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" min="0" max="30"/>
+            <input id="col-count" value="0" type="number" class="m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" min="0" max="30" />
         </div>
-        <div class="seats row col-12  mt-3 pt-3" style="border-top:1px solid black">
-                <div class="seat-row d-flex justify-content-center align-items-center gap-1 w-100"></div>
+        <div class="seats row justify-content-center align-items-center col-12 mt-3 pt-3" style="border-top:1px solid black">
+            @*<div class="seat-row d-flex justify-content-center align-items-center gap-1 w-100"></div>*@
         </div>
         <div class="col-12 d-flex justify-content-center mb-3 pb-3" style="border-bottom:1px solid black">
             <div class="text-center mt-5 col-4" style="background-color:#4ee2a8; color:white; width:200px; border-radius:5px;">EKRAN</div>
         </div>
-        <div class="form-group col-6">
+        <div class="form-group col-4">
             <label>Halls</label>
             <select class="form-control" name="selectedHallId" id="selectedHallId">
                 @foreach (var item in ViewBag.Halls)
@@ -48,50 +48,47 @@
 
 
 <script>
+    $(document).ready(function(){
+        function setDataRow(selected, selectedColCount){
+               $(".seats").empty();
+                 for(var i =1; i<Math.round(selected) + 1;i++){
+               $(".seats").append(`<div class="seat-row data-row=${i} d-flex justify-content-center align-items-center gap-1 w-100">`);
+                  for(var j =1; j<Math.round(selectedColCount) + 1;j++){
+               $(".seats").append(` <input class="seat m-1 text-center" value="0" type="number" data-row=${i} data-column=${j} data-seat-type="0" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />`);
+               }
+                $(".seats").append(`</div>`);
+               }
+        }
       $(document).on("change", "#row-count", function(){
        var selected = $(this).val();
-          if(selected > $("#selectedHallId").attr("data-row-count")){
-             $(this).val($("#selectedHallId").attr("data-row-count"));
-             var selected = $(this).val();
-          }
        var selectedColCount = $("#col-count").val();
-
-               $(".seats").empty();
-               for(var i =1; i<Math.round(selected) + 1;i++){
-               $(".seats").append(`<div data-row=${i} class="seat-row d-flex justify-content-center align-items-center gap-1 w-100">
-                </div>`);
-               }
-                  for(var i =1; i<Math.round(selectedColCount) + 1;i++){
-               $(".seat-row").append(` <input value="0" type="number" data-row="0" data-column=${i} data-seat-type="0" class="seat m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />`);
-               }
+            setDataRow(selected, selectedColCount);
        });
 
         $(document).on("change", "#col-count", function(){
-       var selected = $(this).val();
-
-               $(".seat-row").empty();
-               for(var i = 1; i< Math.round(selected) + 1;i++){
-               $(".seat-row").append(` <input value="0" type="number" data-row="0" data-column=${i} data-seat-type="0" class="seat m-1 text-center" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />`);
-               }
+             var selected = $("#row-count").val();
+       var selectedColCount = $(this).val();
+              setDataRow(selected, selectedColCount);
        });
 
-    $(document).on("change", ".seat", function(){
+    $(document).on("change", ".seat", function(e){
        var selected = $(this).val();
+
        if(selected <= $(".seat-type").length){
                $(this).css( "border-color","red" );
        }
        else{
            $(this).val($(".seat-type").length);
+            selected = $(this).val();
        }
         if(selected >= 0){
                $(this).css( "border-color","red" );
        }
        else{
            $(this).val(0);
+            selected = $(this).val();
        }
-
-        $(this).attr("data-row", $(this).parent(".seat-row").attr("data-row"));
-        $(this).attr("data-seat-type", $(this).val());
+        $(this).attr("data-seat-type", selected);
        });
 
          $(document).on("click", "#create-hall-plan-btn", function(){
@@ -112,7 +109,7 @@
             data: {seats:hallPlan},
             url: "/Seat/Create",
             success: function(res) {
-              window.location.href = '/Seat/index';
+              window.location.href = '/Seat/create';
             }
         });
        });
@@ -123,10 +120,12 @@
             $("#row-count").val(0);
             $("#col-count").val(0);
             $(".seats").empty()
-
+           $("#row-count").attr("max",$(this).attr("data-row-count"))
         });
          let element = document.getElementById("selectedHallId");
             let rowCount = element.options[element.selectedIndex].getAttribute("data-row-count");
             $("#selectedHallId").attr("data-row-count",rowCount)
+            $("#row-count").attr("max", rowCount)
+            });
 </script>
 }

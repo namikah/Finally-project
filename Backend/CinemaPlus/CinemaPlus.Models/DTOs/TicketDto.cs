@@ -13,7 +13,7 @@ namespace CinemaPlus.Models.DTOs
     {
         public double Price { get; set; }
 
-        public Seat Seat { get; set; }
+        public int SeatId { get; set; }
 
         public Session Session { get; set; }
 
