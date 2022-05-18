@@ -28,7 +28,8 @@
             color: rgba(255, 255, 255, 0.745);
           }
           &.another {
-            background: url("../../../public/wheelchairaccess.png") center;
+            // background: url("../../../public/wheelchairaccess.png");
+            background-position: center;
             background-size: 75%;
             background-repeat: no-repeat;
             color: transparent;

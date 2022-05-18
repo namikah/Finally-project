@@ -13,6 +13,8 @@ namespace CinemaPlus.Models.Entities
 
         public string Name { get; set; }
 
+        public string Color { get; set; }
+
         public ICollection<Seat> Seats { get; set; }
 
         public ICollection<Tariff> Tariffs { get; set; }

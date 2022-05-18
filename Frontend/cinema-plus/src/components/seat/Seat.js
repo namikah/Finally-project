@@ -95,8 +95,7 @@ function Seat({ session }) {
               setMaxSeatSelected(maxSeatSelected + 1);
               setTotalPay(totalPay + ticket.Price);
               setTickets([...tickets, ticket]);
-            }
-            else{
+            } else {
               toast.info("Siz maksimum 6 yer seçə bilərsiniz");
             }
           }
@@ -147,22 +146,12 @@ function Seat({ session }) {
                         key={seat.id}
                         datatype={seat.seatType.name}
                         style={
-                          seat.seatTypeId === 1
-                            ? {
-                                backgroundColor: "white",
+                          seat.seatTypeId === 4
+                            ? { background: `url(${seat.seatType.color})` }
+                            : {
+                                backgroundColor: seat.seatType.color,
                                 color: "rgb(0 0 0 / 60%)",
                               }
-                            : seat.seatTypeId === 2
-                            ? {
-                                backgroundColor: "pink",
-                                color: "rgb(0 0 0 / 60%)",
-                              }
-                            : seat.seatTypeId === 3
-                            ? {
-                                backgroundColor: "#49e1ea",
-                                color: "rgb(0 0 0 / 60%)",
-                              }
-                            : {}
                         }
                         className={
                           seat.seatTypeId === 4

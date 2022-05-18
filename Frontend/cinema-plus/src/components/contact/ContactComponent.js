@@ -43,7 +43,7 @@ function ContactComponent({ cinemaId }) {
       .postMessage(message)
       .then((res) => {
         if (res.status === 200) {
-          toast.success("Message göndərildi. Təşəkkür edirik...");
+          toast.success("Mesajınız göndərildi. Təşəkkür edirik...");
        setTimeout(() => {
          document.querySelector("#send-mail-us").style.display="none";
        }, 5000);

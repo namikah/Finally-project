@@ -58,6 +58,11 @@
                                 <span asp-validation-for="Detail.Description" class="text-danger"></span>
                             </div>
                             <div class="form-group">
+                                <label asp-for="Detail.Note">Poster</label>
+                                <input class="form-control" placeholder="poster" asp-for="Detail.Note">
+                                <span asp-validation-for="Detail.Note" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
                                 <label>Actors</label>
                                 <select asp-for="@Model.ActorsId" asp-items="@(new SelectList( ViewBag.Actors,"Id","Name"))" class="form-control">
                                     <option disabled>--Please Select--</option>
@@ -96,10 +101,10 @@
 <partial name="_CKEditorPartial" />
 
 <script>
-         ClassicEditor
-        .create( document.querySelector( '#create-context-ck-editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+     ClassicEditor
+    .create( document.querySelector( '#create-context-ck-editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
 </script>
 }
