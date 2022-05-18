@@ -212,24 +212,13 @@
               &.busy-seat {
                 background-color: black;
               }
-              &.seat1 {
-                background-color: white;
-              }
-              &.seat2 {
-                background-color: pink;
-              }
-              &.seat3 {
-                background-color: #00acec;
-              }
               &.seat4 {
-                background: url("../../../public/wheelchairaccess.png") center;
+                // background: url("../../../public/wheelchairaccess.png") center;
+                background-position: center;
                 background-size: 80%;
                 background-repeat: no-repeat;
                 color: white;
                 background-color: white;
-              }
-              &.seat5 {
-                background-color: #92e6f9;
               }
             }
             h6 {

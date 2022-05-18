@@ -300,7 +300,7 @@ function Session(props) {
                     </td>
                     <td className="row-session">{item.start}</td>
                     <td className="row-cinema">
-                      <Link   to={`/cinema?id=${item.hall.cinemaId}`}>
+                      <Link to={`/cinema?id=${item.hall.cinemaId}`}>
                         {item.hall.cinema.name}
                       </Link>
                     </td>
@@ -420,7 +420,17 @@ function Session(props) {
                     (x) => x.seatTypeId === type.id
                   ) ? (
                     <div key={type.id}>
-                      <span className={`seat${type.id}`}></span>
+                      <span
+                        className={`seat${type.id}`}
+                        style={
+                          type.id === 4
+                            ? { background: `url(${type.color}) center no-repeat`,  backgroundSize: "80%",backgroundColor:"white" }
+                            : {
+                                backgroundColor: type.color,
+                                color: "rgb(0 0 0 / 60%)",
+                              }
+                        }
+                      ></span>
                       <h6>{type.name}</h6>
                     </div>
                   ) : (

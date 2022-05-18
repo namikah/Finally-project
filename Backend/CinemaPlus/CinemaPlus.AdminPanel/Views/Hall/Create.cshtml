@@ -1,0 +1,52 @@
+﻿@model Hall
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+                            <div class="form-group">
+                                <label asp-for="Name">Name</label>
+                                <input class="form-control" placeholder="Name" asp-for="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="RowCount">Rows</label>
+                                <input class="form-control" placeholder="rows count" asp-for="RowCount">
+                                <span asp-validation-for="RowCount" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Formats</label>
+                                <select asp-for="@Model.CinemaId" asp-items="@(new SelectList( ViewBag.Cinemas,"Id","Name"))" class="form-control">
+                                    <option disabled>--Please Select--</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+<partial name="_CKEditorPartial" />
+
+<script>
+     ClassicEditor
+    .create( document.querySelector( '#create-context-ck-editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+}

@@ -147,7 +147,7 @@ function Seat({ session }) {
                         datatype={seat.seatType.name}
                         style={
                           seat.seatTypeId === 4
-                            ? { background: `url(${seat.seatType.color})` }
+                          ? { background: `url(${seat.seatType.color}) center no-repeat`,  backgroundSize: "80%",backgroundColor:"white" }
                             : {
                                 backgroundColor: seat.seatType.color,
                                 color: "rgb(0 0 0 / 60%)",
