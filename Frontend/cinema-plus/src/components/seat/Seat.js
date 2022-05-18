@@ -82,19 +82,60 @@ function Seat({ session }) {
             IsDeleted: false,
           };
           if (e.target.classList.contains("selected")) {
-            e.target.classList.remove("selected");
-            setMaxSeatSelected(maxSeatSelected - 1);
-            setTotalPay(totalPay - ticket.Price);
-            let newTicketList = tickets.filter(
-              ({ Seat }) => Seat.id !== seat.id
-            );
-            setTickets(newTicketList);
+            if (seat.seatType.id === 2) {
+              if (Math.round(seat.column) % 2 === 0) {
+                e.target.previousSibling.classList.remove("selected");
+              } else {
+                e.target.nextSibling.classList.remove("selected");
+              }
+              e.target.classList.remove("selected");
+              setMaxSeatSelected(maxSeatSelected - 2);
+              setTotalPay(totalPay - ticket.Price * 2);
+              setTickets([...tickets, ticket]);
+              if (Math.round(seat.column) % 2 === 0) {
+                let newTicketList = tickets.filter(
+                  ({ Seat }) =>
+                    Seat.id !== seat.id && Seat.id != Math.round(seat.id) - 1
+                );
+                setTickets(newTicketList);
+              } else {
+                let newTicketList = tickets.filter(
+                  ({ Seat }) =>
+                    Seat.id !== seat.id && Seat.id != Math.round(seat.id) + 2
+                );
+                setTickets(newTicketList);
+              }
+            } else {
+              e.target.classList.remove("selected");
+              setMaxSeatSelected(maxSeatSelected - 1);
+              setTotalPay(totalPay - ticket.Price);
+              let newTicketList = tickets.filter(
+                ({ Seat }) => Seat.id !== seat.id
+              );
+              setTickets(newTicketList);
+            }
           } else {
             if (maxSeatSelected < 6) {
-              e.target.classList.add("selected");
-              setMaxSeatSelected(maxSeatSelected + 1);
-              setTotalPay(totalPay + ticket.Price);
-              setTickets([...tickets, ticket]);
+              if (seat.seatType.id === 2) {
+                if (maxSeatSelected > 4) {
+                  toast.info("Siz maksimum 6 yer seçə bilərsiniz");
+                } else {
+                  if (Math.round(seat.column) % 2 === 0) {
+                    e.target.previousSibling.classList.add("selected");
+                  } else {
+                    e.target.nextSibling.classList.add("selected");
+                  }
+                  e.target.classList.add("selected");
+                  setMaxSeatSelected(maxSeatSelected + 2);
+                  setTotalPay(totalPay + ticket.Price * 2);
+                  setTickets([...tickets, ticket]);
+                }
+              } else {
+                e.target.classList.add("selected");
+                setMaxSeatSelected(maxSeatSelected + 1);
+                setTotalPay(totalPay + ticket.Price);
+                setTickets([...tickets, ticket]);
+              }
             } else {
               toast.info("Siz maksimum 6 yer seçə bilərsiniz");
             }
@@ -141,13 +182,21 @@ function Seat({ session }) {
                     ) : (
                       <div
                         onClick={(e) => {
-                          selectedSeat(e, seat, selectedSession, tariff);
+                          seat.seatTypeId !== 4
+                            ? selectedSeat(e, seat, selectedSession, tariff)
+                            : toast.info(
+                                "Bu yerlər yalnız kassada alına bilər!"
+                              );
                         }}
                         key={seat.id}
                         datatype={seat.seatType.name}
                         style={
                           seat.seatTypeId === 4
-                          ? { background: `url(${seat.seatType.color}) center no-repeat`,  backgroundSize: "80%",backgroundColor:"white" }
+                            ? {
+                                background: `url(${seat.seatType.color}) center no-repeat`,
+                                backgroundSize: "80%",
+                                backgroundColor: "white",
+                              }
                             : {
                                 backgroundColor: seat.seatType.color,
                                 color: "rgb(0 0 0 / 60%)",
