@@ -23,7 +23,7 @@
                                 <span asp-validation-for="RowCount" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label>Formats</label>
+                                <label>Halls</label>
                                 <select asp-for="@Model.CinemaId" asp-items="@(new SelectList( ViewBag.Cinemas,"Id","Name"))" class="form-control">
                                     <option disabled>--Please Select--</option>
                                 </select>

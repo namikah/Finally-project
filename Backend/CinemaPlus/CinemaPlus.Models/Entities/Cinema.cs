@@ -28,7 +28,7 @@ namespace CinemaPlus.Models.Entities
         public ICollection<CinemaImage> Images { get; set; }
 
         [NotMapped]
-        public IFormFile Photos { get; set; }
+        public ICollection<IFormFile> Photos { get; set; }
 
         public ICollection<Hall> Halls { get; set; }
 

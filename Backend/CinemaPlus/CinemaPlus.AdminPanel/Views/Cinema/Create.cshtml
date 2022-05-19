@@ -1,0 +1,86 @@
+﻿@model Cinema
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-6 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+                            <div class="form-group" id="photoDiv">
+                                <label asp-for="Photos">Photo</label>
+                                <input class="form-control" placeholder="Photo" asp-for="Photos" accept="image/*">
+                                <span asp-validation-for="Photos" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Name">Name</label>
+                                <input class="form-control" placeholder="Name" asp-for="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address">Address</label>
+                                <input class="form-control" placeholder="address" asp-for="Address">
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MarketingMail">Marketing mail</label>
+                                <input class="form-control" placeholder="e-mail" asp-for="MarketingMail">
+                                <span asp-validation-for="MarketingMail" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email">Email</label>
+                                <input class="form-control" placeholder="email" asp-for="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Mobile">Mobile</label>
+                                <input class="form-control" placeholder="mobile" asp-for="Mobile">
+                                <span asp-validation-for="Mobile" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="WorkTime">Work time</label>
+                                <input class="form-control" placeholder="workTime" asp-for="WorkTime">
+                                <span asp-validation-for="WorkTime" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TarifUrl">Tarif photo url</label>
+                                <input class="form-control" placeholder="photo url" asp-for="TarifUrl">
+                                <span asp-validation-for="TarifUrl" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <textarea class="form-control" placeholder="description" asp-for="Description" id="create-context-ck-editor"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MapUrl">Map adress url</label>
+                                <input class="form-control" placeholder="google map url" asp-for="MapUrl">
+                                <span asp-validation-for="MapUrl" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+<partial name="_CKEditorPartial" />
+
+<script>
+     ClassicEditor
+    .create( document.querySelector( '#create-context-ck-editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+}

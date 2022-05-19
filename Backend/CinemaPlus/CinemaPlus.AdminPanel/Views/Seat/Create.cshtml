@@ -54,7 +54,7 @@
                  for(var i =1; i<Math.round(selected) + 1;i++){
                $(".seats").append(`<div class="seat-row data-row=${i} d-flex justify-content-center align-items-center gap-1 w-100">`);
                   for(var j =1; j<Math.round(selectedColCount) + 1;j++){
-               $(".seats").append(` <input class="seat m-1 text-center" value="0" type="number" data-row=${i} data-column=${j} data-seat-type="0" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" />`);
+               $(".seats").append(` <input class="seat m-1 text-center" value="0" type="number" data-row=${i} data-column=${j} data-seat-type="0" style="border-radius:10px; border: 1px solid #4ee2a8; width:40px;" min="0"/>`);
                }
                 $(".seats").append(`</div>`);
                }

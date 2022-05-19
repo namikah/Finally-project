@@ -13,7 +13,7 @@ function Banner({ cinema }) {
     >
       <div className="container">
         <h4>{cinema.name}</h4>
-        <h6>{cinema.description}</h6>
+        <h6 dangerouslySetInnerHTML={{__html: cinema.description}}></h6>
       </div>
     </div>
   );
