@@ -13,17 +13,24 @@ function Movie({
   movieId,
 }) {
   let date = new Date();
-  let today = dateFormat(date.setDate(date.getDate()), "dd.mm.yyyy");
+  let today = dateFormat(date.setDate(date.getDate()), "yyyy.mm.dd");
   const [moviesData, setMoviesData] = useState();
   const [{ loading, setLoading }] = useLoadingContext();
 
   const getData = useCallback(() => {
     setLoading(true);
     movieService.getMovies().then((res) => {
-      setMoviesData(res.data);
+      setMoviesData(
+        res.data?.filter(
+          (x) =>
+            (dateFormat(x.detail.startInCinema, "yyyy.mm.dd") <= today &&
+              dateFormat(x.detail.endInCinema, "yyyy.mm.dd") >= today) ||
+            x.detail.note?.includes("ÖNCƏDƏN SATIŞ")
+        )
+      );
       setLoading(false);
     });
-  }, [setLoading]);
+  }, [setLoading, today]);
 
   useEffect(() => {
     getData();
@@ -50,7 +57,7 @@ function Movie({
 
   if (soon !== undefined && soon !== "0")
     movies = movies?.filter(
-      (m) => dateFormat(m.detail.startInCinema, "dd.MM.yyyy") > today
+      (m) => dateFormat(m.detail.startInCinema, "yyyy.mm.dd") > today
     );
 
   return (

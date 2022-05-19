@@ -306,37 +306,55 @@ function Session(props) {
                     </td>
                     <td className="row-hall">{item.hall.name}</td>
                     <td className="row-format">
-                      {item.sessionFormats?.map(({ format }) => (
-                        <span key={format.id}>
-                          <img
-                            className="format-icon"
-                            src={format.icon}
-                            alt="format"
-                          ></img>
-                        </span>
-                      ))}
+                      {item.sessionFormats &&
+                        item.sessionFormats?.map(({ format }) => (
+                          <span key={format.id}>
+                            <img
+                              className="format-icon"
+                              src={format.icon}
+                              alt="format"
+                            ></img>
+                          </span>
+                        ))}
                     </td>
                     <td className="row-price">
-                      {item.hall.cinema.tariffs?.find(
-                        (tariff) =>
-                          tariff.startTime <= item.start &&
-                          tariff.endTime >= item.start
-                      ).price + ".00 AZN"}
+                      {!!item.hall.cinema.tariffs &&
+                      item.hall.cinema.tariffs?.length !== 0
+                        ? item.hall.cinema.tariffs?.find(
+                            (tariff) =>
+                              tariff.startTime <= item.start &&
+                              tariff.endTime >= item.start
+                          )?.price + ".00 AZN"
+                        : " Təyin edilməyib "}
                     </td>
                     <td className="row-buy text-center">
-                      <div
-                        onClick={() => {
-                          if (dateFormat(item.date, "dd.mm.yyyy") >= today) {
+                      {dateFormat(item.date, "yyyy.mm.dd") <= dateFormat(date.setDate(date.getDate()), "yyyy.mm.dd") &&
+                      item.hall.cinema.tariffs &&
+                      item.hall.cinema.tariffs?.length !== 0 ? (
+                        <div
+                          className="buy-ticket"
+                          dataid={item.id}
+                          onClick={(e) => {
                             zone.current.classList.add("active-zone");
                             zone.current.classList.remove("deactive-zone");
                             setSelectedSessionId(item.id);
-                          }
-                        }}
-                        className="buy-ticket"
-                        dataid={item.id}
-                      >
-                        Yerlər
-                      </div>
+                          }}
+                        >
+                          Yerlər
+                        </div>
+                      ) : (
+                        <div
+                          className="buy-ticket"
+                          dataid={item.id}
+                          style={{
+                            opacity: ".5",
+                            pointerEvents: "none",
+                            cursor: "default",
+                          }}
+                        >
+                          Yerlər
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -424,7 +442,11 @@ function Session(props) {
                         className={`seat${type.id}`}
                         style={
                           type.id === 4
-                            ? { background: `url(${type.color}) center no-repeat`,  backgroundSize: "80%",backgroundColor:"white" }
+                            ? {
+                                background: `url(${type.color}) center no-repeat`,
+                                backgroundSize: "80%",
+                                backgroundColor: "white",
+                              }
                             : {
                                 backgroundColor: type.color,
                                 color: "rgb(0 0 0 / 60%)",

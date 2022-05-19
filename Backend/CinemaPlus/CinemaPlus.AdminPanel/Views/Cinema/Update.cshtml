@@ -1,4 +1,4 @@
-﻿@model Movie
+﻿@model Cinema
 @{
     ViewData["Title"] = "Update";
 }
@@ -6,16 +6,27 @@
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth px-0">
-            <div class="row w-100 mx-0">
+             <div class="row w-100 mx-0 justify-content-center pt-3">
+                <div class="d-flex flex-wrap justify-content-center align-items-start col-12 pb-3">
+                    @foreach (var item in Model.Images?.ToList())
+                    {
+                        <div class="text-center m-1" style="border-radius:5px;">
+                            <img src=@item.Image alt="news" style="width:100px;height:100px; display:block;" class="img-fluid" />
+                            <a asp-controller="CinemaImages" asp-action="Delete" asp-route-id="@item.Id">
+                                <div class="btn btn-danger p-0" style="height:25px;width:100%;">Delete</div>
+                            </a>
+                        </div>
+                    }
+                </div>
                 <div class="col-lg-6 mx-auto">
                     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                         <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
                         <form class="forms-sample" method="post" enctype="multipart/form-data">
                             <div class="text-danger" asp-validation-summary=ModelOnly></div>
                             <div class="form-group" id="photoDiv">
-                                <label asp-for="Photo">Photo</label>
-                                <input class="form-control" placeholder="Photo" asp-for="Photo" accept="image/*">
-                                <span asp-validation-for="Photo" class="text-danger"></span>
+                                <label asp-for="Photos">Photo</label>
+                                <input class="form-control" placeholder="Photo" asp-for="Photos" accept="image/*">
+                                <span asp-validation-for="Photos" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Name">Name</label>
@@ -23,132 +34,44 @@
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="AgeLimit">Age</label>
-                                <input class="form-control" placeholder="age" asp-for="AgeLimit">
-                                <span asp-validation-for="AgeLimit" class="text-danger"></span>
+                                <label asp-for="Address">Address</label>
+                                <input class="form-control" placeholder="address" asp-for="Address">
+                                <span asp-validation-for="Address" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Detail.Country">Country</label>
-                                <input class="form-control" placeholder="Country" asp-for="Detail.Country">
-                                <span asp-validation-for="Detail.Country" class="text-danger"></span>
+                                <label asp-for="MarketingMail">Marketing mail</label>
+                                <input class="form-control" placeholder="e-mail" asp-for="MarketingMail">
+                                <span asp-validation-for="MarketingMail" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Detail.Duration">Duration</label>
-                                <input class="form-control" placeholder="Duration" asp-for="Detail.Duration">
-                                <span asp-validation-for="Detail.Duration" class="text-danger"></span>
+                                <label asp-for="Email">Email</label>
+                                <input class="form-control" placeholder="email" asp-for="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Detail.Trailer">Trailer</label>
-                                <input class="form-control" placeholder="url" asp-for="Detail.Trailer">
-                                <span asp-validation-for="Detail.Trailer" class="text-danger"></span>
+                                <label asp-for="Mobile">Mobile</label>
+                                <input class="form-control" placeholder="mobile" asp-for="Mobile">
+                                <span asp-validation-for="Mobile" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Detail.StartInCinema">Start In Cinema</label>
-                                <input class="form-control" placeholder="start in cinema" asp-for="Detail.StartInCinema">
-                                <span asp-validation-for="Detail.StartInCinema" class="text-danger"></span>
+                                <label asp-for="WorkTime">Work time</label>
+                                <input class="form-control" placeholder="workTime" asp-for="WorkTime">
+                                <span asp-validation-for="WorkTime" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Detail.EndInCinema">End In Cinema</label>
-                                <input class="form-control" placeholder="end in cinema" asp-for="Detail.EndInCinema">
-                                <span asp-validation-for="Detail.EndInCinema" class="text-danger"></span>
+                                <label asp-for="TarifUrl">Tarif photo url</label>
+                                <input class="form-control" placeholder="photo url" asp-for="TarifUrl">
+                                <span asp-validation-for="TarifUrl" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Detail.Description">Description</label>
-                                <textarea class="form-control" placeholder="description" asp-for="Detail.Description" id="create-context-ck-editor"></textarea>
-                                <span asp-validation-for="Detail.Description" class="text-danger"></span>
-                            </div>
-                              <div class="form-group">
-                                <label asp-for="Detail.Note">Poster</label>
-                                <input class="form-control" placeholder="poster" asp-for="Detail.Note">
-                                <span asp-validation-for="Detail.Note" class="text-danger"></span>
+                                <label asp-for="Description">Description</label>
+                                <textarea class="form-control" placeholder="description" asp-for="Description" id="create-context-ck-editor"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label>Actors</label>
-                                <select asp-for="ActorsId" class="form-control" name="ActorsId" id="actorsId">
-                                    @foreach (var item in ViewBag.Actors)
-                                    {
-                                        int count = 0;
-                                        foreach (var movieActor in ViewBag.SelectedActors)
-                                        {
-                                            if (item.Id == movieActor.ActorId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Directors</label>
-                                <select asp-for="DirectorsId" class="form-control" name="DirectorsId" id="directorsId">
-                                    @foreach (var item in ViewBag.Directors)
-                                    {
-                                        int count = 0;
-                                        foreach (var movieDirector in ViewBag.SelectedDirectors)
-                                        {
-                                            if (item.Id == movieDirector.DirectorId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Genres</label>
-                                <select asp-for="GenresId" class="form-control" name="GenresId" id="genresId">
-                                    @foreach (var item in ViewBag.Genres)
-                                    {
-                                        int count = 0;
-                                        foreach (var movieGenre in ViewBag.SelectedGenres)
-                                        {
-                                            if (item.Id == movieGenre.GenreId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Formats</label>
-                                <select asp-for="FormatsId" class="form-control" name="FormatsId" id="formatsId">
-                                    @foreach (var item in ViewBag.Formats)
-                                    {
-                                        int count = 0;
-                                        foreach (var sessionFromat in ViewBag.SelectedFormats)
-                                        {
-                                            if (item.Id == sessionFromat.FormatId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    }
-                                </select>
+                                <label asp-for="MapUrl">Map adress url</label>
+                                <input class="form-control" placeholder="google map url" asp-for="MapUrl">
+                                <span asp-validation-for="MapUrl" class="text-danger"></span>
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             <a class="btn btn-light" asp-action="Index">Cancel</a>
