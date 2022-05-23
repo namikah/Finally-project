@@ -17,15 +17,11 @@ namespace CinemaPlus.Controllers
     [ApiController]
     public class SessionController : ControllerBase
     {
-        private readonly IRepository<Session> _sessionRepository;
         private readonly ISessionService _sessionService;
-        private readonly IMapper _mapper;
 
-        public SessionController(IRepository<Session> sessionRepository, ISessionService sessionService, IMapper mapper)
+        public SessionController(ISessionService sessionService)
         {
-            _sessionRepository = sessionRepository;
             _sessionService = sessionService;
-            _mapper = mapper;
         }
 
         [HttpGet]

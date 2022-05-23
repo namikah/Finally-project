@@ -69,7 +69,7 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Cinema)
                .ThenInclude(x => x.Tariffs)
                .Include(x => x.Hall)
-               .ThenInclude(x => x.Seats)
+               .ThenInclude(x => x.Seats.OrderBy(x => x.Column))
                .ThenInclude(x => x.SeatType)
                .AsNoTracking()
                .FirstOrDefaultAsync(x => x.Id == (int)id && x.IsDeleted == false && x.Date >= dt.Date);

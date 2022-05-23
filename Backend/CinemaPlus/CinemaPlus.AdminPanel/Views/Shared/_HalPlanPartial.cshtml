@@ -8,7 +8,7 @@
 {
     @for (var i = 1; i < hall.RowCount + 1; i++)
     {
-        <div class="col-1" style="background-color:#4ee2a8; border-radius:10px; border: 1px solid #4ee2a8; ">@i</div>
+        <div class="col-1" style="background-color:#4ee2a8; border-radius:10px; border: 1px solid #4ee2a8; text-align:center;">@i</div>
         <div class="col-10 d-flex justify-content-center align-items-center gap-1 w-100">
             @foreach (var seat in hall.Seats)
             {
@@ -18,7 +18,7 @@
                 }
             }
         </div>
-        <div class="col-1" style="background-color:#4ee2a8; border-radius:10px; border: 1px solid #4ee2a8; ">@i</div>
+        <div class="col-1" style="background-color:#4ee2a8; border-radius:10px; border: 1px solid #4ee2a8; text-align:center;">@i</div>
     }
     <div class="text-center mt-5" style="background-color:#4ee2a8; color:white; width:200px; border-radius:5px;">EKRAN</div>
 

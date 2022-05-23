@@ -76,7 +76,9 @@ namespace CinemaPlus.AdminPanel.Controllers
             var sessions = await _dbContext.Sessions
             .Where(x => x.IsDeleted == false && x.Date >= dt.Date)
             .Include(x => x.Movie)
+            .Include(x=>x.Hall.Cinema)
             .OrderBy(x => x.Start)
+            .OrderBy(x=>x.Hall.Cinema)
             .ToListAsync();
             ViewBag.Sessions = sessions;
 
@@ -157,7 +159,7 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return Json(null);
 
             ViewBag.Tickets = await _dbContext.Tickets
-                .Where(x => x.IsDeleted == false)
+            .Where(x => x.IsDeleted == false)
             .Include(x => x.Seat)
             .Include(x => x.Session)
             .ToListAsync();
@@ -201,12 +203,10 @@ namespace CinemaPlus.AdminPanel.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoadHallPlan(int? selectedSessionId)
         {
-            //if (selectedHallId == null)
-            //    return Json(null);
             var session = await _dbContext.Sessions.FindAsync(selectedSessionId);
 
             var hall = await _dbContext.Halls
-                .Include(x => x.Seats)
+                .Include(x => x.Seats.OrderBy(x=>x.Column))
                 .ThenInclude(x => x.SeatType)
                 .FirstOrDefaultAsync(x => x.Id == session.HallId);
 

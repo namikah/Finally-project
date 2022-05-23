@@ -87,27 +87,41 @@ function Seat({ session }) {
           if (e.target.classList.contains("selected")) {
             if (seat.seatType.id === 2) {
               let newTicketList = [];
-              if (Math.round(seat.column) % 2 === 0) {
+              if (
+                Math.round(seat.column) % 2 === 0 &&
+                e.target.previousSibling.getAttribute("datatype").toString() ===
+                  'İkili "Comfort" yerlər'
+              ) {
                 e.target.previousSibling.classList.remove("selected");
                 newTicketList = tickets.filter(
                   ({ SeatId }) =>
                     SeatId !==
                     Math.round(e.target.previousSibling.getAttribute("dataId"))
                 );
-              } else {
+                e.target.classList.remove("selected");
+                setMaxSeatSelected(maxSeatSelected - 2);
+                setTotalPay(totalPay - ticket.Price * 2);
+                setTickets(
+                  newTicketList.filter(({ SeatId }) => SeatId !== seat.id)
+                );
+              } else if (
+                Math.round(seat.column) % 2 !== 0 &&
+                e.target.nextSibling.getAttribute("datatype").toString() ===
+                  'İkili "Comfort" yerlər'
+              ) {
                 e.target.nextSibling.classList.remove("selected");
                 newTicketList = tickets.filter(
                   ({ SeatId }) =>
                     SeatId !==
                     Math.round(e.target.nextSibling.getAttribute("dataId"))
                 );
+                e.target.classList.remove("selected");
+                setMaxSeatSelected(maxSeatSelected - 2);
+                setTotalPay(totalPay - ticket.Price * 2);
+                setTickets(
+                  newTicketList.filter(({ SeatId }) => SeatId !== seat.id)
+                );
               }
-              e.target.classList.remove("selected");
-              setMaxSeatSelected(maxSeatSelected - 2);
-              setTotalPay(totalPay - ticket.Price * 2);
-              setTickets(
-                newTicketList.filter(({ SeatId }) => SeatId !== seat.id)
-              );
             } else {
               e.target.classList.remove("selected");
               setMaxSeatSelected(maxSeatSelected - 1);
@@ -124,7 +138,12 @@ function Seat({ session }) {
                   toast.info("Siz maksimum 6 yer seçə bilərsiniz");
                 } else {
                   let newTicket = {};
-                  if (Math.round(seat.column) % 2 === 0) {
+                  if (
+                    Math.round(seat.column) % 2 === 0 &&
+                    e.target.previousSibling
+                      .getAttribute("datatype")
+                      .toString() === 'İkili "Comfort" yerlər'
+                  ) {
                     e.target.previousSibling.classList.add("selected");
                     newTicket = {
                       ...ticket,
@@ -133,7 +152,15 @@ function Seat({ session }) {
                       ),
                     };
                     setTickets([...tickets, newTicket]);
-                  } else {
+                    e.target.classList.add("selected");
+                    setMaxSeatSelected(maxSeatSelected + 2);
+                    setTotalPay(totalPay + ticket.Price * 2);
+                    setTickets([...tickets, ticket, newTicket]);
+                  } else if (
+                    Math.round(seat.column) % 2 !== 0 &&
+                    e.target.nextSibling.getAttribute("datatype").toString() ===
+                      'İkili "Comfort" yerlər'
+                  ) {
                     e.target.nextSibling.classList.add("selected");
                     newTicket = {
                       ...ticket,
@@ -142,11 +169,12 @@ function Seat({ session }) {
                       ),
                     };
                     setTickets([...tickets, newTicket]);
+                    e.target.classList.add("selected");
+                    setMaxSeatSelected(maxSeatSelected + 2);
+                    setTotalPay(totalPay + ticket.Price * 2);
+                    setTickets([...tickets, ticket, newTicket]);
                   }
-                  e.target.classList.add("selected");
-                  setMaxSeatSelected(maxSeatSelected + 2);
-                  setTotalPay(totalPay + ticket.Price * 2);
-                  setTickets([...tickets, ticket, newTicket]);
+                 
                 }
               } else {
                 e.target.classList.add("selected");

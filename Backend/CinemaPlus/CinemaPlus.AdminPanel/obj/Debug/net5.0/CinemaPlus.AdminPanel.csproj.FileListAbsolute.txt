@@ -118,6 +118,7 @@ C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Cinema\Index.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Cinema\Update.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Tariff\Create.cshtml.g.cs
-C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Tariff\Detail.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Tariff\Index.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Tariff\Update.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Seat\Index.cshtml.g.cs
+C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Seat\Update.cshtml.g.cs

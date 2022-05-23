@@ -25,6 +25,20 @@ namespace CinemaPlus.AdminPanel.Controllers
             _dbContext = dbContext;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
+            var seats = await _dbContext.Seats
+                .Include(x => x.Hall.Cinema)
+                .Include(x => x.SeatType)
+                .OrderByDescending(x=>x.HallId)
+                .ToListAsync();
+
+            return View(seats);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -74,6 +88,81 @@ namespace CinemaPlus.AdminPanel.Controllers
             await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("Create");
+        }
+
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
+            var existSeat = await _dbContext.Seats
+              .Include(x => x.Hall.Cinema)
+              .Include(x => x.SeatType)
+              .FirstOrDefaultAsync(x => x.Id == id);
+
+            ViewBag.SeatTypes = await _dbContext.SeatTypes.ToListAsync();
+
+            return View(existSeat);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id, Seat seat, int selectedSeatTypeId)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
+            if (id == null)
+                return NotFound();
+
+            if (id != seat.Id)
+                return BadRequest();
+
+            var existSeat = await _dbContext.Seats.FindAsync(id);
+
+            ViewBag.SeatTypes = await _dbContext.SeatTypes.ToListAsync();
+
+            if (!ModelState.IsValid)
+                return View(existSeat);
+
+            var isExistSeat = await _dbContext.Seats
+              .AnyAsync(x => x.Row == seat.Row
+              && x.Column == seat.Column
+              && x.HallId == seat.HallId
+              && x.Id != id);
+
+            if (isExistSeat)
+            {
+                ModelState.AddModelError("", "Session already exist");
+                return View(existSeat);
+            }
+
+            existSeat.Row = seat.Row;
+            existSeat.Column = seat.Column;
+            existSeat.SeatType = await _dbContext.SeatTypes.FindAsync(selectedSeatTypeId);
+
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "User");
+
+            if (id == null)
+                return NotFound();
+
+            var existSeat = await _dbContext.Seats
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (existSeat == null)
+                return NotFound();
+
+            _dbContext.Remove(existSeat);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
