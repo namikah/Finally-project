@@ -2,6 +2,11 @@ import Service from "../../components/services/Service";
 import "./services.scss";
 
 function Services() {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   return (
     <div id="services">
       <div className="container">

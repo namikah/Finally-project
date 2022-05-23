@@ -18,7 +18,11 @@ function Cinema() {
   const [cinemas, setCinemas] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const cinemaId = params.get("id");
-
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  })
   const getDatas = useCallback(() => {
     cinemaService.getCinema().then((res) => {
       setCinemas(res.data);

@@ -158,14 +158,16 @@ function Session(props) {
     setIsCounter(false);
     ticketService.postTickets(tickets).then(({ data }) => {
       if (data) {
+        if (!isCounter) return;
         toast.success("Ödənişiniz uğurla tamamlandı.");
       } else {
         toast.error("Uğursuz ödəniş. Yenidən cəhd edin");
       }
+      setTickets([]);
+      setMaxSeatSelected(0);
+      setTotalPay(0);
+      setIsCounter(false);
       setTimeout(() => {
-        setTickets([]);
-        setMaxSeatSelected(0);
-        setTotalPay(0);
         document.querySelector(".zone-close").click();
       }, 6000);
     });
@@ -323,12 +325,16 @@ function Session(props) {
                         ? item.hall.cinema.tariffs?.find(
                             (tariff) =>
                               tariff.startTime <= item.start &&
-                              tariff.endTime >= item.start
+                              tariff.endTime >= item.end
                           )?.price + ".00 AZN"
                         : " Təyin edilməyib "}
                     </td>
                     <td className="row-buy text-center">
-                      {dateFormat(item.date, "yyyy.mm.dd") <= dateFormat(date.setDate(date.getDate()), "yyyy.mm.dd") &&
+                      {dateFormat(item.date, "yyyy.mm.dd") <=
+                        dateFormat(
+                          date.setDate(date.getDate()),
+                          "yyyy.mm.dd"
+                        ) &&
                       item.hall.cinema.tariffs &&
                       item.hall.cinema.tariffs?.length !== 0 ? (
                         <div
@@ -528,7 +534,7 @@ function Session(props) {
               </FormGroup>
               <p>
                 Qeyd: 'Təsdiqlə' tuşuna basdıqdan sonra, ödəniş etmək üçün sizin{" "}
-                <br /> <span>30</span> saniyəniz olacaq !
+                <br /> <span>60</span> saniyəniz olacaq !
               </p>
               <Button
                 className="btn btn-success"

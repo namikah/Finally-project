@@ -82,14 +82,15 @@ header {
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            cursor: default;
             div {
               text-align: right;
-              span {
+              a {
                 color: white;
+                width: 100%;
                 font-size: 11px;
                 font-weight: 500;
                 letter-spacing: 1px;
-                display: inline-block;
               }
             }
           }

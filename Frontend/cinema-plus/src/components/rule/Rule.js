@@ -4,7 +4,11 @@ import "./rule.scss";
 
 function Rules() {
   const [rules, setrules] = useState([]);
-
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   const getData = useCallback(() => {
     ruleService.getRule().then((res) => {
       setrules(res.data);

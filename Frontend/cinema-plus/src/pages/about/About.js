@@ -8,7 +8,11 @@ import "./about.scss";
 function About() {
   const [cinemaData, setCinemaData] = useState();
   const [abouts, setAbouts] = useState();
-
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   const getData = useCallback(() => {
     cinemaService.getCinema().then((res) => {
       setCinemaData(res.data);
@@ -45,21 +49,12 @@ function About() {
             {cinemaData &&
               cinemaData?.map(({ id, name }) => (
                 <li key={id}>
-                  <Link
-                    to={`/cinema?id=${id}`}
-                    onClick={window.scrollTo({
-                      top: 0,
-                      left: 0,
-                      behavior: "smooth",
-                    })}
-                  >
-                    {name}
-                  </Link>
+                  <Link to={`/cinema?id=${id}`}>{name}</Link>
                 </li>
               ))}
           </ul>
           <div className="services-us row text-center">
-          <Service note="About"/>
+            <Service note="About" />
           </div>
         </div>
       </div>

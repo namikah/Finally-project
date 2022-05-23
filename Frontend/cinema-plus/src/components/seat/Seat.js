@@ -68,13 +68,16 @@ function Seat({ session }) {
           toast.info("Bu yer artıq seçilmişdir.");
           return;
         } else {
+          var today = new Date(session.date);
           const ticket = {
             Price: tariffs.find(
               (x) =>
                 x.cinemaId === session.hall.cinemaId &&
                 x.startTime <= session.start &&
                 x.endTime >= session.end &&
-                x.seatType.id === seat.seatTypeId
+                x.seatType.id === seat.seatTypeId &&
+                x.startDayOfWeek <= today.getDay() &&
+                x.endDayOfWeek >= today.getDay()
             ).price,
             SeatId: seat.id,
             Session: session,

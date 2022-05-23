@@ -8,7 +8,7 @@ import "./contact.scss";
 function Contact() {
   const [cinemaData, setCinemaData] = useState();
   const [selectedCinemaId, setSelectedCinemaId] = useState(0);
-
+  
   const getData = useCallback(() => {
     cinemaService.getCinema().then((res) => {
       setCinemaData(res.data);

@@ -1,0 +1,98 @@
+﻿@model Tariff
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <h5 class="brand-logo" style="color:#6610f2;">Create</h5>
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="text-danger" asp-validation-summary=ModelOnly></div>
+                            <div class="form-group">
+                                <label asp-for="Name">Name</label>
+                                <input class="form-control" placeholder="name" asp-for="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="StartTime">Start</label>
+                                <input class="form-control" placeholder="start" asp-for="StartTime">
+                                <span asp-validation-for="StartTime" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="EndTime">End</label>
+                                <input class="form-control" placeholder="end" asp-for="EndTime">
+                                <span asp-validation-for="EndTime" class="text-danger"></span>
+                            </div>
+                              <div class="form-group">
+                                <label asp-for="StartDayOfWeek">Start day of week</label>
+                                <input class="form-control" placeholder="day of week" asp-for="StartDayOfWeek" min="1" max="7">
+                                <span asp-validation-for="StartDayOfWeek" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="EndDayOfWeek">End day of week</label>
+                                <input class="form-control" placeholder="day of week" asp-for="EndDayOfWeek" min="1" max="7">
+                                <span asp-validation-for="EndDayOfWeek" class="text-danger"></span>
+                            </div>
+                              <div class="form-group">
+                                <label asp-for="AudioFormat">Audio format</label>
+                                <input class="form-control" placeholder="audio" asp-for="AudioFormat">
+                                <span asp-validation-for="AudioFormat" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="Price">Price</label>
+                                <input class="form-control" placeholder="price" asp-for="Price">
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                           <div class="form-group">
+                                <label>Cinemas</label>
+                                <select class="form-control" name="selectedCinemaId" id="selectedCinemaId">
+                                    @foreach (var item in ViewBag.Cinemas)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                              <div class="form-group">
+                                <label>Formats</label>
+                                <select class="form-control" name="selectedFormatId" id="selectedFormatId">
+                                    @foreach (var item in ViewBag.Formats)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                              <div class="form-group">
+                                <label>Seat types</label>
+                                <select class="form-control" name="selectedSeatTypeId" id="selectedSeatTypeId">
+                                    @foreach (var item in ViewBag.SeatTypes)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationPartial" />
+<partial name="_CKEditorPartial" />
+
+<script>
+     ClassicEditor
+    .create( document.querySelector( '#create-context-ck-editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+}

@@ -43,11 +43,11 @@ function Header() {
                 </Link>
               </li>
               <li className="lang">
-                <Link to={"/az"}>AZ</Link>
+                {/* <Link to={"/az"}>AZ</Link>
 
                 <Link to={"/ru"}>RU</Link>
 
-                <Link to={"/en"}>EN</Link>
+                <Link to={"/en"}>EN</Link> */}
 
                 <a
                   className="icon-app"
@@ -101,11 +101,9 @@ function Header() {
                 </li>
                 <li className="call-center">
                   <div className="callcenter">
-                    <span>
-                      <img src="" alt=""></img>
+                    <a rel="noreferrer" href="tel:+994124998988">
                       +99412 499 89 88
-                    </span>
-                    <img src="" alt=""></img>
+                    </a>
                   </div>
                 </li>
               </ul>

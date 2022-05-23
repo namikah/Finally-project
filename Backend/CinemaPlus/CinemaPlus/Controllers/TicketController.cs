@@ -77,7 +77,7 @@ namespace CinemaPlus.Controllers
 
             await _ticketService.AddTicketsAsync(tickets);
 
-            Thread.Sleep(20000);
+            Thread.Sleep(60*1000);
 
             var DeletedTickets = new List<Ticket>();
             foreach (var item in tickets)
@@ -98,6 +98,8 @@ namespace CinemaPlus.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] List<TicketDto> ticketDtos)
         {
+            var result = true;
+
             if (ticketDtos == null || ticketDtos.Count ==0)
                 throw new Exception("Not found");
 
@@ -105,11 +107,17 @@ namespace CinemaPlus.Controllers
             foreach (var item in ticketDtos)
             {
                 var ticket = await _dbContext.Tickets.FirstOrDefaultAsync(x => x.SeatId == item.SeatId && x.SessionId == item.Session.Id && x.IsConfirmed == false && x.IsDeleted == false);
+                if (ticket == null)
+                {
+                    result = false;
+                    return Ok(result);
+                }
+
                 ticket.IsConfirmed = true;
                 await _dbContext.SaveChangesAsync();
             }
 
-            return Ok(DeletedTickets);
+            return Ok(result);
         }
     }
 }

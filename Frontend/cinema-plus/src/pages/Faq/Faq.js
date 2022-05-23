@@ -10,6 +10,11 @@ import { faqService } from "../../API/services/faqService";
 import "./faq.scss";
 
 function Faq() {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   const [faq, setFaq] = useState([]);
 
   const getData = useCallback(() => {

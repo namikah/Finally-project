@@ -16,13 +16,13 @@ function TabHeader() {
             <Tab>TEZLİKLƏ</Tab>
           </TabList>
           <TabPanel>
-            <MovieFilter/>
+            <MovieFilter />
           </TabPanel>
           <TabPanel>
             <Session />
           </TabPanel>
           <TabPanel>
-          <Movie soon={true}/>
+            <Movie soon={true} />
           </TabPanel>
         </Tabs>
       </div>

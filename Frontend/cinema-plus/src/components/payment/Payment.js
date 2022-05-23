@@ -8,9 +8,10 @@ import Counter from "../counter/Counter";
 import "./payment.scss";
 
 function Payment({ customer }) {
-  const [{ totalPay }] = useContsantContext(0);
-  const [{ tickets }] = useContsantContext([]);
-
+  const [{ totalPay, setTotalPay }] = useContsantContext(0);
+  const [{ tickets, setTickets }] = useContsantContext([]);
+  const [{ setMaxSeatSelected }] = useContsantContext(0);
+  const [{ setIsCounter }] = useContsantContext(false);
   useEffect(() => {
     document.querySelector(".StripeCheckout").click();
   }, []);
@@ -32,7 +33,20 @@ function Payment({ customer }) {
           tickets.forEach((element) => {
             element.customer = customer;
           });
-          ticketService.putTickets(tickets);
+          ticketService.putTickets(tickets).then(({ data }) => {
+            if (data) {
+              toast.success("Ödənişiniz uğurla tamamlandı.");
+            } else {
+              toast.error("Uğursuz ödəniş. Yenidən cəhd edin");
+            }
+            setTickets([]);
+            setMaxSeatSelected(0);
+            setTotalPay(0);
+            setIsCounter(false);
+            setTimeout(() => {
+              document.querySelector(".zone-close").click();
+            }, 6000);
+          });
         }
       });
   }

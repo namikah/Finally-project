@@ -192,7 +192,8 @@ namespace CinemaPlus.AdminPanel.Controllers
                 .FirstOrDefault(x => x.StartTime <= session.Start
                 && x.EndTime >= session.End
                 && x.StartDayOfWeek <= (int)session.Date.DayOfWeek
-                && x.EndDayOfWeek >= (int)session.Date.DayOfWeek && x.SeatType.Id == seat.SeatTypeId).Price;
+                && x.EndDayOfWeek >= (int)session.Date.DayOfWeek
+                && x.SeatType.Id == seat.SeatTypeId).Price;
 
             return Json(price);
         }
