@@ -73,7 +73,7 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return Json(new { status = true });
         }
 
         public IActionResult Create()

@@ -46,7 +46,7 @@ namespace CinemaPlus.Controllers
         public async Task<IActionResult> Post([FromBody] Message message)
         {
             message.IsDeleted = false;
-            message.Status = "unread";
+            message.IsRead = false;
 
             await _messageService.AddAsync(message);
 

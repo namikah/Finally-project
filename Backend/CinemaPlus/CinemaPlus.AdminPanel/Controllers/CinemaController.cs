@@ -54,7 +54,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             _dbContext.Remove(existCinema);
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return Json(new { status = true });
         }
 
         public IActionResult Create()

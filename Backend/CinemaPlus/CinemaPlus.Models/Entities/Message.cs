@@ -12,6 +12,8 @@ namespace CinemaPlus.Models.Entities
     {
         public int Id { get; set; }
 
+        public DateTime Date { get; set; }
+
         [Required]
         public string Name { get; set; }
 
@@ -25,7 +27,7 @@ namespace CinemaPlus.Models.Entities
         [Required]
         public string Body { get; set; }
 
-        public string Status { get; set; }
+        public bool IsRead { get; set; }
 
         public bool IsDeleted { get; set; }
     }

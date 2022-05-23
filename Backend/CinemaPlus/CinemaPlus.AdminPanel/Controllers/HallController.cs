@@ -53,7 +53,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             _dbContext.Remove(existHall);
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return Json(new { status = true });
         }
 
         public async Task<IActionResult> Create()
