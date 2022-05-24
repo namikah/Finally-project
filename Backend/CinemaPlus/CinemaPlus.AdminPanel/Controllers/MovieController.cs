@@ -250,7 +250,10 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.SelectedFormats = await _dbContext.MovieFormats.Where(x => x.MovieId == id).ToListAsync();
 
             if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Invalid");
                 return View(existMovie);
+            }
 
             var isExistMovie = await _dbContext.Movies
                 .AnyAsync(x => x.IsDeleted == false && x.Name == movie.Name && x.Detail == movie.Detail && x.Id != id);

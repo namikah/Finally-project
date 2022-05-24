@@ -77,7 +77,7 @@ namespace CinemaPlus.Controllers
 
             await _ticketService.AddTicketsAsync(tickets);
 
-            Thread.Sleep(60*1000);
+            Thread.Sleep(67*1000);
 
             var DeletedTickets = new List<Ticket>();
             foreach (var item in tickets)

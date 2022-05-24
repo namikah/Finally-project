@@ -43,11 +43,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             _dbContext.CinemaImages.Remove(existCinemaImage);
             await _dbContext.SaveChangesAsync();
 
-            var existCinema = await _dbContext.Cinemas
-             .Include(x => x.Images)
-             .FirstOrDefaultAsync(x => x.Id == cinemaId);
-
-            return RedirectToAction("Update", "Cinema", existCinema);
+            return Redirect("/Cinema/Update/" + cinemaId);
         }
     }
 }

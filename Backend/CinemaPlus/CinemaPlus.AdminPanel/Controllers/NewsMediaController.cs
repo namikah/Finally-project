@@ -43,11 +43,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             _dbContext.NewsMedias.Remove(existNewsMedia);
             await _dbContext.SaveChangesAsync();
 
-            var existNews = await _dbContext.News
-             .Include(x => x.Medias)
-             .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == newsId);
-
-            return RedirectToAction("Update", "News", existNews);
+            return Redirect("/News/update/" +  newsId);
         }
     }
 }
