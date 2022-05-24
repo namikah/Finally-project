@@ -56,15 +56,6 @@ namespace CinemaPlus.AdminPanel.Controllers
             return Json(new { status = true });
         }
 
-        public IActionResult Reply()
-        {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "User");
-
-            return View();
-        }
-
-
         public async Task<IActionResult> Read(int? id)
         {
             if (!User.Identity.IsAuthenticated)
