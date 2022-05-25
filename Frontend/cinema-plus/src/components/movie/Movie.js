@@ -92,14 +92,7 @@ function Movie({
                   )}
                 </Link>
                 <div className="card-image">
-                  <Link
-                    // onClick={window.scrollTo({
-                    //   top: 0,
-                    //   left: 0,
-                    //   behavior: "smooth",
-                    // })}
-                    to={`/moviedetail?id=${movie.id}`}
-                  >
+                  <Link to={`/moviedetail?id=${movie.id}`}>
                     <img
                       src={movie?.image}
                       className="card-img-top img-fluid"
