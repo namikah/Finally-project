@@ -81,27 +81,27 @@ function Movie({
                   to={`/moviedetail?id=${movie.id}`}
                   className="card-header"
                 >
-                  {movie.name}
-                  {movie.detail.note && (
+                  {movie?.name}
+                  {movie?.detail.note && (
                     <Link
                       to={`/moviedetail?id=${movie.id}`}
                       className="card-note"
                     >
-                      {movie.detail.note}
+                      {movie?.detail?.note}
                     </Link>
                   )}
                 </Link>
                 <div className="card-image">
                   <Link
-                    onClick={window.scrollTo({
-                      top: 0,
-                      left: 0,
-                      behavior: "smooth",
-                    })}
+                    // onClick={window.scrollTo({
+                    //   top: 0,
+                    //   left: 0,
+                    //   behavior: "smooth",
+                    // })}
                     to={`/moviedetail?id=${movie.id}`}
                   >
                     <img
-                      src={movie.image}
+                      src={movie?.image}
                       className="card-img-top img-fluid"
                       alt="film"
                     />

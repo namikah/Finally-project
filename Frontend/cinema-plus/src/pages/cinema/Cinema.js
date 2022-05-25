@@ -22,7 +22,7 @@ function Cinema() {
     top: 0,
     left: 0,
     behavior: "smooth",
-  })
+  });
   const getDatas = useCallback(() => {
     cinemaService.getCinema().then((res) => {
       setCinemas(res.data);
@@ -32,7 +32,7 @@ function Cinema() {
   useEffect(() => {
     getDatas();
   }, [getDatas]);
-  
+
   const getData = useCallback((id) => {
     cinemaService.getCinemaById(id).then((res) => {
       setCinema(res.data);
@@ -42,8 +42,6 @@ function Cinema() {
   useEffect(() => {
     getData(cinemaId);
   }, [getData, cinemaId]);
-
-
 
   const getTabIndex = useCallback(() => {
     setTabIndex(

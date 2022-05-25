@@ -53,7 +53,7 @@ function News({ page, perPage }) {
                     <img
                       src={
                         item.medias &&
-                        item.medias?.find((x) => x.name === "photo").url
+                        item.medias?.find((x) => x.name === "photo")?.url
                       }
                       className="card-img-top"
                       alt="news"
