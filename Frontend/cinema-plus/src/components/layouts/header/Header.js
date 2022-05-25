@@ -128,19 +128,17 @@ function Header() {
         <div className="header-top d-flex justify-content-between align-items-center">
           <div className="container">
             <div className="d-flex justify-content-between align-items-center">
-              <div className="callcenter">
-                <span>
-                  <img src="" alt=""></img>
-                  +99412 499 89 88
-                </span>
-                <img src="" alt=""></img>
-              </div>
+            <div className="callcenter">
+                    <a rel="noreferrer" href="tel:+994124998988">
+                      +99412 499 89 88
+                    </a>
+                  </div>
               <div className="lang d-flex justify-content-between align-items-center">
-                <Link to={""}>AZ</Link>
+                {/* <Link to={""}>AZ</Link>
 
                 <Link to={""}>RU</Link>
 
-                <Link to={""}>EN</Link>
+                <Link to={""}>EN</Link> */}
                 <a
                   className="icon-app"
                   target="_blank"

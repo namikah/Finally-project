@@ -93,7 +93,8 @@ namespace CinemaPlus.AdminPanel.Controllers
             await _dbContext.Tariffs.AddAsync(tariff);
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return View(tariff);
         }
 
         public async Task<IActionResult> Update(int? id)

@@ -325,7 +325,15 @@ function Session(props) {
                         ? item.hall.cinema.tariffs?.find(
                             (tariff) =>
                               tariff.startTime <= item.start &&
-                              tariff.endTime >= item.end
+                              tariff.endTime >= item.end &&
+                              Math.round(tariff.startDayOfWeek) <=
+                                Math.round(
+                                  new Date(item.date.toString()).getDay()
+                                ) &&
+                              Math.round(tariff.endDayOfWeek) >=
+                                Math.round(
+                                  new Date(item.date.toString()).getDay()
+                                )
                           )?.price + ".00 AZN"
                         : " Təyin edilməyib "}
                     </td>
@@ -471,15 +479,23 @@ function Session(props) {
               <p className="total-price">{totalPay} AZN</p>
             </div>
             <div className="payment-button col-md-5 d-flex flex-column justify-content-center align-items-end">
-              <div
-                onClick={() => {
-                  document
-                    .querySelector("#customer-for-payment")
-                    .classList.toggle("active");
-                }}
-              >
-                Təsdiqləmək
-              </div>
+              {totalPay > 0 ? (
+                <div
+                  onClick={() => {
+                    document
+                      .querySelector("#customer-for-payment")
+                      .classList.toggle("active");
+                  }}
+                >
+                  Təsdiqləmək
+                </div>
+              ) : (
+                <div
+                  style={{ pointerEvents: "none", backgroundColor: "#696969" }}
+                >
+                  Təsdiqləmək
+                </div>
+              )}
             </div>
           </div>
           <div

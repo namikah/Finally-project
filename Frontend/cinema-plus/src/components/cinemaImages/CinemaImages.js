@@ -12,7 +12,7 @@ function CinemaImages({ cinema }) {
               cinema.images.length !== 0 &&
               item !== cinema.images[0] ? (
                 <div key={item.id} className="col-md-2">
-                  <img src={item.image} alt="" className="img-fluid"></img>
+                  <img src={item.image} alt="cinema" className="img-fluid"></img>
                 </div>
               ) : (
                 ""
