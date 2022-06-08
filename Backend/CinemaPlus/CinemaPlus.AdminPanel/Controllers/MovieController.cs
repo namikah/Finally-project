@@ -34,6 +34,10 @@ namespace CinemaPlus.AdminPanel.Controllers
                 .Include(x => x.Detail)
                 .Include(x => x.MovieActors)
                 .ThenInclude(x => x.Actor)
+                .Include(x=>x.MovieFormats)
+                .ThenInclude(x=>x.Format)
+                .Include(x => x.MovieLanguages)
+                .ThenInclude(x => x.Language)
                 .OrderByDescending(x => x.Id)
                 .ToListAsync();
 
@@ -54,10 +58,12 @@ namespace CinemaPlus.AdminPanel.Controllers
                 .ThenInclude(x => x.Actor)
                 .Include(x => x.MovieGenres)
                 .ThenInclude(x => x.Genre)
-                 .Include(x => x.MovieDirectors)
+                .Include(x => x.MovieDirectors)
                 .ThenInclude(x => x.Director)
-                  .Include(x => x.MovieFormats)
+                .Include(x => x.MovieFormats)
                 .ThenInclude(x => x.Format)
+                .Include(x => x.MovieLanguages)
+                .ThenInclude(x => x.Language)
                 .FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
 
             if (existMovie == null)
@@ -95,6 +101,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.Directors = await _dbContext.Directors.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Genres = await _dbContext.Genres.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
+            ViewBag.Languages = await _dbContext.Languages.ToListAsync();
 
             return View();
         }
@@ -109,6 +116,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.Directors = await _dbContext.Directors.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Genres = await _dbContext.Genres.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
+            ViewBag.Languages = await _dbContext.Languages.ToListAsync();
 
             if (!ModelState.IsValid)
                 return View();
@@ -189,10 +197,25 @@ namespace CinemaPlus.AdminPanel.Controllers
                 }
             }
 
+            var movieLanguages = new List<MovieLanguages>();
+            if (movie.LanguagesId != null)
+            {
+                foreach (var item in movie.LanguagesId)
+                {
+                    MovieLanguages movieLanguage = new()
+                    {
+                        MovieId = movie.Id,
+                        LanguageId = item
+                    };
+                    movieLanguages.Add(movieLanguage);
+                }
+            }
+
             movie.MovieActors = movieActors;
             movie.MovieDirectors = movieDirectors;
             movie.MovieGenres = movieGenres;
             movie.MovieFormats = movieFormats;
+            movie.MovieLanguages = movieLanguages;
 
             await _dbContext.Movies.AddAsync(movie);
             await _dbContext.SaveChangesAsync();
@@ -213,11 +236,13 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.Directors = await _dbContext.Directors.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Genres = await _dbContext.Genres.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
+            ViewBag.Languages = await _dbContext.Languages.ToListAsync();
 
             ViewBag.SelectedActors = await _dbContext.MovieActors.Where(x => x.MovieId == id).ToListAsync();
             ViewBag.SelectedDirectors = await _dbContext.MovieDirectors.Where(x => x.MovieId == id).ToListAsync();
             ViewBag.SelectedGenres = await _dbContext.MovieGenres.Where(x => x.MovieId == id).ToListAsync();
             ViewBag.SelectedFormats = await _dbContext.MovieFormats.Where(x => x.MovieId == id).ToListAsync();
+            ViewBag.SelectedLanguages = await _dbContext.MovieLanguages.Where(x => x.MovieId == id).ToListAsync();
 
             return View(existMovie);
         }
@@ -243,11 +268,13 @@ namespace CinemaPlus.AdminPanel.Controllers
             ViewBag.Directors = await _dbContext.Directors.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Genres = await _dbContext.Genres.Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
+            ViewBag.Languages = await _dbContext.Languages.ToListAsync();
 
             ViewBag.SelectedActors = await _dbContext.MovieActors.Where(x => x.MovieId == id).ToListAsync();
             ViewBag.SelectedDirectors = await _dbContext.MovieDirectors.Where(x => x.MovieId == id).ToListAsync();
             ViewBag.SelectedGenres = await _dbContext.MovieGenres.Where(x => x.MovieId == id).ToListAsync();
             ViewBag.SelectedFormats = await _dbContext.MovieFormats.Where(x => x.MovieId == id).ToListAsync();
+            ViewBag.SelectedLanguages = await _dbContext.MovieLanguages.Where(x => x.MovieId == id).ToListAsync();
 
             if (!ModelState.IsValid)
             {
@@ -316,6 +343,19 @@ namespace CinemaPlus.AdminPanel.Controllers
                     movieFormats.Add(movieFormat);
                 }
             }
+            var movieLanguages = new List<MovieLanguages>();
+            if (movie.LanguagesId != null)
+            {
+                foreach (var item in movie.LanguagesId)
+                {
+                    MovieLanguages movieLanguage = new()
+                    {
+                        MovieId = movie.Id,
+                        LanguageId = item
+                    };
+                    movieLanguages.Add(movieLanguage);
+                }
+            }
 
             if (movie.Photo != null)
             {
@@ -341,6 +381,7 @@ namespace CinemaPlus.AdminPanel.Controllers
             existMovie.MovieDirectors = movieDirectors;
             existMovie.MovieGenres = movieGenres;
             existMovie.MovieFormats = movieFormats;
+            existMovie.MovieLanguages = movieLanguages;
             existMovie.IsDeleted = false;
 
             await _dbContext.SaveChangesAsync();

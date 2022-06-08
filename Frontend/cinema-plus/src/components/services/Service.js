@@ -18,7 +18,7 @@ function Service({ note }) {
     <>
       {services &&
         services?.map((item) => (
-          <div className="all-services-card col-md-6">
+          <div key={item.id} className="all-services-card col-md-6">
             <img src={item.image && item.image} alt="service"></img>
             <p className="subtitle">{item.title && item.title}</p>
             <div

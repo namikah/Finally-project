@@ -68,7 +68,6 @@ function Seat({ session }) {
           toast.info("Bu yer artıq seçilmişdir.");
           return;
         } else {
-          var today = new Date(session.date);
           const ticket = {
             Price: tariffs.find(
               (x) =>
@@ -76,8 +75,19 @@ function Seat({ session }) {
                 x.startTime <= session.start &&
                 x.endTime >= session.end &&
                 x.seatType.id === seat.seatTypeId &&
-                x.startDayOfWeek <= today.getDay() &&
-                x.endDayOfWeek >= today.getDay()
+                Math.round(x.startDayOfWeek) <=
+                  Math.round(
+                    new Date(session.date.toString()).getDay() === 0
+                      ? 7
+                      : new Date(session.date.toString()).getDay()
+                  ) &&
+                  Math.round(x.endDayOfWeek) >=
+                  Math.round(
+                    new Date(session.date.toString()).getDay() === 0
+                      ? 7
+                      : new Date(session.date.toString()).getDay()
+                  ) &&
+                session.formatId === x.formatId
             ).price,
             SeatId: seat.id,
             Session: session,
@@ -96,7 +106,7 @@ function Seat({ session }) {
                 newTicketList = tickets.filter(
                   ({ SeatId }) =>
                     SeatId !==
-                    Math.round(e.target.previousSibling.getAttribute("dataId"))
+                    Math.round(e.target.previousSibling.getAttribute("dataid"))
                 );
                 e.target.classList.remove("selected");
                 setMaxSeatSelected(maxSeatSelected - 2);
@@ -113,7 +123,7 @@ function Seat({ session }) {
                 newTicketList = tickets.filter(
                   ({ SeatId }) =>
                     SeatId !==
-                    Math.round(e.target.nextSibling.getAttribute("dataId"))
+                    Math.round(e.target.nextSibling.getAttribute("dataid"))
                 );
                 e.target.classList.remove("selected");
                 setMaxSeatSelected(maxSeatSelected - 2);
@@ -148,7 +158,7 @@ function Seat({ session }) {
                     newTicket = {
                       ...ticket,
                       SeatId: Math.round(
-                        e.target.previousSibling.getAttribute("dataId")
+                        e.target.previousSibling.getAttribute("dataid")
                       ),
                     };
                     setTickets([...tickets, newTicket]);
@@ -165,7 +175,7 @@ function Seat({ session }) {
                     newTicket = {
                       ...ticket,
                       SeatId: Math.round(
-                        e.target.nextSibling.getAttribute("dataId")
+                        e.target.nextSibling.getAttribute("dataid")
                       ),
                     };
                     setTickets([...tickets, newTicket]);
@@ -174,7 +184,6 @@ function Seat({ session }) {
                     setTotalPay(totalPay + ticket.Price * 2);
                     setTickets([...tickets, ticket, newTicket]);
                   }
-                 
                 }
               } else {
                 e.target.classList.add("selected");
@@ -222,7 +231,7 @@ function Seat({ session }) {
                         className="busy-seat"
                         key={seat.id}
                         datatype={seat.seatType.name}
-                        dataId={seat.id}
+                        dataid={seat.id}
                       >
                         {seat.column}
                       </div>
@@ -237,7 +246,7 @@ function Seat({ session }) {
                         }}
                         key={seat.id}
                         datatype={seat.seatType.name}
-                        dataId={seat.id}
+                        dataid={seat.id}
                         style={
                           seat.seatTypeId === 4
                             ? {

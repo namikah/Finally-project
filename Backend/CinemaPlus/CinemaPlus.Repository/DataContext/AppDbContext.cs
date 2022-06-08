@@ -28,9 +28,11 @@ namespace CinemaPlus.Repository.DataContext
 
         public DbSet<MovieFormats> MovieFormats { get; set; }
 
+        public DbSet<MovieLanguages> MovieLanguages { get; set; }
+
         public DbSet<MovieGenres> MovieGenres { get; set; }
 
-        public DbSet<SessionFormats> SessionFormats { get; set; }
+        //public DbSet<SessionFormats> SessionFormats { get; set; }
 
         public DbSet<Cinema> Cinemas { get; set; }
 
@@ -61,8 +63,11 @@ namespace CinemaPlus.Repository.DataContext
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<DolbyAtmos> DolbyAtmos { get; set; }
+
         public DbSet<CinemaServices> CinemaServices { get; set; }
 
         public DbSet<NewsMedia> NewsMedias { get; set; }
+
+        public DbSet<Language> Languages { get; set; }
     }
 }

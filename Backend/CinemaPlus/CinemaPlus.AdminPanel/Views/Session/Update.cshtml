@@ -28,7 +28,7 @@
                                 <span asp-validation-for="End" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label>Movies</label>
+                                <label>Movie</label>
                                 <select class="form-control" name="selectedMovieId" id="selectedMovieId">
                                     @foreach (var item in ViewBag.Movies)
                                     {
@@ -37,7 +37,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Halls</label>
+                                <label>Hall</label>
                                 <select class="form-control" name="selectedHallId" id="selectedHallId">
                                     @foreach (var item in ViewBag.Halls)
                                     {
@@ -46,24 +46,20 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Formats</label>
-                                <select asp-for="FormatsId" class="form-control" name="FormatsId" id="formatsId">
+                                <label>Format</label>
+                                <select class="form-control" name="selectedFormatId" id="selectedFormatId">
                                     @foreach (var item in ViewBag.Formats)
                                     {
-                                        int count = 0;
-                                        foreach (var sessionFromat in ViewBag.SelectedFormats)
-                                        {
-                                            if (item.Id == sessionFromat.FormatId)
-                                                count++;
-                                        }
-                                        if (count > 0)
-                                        {
-                                            <option value="@item.Id" selected>@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
+                                        <option selected="@(item.Id == Model.FormatId)" value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Language</label>
+                                <select class="form-control" name="selectedLanguageId" id="selectedLanguageId">
+                                    @foreach (var item in ViewBag.Languages)
+                                    {
+                                        <option selected="@(item.Id == Model.LanguageId)" value="@item.Id">@item.Name</option>
                                     }
                                 </select>
                             </div>

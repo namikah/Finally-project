@@ -35,8 +35,9 @@ namespace CinemaPlus.Models.Entities
 
         public ICollection<MovieDirectors> MovieDirectors { get; set; }
 
-
         public ICollection<MovieFormats> MovieFormats { get; set; }
+
+        public ICollection<MovieLanguages> MovieLanguages { get; set; }
 
         public ICollection<MovieGenres> MovieGenres { get; set; }
 
@@ -48,6 +49,9 @@ namespace CinemaPlus.Models.Entities
 
         [NotMapped]
         public List<int> FormatsId { get; set; }
+
+        [NotMapped]
+        public List<int> LanguagesId { get; set; }
 
         [NotMapped]
         public List<int> GenresId { get; set; }

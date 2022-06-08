@@ -22,7 +22,13 @@ namespace CinemaPlus.Models.Entities
         [Required]
         public TimeSpan End { get; set; }
 
-        public ICollection<SessionFormats> SessionFormats { get; set; }
+        public int? FormatId { get; set; }
+
+        public Format Format { get; set; }
+
+        public int? LanguageId { get; set; }
+
+        public Language Language { get; set; }
 
         public int MovieId { get; set; }
 
@@ -34,9 +40,6 @@ namespace CinemaPlus.Models.Entities
 
         public ICollection<Ticket> Tickets { get; set; }
         
-        [NotMapped]
-        public ICollection<int> FormatsId { get; set; }
-
         public bool IsDeleted { get; set; }
     }
 }

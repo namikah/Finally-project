@@ -100,18 +100,18 @@ function ContactComponent({ cinemaId }) {
           </ul>
         </div>
         <div className="col-md-6 right-side">
-          <div class="mapouter">
-            <div class="gmap_canvas">
+          <div className="mapouter">
+            <div className="gmap_canvas">
               <iframe
                 title="unique"
                 width="100%"
                 height="650"
                 id="gmap_canvas"
                 src={cinema.mapUrl}
-                frameborder="0"
+                frameBorder="0"
                 scrolling="no"
-                marginheight="0"
-                marginwidth="0"
+                marginHeight="0"
+                marginWidth="0"
               ></iframe>
             </div>
           </div>

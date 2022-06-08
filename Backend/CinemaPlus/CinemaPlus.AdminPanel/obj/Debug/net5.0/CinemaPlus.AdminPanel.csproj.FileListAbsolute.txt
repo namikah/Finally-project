@@ -93,7 +93,6 @@ C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\User\ChangePassword.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\User\ChangeRole.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Session\Create.cshtml.g.cs
-C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Session\Detail.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Session\Index.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Session\Update.cshtml.g.cs
 C:\Users\UGHUR\Desktop\Finally-project\Backend\CinemaPlus\CinemaPlus.AdminPanel\obj\Debug\net5.0\Razor\Views\Movie\Update.cshtml.g.cs

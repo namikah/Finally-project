@@ -129,16 +129,11 @@ function Header() {
           <div className="container">
             <div className="d-flex justify-content-between align-items-center">
             <div className="callcenter">
-                    <a rel="noreferrer" href="tel:+994124998988">
+                    <a rel="noreferrer" href="tel:+994124998988" style={{textDecoration:"none "}}>
                       +99412 499 89 88
                     </a>
                   </div>
               <div className="lang d-flex justify-content-between align-items-center">
-                {/* <Link to={""}>AZ</Link>
-
-                <Link to={""}>RU</Link>
-
-                <Link to={""}>EN</Link> */}
                 <a
                   className="icon-app"
                   target="_blank"

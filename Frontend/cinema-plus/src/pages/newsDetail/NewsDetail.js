@@ -65,7 +65,7 @@ function NewsDetail() {
                 news.medias?.map(
                   (media) =>
                     media.name === "photo" && (
-                      <div className="card-news-photo col-lg-3 col-md-6 col-sm-12 mb-3">
+                      <div key={media.id} className="card-news-photo col-lg-3 col-md-6 col-sm-12 mb-3">
                         <img
                           src={media.url}
                           className="img-fluid"

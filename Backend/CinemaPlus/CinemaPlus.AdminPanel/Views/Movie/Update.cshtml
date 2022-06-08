@@ -150,6 +150,28 @@
                                     }
                                 </select>
                             </div>
+                             <div class="form-group">
+                                <label>Languages</label>
+                                <select asp-for="LanguagesId" class="form-control" name="LanguagesId" id="languagesId">
+                                    @foreach (var item in ViewBag.Languages)
+                                    {
+                                        int count = 0;
+                                        foreach (var movieLanguage in ViewBag.SelectedLanguages)
+                                        {
+                                            if (item.Id == movieLanguage.LanguageId)
+                                                count++;
+                                        }
+                                        if (count > 0)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             <a class="btn btn-light" asp-action="Index">Cancel</a>
                         </form>

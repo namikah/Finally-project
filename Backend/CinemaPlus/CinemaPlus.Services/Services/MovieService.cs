@@ -28,6 +28,8 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Director)
                .Include(x => x.MovieFormats)
                .ThenInclude(x => x.Format)
+               .Include(x => x.MovieLanguages)
+               .ThenInclude(x => x.Language)
                .Include(x => x.MovieGenres)
                .ThenInclude(x => x.Genre)
                .OrderByDescending(x => x.Id)
@@ -48,6 +50,8 @@ namespace CinemaPlus.Services.Services
                .ThenInclude(x => x.Director)
                .Include(x => x.MovieFormats)
                .ThenInclude(x => x.Format)
+               .Include(x => x.MovieLanguages)
+               .ThenInclude(x => x.Language)
                .Include(x => x.MovieGenres)
                .ThenInclude(x => x.Genre)
                .FirstOrDefaultAsync(x => x.Id == (int)id && x.IsDeleted == false);

@@ -21,7 +21,7 @@ function AllNews() {
   }, []);
 
   const getNewsData = useCallback((page) => {
-    newsService.getNews(`?page=${page}&perPage=8`).then((res) => {
+    newsService.getNews(`?page=${page}&perPage=10`).then((res) => {
       setNewsData(res.data);
     });
   }, []);

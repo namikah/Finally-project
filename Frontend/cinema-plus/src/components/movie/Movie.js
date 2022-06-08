@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { movieService } from "../../API/services/movieService";
 import "./movie.scss";
 import { Link } from "react-router-dom";
 import { useLoadingContext } from "../../context/loading";
 import dateFormat from "dateformat";
+import axios from "axios";
 
 function Movie({
   movieCount,
@@ -19,7 +19,7 @@ function Movie({
 
   const getData = useCallback(() => {
     setLoading(true);
-    movieService.getMovies().then((res) => {
+    axios.request("https://localhost:44392/api/movie").then((res) => {
       setMoviesData(
         res.data?.filter(
           (x) =>
@@ -32,9 +32,23 @@ function Movie({
     });
   }, [setLoading, today]);
 
+  const getSoon = useCallback(() => {
+    setLoading(true);
+    axios.request("https://localhost:44392/api/movie").then((res) => {
+      setMoviesData(
+        res.data?.filter(
+          (m) => dateFormat(m.detail.startInCinema, "yyyy.mm.dd") > today &&
+          dateFormat(m.detail.endInCinema, "yyyy.mm.dd") >= today
+        )
+      );
+      setLoading(false);
+    });
+  }, [setLoading, today]);
+
   useEffect(() => {
-    getData();
-  }, [getData]);
+    if (soon !== undefined && soon !== "0") getSoon();
+    else getData();
+  }, [soon, getData, getSoon]);
 
   var movies = useMemo(() => {
     return moviesData;
@@ -52,12 +66,7 @@ function Movie({
 
   if (selectedLanguage !== undefined && selectedLanguage !== "0")
     movies = movies?.filter((m) =>
-      m.movieFormats?.find((x) => x.format.name.includes(selectedLanguage))
-    );
-
-  if (soon !== undefined && soon !== "0")
-    movies = movies?.filter(
-      (m) => dateFormat(m.detail.startInCinema, "yyyy.mm.dd") > today
+      m.movieLanguages?.find((x) => x.language.name.includes(selectedLanguage))
     );
 
   return (
@@ -107,6 +116,15 @@ function Movie({
                         <img
                           src={format.icon}
                           alt="film-format"
+                          className="img-fluid"
+                        ></img>
+                      </li>
+                    ))}
+                    {movie.movieLanguages?.map(({ language }) => (
+                      <li key={"language" + language.id}>
+                        <img
+                          src={language.icon}
+                          alt="film-language"
                           className="img-fluid"
                         ></img>
                       </li>

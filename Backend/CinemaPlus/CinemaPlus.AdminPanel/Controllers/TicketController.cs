@@ -90,6 +90,7 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             ViewBag.Seats = await _dbContext.Seats
             .Include(x => x.Hall.Cinema.Tariffs)
+            .Include(x => x.SeatType)
             .Where(x => sessions.Count > 0 && x.HallId == sessions[0].HallId)
             .ToListAsync();
 
@@ -170,6 +171,7 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             var seats = await _dbContext.Seats
                 .Include(x => x.Hall.Cinema)
+                .Include(x => x.SeatType)
                 .Where(x => session != null && x.HallId == session.HallId)
                 .ToListAsync();
 
@@ -188,14 +190,19 @@ namespace CinemaPlus.AdminPanel.Controllers
                 .FirstOrDefaultAsync(x => x.Id == selectedSessionId);
 
             var seat = await _dbContext.Seats
-                .FindAsync(selectedSeatId);
+                .Include(x => x.Hall.Cinema)
+                .Include(x => x.SeatType)
+                .FirstOrDefaultAsync(x => x.Id == selectedSeatId);
+
+            var dayOfWeek = Convert.ToInt32(session.Date.DayOfWeek == 0 ? 7 : session.Date.DayOfWeek);
 
             var price = session.Hall.Cinema.Tariffs?
                 .FirstOrDefault(x => x.StartTime <= session.Start
                 && x.EndTime >= session.End
-                && x.StartDayOfWeek <= (int)session.Date.DayOfWeek
-                && x.EndDayOfWeek >= (int)session.Date.DayOfWeek
-                && seat != null && x.SeatType.Id == seat.SeatTypeId).Price;
+                && x.StartDayOfWeek <= dayOfWeek
+                && x.EndDayOfWeek >= dayOfWeek
+                && x.FormatId == session.FormatId
+                && (seat != null && x.SeatType.Id == seat.SeatTypeId)).Price;
 
             return Json(price);
         }
@@ -248,6 +255,7 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             ViewBag.Seats = await _dbContext.Seats
             .Include(x => x.Hall.Cinema.Tariffs)
+            .Include(x => x.SeatType)
             .Where(x => session != null && x.HallId == session.HallId)
             .ToListAsync();
 
@@ -294,6 +302,7 @@ namespace CinemaPlus.AdminPanel.Controllers
 
             ViewBag.Seats = await _dbContext.Seats
             .Include(x => x.Hall.Cinema.Tariffs)
+            .Include(x => x.SeatType)
             .Where(x => session != null && x.HallId == session.HallId)
             .ToListAsync();
 

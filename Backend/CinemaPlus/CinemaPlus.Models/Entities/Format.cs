@@ -25,7 +25,7 @@ namespace CinemaPlus.Models.Entities
 
         public ICollection<MovieFormats> MovieFormats { get; set; }
 
-        public ICollection<SessionFormats> SessionFormats { get; set; }
+        public ICollection<Session> Sessions { get; set; }
 
         public ICollection<Tariff> Tariffs { get; set; }
 

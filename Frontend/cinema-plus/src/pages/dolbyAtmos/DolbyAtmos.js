@@ -25,7 +25,7 @@ function DolbyAtmos() {
             ></img>
           </div>
           {dolbyAtmos?.map((item) => (
-            <>
+            <div key={item.id}>
               {" "}
               <div
                 className="dolby-description"
@@ -43,7 +43,7 @@ function DolbyAtmos() {
                   ></iframe>
                 </div>
               )}
-            </>
+            </div>
           ))}
         </div>
       </div>

@@ -12,12 +12,15 @@ import dateFormat from "dateformat";
 import { useLoadingContext } from "../../context/loading";
 import { seatTypeService } from "../../API/services/seatTypeService";
 import { cinemaService } from "../../API/services/cinemaService";
-import { sessionService } from "../../API/services/sessionService";
 import Seat from "../seat/Seat";
 import { useContsantContext } from "../../context/constant";
 import Payment from "../payment/Payment";
 import { ticketService } from "../../API/services/ticketService";
 import { toast, ToastContainer } from "react-toastify";
+import { languageService } from "../../API/services/languageService";
+import axios from "axios";
+import { tariffService } from "../../API/services/tariffService";
+import { seatService } from "../../API/services/seatService";
 
 const customerDto = {
   name: "",
@@ -42,6 +45,8 @@ function Session(props) {
   const [selectedSessionId, setSelectedSessionId] = useState();
   const [existSession, setExistSession] = useState({});
   const [seatType, setSeatType] = useState();
+  const [tariffs, setTariffs] = useState([]);
+  const [seats, setSeats] = useState([]);
   const [cinemaData, setCinemaData] = useState();
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCinemaId, setSelectedCinemaId] = useState("");
@@ -50,7 +55,7 @@ function Session(props) {
   const [{ tickets, setTickets }] = useContsantContext([]);
   const [{ isCounter, setIsCounter }] = useContsantContext(false);
   const [{ setMaxSeatSelected }] = useContsantContext(0);
-
+  const [languageData, setLanguageData] = useState([]);
   const zone = useRef();
 
   const getCinemas = useCallback(() => {
@@ -63,8 +68,18 @@ function Session(props) {
     getCinemas();
   }, [getCinemas]);
 
+  const getLanguages = useCallback(async () => {
+    await languageService.getLanguage().then((res) => {
+      setLanguageData(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    getLanguages();
+  }, [getLanguages]);
+
   const getData = useCallback(() => {
-    sessionService.getSession().then((res) => {
+    axios.request("https://localhost:44392/api/session").then((res) => {
       setSessionData(res.data);
     });
   }, []);
@@ -91,11 +106,33 @@ function Session(props) {
 
   var selectedSession = useMemo(() => {
     selectedSessionId &&
-      sessionService.getSessionById(selectedSessionId).then((res) => {
-        setExistSession(res.data);
-      });
+      axios
+        .request("https://localhost:44392/api/session/" + selectedSessionId)
+        .then((res) => {
+          setExistSession(res.data);
+        });
     return sessions?.find((x) => x.id === selectedSessionId);
   }, [sessions, selectedSessionId]);
+
+  const getTariffs = useCallback(() => {
+    tariffService.getTariff().then((res) => {
+      setTariffs(res.data);
+    });
+  }, [setTariffs]);
+
+  useEffect(() => {
+    getTariffs();
+  }, [getTariffs]);
+
+  const getSeats = useCallback(() => {
+    seatService.getSeats().then((res) => {
+      setSeats(res.data);
+    });
+  }, [setSeats]);
+
+  useEffect(() => {
+    getSeats();
+  }, [getSeats]);
 
   if (props.platinum !== undefined) {
     sessions = sessions?.filter(
@@ -113,7 +150,7 @@ function Session(props) {
 
   if (selectedLanguage !== undefined && selectedLanguage !== "") {
     sessions = sessions?.filter((s) =>
-      s.sessionFormats?.find((f) => f.format.name.includes(selectedLanguage))
+      s.language.shortName.includes(selectedLanguage)
     );
   }
 
@@ -172,6 +209,7 @@ function Session(props) {
       }, 6000);
     });
   };
+  console.log(seats);
   return (
     <section id="session">
       <div className="header-filter d-flex flex-wrap justify-content-center align-items-center gap-2 gap-lg-5 gap-md-3">
@@ -252,10 +290,11 @@ function Session(props) {
               }
             >
               <option value="">Bütün dillərdə</option>
-              <option value="Az">Azərbaycanca</option>
-              <option value="Rus">На русском</option>
-              <option value="Eng">In English</option>
-              <option value="Tur">Türkçe</option>
+              {languageData?.map(({ id, shortName, name }) => (
+                <option key={id} value={shortName}>
+                  {name}
+                </option>
+              ))}
             </select>
           </>
         ) : (
@@ -308,32 +347,51 @@ function Session(props) {
                     </td>
                     <td className="row-hall">{item.hall.name}</td>
                     <td className="row-format">
-                      {item.sessionFormats &&
-                        item.sessionFormats?.map(({ format }) => (
-                          <span key={format.id}>
-                            <img
-                              className="format-icon"
-                              src={format.icon}
-                              alt="format"
-                            ></img>
-                          </span>
-                        ))}
+                      <span>
+                        <img
+                          className="format-icon"
+                          src={item.format.icon}
+                          alt="format"
+                        ></img>
+                      </span>
+                      <span>
+                        <img
+                          className="format-icon"
+                          src={item.language.icon}
+                          alt="language"
+                        ></img>
+                      </span>
                     </td>
                     <td className="row-price">
-                      {!!item.hall.cinema.tariffs &&
-                      item.hall.cinema.tariffs?.length !== 0
-                        ? item.hall.cinema.tariffs?.find(
+                      {!!tariffs && tariffs.length !== 0
+                        ? tariffs?.find(
                             (tariff) =>
+                              tariff.cinemaId === item.hall.cinemaId &&
                               tariff.startTime <= item.start &&
                               tariff.endTime >= item.end &&
                               Math.round(tariff.startDayOfWeek) <=
                                 Math.round(
-                                  new Date(item.date.toString()).getDay()
+                                  new Date(item.date.toString()).getDay() === 0
+                                    ? 7
+                                    : new Date(item.date.toString()).getDay()
                                 ) &&
                               Math.round(tariff.endDayOfWeek) >=
                                 Math.round(
-                                  new Date(item.date.toString()).getDay()
+                                  new Date(item.date.toString()).getDay() === 0
+                                    ? 7
+                                    : new Date(item.date.toString()).getDay()
+                                ) &&
+                              item.formatId === tariff.formatId &&
+                              seats?.find((x) =>
+                                seats?.some(
+                                  (x) =>
+                                    x.hallId === item.hallId &&
+                                    x.seatType.name.includes("Normal")
                                 )
+                                  ? x.hallId === item.hallId &&
+                                    x.seatType.name.includes("Normal")
+                                  : x.hallId === item.hallId
+                              )?.seatTypeId === tariff.seatType.id
                           )?.price + ".00 AZN"
                         : " Təyin edilməyib "}
                     </td>
@@ -343,8 +401,8 @@ function Session(props) {
                           date.setDate(date.getDate()),
                           "yyyy.mm.dd"
                         ) &&
-                      item.hall.cinema.tariffs &&
-                      item.hall.cinema.tariffs?.length !== 0 ? (
+                      tariffs &&
+                      tariffs?.length !== 0 ? (
                         <div
                           className="buy-ticket"
                           dataid={item.id}
@@ -420,6 +478,16 @@ function Session(props) {
                       className="format-icon"
                       src={format.icon}
                       alt="format"
+                    ></img>
+                  </span>
+                ))}
+              {selectedSession &&
+                selectedSession.movie.movieLanguages?.map(({ language }) => (
+                  <span key={language.id}>
+                    <img
+                      className="format-icon"
+                      src={language.icon}
+                      alt="language"
                     ></img>
                   </span>
                 ))}

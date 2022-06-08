@@ -45,12 +45,10 @@
                                 <td>@session.Hall.Cinema.Name</td>
                                 <td>@session.Hall.Name</td>
                                  <td>
-                                    @foreach (var format in session.SessionFormats?.ToList())
-                                    {
-                                       <span><img src="@format.Format.Icon" style="width:40px; height:40px;" /></span>
-                                    }
+                                       <span><img src="@session.Format?.Icon" style="width:40px; height:40px;" /></span>
+                                       <span><img src="@session.Language?.Icon" style="width:40px; height:40px;" /></span>
                                 </td>
-                                <td>@session.Hall.Cinema.Tariffs?.FirstOrDefault(x=>x.StartTime <= session.Start && x.EndTime >= session.End && x.StartDayOfWeek <= Convert.ToInt32(Convert.ToDateTime(session.Date).DayOfWeek) && x.EndDayOfWeek >= Convert.ToInt32(Convert.ToDateTime(session.Date).DayOfWeek))?.Price AZN</td>
+                                <td>@session.Hall.Cinema.Tariffs?.FirstOrDefault(x=>x.FormatId == session.FormatId && x.StartTime <= session.Start && x.EndTime >= session.End && x.StartDayOfWeek <= Convert.ToInt32(Convert.ToDateTime(session.Date).DayOfWeek == 0 ? 7 : Convert.ToDateTime(session.Date).DayOfWeek) && x.EndDayOfWeek >= Convert.ToInt32(Convert.ToDateTime(session.Date).DayOfWeek == 0 ? 7 : Convert.ToDateTime(session.Date).DayOfWeek))?.Price AZN</td>
                                 <td class="text-right">
                                     <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@session.Id">
                                         Update

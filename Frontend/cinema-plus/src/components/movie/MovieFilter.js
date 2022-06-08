@@ -1,5 +1,12 @@
 import axios from "axios";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { languageService } from "../../API/services/languageService";
 import Movie from "./Movie";
 import "./movieFilter.scss";
 
@@ -8,11 +15,12 @@ function MovieFilter() {
   const [optionTwo, setOptionTwo] = useState(false);
   const [cinemaData, setCinemaData] = useState();
   const [selectedLanguage, setSelectedLanguage] = useState("0");
-  const [sessionData, setSessionData] = useState([])
+  const [sessionData, setSessionData] = useState([]);
   const [selectedCinemaId, setSelectedCinemaId] = useState(0);
-const changeLang = useRef();
+  const [languageData, setLanguageData] = useState([]);
+  const changeLang = useRef();
 
-  const getCinemas = useCallback(async() => {
+  const getCinemas = useCallback(async () => {
     await axios.request("https://localhost:44392/api/cinema").then((res) => {
       setCinemaData(res.data);
     });
@@ -22,7 +30,17 @@ const changeLang = useRef();
     getCinemas();
   }, [getCinemas]);
 
-  const getData = useCallback(async() => {
+  const getLanguages = useCallback(async () => {
+    await languageService.getLanguage().then((res) => {
+      setLanguageData(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    getLanguages();
+  }, [getLanguages]);
+
+  const getData = useCallback(async () => {
     await axios.request("https://localhost:44392/api/session").then((res) => {
       setSessionData(res.data);
     });
@@ -70,7 +88,7 @@ const changeLang = useRef();
           ))}
         </select>
         <select
-        ref={changeLang}
+          ref={changeLang}
           className="change-lang"
           onChange={(e) => setSelectedLanguage(e.target.value)}
           onClick={() => setOptionTwo(!optionTwo)}
@@ -81,13 +99,21 @@ const changeLang = useRef();
           }
         >
           <option value="0">Bütün dillərdə</option>
-          <option value="Az">Azərbaycanca</option>
-          <option value="Rus">На русском</option>
-          <option value="Eng">In English</option>
-          <option value="Tur">Türkçe</option>
+          {languageData?.map(({ id, shortName, name }) => (
+            <option key={id} value={shortName}>
+              {name}
+            </option>
+          ))}
         </select>
         <div className="in-english d-flex justify-content-center align-items-center">
-          <div   onClick={() => {changeLang.current.value = "Eng"; setSelectedLanguage("Eng")}}>Movies in English</div>
+          <div
+            onClick={() => {
+              changeLang.current.value = "Eng";
+              setSelectedLanguage("Eng");
+            }}
+          >
+            Movies in English
+          </div>
         </div>
       </div>
       <Movie

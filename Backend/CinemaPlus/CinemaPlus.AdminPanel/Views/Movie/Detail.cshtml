@@ -55,6 +55,10 @@
                                         {
                                             <span><img src="@format.Format.Icon" style="width:40px; height:40px;" /></span>
                                         }
+                                        @foreach (var language in Model.MovieLanguages)
+                                        {
+                                            <span><img src="@language.Language.Icon" style="width:40px; height:40px;" /></span>
+                                        }
                                     </li>
                                 </ul>
 

@@ -31,8 +31,8 @@ namespace CinemaPlus.AdminPanel.Controllers
             var sessions = await _dbContext.Sessions
                .Include(x => x.Movie)
                .ThenInclude(x => x.Detail)
-               .Include(x => x.SessionFormats)
-               .ThenInclude(x => x.Format)
+               .Include(x => x.Format)
+               .Include(x => x.Language)
                .Include(x => x.Hall)
                .ThenInclude(x => x.Cinema)
                .ThenInclude(x => x.Tariffs)
@@ -70,6 +70,7 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return RedirectToAction("Login", "User");
 
             ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
+            ViewBag.Languages = await _dbContext.Languages.ToListAsync();
             ViewBag.Movies = await _dbContext.Movies.Include(x => x.Detail).Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Halls = await _dbContext.Halls.Include(x => x.Cinema).ToListAsync();
 
@@ -77,12 +78,13 @@ namespace CinemaPlus.AdminPanel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Session session, int selectedMovieId, int selectedHallId)
+        public async Task<IActionResult> Create(Session session, int selectedMovieId, int selectedHallId, int selectedFormatId, int selectedLanguageId)
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "User");
 
             ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
+            ViewBag.Languages = await _dbContext.Languages.ToListAsync();
             ViewBag.Movies = await _dbContext.Movies.Include(x => x.Detail).Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Halls = await _dbContext.Halls.Include(x => x.Cinema).ToListAsync();
 
@@ -100,22 +102,10 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return View();
             }
 
-            var sessionFormats = new List<SessionFormats>();
-            if (session.FormatsId != null)
-            {
-                foreach (var item in session.FormatsId)
-                {
-                    SessionFormats sessionFormat = new SessionFormats()
-                    {
-                        SessionId = session.Id,
-                        FormatId = item
-                    };
-                    sessionFormats.Add(sessionFormat);
-                }
-            }
-            session.SessionFormats = sessionFormats;
             session.HallId = selectedHallId;
             session.MovieId = selectedMovieId;
+            session.FormatId = selectedFormatId;
+            session.LanguageId = selectedLanguageId;
 
             await _dbContext.Sessions.AddAsync(session);
             await _dbContext.SaveChangesAsync();
@@ -132,19 +122,21 @@ namespace CinemaPlus.AdminPanel.Controllers
               .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
 
             ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
+            ViewBag.Languages = await _dbContext.Languages.ToListAsync();
             ViewBag.Movies = await _dbContext.Movies.Include(x => x.Detail).Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Halls = await _dbContext.Halls.Include(x => x.Cinema).ToListAsync();
 
             ViewBag.SelectedMovie = await _dbContext.Movies.FirstOrDefaultAsync(x => x.Id == existSession.MovieId);
             ViewBag.SelectedHall = await _dbContext.Halls.FirstOrDefaultAsync(x => x.Id == existSession.HallId);
-            ViewBag.SelectedFormats = await _dbContext.SessionFormats.Where(x => x.SessionId == id).ToListAsync();
+            ViewBag.SelectedFormat = await _dbContext.Formats.Where(x => x.Id == existSession.FormatId).ToListAsync();
+            ViewBag.SelectedLanguage = await _dbContext.Languages.Where(x => x.Id == existSession.LanguageId).ToListAsync();
 
             return View(existSession);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, Session session, int selectedMovieId, int selectedHallId)
+        public async Task<IActionResult> Update(int? id, Session session, int selectedMovieId, int selectedHallId, int selectedFormatId, int selectedLanguageId)
         {
             if (id == null)
                 return NotFound();
@@ -153,19 +145,20 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return BadRequest();
 
             var existSession = await _dbContext.Sessions
-               .Include(x => x.SessionFormats)
-               .ThenInclude(x => x.Format)
+               .Include(x => x.Format)
                .Include(x => x.Hall)
                .Include(x => x.Movie)
                .FirstOrDefaultAsync(x => x.IsDeleted == false && x.Id == id);
 
             ViewBag.Formats = await _dbContext.Formats.Where(x => x.IsDeleted == false).ToListAsync();
+            ViewBag.Languages = await _dbContext.Languages.ToListAsync();
             ViewBag.Movies = await _dbContext.Movies.Include(x => x.Detail).Where(x => x.IsDeleted == false).ToListAsync();
             ViewBag.Halls = await _dbContext.Halls.Include(x => x.Cinema).ToListAsync();
 
             ViewBag.SelectedMovie = await _dbContext.Movies.FirstOrDefaultAsync(x => x.Id == existSession.MovieId);
             ViewBag.SelectedHall = await _dbContext.Halls.FirstOrDefaultAsync(x => x.Id == existSession.HallId);
-            ViewBag.SelectedFormats = await _dbContext.SessionFormats.Where(x => x.SessionId == id).ToListAsync();
+            ViewBag.SelectedFormat = await _dbContext.Formats.Where(x => x.Id == existSession.FormatId).ToListAsync();
+            ViewBag.SelectedLanguage = await _dbContext.Languages.Where(x => x.Id == existSession.LanguageId).ToListAsync();
 
             if (!ModelState.IsValid)
                 return View(existSession);
@@ -181,21 +174,9 @@ namespace CinemaPlus.AdminPanel.Controllers
                 return View(existSession);
             }
 
-            var sessionFormats = new List<SessionFormats>();
-            if (session.FormatsId != null)
-            {
-                foreach (var item in session.FormatsId)
-                {
-                    SessionFormats sessionFormat = new SessionFormats()
-                    {
-                        SessionId = session.Id,
-                        FormatId = item
-                    };
-                    sessionFormats.Add(sessionFormat);
-                }
-            }
-
-            var existHall = await _dbContext.Halls.FirstOrDefaultAsync(x => x.Id == selectedHallId);
+            var existHall = await _dbContext.Halls.FindAsync(selectedHallId);
+            var existLanguage = await _dbContext.Languages.FindAsync(selectedLanguageId);
+            var existFormat = await _dbContext.Formats.FirstOrDefaultAsync(x => x.Id == selectedFormatId && x.IsDeleted == false);
             var existMovie = await _dbContext.Movies.FirstOrDefaultAsync(x => x.Id == selectedMovieId && x.IsDeleted == false);
 
             if (existHall == null || existMovie == null)
@@ -209,7 +190,8 @@ namespace CinemaPlus.AdminPanel.Controllers
             existSession.End = session.End;
             existSession.Movie = existMovie;
             existSession.Hall = existHall;
-            existSession.SessionFormats = sessionFormats;
+            existSession.Language = existLanguage;
+            existSession.Format = existFormat;
             existSession.IsDeleted = false;
 
             await _dbContext.SaveChangesAsync();

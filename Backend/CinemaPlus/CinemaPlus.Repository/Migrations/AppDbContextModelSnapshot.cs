@@ -335,6 +335,27 @@ namespace CinemaPlus.Repository.Migrations
                     b.ToTable("Halls");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -490,6 +511,28 @@ namespace CinemaPlus.Repository.Migrations
                     b.ToTable("MovieGenres");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.MovieLanguages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("MovieLanguages");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.News", b =>
                 {
                     b.Property<int>("Id")
@@ -630,11 +673,17 @@ namespace CinemaPlus.Repository.Migrations
                     b.Property<TimeSpan>("End")
                         .HasColumnType("time");
 
+                    b.Property<int?>("FormatId")
+                        .HasColumnType("int");
+
                     b.Property<int>("HallId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("LanguageId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
@@ -644,33 +693,15 @@ namespace CinemaPlus.Repository.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FormatId");
+
                     b.HasIndex("HallId");
+
+                    b.HasIndex("LanguageId");
 
                     b.HasIndex("MovieId");
 
                     b.ToTable("Sessions");
-                });
-
-            modelBuilder.Entity("CinemaPlus.Models.Entities.SessionFormats", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FormatId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SessionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FormatId");
-
-                    b.HasIndex("SessionId");
-
-                    b.ToTable("SessionFormats");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Tariff", b =>
@@ -1072,6 +1103,25 @@ namespace CinemaPlus.Repository.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.MovieLanguages", b =>
+                {
+                    b.HasOne("CinemaPlus.Models.Entities.Language", "Language")
+                        .WithMany("MovieLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CinemaPlus.Models.Entities.Movie", "Movie")
+                        .WithMany("MovieLanguages")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.NewsMedia", b =>
                 {
                     b.HasOne("CinemaPlus.Models.Entities.News", "News")
@@ -1113,11 +1163,19 @@ namespace CinemaPlus.Repository.Migrations
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Session", b =>
                 {
+                    b.HasOne("CinemaPlus.Models.Entities.Format", "Format")
+                        .WithMany("Sessions")
+                        .HasForeignKey("FormatId");
+
                     b.HasOne("CinemaPlus.Models.Entities.Hall", "Hall")
                         .WithMany()
                         .HasForeignKey("HallId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CinemaPlus.Models.Entities.Language", "Language")
+                        .WithMany("Sessions")
+                        .HasForeignKey("LanguageId");
 
                     b.HasOne("CinemaPlus.Models.Entities.Movie", "Movie")
                         .WithMany()
@@ -1125,28 +1183,13 @@ namespace CinemaPlus.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Hall");
-
-                    b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("CinemaPlus.Models.Entities.SessionFormats", b =>
-                {
-                    b.HasOne("CinemaPlus.Models.Entities.Format", "Format")
-                        .WithMany("SessionFormats")
-                        .HasForeignKey("FormatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CinemaPlus.Models.Entities.Session", "Session")
-                        .WithMany("SessionFormats")
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Format");
 
-                    b.Navigation("Session");
+                    b.Navigation("Hall");
+
+                    b.Navigation("Language");
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Tariff", b =>
@@ -1278,7 +1321,7 @@ namespace CinemaPlus.Repository.Migrations
                 {
                     b.Navigation("MovieFormats");
 
-                    b.Navigation("SessionFormats");
+                    b.Navigation("Sessions");
 
                     b.Navigation("Tariffs");
                 });
@@ -1293,6 +1336,13 @@ namespace CinemaPlus.Repository.Migrations
                     b.Navigation("Seats");
                 });
 
+            modelBuilder.Entity("CinemaPlus.Models.Entities.Language", b =>
+                {
+                    b.Navigation("MovieLanguages");
+
+                    b.Navigation("Sessions");
+                });
+
             modelBuilder.Entity("CinemaPlus.Models.Entities.Movie", b =>
                 {
                     b.Navigation("MovieActors");
@@ -1302,6 +1352,8 @@ namespace CinemaPlus.Repository.Migrations
                     b.Navigation("MovieFormats");
 
                     b.Navigation("MovieGenres");
+
+                    b.Navigation("MovieLanguages");
                 });
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.News", b =>
@@ -1318,8 +1370,6 @@ namespace CinemaPlus.Repository.Migrations
 
             modelBuilder.Entity("CinemaPlus.Models.Entities.Session", b =>
                 {
-                    b.Navigation("SessionFormats");
-
                     b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618

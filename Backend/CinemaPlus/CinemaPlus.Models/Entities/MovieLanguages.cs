@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace CinemaPlus.Models.Entities
 {
-    public class SessionFormats : IEntity
+    public class MovieLanguages : IEntity
     {
         public int Id { get; set; }
 
-        public int SessionId { get; set; }
+        public int MovieId { get; set; }
 
-        public Session Session { get; set; }
+        public Movie Movie { get; set; }
 
-        public int FormatId { get; set; }
+        public int LanguageId { get; set; }
 
-        public Format Format { get; set; }
+        public Language Language { get; set; }
     }
 }

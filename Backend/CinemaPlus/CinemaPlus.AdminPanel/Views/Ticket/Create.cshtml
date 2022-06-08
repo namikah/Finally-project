@@ -31,7 +31,7 @@
                                     {
                                         if (!tickets.Any(x => x.Seat == item && x.Session.Id == sessions[0].Id))
                                         {
-                                            <option value="@item.Id">row: @item.Row - col: @item.Column - @item.Hall.Name - @item.Hall.Cinema.Name</option>
+                                            <option value="@item.Id">row: @item.Row - col: @item.Column - @item.SeatType?.Name</option>
                                         }
                                     }
                                 </select>
@@ -103,7 +103,8 @@
             dataType: 'json',
             url: "/Ticket/LoadPrice?selectedSeatId=" + seatId + "&selectedSessionId=" + sessionId,
             success: function(res) {
-                $("#seat-price").val(res);
+                $("#seat-price").val(0);
+                 $("#seat-price").val(res);
             }
         });
     });

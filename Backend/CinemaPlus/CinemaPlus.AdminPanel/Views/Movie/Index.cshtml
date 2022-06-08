@@ -27,7 +27,7 @@
                             <th>Image</th>
                             <th>Name</th>
                             <th>In cinema</th>
-                            <th>Actors</th>
+                            <th>Formats</th>
                             <th>Age</th>
                             <th class="operation-row"></th>
                         </tr>
@@ -41,11 +41,14 @@
                                 </td>
                                 <td>@item.Name</td>
                                 <td>@item.Detail.StartInCinema.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture) - @item.Detail.EndInCinema.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture)</td>
-                                <td>
-                                    @foreach (var movieActor in item.MovieActors.ToList())
+                                 <td style="max-width:200px">
+                                    @foreach (var movieFormat in item.MovieFormats.ToList())
                                     {
-                                        <span>@movieActor.Actor.Name @movieActor.Actor.Surname</span>
-                                        <br />
+                                        <span><img src=@movieFormat.Format.Icon alt="format" style="width:40px; height:40px;"/></span>
+                                    }
+                                      @foreach (var movieLanguage in item.MovieLanguages.ToList())
+                                    {
+                                        <span><img src=@movieLanguage.Language.Icon alt="language" style="width:40px; height:40px;"/></span>
                                     }
                                 </td>
                                 <td>@item.AgeLimit+</td>

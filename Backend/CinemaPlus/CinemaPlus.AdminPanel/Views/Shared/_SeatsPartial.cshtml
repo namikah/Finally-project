@@ -9,7 +9,7 @@
 {
     if (!tickets.Any(x => x.Seat == item && x.Session == session))
     {
-        <option value="@item.Id">row: @item.Row - col: @item.Column - @item.Hall.Name - @item.Hall.Cinema.Name</option>
+        <option value="@item.Id">row: @item.Row - col: @item.Column - @item.SeatType?.Name</option>
     }
 
 }

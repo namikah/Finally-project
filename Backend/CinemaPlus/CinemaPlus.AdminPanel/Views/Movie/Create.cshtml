@@ -86,6 +86,12 @@
                                     <option disabled>--Please Select--</option>
                                 </select>
                             </div>
+                              <div class="form-group">
+                                <label>Languages</label>
+                                <select asp-for="@Model.LanguagesId" asp-items="@(new SelectList( ViewBag.Languages,"Id","Name"))" class="form-control">
+                                    <option disabled>--Please Select--</option>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             <a class="btn btn-light" asp-action="Index">Cancel</a>
                         </form>
